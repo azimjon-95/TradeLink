@@ -1,0 +1,18 @@
+{
+  // Standart konfiguratsiyalarni (Create React App va Jest) qo'llash.
+  "extends": ["react-app", "react-app/jest"],
+  "rules": {
+    // Ishtirokchi o'zgaruvchilarni aniqlab chiqishda xato.
+    "no-unused-vars": "error",
+    // Console o'rniga ogohlantirish berish.
+    "no-console": "warn",
+    // JSX atributlari uchun "prefer-double" ni qo'llash.
+    "jsx-quotes": ["error", "prefer-double"],
+    // Multiline literal va massivlarda vergulni har doim qo'llash.
+    // "comma-dangle": ["error", "always-multiline"],
+    // Import buyruqlarining ma'lum bir tartibda joylashishi.
+    "import/order": ["error", {
+      "groups": ["builtin", "external", "internal", "parent", "sibling", "index", "object", "type"]
+    }]
+  }
+}
