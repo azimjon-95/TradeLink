@@ -1,12 +1,14 @@
 import { lazy } from "react";
 
 // Lazy-load pages
-const Home = lazy(() => import('../components/home/Home'));
+const Home = lazy(() => import('../pages/home/Home'));
 const Login = lazy(() => import('../components/login/Login'));
+const Register = lazy(() => import('../pages/register/Register'));
 
 // Define routes
 const routes = [
     { path: "/login", element: <Login />, protected: false },
+    { path: "/signup", element: <Register />, protected: false },
     { path: "/", element: <Home />, protected: true },
     { path: "*", element: <Home />, protected: false },
 ];
