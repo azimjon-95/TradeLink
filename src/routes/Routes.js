@@ -2,7 +2,7 @@ import { lazy } from "react";
 
 // Lazy-load pages
 const Home = lazy(() => import('../pages/home/Home'));
-const Login = lazy(() => import('../components/login/Login'));
+const Login = lazy(() => import('../pages/login/Login'));
 const Register = lazy(() => import('../pages/register/Register'));
 
 // Define routes
