@@ -174,7 +174,7 @@ function Navbar() {
       <div onClick={() => setIsMediaModalOpen(false)} className={`${isMediaModalOpen ? 'modal-open' : 'close-modal'}`}></div>
 
       <div className={`close-modal-signup ${isModalSinUp && "close-modal-signup-open"}`}>
-        <SignUpModal modalType={modalType} setIsMediaModalOpen={setIsMediaModalOpen} isOpen={isModalSinUp} onRequestClose={() => setIsModalSinUp(false)} />
+        <SignUpModal setModalType={setModalType} modalType={modalType} setIsMediaModalOpen={setIsMediaModalOpen} isOpen={isModalSinUp} onRequestClose={() => setIsModalSinUp(false)} />
       </div>
     </div>
   );
