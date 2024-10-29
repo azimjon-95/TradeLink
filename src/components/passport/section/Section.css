@@ -1,0 +1,40 @@
+section {
+  max-width: 1280px;
+  width: 100%;
+  padding: 96px 11.5px;
+  background-image: linear-gradient(#f1f4f8, #fcf3ed);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+section > .section_title {
+  font-size: 44px;
+  margin: 0 256px;
+  text-align: center;
+  font-weight: 570;
+  color: #111827;
+}
+
+section > h3 {
+  font-size: 24px;
+  margin: 20px 172px;
+  color: #7e6b8d;
+  text-align: center;
+  font-weight: normal;
+}
+
+section button {
+  margin: 40px 0;
+  padding: 15px 24px;
+  text-transform: capitalize;
+  color: #fff;
+  background-color: #000;
+  font-size: 18px;
+  border-radius: 10px;
+  border: none;
+}
+
+section > img {
+  width: 100%;
+}
