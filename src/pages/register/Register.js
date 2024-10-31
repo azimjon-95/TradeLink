@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Modal from 'react-modal';
-import { FaGoogle, FaEnvelope } from 'react-icons/fa';
+import { FaEnvelope } from 'react-icons/fa';
+import { FcGoogle } from "react-icons/fc";
+
 import './style.css';
 
 Modal.setAppElement('#root'); // For accessibility
@@ -48,7 +50,7 @@ const SignUpModal = ({ isOpen, onRequestClose, setIsMediaModalOpen, modalType, s
                     <>
                         <h2 className="modal-title">Log in</h2>
                         <button onClick={handleGoogleSignIn} className="social-button">
-                            <FaGoogle className="google-icon" /> Continue with Google
+                            <FcGoogle className="google-icon" /> Continue with Google
                         </button>
 
                         <div className="separator">
@@ -101,7 +103,7 @@ const SignUpModal = ({ isOpen, onRequestClose, setIsMediaModalOpen, modalType, s
                         <p className="modal-subtitle">Sign up with</p>
 
                         <button onClick={handleGoogleSignUp} className="social-button">
-                            <FaGoogle /> Google
+                            <FcGoogle className="google-icon" /> Google
                         </button>
 
                         <button onClick={handleEmailSignUp} className="social-button">

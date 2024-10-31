@@ -4,10 +4,11 @@ import { CgMenuGridO } from "react-icons/cg";
 import { IoMenu } from "react-icons/io5";
 import { IoChevronDown, IoChevronUpOutline } from "react-icons/io5";
 import { AiFillHome, AiOutlineFileText } from 'react-icons/ai';
+import { FaPassport, FaStoreAlt } from 'react-icons/fa';
 import { BsShop } from 'react-icons/bs';
 import SignUpModal from '../../pages/register/Register';
 
-import logo from '../../assets/logo.png';
+import logo from '../../assets/kyt.png';
 
 function Navbar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,7 +29,7 @@ function Navbar() {
   const closeModalWithDelay = () => {
     const id = setTimeout(() => {
       setIsModalOpen(false);
-    }, 1000);
+    }, 600);
     setTimeoutId(id);
   };
 
@@ -98,7 +99,38 @@ function Navbar() {
               tabIndex={0}
               onBlur={handleModalBlur}
             >
-              <p>Menu Content</p>
+              <div className="trade-link-header">
+                <div className="trade-link-header-icon">
+                  <FaStoreAlt size={32} style={{ color: '#6e44ff' }} />
+                </div>
+                <div className="trade-link-header-text">
+                  <h3>KYT - Know Your Trader</h3>
+                  <p>For professional traders and investors within the crypto market.</p>
+                </div>
+              </div>
+              <div className="trade-link-products-section">
+                <h4>PRODUCTS</h4>
+                <div className="trade-link-products">
+                  <div className="trade-link-product-item">
+                    <div className="trade-link-product-icon">
+                      <FaPassport size={32} style={{ color: '#f7b267' }} />
+                    </div>
+                    <div className="trade-link-header-text">
+                      <h3>Passport</h3>
+                      <p>Worldwide Independent confirmation of traders' results</p>
+                    </div>
+                  </div>
+                  <div className="trade-link-product-item">
+                    <div className="trade-link-product-icon">
+                      <FaStoreAlt size={32} style={{ color: '#d8b4f8' }} />
+                    </div>
+                    <div className="trade-link-header-text">
+                      <h3>Marketplace <span className="trade-link-new-badge">New</span></h3>
+                      <p>Best-selected strategies from thousands around the world</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
         </button>
@@ -127,10 +159,10 @@ function Navbar() {
             setModalType('signUp');
           }} >Sign Up</button>
         </div>
-        {/* TradeLink Section */}
+        {/* KYT - Know Your Trader Section */}
         <div>
           <div className="nav_head-lins" onClick={() => toggleSection('tradeLink')}>
-            <span><AiFillHome />TradeLink</span>
+            <span><AiFillHome />KYT - Know Your Trader</span>
             {openSections.tradeLink ? <IoChevronDown className="nav-chevron" /> : <IoChevronUpOutline className="nav-chevron" />}
           </div>
           {openSections.tradeLink && (

@@ -7,6 +7,11 @@
     border-bottom: 1px solid #8080802e;
     background: #fff;
     padding: 0 15px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
 }
 
 .nav_links-box {
@@ -17,7 +22,7 @@
 }
 
 .nav_logo {
-    width: 160px;
+    width: 140px;
     height: 47px;
     display: flex;
     justify-content: center;
@@ -122,7 +127,6 @@
 
 .navbar_modal {
     position: absolute;
-    top: 100%;
     left: 0px;
     width: 500px;
     height: 200px;
@@ -313,8 +317,8 @@
     height: 100%;
     top: 0;
     left: 0;
-    right: 0;
-    /* z-index: -1; */
+    /* right: 0; */
+    z-index: 2;
 }
 
 .modal-open {
@@ -326,6 +330,116 @@
     left: 0;
     right: 0;
     z-index: -1;
+}
+
+/* --------------------- */
+.navbar_modal {
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    width: 580px;
+    height: 200px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    margin-top: 0.5rem;
+    border-radius: 8px;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu_button-media {
+    display: none !important;
+}
+
+.trade-link-header:hover {
+    background: #2e437114;
+}
+
+.trade-link-header {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.trade-link-header-icon {
+    margin-right: 15px;
+}
+
+.trade-link-header-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.trade-link-header-text h3 {
+    text-align: start !important;
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.trade-link-header-text p {
+    text-align: start !important;
+    margin: 5px 0 0;
+    font-size: 13px;
+    color: #777;
+}
+
+.trade-link-products-section h4 {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
+    text-align: start !important;
+}
+
+.trade-link-products {
+    display: flex;
+    gap: 20px;
+}
+
+.trade-link-product-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    padding: 10px;
+    /* margin-bottom: 20px; */
+}
+
+.trade-link-product-item:hover {
+    background: #2e437114;
+
+}
+
+.trade-link-product-item h5 {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.trade-link-product-item p {
+    margin: 0;
+    font-size: 12px;
+    color: #777;
+}
+
+.trade-link-new-badge {
+    display: inline-block;
+    background-color: #e0f7e0;
+    color: #3ab54a;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 5px;
+    border-radius: 5px;
+    margin-left: 5px;
 }
 
 /* Media query */
