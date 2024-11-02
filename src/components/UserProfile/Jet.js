@@ -1,24 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Input, Tooltip } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import binance_rounded from '../../assets/ed_khan/binance_rounded.svg';
-import './style.css'; // Import the CSS file
+import './styles/style.css'; // Import the CSS file
 
-const Jet = ({ data = [100, 100, 85, 75, 75, 10, 30, 100, 100, 85, 75, 75], maxValue = 100, chartHeight = 80, chartWidth = 580 }) => {
+const Jet = ({ data = [100, 100, 85, 75, 75, 10, 30, 100, 100, 85, 75, 75], maxValue = 100, chartHeight = 80 }) => {
+    const [chartWidth, setChartWidth] = useState(window.innerWidth < 900 ? '100%' : 580); // Default width
 
-    // Diagramma uchun nuqtalarni hosil qilish
+    useEffect(() => {
+        const handleResize = () => {
+            setChartWidth(window.innerWidth < 900 ? 900 : 580);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    // Function to generate points for the chart
     const getPoints = (data, chartWidth, maxValue, chartHeight) => {
         return data
             .map((value, index) => {
-                const x = (index / (data.length - 1)) * chartWidth;
-                const y = (value / maxValue) * chartHeight; // Y koordinatlarini o'zgartirdik
+                const x = (index / (data.length - 1)) * (typeof chartWidth === 'string' ? parseInt(chartWidth) : chartWidth);
+                const y = (value / maxValue) * chartHeight; // Y coordinates adjusted
                 return `${x},${y}`;
             })
             .join(" ");
     };
 
-    // To'ldirilgan maydon uchun nuqtalarni aniqlash
-    const filledPoints = `0,0 ${getPoints(data, chartWidth, maxValue, chartHeight)} ${chartWidth},0`; // Diagramma yuqorisidan boshlanadi
+    // Define points for the filled area of the chart
+    const filledPoints = `0,0 ${getPoints(data, chartWidth, maxValue, chartHeight)} ${typeof chartWidth === 'string' ? parseInt(chartWidth) : chartWidth},0`; // Starts from the top of the chart
     const points = getPoints(data, chartWidth, maxValue, chartHeight);
 
     return (
@@ -52,9 +62,7 @@ const Jet = ({ data = [100, 100, 85, 75, 75, 10, 30, 100, 100, 85, 75, 75], maxV
                 </div>
             </div>
 
-
             <div className="overview-container">
-
                 <div className="over-card">
                     <div className="jet-header">
                         <div className="over-header">
@@ -98,7 +106,8 @@ const Jet = ({ data = [100, 100, 85, 75, 75, 10, 30, 100, 100, 85, 75, 75], maxV
                         <button className="jet-moreButton">More</button>
                     </div>
                 </div>
-            </div>  </>
+            </div>
+        </>
     );
 };
 

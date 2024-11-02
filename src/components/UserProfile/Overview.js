@@ -4,7 +4,7 @@ import { SearchOutlined } from '@ant-design/icons';
 import LineChart from '../../hooks/LineChart';
 import ed_khan from '../../assets/ed_khan/Ed_Khan.png';
 import binance_rounded from '../../assets/ed_khan/binance_rounded.svg';
-import './style.css';
+import './styles/style.css'; // Import the CSS file
 
 const OverviewCard = ({
     title,

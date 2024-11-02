@@ -16,14 +16,14 @@
     letter-spacing: -0.36px;
     line-height: 39.6px;
     color: rgb(255, 255, 255);
-    width: 97%;
+    width: 90%;
     height: 80px;
     display: flex;
     align-items: center;
 }
 
 .user-share-container {
-    width: 97%;
+    width: 90%;
     border-radius: 24px;
     background-color: rgb(255, 255, 255);
     padding: 24px;
@@ -150,7 +150,6 @@
 }
 
 .khan-inps {
-    box-sizing: border-box;
     border-radius: 16px;
     background-color: rgba(231, 235, 243, 0.5);
     height: 50px;
@@ -184,7 +183,6 @@
     background: transparent;
     border: none;
     outline: none;
-    box-sizing: border-box;
     white-space: pre-line;
     overflow-wrap: break-word;
     line-height: 24px;
@@ -544,7 +542,6 @@
 }
 
 .portfol-details p {
-    box-sizing: border-box;
     display: flex;
     align-items: center;
     gap: 6px;
@@ -743,4 +740,202 @@
 .jet-moreButton button:hover {
     background-color: rgb(26, 34, 51);
     color: rgb(255, 255, 255);
+}
+
+
+/* =========Modal========== */
+
+
+.user-open-modal-btn {
+    padding: 10px 20px;
+    background-color: #6a4bd8;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.user-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.user-modal-content>span {
+    cursor: pointer;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    line-height: 22.001px;
+    font-weight: 500;
+    color: rgb(89, 29, 135);
+    visibility: visible;
+    text-align: start !important;
+    display: flex;
+    align-items: center;
+    margin-top: 4px;
+}
+
+
+.user-modal-content>h2 {
+    font-size: 18px;
+    letter-spacing: -0.2px;
+    line-height: 30px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #2D1146;
+    visibility: visible;
+    text-align: start;
+}
+
+.user-close-modal-btn {
+    box-sizing: border-box;
+    display: block;
+    height: 23.9931px;
+    width: 23.9931px;
+    color: rgba(26, 34, 51, 0.5);
+    font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Lato, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 50%;
+    letter-spacing: normal;
+    line-height: 14px;
+    cursor: pointer;
+    text-align: center;
+    visibility: visible;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+}
+
+.user-close-modal-btn:hover {
+    background-color: rgba(26, 34, 51, 0.2);
+
+}
+
+.user-qr-code {
+    width: 100px;
+    height: 100px;
+    margin: 20px auto;
+}
+
+.link-btns {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-modal-icons {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.link-btns>span {
+    overflow-wrap: break-word;
+    font-size: 12px;
+    line-height: 18px;
+    color: rgb(89, 29, 135);
+    text-decoration-color: rgb(89, 29, 135);
+    text-decoration-style: solid;
+    text-decoration-thickness: auto;
+    cursor: pointer;
+    visibility: visible;
+    text-align: center;
+    margin-top: 3px;
+}
+
+
+.user-modal-icons button {
+    box-sizing: border-box;
+    border-radius: 16px;
+    background-color: rgb(231, 235, 243);
+    padding: 14px 20px;
+    transition-duration: 0.15s;
+    color: rgb(89, 29, 135);
+    text-decoration-color: rgb(89, 29, 135);
+    text-decoration-style: solid;
+    text-decoration-thickness: auto;
+    cursor: pointer;
+    visibility: visible;
+    line-height: 24px;
+    border: none;
+}
+
+.user-modal-icons button>svg {
+    margin-top: 4px;
+}
+
+.user-modal-daw-img {
+    display: flex;
+    flex-direction: column;
+    vertical-align: middle;
+    justify-content: space-between;
+    align-items: start;
+    height: 240px;
+    width: 375px;
+    padding: 13px;
+    max-width: 100%;
+    border-radius: 8px;
+    object-fit: scale-down;
+    color: #ffffff;
+    visibility: visible;
+    position: relative;
+    line-height: 24px;
+    background: linear-gradient(to bottom left, #2D1146, #521E81);
+}
+
+.user-modal-daw-img span {
+    text-align: start;
+    font-size: 22px;
+    font-weight: 550;
+}
+
+.user-rak {
+    position: absolute;
+    right: 5px;
+    top: 15px;
+    width: 160px;
+    height: 210px;
+}
+
+.qr-code-box {
+    width: 85px;
+    height: 85px;
+    background: #ffffff;
+    padding: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.jet-chart {
+    display: block;
+    /* Ensures no extra space below SVG */
+    max-width: 100%;
+    /* Keeps SVG within bounds */
+}
+
+.share_userBtn {
+    display: none;
+}
+
+.user-image-mob {
+    display: none;
 }

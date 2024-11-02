@@ -3,7 +3,7 @@ import { EyeOutlined, StarOutlined, SearchOutlined } from '@ant-design/icons'; /
 import { Input, Tooltip } from 'antd'; // Ant Design components
 import binance_rounded from '../../assets/ed_khan/binance_rounded.svg'; // Image import
 import LineChart from '../../hooks/LineChart'; // Custom hook or component import
-import './style.css'; // CSS import
+import './styles/style.css'; // Import the CSS file
 
 
 const PortfolCard = ({ title, returnPercentage, drawDown, minDeposit, data, tooltipReturn, tooltipDrawDown, tooltipMinDeposit, tooltipProfit, labelReturn, labelDrawDown, labelMinDeposit, profit, view, image, started, result }) => {
