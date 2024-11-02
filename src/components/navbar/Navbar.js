@@ -100,11 +100,6 @@ function Navbar() {
       { path: '/#products', label: 'Passport', scrollTo: 570 },
       { path: '/faq', label: 'FAQ' },
     ],
-    '/marketplace': [
-      { path: '/marketplace#strategy', label: 'Strategy' },
-      { path: '/marketplace#analysis', label: 'Analysis' },
-      { path: '/marketplace#campaigns', label: 'Campaigns' },
-    ],
     default: [
       { path: '/#default', label: 'Default', scrollTo: 0 },
     ],
@@ -257,7 +252,7 @@ function Navbar() {
           )}
         </div>
         {/* Marketplace Section */}
-        <div>
+             {/*<div>
           <div className="nav_head-lins" onClick={() => toggleSection('marketplace')}>
             <span><BsShop />Marketplace</span>
             {openSections.marketplace ? <IoChevronDown className="nav-chevron" /> : <IoChevronUpOutline className="nav-chevron" />}
@@ -268,7 +263,7 @@ function Navbar() {
               <p>Constructor</p>
             </div>
           )}
-        </div>
+        </div>*/}
       </div>
       <div onClick={() => setIsMediaModalOpen(false)} className={`${isMediaModalOpen ? 'modal-open' : 'close-modal'}`}></div>
 
