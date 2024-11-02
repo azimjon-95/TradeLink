@@ -1,7 +1,7 @@
 import React from "react";
 import "./Section.css";
 import section_img from "../../../assets/section_img.png";
-import supporters from "../../../assets/supporters.png";
+import supporters from "../../../assets/banner/supporters.png";
 
 function Section() {
   return (
