@@ -233,7 +233,7 @@ const Banner = () => {
                             </li>
                         </ul>
 
-                        <Link to="/marketplace">
+                        <Link to="/passport">
                             <button className="learn-more-button-passporte">Learn more</button>
                         </Link>
                     </div>

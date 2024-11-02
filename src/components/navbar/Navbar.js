@@ -90,9 +90,10 @@ function Navbar() {
   // Link to'plamlarini aniqlash
   const linkOptions = {
     '/passport': [
-      { path: '/passport#apply', label: 'Apply', scrollTo: 0 },
-      { path: '/passport#status', label: 'Status', scrollTo: 500 },
-      { path: '/passport#renew', label: 'Renew', scrollTo: 1000 },
+      { path: '/passport#cabinet', label: "Trader's Cabinet" },
+      { path: '/passport#rating', label: 'Rating' },
+      { path: '/passport#feed', label: 'Feed' },
+      { path: '/passport#hub', label: 'Hub' },
     ],
     '/': [
       { path: '/#about', label: 'About', scrollTo: 0 },
@@ -167,15 +168,17 @@ function Navbar() {
                   <p>For professional traders and investors within the crypto market.</p>
                 </div>
               </div>
-              <div className="trade-link-header">
-                <div className="trade-link-header-icon">
-                  <FaPassport size={32} style={{ color: '#f7b267' }} />
+              <Link to="/passport">
+                <div className="trade-link-header">
+                  <div className="trade-link-header-icon">
+                    <FaPassport size={32} style={{ color: '#f7b267' }} />
+                  </div>
+                  <div className="trade-link-header-text">
+                    <h3>Passport</h3>
+                    <p>Worldwide Independent confirmation of traders' results</p>
+                  </div>
                 </div>
-                <div className="trade-link-header-text">
-                  <h3>Passport</h3>
-                  <p>Worldwide Independent confirmation of traders' results</p>
-                </div>
-              </div>
+              </Link>
             </div>
           )}
         </button>
