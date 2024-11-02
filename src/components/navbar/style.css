@@ -55,19 +55,44 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
     gap: 28px;
 }
 
-.nav_links-main>button {
+.nav_links-main>a>button {
     border: none;
-    background: transparent;
-    color: #000000cb;
-    text-decoration: underline;
+    color: rgb(26, 34, 51);
+    text-decoration: none solid rgb(26, 34, 51);
+    cursor: pointer;
+    outline: rgba(0, 0, 0, 0) solid 2px;
+    outline-offset: 2px;
+    font-size: 14px;
+    line-height: 22.001px;
+    font-weight: 500;
     text-underline-offset: 4px;
-    text-decoration: none;
-    min-width: max-content;
-    font-size: 0.875rem;
-    font-weight: 550;
+    opacity: 0.8;
+    position: relative;
+    display: flex;
+    height: 63px;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    list-style: outside none none;
+    background-color: rgb(255, 255, 255);
+}
+
+.nav_links-main>a>button.active-button::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    height: 3px;
+    background-color: #641d9a;
+    border-radius: 3px 3px 0 0;
 }
 
 .right-btns {
@@ -125,10 +150,10 @@
     position: relative;
 }
 
-.navbar_modal {
+/* .navbar_modal {
     position: absolute;
     left: 0px;
-    width: 500px;
+    width: 400px;
     height: 200px;
     background-color: #ffffff;
     border: 1px solid #ddd;
@@ -140,7 +165,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
 .menu_button-media {
     display: none !important;
@@ -337,7 +362,7 @@
     position: absolute;
     top: 100%;
     left: 0px;
-    width: 580px;
+    width: 420px;
     height: 200px;
     background-color: #ffffff;
     border: 1px solid #ddd;

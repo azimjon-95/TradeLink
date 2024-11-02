@@ -3,6 +3,7 @@ import './style.css';
 import { CgMenuGridO } from "react-icons/cg";
 import { IoMenu } from "react-icons/io5";
 import { IoChevronDown, IoChevronUpOutline } from "react-icons/io5";
+import { Link, useLocation } from "react-router-dom";
 import { AiFillHome, AiOutlineFileText } from 'react-icons/ai';
 import { FaPassport, FaStoreAlt } from 'react-icons/fa';
 import { BsShop } from 'react-icons/bs';
@@ -16,6 +17,9 @@ function Navbar() {
   const [isMediaModalOpen, setIsMediaModalOpen] = useState(false); // State for media modal
   const [isModalSinUp, setIsModalSinUp] = useState(false);
   const [modalType, setModalType] = useState(''); // Use a single state for modal type
+  const location = useLocation();
+  const [activeLink, setActiveLink] = useState('');
+  // const [hasScrolled, setHasScrolled] = useState(false);
 
   const openModal = () => {
     if (timeoutId) {
@@ -79,12 +83,67 @@ function Navbar() {
     };
   }, []);
 
+
+
+  const [links, setLinks] = useState([]);
+
+  // Link to'plamlarini aniqlash
+  const linkOptions = {
+    '/passport': [
+      { path: '/passport#apply', label: 'Apply', scrollTo: 0 },
+      { path: '/passport#status', label: 'Status', scrollTo: 500 },
+      { path: '/passport#renew', label: 'Renew', scrollTo: 1000 },
+    ],
+    '/': [
+      { path: '/#about', label: 'About', scrollTo: 0 },
+      { path: '/#products', label: 'Passport', scrollTo: 570 },
+      { path: '/faq', label: 'FAQ' },
+    ],
+    '/marketplace': [
+      { path: '/marketplace#strategy', label: 'Strategy' },
+      { path: '/marketplace#analysis', label: 'Analysis' },
+      { path: '/marketplace#campaigns', label: 'Campaigns' },
+    ],
+    default: [
+      { path: '/#default', label: 'Default', scrollTo: 0 },
+    ],
+  };
+
+
+  // Add the '/user' link options after 'linkOptions' is fully defined
+  linkOptions['/user'] = [...linkOptions['/']];
+
+  // Asosiy sahifa linklarini yuklash kerak bo'lgan yo'nalishlar ro'yxati
+  const mainPageRoutes = ['/faq', '/main', '/about', '/contact']; // Yangi yo'nalishlar qo'shilishi mumkin
+
+  useEffect(() => {
+    // `location.pathname` asosiy sahifa yo'nalishlaridan birida bo'lsa, asosiy sahifa linklarini yuklaydi
+    const linksToSet = mainPageRoutes.includes(location.pathname) ? linkOptions['/'] : linkOptions[location.pathname] || linkOptions.default;
+    setLinks(linksToSet);
+  }, [location.pathname]);
+
+  const handleClick = (path) => {
+    setActiveLink(path);
+    localStorage.setItem('activeLink', path);
+  };
+
+  const handleScroll = (scrollAmount) => {
+    window.scrollTo({
+      top: scrollAmount,
+      behavior: 'smooth',
+    });
+  };
+
+
+
   return (
     <div className="navbar_container">
       <div className="nav_links-box">
-        <div className="nav_logo">
-          <img src={logo} alt="Logo" />
-        </div>
+        <Link to="/" onClick={() => handleClick('/')}>
+          <div className="nav_logo">
+            <img src={logo} alt="Logo" />
+          </div>
+        </Link>
         <button
           className="menu_button"
           onMouseEnter={openModal}
@@ -108,42 +167,48 @@ function Navbar() {
                   <p>For professional traders and investors within the crypto market.</p>
                 </div>
               </div>
-              <div className="trade-link-products-section">
-                <h4>PRODUCTS</h4>
-                <div className="trade-link-products">
-                  <div className="trade-link-product-item">
-                    <div className="trade-link-product-icon">
-                      <FaPassport size={32} style={{ color: '#f7b267' }} />
-                    </div>
-                    <div className="trade-link-header-text">
-                      <h3>Passport</h3>
-                      <p>Worldwide Independent confirmation of traders' results</p>
-                    </div>
-                  </div>
-                  <div className="trade-link-product-item">
-                    <div className="trade-link-product-icon">
-                      <FaStoreAlt size={32} style={{ color: '#d8b4f8' }} />
-                    </div>
-                    <div className="trade-link-header-text">
-                      <h3>Marketplace <span className="trade-link-new-badge">New</span></h3>
-                      <p>Best-selected strategies from thousands around the world</p>
-                    </div>
-                  </div>
+              <div className="trade-link-header">
+                <div className="trade-link-header-icon">
+                  <FaPassport size={32} style={{ color: '#f7b267' }} />
+                </div>
+                <div className="trade-link-header-text">
+                  <h3>Passport</h3>
+                  <p>Worldwide Independent confirmation of traders' results</p>
                 </div>
               </div>
             </div>
           )}
         </button>
+
         <button className="menu_button-media" onClick={toggleMediaModal}>
           <IoMenu />
         </button>
       </div>
+
+
       <div className="nav_links-main">
-        <button>About</button>
-        <button>Products</button>
-        <button>FAQ</button>
-        <button>Careers</button>
+        {links.map((link, index) => (
+          <Link
+            key={index}
+            to={link.path}
+            onClick={() => {
+              handleClick(link.path);
+              handleScroll(link.scrollTo);
+            }}
+          >
+            <button
+              style={{
+                width: '100%',
+                position: 'relative',
+              }}
+              className={activeLink === link.path ? 'active-button' : ''}
+            >
+              {link.label}
+            </button>
+          </Link>
+        ))}
       </div>
+
       <div className="right-btns">
         <button onClick={() => { setModalType('signIn'); setIsModalSinUp(true); }}>Log In</button>
         <button onClick={() => { setModalType('signUp'); setIsModalSinUp(true); }}>Sign Up</button>
@@ -170,7 +235,6 @@ function Navbar() {
               <p>About</p>
               <p>Products</p>
               <p>FAQ</p>
-              <p>Careers</p>
             </div>
           )}
         </div>
@@ -213,5 +277,7 @@ function Navbar() {
 }
 
 export default Navbar;
+
+
 
 

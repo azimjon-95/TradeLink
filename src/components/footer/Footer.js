@@ -22,7 +22,6 @@ const Footer = () => {
                 <div className="footer-section">
                     <h3 className="footer-title">Products</h3>
                     <ul className="footer-list">
-                        <li>KYT - Know Your Trader Marketplace</li>
                         <li>KYT - Know Your Trader Passport</li>
                     </ul>
                 </div>

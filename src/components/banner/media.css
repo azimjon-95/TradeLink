@@ -1,0 +1,298 @@
+/* Media query uchun */
+@media screen and (max-width: 900px) {
+    .homePage {
+        background-image: none;
+        text-align: start;
+        margin-top: 10px;
+    }
+
+    .homePage__signUpButton {
+        padding: 10px 24px;
+        width: 100%;
+    }
+
+    .marketplace-home {
+        width: 97%;
+        align-items: start;
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .marketplace-home_img {
+        width: 100%;
+        height: 320px;
+    }
+
+    .marketplace-container {
+        padding: 1rem;
+        border-radius: 12px;
+        width: 100%;
+    }
+
+    .marketplace-subtitle {
+        font-size: 15px;
+    }
+
+    .learn-more-button {
+        width: 100%;
+    }
+
+    .marketplace-passporte {
+        width: 97%;
+        align-items: start;
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .learn-more-button-passporte {
+        width: 100%;
+    }
+
+    .mission-container {
+        padding: 10px 0;
+    }
+
+    .index-cards {
+        display: none;
+    }
+
+    .learn-more-btn {
+        width: 100%;
+        padding: 10px 24px;
+
+    }
+
+    .marketplace-header {
+        width: 100%;
+        height: 100%;
+    }
+
+    .marketplace-title {
+        line-height: 1.333;
+    }
+
+    .badge-pro-traders {
+        margin-bottom: 15px;
+    }
+
+    .marketplace-section-box {
+        flex-direction: column;
+        height: 100%;
+        gap: 20px;
+    }
+
+    .statistics-bar-chart {
+        display: none;
+    }
+
+    .widget-section {
+        background-color: #fff4cc;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+
+    .widget-title {
+        font-size: 1.25rem;
+    }
+
+    .referral-section {
+        width: 100%;
+    }
+
+    .referral-avatars {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        width: 145px;
+        height: 60px;
+    }
+
+    .faq-container {
+        width: 100%;
+    }
+
+    .faq-title {
+        font-size: 24px;
+    }
+
+    .faq-question {
+        font-size: 19px;
+    }
+
+    .faq-more-btn {
+        padding: 10px 24px;
+        width: 100%;
+    }
+
+    .account-title {
+        font-size: 1.2rem;
+        width: 100%;
+    }
+
+    .account-container {
+        padding: 10px;
+    }
+
+    .account-container>p {
+        color: #4E5562;
+        font-size: 18px;
+        margin: 25px 0;
+    }
+
+    .referral-btnAsked {
+        width: 100%;
+        padding: 9px 24px !important;
+    }
+}
+
+@media screen and (max-width: 615px) {
+    .reviews-container {
+        width: 100%;
+        display: flex;
+        /* Flex modeli qo'llash */
+        flex-wrap: nowrap;
+        /* Kartalar bitta qatorga joylashtiriladi */
+        overflow-x: auto;
+        /* Gorizontal skrolldir */
+        scroll-snap-type: x mandatory;
+        /* Skrolldirni teskari oling */
+        scroll-padding-left: 1rem;
+        /* Skrolldirning boshida bo'sh joy qo'shish */
+        scrollbar-width: none;
+        /* Firefox uchun skrolldirni yashirish */
+    }
+
+    /* Chrome, Safari, Edge uchun skrolldirni yashirish */
+    .reviews-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .review-card {
+        flex: 0 0 auto;
+        /* Kartalar o'lchamlarini avtomatik qo'llash */
+        width: 80%;
+        /* Har bir kartaning kengligi */
+        scroll-snap-align: start;
+        /* Skrolldir boshlanishiga qarab sozlanadi */
+        transition: transform 0.3s ease-in-out;
+        /* O'zgarishlar aniq ko'rinishi */
+        margin-right: 1rem;
+        /* Kartalar orasidagi masofa */
+    }
+}
+
+/* Media query uchun */
+@media screen and (max-width: 450px) {
+    .homePage__title {
+        width: 85%;
+        font-size: 22px;
+        font-weight: 600 !important;
+        line-height: 30px;
+        letter-spacing: 1px;
+    }
+
+    .homePage__subtitle {
+        font-size: 18px;
+        text-align: start;
+    }
+
+
+    .homePage {
+        height: 100%;
+    }
+
+    .homePage__subtitle-bottom {
+        font-size: 1.4rem;
+    }
+
+    .homePage__support {
+        max-width: 380px;
+    }
+
+    .product-header h2 {
+        font-size: 1.7rem;
+    }
+
+    .product-header p {
+        font-size: 16px;
+    }
+
+    .marketplace-home_img {
+        width: 100%;
+        height: 270px;
+    }
+
+    .marketplace-container {
+        padding: 5px;
+    }
+
+    .marketplace-title {
+        gap: 0.5rem;
+        font-size: 1.2rem !important;
+    }
+
+    .check-icon {
+        width: 30px;
+        height: 30px
+    }
+
+    .mission-container {
+        padding: 5px 0;
+    }
+
+    .mission-content {
+        width: 90%;
+    }
+
+    .mission-content h2 {
+        color: #333;
+        font-size: 1.175rem;
+    }
+
+    .referral-title {
+        font-size: 19px;
+    }
+
+    .referral-subtitle {
+        font-size: 17px;
+        margin-top: 12px;
+    }
+
+    .referral-btn {
+        padding: 10px 24px !important;
+        width: 100%;
+        margin-top: 18px;
+    }
+
+    .faq-question {
+        font-size: 16px;
+    }
+
+    .faq-header {
+        padding: 15px;
+    }
+
+
+    .faq-content {
+        font-size: 14px;
+    }
+
+    .account-title {
+        font-size: 1.7rem;
+
+    }
+
+    .blog-section__container {
+        padding: 1rem;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .marketplace-home_img {
+        height: 240px;
+    }
+}
