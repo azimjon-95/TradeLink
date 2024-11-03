@@ -137,3 +137,126 @@
   padding: 0px 25px;
   height: 57px;
 }
+
+/* Media Queries */
+@media (max-width: 1280px) {
+  .solving_container {
+    max-width: 98%;
+  }
+  .solving_title {
+    font-size: 36px;
+    margin: 0 auto;
+  }
+  .solving_description {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 1224px) {
+  .solving_answer_item p {
+    height: 160px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .solving_title {
+    font-size: 32px;
+    margin: 0 4rem;
+  }
+  .solving_description {
+    font-size: 1.2rem;
+    margin: 0 8rem;
+  }
+}
+
+@media (max-width: 958px) {
+  .solving_answer_item p {
+    height: 240px;
+  }
+}
+
+@media (max-width: 768px) {
+  .solving_title {
+    font-size: 28px;
+    margin: 0 4rem;
+  }
+
+  .solving_description {
+    font-size: 1.1rem;
+    margin: 0 4rem;
+  }
+
+  .solving_type {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+  }
+
+  .solving_answers {
+    grid-template-columns: 1fr;
+  }
+
+  .solving_answer_item p {
+    height: 120px;
+  }
+  .solving_container > button {
+    font-size: 16px;
+  }
+}
+
+/* 693 */
+@media screen and (max-width: 693px) {
+  .solving_answer_item p {
+    height: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .solving_container {
+    padding: 48px 10px;
+  }
+  .solving_title {
+    font-size: 24px;
+    margin: 0 2rem;
+  }
+  .solving_description {
+    font-size: 1rem;
+    margin: 0 2rem;
+  }
+  .solving_container > button {
+    font-size: 14px;
+    padding: 12px 20px;
+  }
+}
+
+@media (max-width: 400px) {
+  .solving_title {
+    font-size: 20px;
+    margin: 0 1rem;
+  }
+  .solving_description {
+    font-size: 0.9rem;
+    margin: 0 1rem;
+  }
+  .solving_container > button {
+    font-size: 13px;
+    padding: 10px 16px;
+    height: auto;
+  }
+}
+
+@media (max-width: 300px) {
+  .solving_title {
+    font-size: 18px;
+  }
+  .solving_description {
+    font-size: 0.8rem;
+  }
+  .solving_container > button {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+  .solving_answer_item p {
+    height: 80px;
+  }
+}
