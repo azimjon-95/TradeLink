@@ -1,0 +1,9 @@
+.passport_dashboard {
+  background-image: linear-gradient(to bottom, #f0f4f7, #fbf3ed);
+}
+
+.passport_dashboard > h1 {
+  padding: 32px 0;
+  max-width: 1280px;
+  margin: 0 auto;
+}

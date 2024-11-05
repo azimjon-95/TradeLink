@@ -1,0 +1,237 @@
+.strategy {
+  width: 100%;
+  border-radius: 40px 40px 0 0;
+  padding: 64px 0;
+  line-height: 24px;
+  transform: translateY(-40px);
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.strategy_container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.strategy_caption {
+  font-size: 44px;
+  font-weight: 600;
+  line-height: 1.375;
+  letter-spacing: -0.01em;
+}
+
+.strategy_text {
+  font-size: 20px;
+  margin: 8px 0 0;
+  color: #1a223380;
+}
+
+.strategy_items {
+  width: 100%;
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  background-color: rgb(255, 255, 255);
+  margin-bottom: 6rem;
+}
+
+.strategy_item {
+  display: flex;
+  height: 224px;
+  overflow: hidden;
+  border-radius: 24px;
+  padding: 32px;
+  color: rgb(89, 29, 135);
+  background-color: rgba(89, 29, 135, 0.1);
+
+  .strategy_item_order {
+    font-size: 13rem;
+    line-height: 12px;
+    font-weight: 400;
+    transform: translateY(145px);
+    font-family: "Roboto", sans-serif;
+  }
+
+  .strategy_item_info {
+    font-size: 28px;
+    letter-spacing: -0.28px;
+    line-height: 39.2px;
+    font-weight: 500;
+    transform: translate(20px, 90px);
+  }
+}
+
+.strategy_item:nth-child(2) {
+  .strategy_item_info {
+    transform: translate(20px, 50px);
+  }
+}
+
+.strategy_item:nth-child(3) .strategy_item_info,
+.strategy_item:nth-child(4) .strategy_item_info {
+  transform: translate(0px, 90px);
+}
+
+.best_marketplace_traders {
+  background-color: #f8f9fb;
+  margin-top: 24px;
+  padding: 32px;
+  border-radius: 24px;
+  align-items: center;
+  margin-bottom: 6rem;
+}
+
+.best_marketplace_traders > h1 {
+  font-size: 1.875rem;
+  line-height: 1.333;
+  letter-spacing: -0.01em;
+  font-weight: 550;
+  font-family: "Roboto", sans-serif;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.best_marketplace_traders_item {
+  width: 100%;
+  height: 84px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 0.75rem;
+  margin-bottom: 16px;
+
+  .traders_item_left {
+    display: flex;
+    align-items: center;
+
+    .traders_item_order {
+      height: 48px;
+      width: 48px;
+      color: #000000;
+      line-height: 24px;
+      border-radius: 20px;
+      margin-right: 15px;
+      mask-size: contain;
+      display: grid;
+      font-size: 20px;
+      font-family: system-ui, -apple-system;
+      place-items: center;
+      font-weight: 600;
+    }
+
+    .traders_item_name {
+      font-size: 20px;
+      font-family: "Roboto", sans-serif;
+      font-weight: 30px;
+      font-weight: 900;
+    }
+
+    .traders_item_info {
+      color: #1a2233b2;
+      font-size: 14px;
+      font-weight: 570;
+    }
+  }
+
+  &:nth-child(1) .traders_item_left .traders_item_order {
+    background-color: #fbaf3d;
+    clip-path: var(--clip-path);
+  }
+
+  &:nth-child(2) .traders_item_left .traders_item_order {
+    background-color: #c0c8e0;
+    clip-path: var(--clip-path);
+  }
+
+  &:nth-child(3) .traders_item_left .traders_item_order {
+    background-color: #d5b678;
+    clip-path: var(--clip-path);
+  }
+
+  .traders_item_right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    b {
+      font-size: 20px;
+    }
+
+    span {
+      font-size: 14px;
+      color: #1a2233b2;
+    }
+
+    a {
+      color: #1a2233;
+      font-size: 14px;
+      font-family: "Roboto", sans-serif;
+      font-weight: 650;
+    }
+  }
+
+  .traders_item_right > span {
+    font-weight: 570;
+    padding: 8px 12px;
+    background-color: #e7ebf380;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #1a2233;
+  }
+}
+
+.best_marketplace_traders_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.best_marketplace_traders > .best_marketplace_traders_button > a {
+  color: #fff;
+  text-align: center;
+  background-color: #581d87;
+  padding: 0.5rem 1.2rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 570;
+  transition: all 0.3s ease-in-out;
+}
+
+.best_marketplace_traders > .best_marketplace_traders_button > a:hover {
+  background-color: #4b117a;
+  color: #fff;
+}
+
+.work_steps {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.work_step_item {
+  /* width: 302px; */
+  height: 216px;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 40px;
+  background-color: #f2f5f8;
+
+  p {
+    font-size: 20px;
+    color: #7b61ff;
+    font-weight: 570;
+    line-height: 1.5;
+    margin-top: 10px;
+  }
+}
