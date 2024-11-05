@@ -14,7 +14,7 @@ function Products() {
       <div className="products-container">
         <h2>There's nothing yet</h2>
         <p>Add your first product to the Marketplace to get started.</p>
-        <Link to={"/apply"}>Apply New</Link>
+        <Link to={"/dashboard&ctx=product"}>Apply New</Link>
       </div>
     </div>
   );

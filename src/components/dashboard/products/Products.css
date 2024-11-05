@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 .dashboard-product-container {
   --main-color: #1a2233;
-  max-width: 1440px;
   width: 100%;
   min-height: 374px;
   padding: 8px 11.2px;
@@ -25,7 +24,7 @@
   height: 56px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 1rem;
   border-bottom: 1px solid #e7ebf3;
 }
@@ -69,10 +68,12 @@
 
 .products-container h2 {
   font-size: 24px;
+  text-align: center;
 }
 
 .products-container p {
   font-weight: 400;
+  text-align: center;
 }
 
 .products-container a {
@@ -88,3 +89,15 @@
 .products-container a:hover {
   background-color: #431666;
 }
+
+/* media */
+
+/* @media screen and (max-width: 340px) {
+  .link-continer {
+    overflow: auto;
+  }
+
+  .top-links {
+    overflow: auto;
+  }
+} */

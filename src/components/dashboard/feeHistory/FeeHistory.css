@@ -4,7 +4,6 @@
 }
 .fee-history-container {
   --main-color: #1a2233;
-  max-width: 1440px;
   width: 100%;
   min-height: 374px;
   padding: 8px 11.2px;
@@ -40,7 +39,6 @@
   height: 100%;
   display: grid;
   place-items: center;
-  /* background-color: rebeccapurple; */
   position: relative;
   padding: 0 8px;
 
@@ -73,10 +71,12 @@
 
 .success-fee-container h2 {
   font-size: 24px;
+  text-align: center;
 }
 
 .success-fee-container p {
   font-weight: 400;
+  text-align: center;
 }
 
 .success-fee-container a {
@@ -92,3 +92,11 @@
 .success-fee-container a:hover {
   background-color: #431666;
 }
+
+/* media */
+
+/* @media screen and (max-width: 340px) {
+  .fee-history-container .top-links {
+    overflow: auto;
+  }
+} */
