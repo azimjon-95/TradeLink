@@ -6,7 +6,7 @@ import { IoChevronDown, IoChevronUpOutline } from "react-icons/io5";
 import { Link, useLocation } from "react-router-dom";
 import { AiFillHome, AiOutlineFileText } from 'react-icons/ai';
 import { FaPassport, FaStoreAlt } from 'react-icons/fa';
-import { BsShop } from 'react-icons/bs';
+// import { BsShop } from 'react-icons/bs';
 import SignUpModal from '../../pages/register/Register';
 
 import logo from '../../assets/kyt.png';
@@ -252,7 +252,7 @@ function Navbar() {
           )}
         </div>
         {/* Marketplace Section */}
-             {/*<div>
+        {/*<div>
           <div className="nav_head-lins" onClick={() => toggleSection('marketplace')}>
             <span><BsShop />Marketplace</span>
             {openSections.marketplace ? <IoChevronDown className="nav-chevron" /> : <IoChevronUpOutline className="nav-chevron" />}
