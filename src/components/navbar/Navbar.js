@@ -21,6 +21,8 @@ function Navbar() {
   const [activeLink, setActiveLink] = useState("");
   // const [hasScrolled, setHasScrolled] = useState(false);
 
+  let token = localStorage.getItem("access_token");
+
   const openModal = () => {
     if (timeoutId) {
       clearTimeout(timeoutId);
@@ -69,7 +71,6 @@ function Navbar() {
   };
 
   useEffect(() => {
-    // Function to close media modal if window width exceeds 900px
     const handleResize = () => {
       if (window.innerWidth > 900) {
         setIsMediaModalOpen(false);
@@ -208,30 +209,16 @@ function Navbar() {
         ))}
       </div>
 
-      <div className="right-btns">
-        <button
-          onClick={() => {
-            setModalType("signIn");
-            setIsModalSinUp(true);
-          }}
-        >
-          Log In
-        </button>
-        <button
-          onClick={() => {
-            setModalType("signUp");
-            setIsModalSinUp(true);
-          }}
-        >
-          Sign Up
-        </button>
-      </div>
-
-      {/* Media modal */}
-      <div
-        className={`media_modal-container ${isMediaModalOpen ? "open" : ""}`}
-      >
-        <div className="media_modal-btns">
+      {token ? (
+        <div className="userProfileName">
+          <b>Bahromjon</b>
+          <img
+            src="https://gravatar.com/avatar/07f9820661965f5c65726c026a58a8b3?size=80&d=retro"
+            alt=""
+          />
+        </div>
+      ) : (
+        <div className="right-btns">
           <button
             onClick={() => {
               setModalType("signIn");
@@ -242,14 +229,49 @@ function Navbar() {
           </button>
           <button
             onClick={() => {
-              setIsModalSinUp(true);
-              toggleMediaModal();
               setModalType("signUp");
+              setIsModalSinUp(true);
             }}
           >
             Sign Up
           </button>
         </div>
+      )}
+
+      {/* Media modal */}
+      <div
+        className={`media_modal-container ${isMediaModalOpen ? "open" : ""}`}
+      >
+        {token ? (
+          <div className="userProfileName media_modal_userInfo">
+            <b>Bahromjon</b>
+            <img
+              src="https://gravatar.com/avatar/07f9820661965f5c65726c026a58a8b3?size=80&d=retro"
+              alt=""
+            />
+          </div>
+        ) : (
+          <div className="media_modal-btns">
+            <button
+              onClick={() => {
+                setModalType("signIn");
+                setIsModalSinUp(true);
+              }}
+            >
+              Log In
+            </button>
+            <button
+              onClick={() => {
+                setIsModalSinUp(true);
+                toggleMediaModal();
+                setModalType("signUp");
+              }}
+            >
+              Sign Up
+            </button>
+          </div>
+        )}
+
         {/* KYT - Know Your Trader Section */}
         <div>
           <div

@@ -62,3 +62,23 @@
   width: 512px;
   height: 435px;
 }
+
+@media screen and (max-width: 1315px) {
+  .tradersCabinetBanner__container {
+    padding: 3rem;
+  }
+}
+
+@media screen and (max-width: 1090px) {
+  .tradersCabinetBanner__container > div {
+    background-color: yellow;
+  }
+
+  .tradersCabinetBanner__container > div:last-child {
+    background-color: red;
+  }
+  .tradersCabinetBanner__container > div:last-child img {
+    width: 90%;
+    object-fit: contain;
+  }
+}

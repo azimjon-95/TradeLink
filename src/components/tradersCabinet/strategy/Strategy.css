@@ -235,3 +235,102 @@
     margin-top: 10px;
   }
 }
+
+.safety_desc {
+  display: flex;
+  border-radius: 24px;
+  background-color: #f8f9fb;
+  padding: 32px;
+  margin-top: 25px;
+  color: #591d87;
+  line-height: 24px;
+  margin-bottom: 6rem;
+}
+
+.safety_desc_left {
+  width: 45%;
+}
+
+.safety_desc_left img {
+  display: block;
+  height: 321px;
+  max-height: 321px;
+  width: 448px;
+  max-width: 448px;
+  object-fit: cover;
+  line-height: 24px;
+}
+
+.safety_desc_right {
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 38px;
+}
+
+.safety_desc_item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #591d87;
+  line-height: 24px;
+
+  svg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: #591d87;
+    padding: 9px;
+    background-color: #e8e3ef;
+    display: grid;
+    place-items: center;
+  }
+
+  span {
+    flex: 1;
+    font-size: 24px;
+    font-weight: 570;
+    line-height: 24px;
+    color: #591d87;
+    line-height: 1.415;
+    letter-spacing: -0.01em;
+  }
+}
+
+.get_started_steps {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.get_started_steps > .work_step_item {
+  padding: 20px 40px;
+}
+
+.work_step_apply {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.work_step_apply a {
+  color: #fff;
+  text-align: center;
+  background-color: #581d87;
+  padding: 0.5rem 1.2rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 570;
+  transition: all 0.3s ease-in-out;
+}
+
+.work_step_apply a:hover {
+  background-color: #4b117a;
+  color: #fff;
+}
+
+@media screen and (max-width: 1315px) {
+  .strategy_container {
+    border: 1px solid red;
+  }
+}

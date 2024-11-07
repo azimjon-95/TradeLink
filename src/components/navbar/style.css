@@ -475,6 +475,35 @@
   margin-left: 5px;
 }
 
+.userProfileName {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  b {
+    white-space: nowrap;
+    font-size: 14px;
+    line-height: 22.001px;
+    font-weight: 600;
+    cursor: pointer;
+    color: rgb(26, 34, 51);
+  }
+
+  img {
+    height: 40px;
+    max-width: 40px;
+    border-radius: 4px;
+    object-fit: cover;
+    max-height: 40px;
+    aspect-ratio: 1 / 1;
+    width: 40px;
+    cursor: pointer;
+    color: rgb(26, 34, 51);
+    line-height: 24px;
+  }
+}
+
 /* Media query */
 @media screen and (max-width: 900px) {
   .nav_links-box {
@@ -489,10 +518,15 @@
     font-size: 30px !important;
   }
 
+  .userProfileName,
   .nav_links-main,
   .right-btns {
     display: none;
     /* Desktopda ko'rinmaydi */
+  }
+
+  .media_modal_userInfo {
+    display: flex;
   }
 
   .menu_button {
