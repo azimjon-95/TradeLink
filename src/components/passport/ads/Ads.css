@@ -142,3 +142,32 @@
   border: 2px solid rgb(26, 34, 51);
   opacity: 0.9;
 }
+
+@media screen and (max-width: 960px) {
+  .ads_container > .ads_title {
+    font-size: 35px;
+    margin: 0 4%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .ads_container > .ads_text,
+  .ads_container > .ads_title {
+    width: 100%;
+    text-align: left;
+  }
+
+  .ads_container > .ads_title {
+    font-size: 30px;
+    line-height: 1.5;
+  }
+
+  .ads_container > .ads_text {
+    font-size: 18px;
+  }
+
+  .ads_2 > button,
+  .ads_3 > button {
+    width: 100%;
+  }
+}

@@ -135,3 +135,68 @@
   line-height: 1.5;
   flex: 1;
 }
+
+@media screen and (max-width: 1020px) {
+  .commandCenter_container {
+    padding: 10%;
+  }
+  .commandCenter_img_and_text {
+    flex-direction: column-reverse;
+    display: flex;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .commandCenter .commandCenter_img_and_text_left {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 853px) {
+  .command_center_services_item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .command_center_services_item p {
+    text-align: center;
+    width: 100%;
+    font-family: "Inter";
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .commandCenter_title {
+    text-align: left;
+    font-size: 30px;
+  }
+  .commandCenter_container {
+    padding: 5%;
+  }
+
+  .commandCenter_img_and_text_right {
+    padding: 0;
+  }
+
+  .commandCenter_img_and_text {
+    padding: 20px;
+  }
+
+  .commandCenter .commandCenter_img_and_text_left {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .command_center_services {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  .command_center_services_item {
+    min-width: 150px;
+  }
+}

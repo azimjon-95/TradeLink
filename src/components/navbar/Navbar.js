@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import './style.css';
+import "./style.css";
 import { CgMenuGridO } from "react-icons/cg";
 import { IoMenu } from "react-icons/io5";
 import { IoChevronDown, IoChevronUpOutline } from "react-icons/io5";
@@ -9,18 +9,20 @@ import { FaPassport, FaStoreAlt } from 'react-icons/fa';
 // import { BsShop } from 'react-icons/bs';
 import SignUpModal from '../../pages/register/Register';
 
-import logo from '../../assets/kyt.png';
+import logo from "../../assets/kyt.png";
 
 function Navbar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [timeoutId, setTimeoutId] = useState(null);
   const [isMediaModalOpen, setIsMediaModalOpen] = useState(false); // State for media modal
   const [isModalSinUp, setIsModalSinUp] = useState(false);
-  const [modalType, setModalType] = useState(''); // Use a single state for modal type
+  const [modalType, setModalType] = useState(""); // Use a single state for modal type
   const location = useLocation();
   const [activeLink, setActiveLink] = useState('');
   const [isAuth] = useState(true);
+  // const [hasScrolled, setHasScrolled] = useState(false);
 
+  let token = localStorage.getItem("access_token");
 
   const openModal = () => {
     if (timeoutId) {
@@ -29,7 +31,6 @@ function Navbar() {
     }
     setIsModalOpen(true);
   };
-
 
   const closeModalWithDelay = () => {
     const id = setTimeout(() => {
@@ -40,7 +41,10 @@ function Navbar() {
 
   const handleMouseLeave = (e, action) => {
     const relatedTarget = e.relatedTarget;
-    if (relatedTarget instanceof Node && !e.currentTarget.contains(relatedTarget)) {
+    if (
+      relatedTarget instanceof Node &&
+      !e.currentTarget.contains(relatedTarget)
+    ) {
       action();
     }
   };
@@ -56,7 +60,7 @@ function Navbar() {
   });
 
   const toggleSection = (section) => {
-    setOpenSections(prevState => ({
+    setOpenSections((prevState) => ({
       ...prevState,
       [section]: !prevState[section],
     }));
@@ -64,11 +68,10 @@ function Navbar() {
 
   // Function to toggle media modal visibility
   const toggleMediaModal = () => {
-    setIsMediaModalOpen(prev => !prev);
+    setIsMediaModalOpen((prev) => !prev);
   };
 
   useEffect(() => {
-    // Function to close media modal if window width exceeds 900px
     const handleResize = () => {
       if (window.innerWidth > 900) {
         setIsMediaModalOpen(false);
@@ -76,15 +79,13 @@ function Navbar() {
     };
 
     // Add event listener
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     // Cleanup event listener on component unmount
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-
 
   const [links, setLinks] = useState([]);
 
@@ -95,16 +96,13 @@ function Navbar() {
       { path: '/rating', label: 'Rating' },
       { path: '/passport#hub', label: 'Hub' },
     ],
-    '/': [
-      { path: '/#about', label: 'About', scrollTo: 0 },
-      { path: '/#products', label: 'Passport', scrollTo: 570 },
-      { path: '/faq', label: 'FAQ' },
+    "/": [
+      { path: "/#about", label: "About", scrollTo: 0 },
+      { path: "/#products", label: "Passport", scrollTo: 570 },
+      { path: "/faq", label: "FAQ" },
     ],
-    default: [
-      { path: '/#default', label: 'Default', scrollTo: 0 },
-    ],
+    default: [{ path: "/#default", label: "Default", scrollTo: 0 }],
   };
-
 
   // Add the '/user' link options after 'linkOptions' is fully defined
   linkOptions['/user'] = [...linkOptions['/']];
@@ -138,22 +136,20 @@ function Navbar() {
 
   const handleClick = (path) => {
     setActiveLink(path);
-    localStorage.setItem('activeLink', path);
+    localStorage.setItem("activeLink", path);
   };
 
   const handleScroll = (scrollAmount) => {
     window.scrollTo({
       top: scrollAmount,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   };
-
-
 
   return (
     <div className="navbar_container">
       <div className="nav_links-box">
-        <Link to="/" onClick={() => handleClick('/')}>
+        <Link to="/" onClick={() => handleClick("/")}>
           <div className="nav_logo">
             <img src={logo} alt="Logo" />
           </div>
@@ -174,21 +170,26 @@ function Navbar() {
             >
               <div className="trade-link-header">
                 <div className="trade-link-header-icon">
-                  <FaStoreAlt size={32} style={{ color: '#6e44ff' }} />
+                  <FaStoreAlt size={32} style={{ color: "#6e44ff" }} />
                 </div>
                 <div className="trade-link-header-text">
                   <h3>KYT - Know Your Trader</h3>
-                  <p>For professional traders and investors within the crypto market.</p>
+                  <p>
+                    For professional traders and investors within the crypto
+                    market.
+                  </p>
                 </div>
               </div>
               <Link to="/passport">
                 <div className="trade-link-header">
                   <div className="trade-link-header-icon">
-                    <FaPassport size={32} style={{ color: '#f7b267' }} />
+                    <FaPassport size={32} style={{ color: "#f7b267" }} />
                   </div>
                   <div className="trade-link-header-text">
                     <h3>Passport</h3>
-                    <p>Worldwide Independent confirmation of traders' results</p>
+                    <p>
+                      Worldwide Independent confirmation of traders' results
+                    </p>
                   </div>
                 </div>
               </Link>
@@ -200,7 +201,6 @@ function Navbar() {
           <IoMenu />
         </button>
       </div>
-
 
       <div className="nav_links-main">
         {links.map((link, index) => (
@@ -214,10 +214,10 @@ function Navbar() {
           >
             <button
               style={{
-                width: '100%',
-                position: 'relative',
+                width: "100%",
+                position: "relative",
               }}
-              className={activeLink === link.path ? 'active-button' : ''}
+              className={activeLink === link.path ? "active-button" : ""}
             >
               {link.label}
             </button>
@@ -225,26 +225,84 @@ function Navbar() {
         ))}
       </div>
 
-      <div className="right-btns">
-        <button onClick={() => { setModalType('signIn'); setIsModalSinUp(true); }}>Log In</button>
-        <button onClick={() => { setModalType('signUp'); setIsModalSinUp(true); }}>Sign Up</button>
-      </div>
+      {token ? (
+        <div className="userProfileName">
+          <b>Bahromjon</b>
+          <img
+            src="https://gravatar.com/avatar/07f9820661965f5c65726c026a58a8b3?size=80&d=retro"
+            alt=""
+          />
+        </div>
+      ) : (
+        <div className="right-btns">
+          <button
+            onClick={() => {
+              setModalType("signIn");
+              setIsModalSinUp(true);
+            }}
+          >
+            Log In
+          </button>
+          <button
+            onClick={() => {
+              setModalType("signUp");
+              setIsModalSinUp(true);
+            }}
+          >
+            Sign Up
+          </button>
+        </div>
+      )}
 
       {/* Media modal */}
-      <div className={`media_modal-container ${isMediaModalOpen ? 'open' : ''}`}>
-        <div className="media_modal-btns">
-          <button onClick={() => { setModalType('signIn'); setIsModalSinUp(true); }}>Log In</button>
-          <button onClick={() => {
-            setIsModalSinUp(true);
-            toggleMediaModal();
-            setModalType('signUp');
-          }} >Sign Up</button>
-        </div>
+      <div
+        className={`media_modal-container ${isMediaModalOpen ? "open" : ""}`}
+      >
+        {token ? (
+          <div className="userProfileName media_modal_userInfo">
+            <b>Bahromjon</b>
+            <img
+              src="https://gravatar.com/avatar/07f9820661965f5c65726c026a58a8b3?size=80&d=retro"
+              alt=""
+            />
+          </div>
+        ) : (
+          <div className="media_modal-btns">
+            <button
+              onClick={() => {
+                setModalType("signIn");
+                setIsModalSinUp(true);
+              }}
+            >
+              Log In
+            </button>
+            <button
+              onClick={() => {
+                setIsModalSinUp(true);
+                toggleMediaModal();
+                setModalType("signUp");
+              }}
+            >
+              Sign Up
+            </button>
+          </div>
+        )}
+
         {/* KYT - Know Your Trader Section */}
         <div>
-          <div className="nav_head-lins" onClick={() => toggleSection('tradeLink')}>
-            <span><AiFillHome />KYT - Know Your Trader</span>
-            {openSections.tradeLink ? <IoChevronDown className="nav-chevron" /> : <IoChevronUpOutline className="nav-chevron" />}
+          <div
+            className="nav_head-lins"
+            onClick={() => toggleSection("tradeLink")}
+          >
+            <span>
+              <AiFillHome />
+              KYT - Know Your Trader
+            </span>
+            {openSections.tradeLink ? (
+              <IoChevronDown className="nav-chevron" />
+            ) : (
+              <IoChevronUpOutline className="nav-chevron" />
+            )}
           </div>
           {openSections.tradeLink && (
             <div className="media-nav-links">
@@ -256,9 +314,19 @@ function Navbar() {
         </div>
         {/* Passport Section */}
         <div>
-          <div className="nav_head-lins" onClick={() => toggleSection('passport')}>
-            <span><AiOutlineFileText />Passport</span>
-            {openSections.passport ? <IoChevronDown className="nav-chevron" /> : <IoChevronUpOutline className="nav-chevron" />}
+          <div
+            className="nav_head-lins"
+            onClick={() => toggleSection("passport")}
+          >
+            <span>
+              <AiOutlineFileText />
+              Passport
+            </span>
+            {openSections.passport ? (
+              <IoChevronDown className="nav-chevron" />
+            ) : (
+              <IoChevronUpOutline className="nav-chevron" />
+            )}
           </div>
           {openSections.passport && (
             <div className="media-nav-links">
@@ -283,17 +351,25 @@ function Navbar() {
           )}
         </div>*/}
       </div>
-      <div onClick={() => setIsMediaModalOpen(false)} className={`${isMediaModalOpen ? 'modal-open' : 'close-modal'}`}></div>
+      <div
+        onClick={() => setIsMediaModalOpen(false)}
+        className={`${isMediaModalOpen ? "modal-open" : "close-modal"}`}
+      ></div>
 
-      <div className={`close-modal-signup ${isModalSinUp && "close-modal-signup-open"}`}>
-        <SignUpModal setModalType={setModalType} modalType={modalType} setIsMediaModalOpen={setIsMediaModalOpen} isOpen={isModalSinUp} onRequestClose={() => setIsModalSinUp(false)} />
+      <div
+        className={`close-modal-signup ${isModalSinUp && "close-modal-signup-open"
+          }`}
+      >
+        <SignUpModal
+          setModalType={setModalType}
+          modalType={modalType}
+          setIsMediaModalOpen={setIsMediaModalOpen}
+          isOpen={isModalSinUp}
+          onRequestClose={() => setIsModalSinUp(false)}
+        />
       </div>
     </div>
   );
 }
 
 export default Navbar;
-
-
-
-

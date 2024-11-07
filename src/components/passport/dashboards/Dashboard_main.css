@@ -1,0 +1,41 @@
+.ant-skeleton-paragraph li,
+.ant-skeleton-content .ant-skeleton-title {
+  width: 100% !important;
+  height: 80px !important;
+  border-radius: 20px !important;
+}
+
+.dashbord_main {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 40px 40px 0 0;
+  padding: 40px 0;
+}
+
+.password_dashboard_container {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.dashbord_main .my_keys {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.dashbord_main .my_keys > .my_keys_title {
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 40px;
+  font-weight: 570;
+}
+
+.my_keys_title > svg {
+  transition: all 0.3s ease-in-out;
+}
+
+.my_keys_title > svg.icon_active {
+  transform: rotate(180deg);
+}
