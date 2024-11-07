@@ -11,29 +11,35 @@ const Charts = ({ checkedItems, isOverlayVisible, key }) => {
         const dataMain = [];
         const startDate = new Date(2022, 0); // Starting from January 2022
 
-        // Define unique data arrays for each field with a more dynamic fluctuation
-        const dataNegative0 = Array.from({ length: 60 }, (_, i) => 100 + i * -100 + Math.sin(i / 3) * 80 + Math.sin(i / 5) * 50);
-        const dataNegative1 = Array.from({ length: 60 }, (_, i) => 150 + i * 110 + Math.cos(i / 4) * 70 + Math.cos(i / 6) * 40);
-        const dataNegative2 = Array.from({ length: 50 }, (_, i) => 150 + i * 90 + Math.sin(i / 5) * 60 + Math.cos(i / 7) * -30);
-        const dataNegative3 = Array.from({ length: 60 }, (_, i) => i * 50 + Math.cos(i / 6) * 50 + Math.sin(i / 8) * 30);
-        const dataNegative4 = Array.from({ length: 60 }, (_, i) => 1200 + i * 120 + Math.sin(i / 7) * -50 + Math.cos(i / 9) * 40);
-        const dataNegative5 = Array.from({ length: 60 }, (_, i) => 280 + i * 70 + Math.cos(i / 8) * 40 + Math.sin(i / 10) * 30);
-        const dataNegative6 = Array.from({ length: 60 }, (_, i) => 100 + i * 100 + Math.sin(i / 9) * 30 + Math.cos(i / 12) * 20);
-        const dataNegative7 = Array.from({ length: 60 }, (_, i) => 200 + i * 75 + Math.cos(i / 10) * 45 + Math.sin(i / 15) * 25);
+        // Define data fields with sine and cosine fluctuations
+        const generateSeries = (base, increment, length, sinFactor, cosFactor) =>
+            Array.from({ length }, (_, i) =>
+                base + i * increment + Math.sin(i / sinFactor) * 50 + Math.cos(i / cosFactor) * 30
+            );
 
-        // Randomly generate positive and negative revenue values with smoother fluctuations
+        // Generate arrays for each data field with unique patterns
+        const dataNegative0 = generateSeries(100, -100, 60, 3, 5);
+        const dataNegative1 = generateSeries(150, 110, 60, 4, 6);
+        const dataNegative2 = generateSeries(150, 90, 50, 5, 7);
+        const dataNegative3 = generateSeries(0, 50, 60, 6, 8);
+        const dataNegative4 = generateSeries(1200, 120, 60, 7, 9);
+        const dataNegative5 = generateSeries(280, 70, 60, 8, 10);
+        const dataNegative6 = generateSeries(100, 100, 60, 9, 12);
+        const dataNegative7 = generateSeries(200, 75, 60, 10, 15, 200);
+
+        // Generate revenue data with smooth fluctuations
         const dataRevenue = Array.from({ length: 60 }, (_, i) => {
-            const baseRevenue = (50 + i * 50) * 6; // Positive revenue
-            const fluctuation = Math.random() > 0.5 ? 1 : -.0; // Randomly fluctuate to make some negative
-            return baseRevenue * fluctuation + Math.sin(i / 7) * 40; // Adding some smooth fluctuation
+            const baseRevenue = (50 + i * 50) * 6;
+            const fluctuation = Math.random() > 0.5 ? 1 : -0.5;
+            return baseRevenue * fluctuation + Math.sin(i / 7) * 40;
         });
 
-        // Loop to generate `dataMain` with distinct values for each month
+        // Generate `dataMain` array with distinct values for each month
         for (let i = 0; i < 60; i++) {
             const date = `${startDate.toLocaleString('default', { month: 'short' })} '${startDate.getFullYear().toString().slice(-2)}`;
 
             dataMain.push({
-                date: date,
+                date,
                 negative0: dataNegative0[i],
                 negative1: dataNegative1[i],
                 negative2: dataNegative2[i],
@@ -41,8 +47,8 @@ const Charts = ({ checkedItems, isOverlayVisible, key }) => {
                 negative4: dataNegative4[i],
                 negative5: dataNegative5[i],
                 negative6: dataNegative6[i],
-                negative7: dataNegative7[i], // Include `negative7` for #EA3941 color
-                revenue: dataRevenue[i] // This can now be positive or negative with smooth fluctuations
+                negative7: dataNegative7[i],
+                revenue: dataRevenue[i]
             });
 
             startDate.setMonth(startDate.getMonth() + 1);
@@ -219,7 +225,7 @@ const Charts = ({ checkedItems, isOverlayVisible, key }) => {
                     <YAxis
                         yAxisId="left"
                         orientation="left"
-                        domain={[0, 'auto']}
+                        domain={['auto']}
                         tickFormatter={(value) => `${value}%`} // Keep as percentage format (unchanged)
                         tick={{ fontSize: 10 }}
                         axisLine={{ stroke: '#a9a9a978' }}
@@ -230,12 +236,13 @@ const Charts = ({ checkedItems, isOverlayVisible, key }) => {
                     <YAxis
                         yAxisId="right"
                         orientation="right"
-                        domain={['auto', 0]}
+                        domain={['auto']}
                         tickFormatter={(value) => `$${(value / 1000).toFixed(1)}K`} // Format with "$" and "K"
                         axisLine={{ stroke: '#a9a9a978' }}
                         tickLine={{ stroke: '#a9a9a978' }}
                         tick={{ fontSize: 10 }}
                     />
+
 
                     <Tooltip content={<CustomTooltipMain />} />
                     <Legend />
@@ -244,7 +251,7 @@ const Charts = ({ checkedItems, isOverlayVisible, key }) => {
                         <Line yAxisId="left" name="Benchmark BTC" type="monotone" dataKey="negative0" stroke="#8A2BE2" strokeWidth={1.5} dot={false} />
                     )}
                     {checkedItems.return && (
-                        <Area strokeWidth={1.5} name="Return (%)" yAxisId="left" type="linear" dataKey="negative2" fill="#fceddc" stroke="#EB932D" />
+                        <Area strokeWidth={1.5} name="Return (%)" yAxisId="left" type="linear" dataKey="negative1" fill="#fceddc" stroke="#EB932D" />
                     )}
                     {checkedItems.realizedReturn && (
                         <Line yAxisId="left" name="Realized Return" type="monotone" dataKey="negative2" label="ssss" stroke="#1E90FF" strokeWidth={1.5} dot={false} />

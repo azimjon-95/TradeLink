@@ -13,7 +13,7 @@ const routes = [
   { path: "/signup", element: <Register />, protected: false },
   { path: "/passport", element: <Passport />, protected: false },
   { path: "/user/*", element: <UserProfile />, protected: false },
-  { path: "/:123", element: <UtopiaOldMultiLine />, protected: false },
+  { path: "/portfolio/:id", element: <UtopiaOldMultiLine />, protected: false },
   { path: "/faq", element: <Faq />, protected: false },
   { path: "/", element: <Home />, protected: false },
   { path: "*", element: <Home />, protected: false },

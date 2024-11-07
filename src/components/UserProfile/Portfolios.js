@@ -1,5 +1,7 @@
 import React, { useState } from 'react'; // Import React at the top
 import { EyeOutlined, StarOutlined, SearchOutlined } from '@ant-design/icons'; // Consolidated icon imports
+import { Link } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 import { Input, Tooltip } from 'antd'; // Ant Design components
 import binance_rounded from '../../assets/ed_khan/binance_rounded.svg'; // Image import
 import LineChart from '../../hooks/LineChart'; // Custom hook or component import
@@ -7,6 +9,8 @@ import './styles/style.css'; // Import the CSS file
 
 
 const PortfolCard = ({ title, returnPercentage, drawDown, minDeposit, data, tooltipReturn, tooltipDrawDown, tooltipMinDeposit, tooltipProfit, labelReturn, labelDrawDown, labelMinDeposit, profit, view, image, started, result }) => {
+
+
     return (
         <div className="over-card">
             <div className="over-header">
@@ -58,6 +62,8 @@ const PortfolCard = ({ title, returnPercentage, drawDown, minDeposit, data, tool
 };
 
 const Portfolios = () => {
+
+
     const data = [10, 15, 20, 25, 40, 42, 41, 44, 43, 48, 50, 52, 55, 58, 60, 62, 65, 68, 10, 15, 20, 25, 40, 42, 41, 44, 43, 48, 50, 52, 55, 58, 60, 62, 65, 68];
     const startDate = "12/04/2019";
     const daysElapsed = 1152;
@@ -72,8 +78,21 @@ const Portfolios = () => {
     };
 
 
+    const generateUniqueId = () => {
+        const baseId = uuidv4();
+        const tParam = Math.floor(Date.now() / 1000); // using a Unix timestamp
+        const startDate = "2019-12-04";
+        const endDate = "2023-01-28";
+        const step = "hour";
+        const profit = 0;
+        const marginBalance = 0;
+        const balance = 1;
+
+        return `${baseId}?t=${tParam}&startDate=${startDate}&endDate=${endDate}&step=${step}&profit=${profit}&margin-balance=${marginBalance}&balance=${balance}`;
+    };
     const portfoliosData = [
         {
+            id: generateUniqueId(),
             title: "Utopia",
             returnPercentage: "205.25",
             drawDown: "39.77",
@@ -93,6 +112,7 @@ const Portfolios = () => {
             result: "3"
         },
         {
+            id: generateUniqueId(),
             title: "Utopia",
             returnPercentage: "205.25",
             drawDown: "39.77",
@@ -112,6 +132,7 @@ const Portfolios = () => {
             result: "3",
         },
         {
+            id: generateUniqueId(),
             title: "Utopia",
             returnPercentage: "205.25",
             drawDown: "39.77",
@@ -131,6 +152,7 @@ const Portfolios = () => {
             result: "3"
         },
         {
+            id: generateUniqueId(),
             title: "Utopia",
             returnPercentage: "205.25",
             drawDown: "39.77",
@@ -150,6 +172,7 @@ const Portfolios = () => {
             result: "3",
         },
         {
+            id: generateUniqueId(),
             title: "Utopia",
             returnPercentage: "205.25",
             drawDown: "39.77",
@@ -169,6 +192,7 @@ const Portfolios = () => {
             result: "3"
         },
         {
+            id: generateUniqueId(),
             title: "Utopia",
             returnPercentage: "205.25",
             drawDown: "39.77",
@@ -188,6 +212,7 @@ const Portfolios = () => {
             result: "3",
         },
         {
+            id: generateUniqueId(),
             title: "Utopia",
             returnPercentage: "205.25",
             drawDown: "39.77",
@@ -207,6 +232,7 @@ const Portfolios = () => {
             result: "3"
         },
         {
+            id: generateUniqueId(),
             title: "Utopia",
             returnPercentage: "205.25",
             drawDown: "39.77",
@@ -226,6 +252,7 @@ const Portfolios = () => {
             result: "3",
         },
         {
+            id: generateUniqueId(),
             title: "Utopia",
             returnPercentage: "205.25",
             drawDown: "39.77",
@@ -245,6 +272,7 @@ const Portfolios = () => {
             result: "3"
         },
         {
+            id: generateUniqueId(),
             title: "Utopia",
             returnPercentage: "205.25",
             drawDown: "39.77",
@@ -264,6 +292,7 @@ const Portfolios = () => {
             result: "3",
         },
         {
+            id: generateUniqueId(),
             title: "Utopia",
             returnPercentage: "205.25",
             drawDown: "39.77",
@@ -283,6 +312,7 @@ const Portfolios = () => {
             result: "3"
         },
         {
+            id: generateUniqueId(),
             title: "Utopia",
             returnPercentage: "205.25",
             drawDown: "39.77",
@@ -302,6 +332,7 @@ const Portfolios = () => {
             result: "3",
         },
         {
+            id: generateUniqueId(),
             title: "Utopia",
             returnPercentage: "205.25",
             drawDown: "39.77",
@@ -321,6 +352,7 @@ const Portfolios = () => {
             result: "3"
         },
         {
+            id: generateUniqueId(),
             title: "Utopia",
             returnPercentage: "205.25",
             drawDown: "39.77",
@@ -390,7 +422,9 @@ const Portfolios = () => {
 
             <div className="overview-container">
                 {filteredPortfolios?.map((portfolio, index) => (
-                    <PortfolCard key={index} {...portfolio} />
+                    <Link to={`/portfolio/${portfolio.id}`}>
+                        <PortfolCard key={index} {...portfolio} />
+                    </Link>
                 ))}
 
             </div>

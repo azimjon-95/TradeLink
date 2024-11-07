@@ -3,6 +3,7 @@ import { ImStarEmpty } from "react-icons/im";
 import { Checkbox, Select, DatePicker, Space, Switch } from 'antd';
 import { CheckSquareTwoTone } from '@ant-design/icons';
 import { RiExpandDiagonalLine } from "react-icons/ri";
+import { useParams, useLocation } from 'react-router-dom';
 import bin from '../../../assets/ed_khan/binance_rounded.svg';
 import MyCards from './myCards/MyCards';
 import './style.css';
@@ -14,6 +15,31 @@ import Investment from "./myCards/Investment";
 const { RangePicker } = DatePicker;
 
 const UtopiaOldMultiLine = () => {
+
+    // ===============useParams========================
+    const { id: baseId } = useParams(); // Extract base ID
+    const location = useLocation(); // Access URL's query parameters
+    // Function to parse query parameters
+    const getQueryParams = () => {
+        const params = new URLSearchParams(location.search);
+
+        return {
+            baseId, // From useParams
+            t: params.get('t'),
+            startDate: params.get('startDate'),
+            endDate: params.get('endDate'),
+            step: params.get('step'),
+            profit: params.get('profit'),
+            marginBalance: params.get('margin-balance'),
+            balance: params.get('balance'),
+        };
+    };
+    // =======================================
+
+    const queryData = getQueryParams();
+    console.log(queryData);
+
+
     const [isLite, setIsLite] = useState(false);
     const [activeTab, setActiveTab] = useState("main");
     const handleChange = (value) => {
@@ -99,10 +125,10 @@ const UtopiaOldMultiLine = () => {
             </div>
             <div className="oldMultiLine-main">
                 <div className="oldMultiLine-main-head">
+                    <Space className="RangePicker" direction="vertical" size={12}>
+                        <RangePicker />
+                    </Space>
                     <div className="oldMultiLine-calendar">
-                        <Space className="RangePicker" direction="vertical" size={12}>
-                            <RangePicker />
-                        </Space>
                         <Select
                             defaultValue="Day"
                             style={{
@@ -115,16 +141,16 @@ const UtopiaOldMultiLine = () => {
                                 { value: 'sunday', label: 'Sunday' },
                             ]}
                         />
-                    </div>
 
-                    <div style={{ color: "#591d87", display: "flex", alignItems: "center", fontSize: "12px" }}>
-                        {isLite ? "Lite" : "A little"}
-                        &nbsp;&nbsp;
-                        <Switch
-                            checked={isLite}
-                            onChange={handleSwitchChange}
-                            className={isLite ? 'switch-checked' : 'switch-unchecked'}
-                        />
+                        <div style={{ color: "#591d87", display: "flex", alignItems: "center", fontSize: "12px" }}>
+                            {isLite ? "Lite" : "A little"}
+                            &nbsp;&nbsp;
+                            <Switch
+                                checked={isLite}
+                                onChange={handleSwitchChange}
+                                className={isLite ? 'switch-checked' : 'switch-unchecked'}
+                            />
+                        </div>
                     </div>
                 </div>
 
@@ -147,10 +173,11 @@ const UtopiaOldMultiLine = () => {
                 >
                     {isOverlayVisible &&
                         <div style={{ padding: "10px 20px" }} className="oldMultiLine-main-head">
+                            <Space className="RangePicker" direction="vertical" size={12}>
+                                <RangePicker />
+                            </Space>
                             <div className="oldMultiLine-calendar">
-                                <Space className="RangePicker" direction="vertical" size={12}>
-                                    <RangePicker />
-                                </Space>
+
                                 <Select
                                     defaultValue="Day"
                                     style={{
@@ -163,22 +190,21 @@ const UtopiaOldMultiLine = () => {
                                         { value: 'sunday', label: 'Sunday' },
                                     ]}
                                 />
-                            </div>
+                                <div style={{ color: "#591d87", display: "flex", alignItems: "center", fontSize: "12px" }}>
+                                    {isLite ? "Lite" : "A little"}
+                                    &nbsp;&nbsp;
+                                    <Switch
+                                        checked={isLite}
+                                        onChange={handleSwitchChange}
+                                        className={isLite ? 'switch-checked' : 'switch-unchecked'}
+                                    />
+                                    &nbsp;&nbsp;
+                                    &nbsp;&nbsp;
+                                    <button className="isOverlayVisible-btn" onClick={() => setOverlayVisible(!isOverlayVisible)}>
+                                        <RiExpandDiagonalLine />
+                                    </button>
 
-                            <div style={{ color: "#591d87", display: "flex", alignItems: "center", fontSize: "12px" }}>
-                                {isLite ? "Lite" : "A little"}
-                                &nbsp;&nbsp;
-                                <Switch
-                                    checked={isLite}
-                                    onChange={handleSwitchChange}
-                                    className={isLite ? 'switch-checked' : 'switch-unchecked'}
-                                />
-                                &nbsp;&nbsp;
-                                &nbsp;&nbsp;
-                                <button className="isOverlayVisible-btn" onClick={() => setOverlayVisible(!isOverlayVisible)}>
-                                    <RiExpandDiagonalLine />
-                                </button>
-
+                                </div>
                             </div>
                         </div>
                     }

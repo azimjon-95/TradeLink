@@ -19,7 +19,8 @@ function Navbar() {
   const [modalType, setModalType] = useState(''); // Use a single state for modal type
   const location = useLocation();
   const [activeLink, setActiveLink] = useState('');
-  // const [hasScrolled, setHasScrolled] = useState(false);
+  const [isAuth] = useState(true);
+
 
   const openModal = () => {
     if (timeoutId) {
@@ -92,7 +93,6 @@ function Navbar() {
     '/passport': [
       { path: '/passport#cabinet', label: "Trader's Cabinet" },
       { path: '/passport#rating', label: 'Rating' },
-      { path: '/passport#feed', label: 'Feed' },
       { path: '/passport#hub', label: 'Hub' },
     ],
     '/': [
@@ -108,15 +108,33 @@ function Navbar() {
 
   // Add the '/user' link options after 'linkOptions' is fully defined
   linkOptions['/user'] = [...linkOptions['/']];
+  linkOptions['/portfolio/:id'] = [...linkOptions['/passport']];
 
   // Asosiy sahifa linklarini yuklash kerak bo'lgan yo'nalishlar ro'yxati
   const mainPageRoutes = ['/faq', '/main', '/about', '/contact']; // Yangi yo'nalishlar qo'shilishi mumkin
 
   useEffect(() => {
-    // `location.pathname` asosiy sahifa yo'nalishlaridan birida bo'lsa, asosiy sahifa linklarini yuklaydi
-    const linksToSet = mainPageRoutes.includes(location.pathname) ? linkOptions['/'] : linkOptions[location.pathname] || linkOptions.default;
+    const path = location.pathname;
+
+    // Check if path matches '/portfolio/:id' pattern
+    const isPortfolioRoute = /^\/portfolio\/\w+/.test(path);
+
+    // Load passport links and add Dashboard if registered
+    let passportLinks = [...linkOptions['/passport']];
+    if (isAuth) {
+      passportLinks.unshift({ path: '/dashboard', label: 'Dashboard' });
+    }
+
+    // Set links based on current path
+    const linksToSet =
+      mainPageRoutes.includes(path) ? linkOptions['/'] :
+        isPortfolioRoute ? passportLinks :
+          linkOptions[path] || linkOptions['/'];
+
     setLinks(linksToSet);
-  }, [location.pathname]);
+  }, [location.pathname, isAuth]);
+
+
 
   const handleClick = (path) => {
     setActiveLink(path);
