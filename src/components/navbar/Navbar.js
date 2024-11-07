@@ -92,7 +92,7 @@ function Navbar() {
   const linkOptions = {
     '/passport': [
       { path: '/passport#cabinet', label: "Trader's Cabinet" },
-      { path: '/passport#rating', label: 'Rating' },
+      { path: '/rating', label: 'Rating' },
       { path: '/passport#hub', label: 'Hub' },
     ],
     '/': [
@@ -111,7 +111,7 @@ function Navbar() {
   linkOptions['/portfolio/:id'] = [...linkOptions['/passport']];
 
   // Asosiy sahifa linklarini yuklash kerak bo'lgan yo'nalishlar ro'yxati
-  const mainPageRoutes = ['/faq', '/main', '/about', '/contact']; // Yangi yo'nalishlar qo'shilishi mumkin
+  const mainPageRoutes = ['/faq', '/rating', '/main', '/about', '/contact']; // Yangi yo'nalishlar qo'shilishi mumkin
 
   useEffect(() => {
     const path = location.pathname;
