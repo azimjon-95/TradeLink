@@ -4,7 +4,7 @@ import './style.css';
 
 
 
-const Charts = ({ checkedItems, isOverlayVisible, key }) => {
+const Charts = ({ checkedItems, isOverlayVisible, customKey }) => {
 
 
     const generateData = () => {
@@ -279,7 +279,7 @@ const Charts = ({ checkedItems, isOverlayVisible, key }) => {
 
 
             {/* ---------------------------10A----------------------------------- */}
-            <div style={{ display: `${key && "none"}` }}>
+            <div style={{ display: `${customKey && "none"}` }}>
                 {checkedItems.usedLeverage &&
                     <ResponsiveContainer width="100%" height={130}>
 

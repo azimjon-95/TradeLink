@@ -156,7 +156,7 @@ const UtopiaOldMultiLine = () => {
 
                 {/* -----------------------7A------------------------- */}
                 <h2 className="ket-inxTitle">Key indicators</h2>
-                <KeyIndicators key={isLite} />
+                <KeyIndicators customKey={isLite} />
 
                 <div
                     className="overlayVisible"
@@ -231,7 +231,7 @@ const UtopiaOldMultiLine = () => {
                             </div>
                         ))}
                     </div>
-                    <Charts key={isLite} checkedItems={checkedItems} isOverlayVisible={isOverlayVisible} />
+                    <Charts customKey={isLite} checkedItems={checkedItems} isOverlayVisible={isOverlayVisible} />
                     {
                         isLite &&
                         <div className="single-cards-container">
