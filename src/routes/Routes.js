@@ -31,7 +31,7 @@ const routes = [
   { path: "/passport", element: <Passport />, protected: false },
   { path: "/passport/dashboard", element: <PassportDashboard />, protected: false, },
   { path: "/rating", element: <Rating />, protected: false },
-  { path: "/dashboard", element: <Dashboard />, protected: false },
+  { path: "/trader-cabinet/dashboard", element: <Dashboard />, protected: false },
   { path: "/dashboard&ctx=product", element: <NewDeclaration />, protected: false, },
   { path: "/dashboard/success-fee", element: <SuccessFeeHistory />, protected: false, },
 
