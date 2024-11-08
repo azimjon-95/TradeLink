@@ -329,8 +329,111 @@
   color: #fff;
 }
 
+/* media queries */
+
 @media screen and (max-width: 1315px) {
   .strategy_container {
-    border: 1px solid red;
+    padding: 4%;
+  }
+}
+
+@media screen and (max-width: 1265px) {
+  .strategy_items {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .strategy_item:nth-child(3),
+  .strategy_item:nth-child(4) {
+    gap: 20px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .strategy_caption {
+    font-size: 30px;
+  }
+
+  .strategy_text {
+    font-size: 18px;
+  }
+
+  .strategy_item {
+    padding: 20px;
+    height: 150px;
+
+    .strategy_item_order {
+      font-size: 10rem;
+      transform: translateY(90px);
+    }
+
+    .strategy_item_info {
+      font-size: 24px;
+      transform: translate(20px);
+    }
+  }
+
+  .strategy_item:nth-child(3) .strategy_item_info,
+  .strategy_item:nth-child(4) .strategy_item_info {
+    transform: translate(0px);
+    display: flex;
+    align-items: flex-end;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .strategy {
+    padding-top: 30px;
+  }
+
+  .strategy_item {
+    padding: 20px;
+
+    .strategy_item_order {
+      font-size: 8rem;
+      transform: translateY(95px);
+    }
+
+    .strategy_item_info {
+      font-size: 18px;
+      transform: translate(20px);
+      line-height: 1.2;
+    }
+  }
+}
+
+@media screen and (max-width: 439px) {
+  .strategy_item {
+    padding: 20px;
+    align-items: center;
+
+    .strategy_item_order {
+      font-size: 7rem;
+      /* transform: translateY(100px); */
+      transform: translateY(0px);
+    }
+
+    .strategy_item_info {
+      font-size: 18px;
+      /* transform: translate(0, 20px); */
+      transform: translate(0px);
+      line-height: 1.2;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .strategy_item:nth-child(2) .strategy_item_info,
+  .strategy_item:nth-child(3) .strategy_item_info,
+  .strategy_item:nth-child(4) .strategy_item_info {
+    transform: translate(0px);
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  .strategy_item {
+    .strategy_item_order {
+      transform: translateY(50px);
+    }
   }
 }

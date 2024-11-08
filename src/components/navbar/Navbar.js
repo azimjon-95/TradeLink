@@ -4,25 +4,37 @@ import { CgMenuGridO } from "react-icons/cg";
 import { IoMenu } from "react-icons/io5";
 import { IoChevronDown, IoChevronUpOutline } from "react-icons/io5";
 import { Link, useLocation } from "react-router-dom";
-import { AiFillHome, AiOutlineFileText } from 'react-icons/ai';
-import { FaPassport, FaStoreAlt } from 'react-icons/fa';
+import { AiFillHome, AiOutlineFileText } from "react-icons/ai";
+import { FaPassport, FaStoreAlt, FaGlobe } from "react-icons/fa";
+import { BsThreeDots } from "react-icons/bs";
+import { FiX } from "react-icons/fi";
 // import { BsShop } from 'react-icons/bs';
-import SignUpModal from '../../pages/register/Register';
-
+import { useDispatch, useSelector } from "react-redux";
+import SignUpModal from "../../pages/register/Register";
+import { setModalType as setModalType2 } from "../../context/modalType";
 import logo from "../../assets/kyt.png";
 
 function Navbar() {
+  const dispatch = useDispatch();
+  const modalTypeValue = useSelector((s) => s?.modalType);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [timeoutId, setTimeoutId] = useState(null);
   const [isMediaModalOpen, setIsMediaModalOpen] = useState(false); // State for media modal
   const [isModalSinUp, setIsModalSinUp] = useState(false);
   const [modalType, setModalType] = useState(""); // Use a single state for modal type
   const location = useLocation();
-  const [activeLink, setActiveLink] = useState('');
+  const [activeLink, setActiveLink] = useState("");
   const [isAuth] = useState(true);
   // const [hasScrolled, setHasScrolled] = useState(false);
 
   let token = localStorage.getItem("access_token");
+
+  useEffect(() => {
+    if (modalTypeValue) {
+      setModalType(modalTypeValue);
+      setIsModalSinUp(true);
+    }
+  }, [modalTypeValue]);
 
   const openModal = () => {
     if (timeoutId) {
@@ -51,6 +63,7 @@ function Navbar() {
 
   const handleModalBlur = () => {
     setIsModalOpen(false);
+    dispatch(setModalType2(null));
   };
 
   const [openSections, setOpenSections] = useState({
@@ -91,10 +104,10 @@ function Navbar() {
 
   // Link to'plamlarini aniqlash
   const linkOptions = {
-    '/passport': [
-      { path: '/passport#cabinet', label: "Trader's Cabinet" },
-      { path: '/rating', label: 'Rating' },
-      { path: '/passport#hub', label: 'Hub' },
+    "/passport": [
+      { path: "/passport#cabinet", label: "Trader's Cabinet" },
+      { path: "/rating", label: "Rating" },
+      { path: "/passport#hub", label: "Hub" },
     ],
     "/": [
       { path: "/#about", label: "About", scrollTo: 0 },
@@ -105,11 +118,11 @@ function Navbar() {
   };
 
   // Add the '/user' link options after 'linkOptions' is fully defined
-  linkOptions['/user'] = [...linkOptions['/']];
-  linkOptions['/portfolio/:id'] = [...linkOptions['/passport']];
+  linkOptions["/user"] = [...linkOptions["/"]];
+  linkOptions["/portfolio/:id"] = [...linkOptions["/passport"]];
 
   // Asosiy sahifa linklarini yuklash kerak bo'lgan yo'nalishlar ro'yxati
-  const mainPageRoutes = ['/faq', '/rating', '/main', '/about', '/contact']; // Yangi yo'nalishlar qo'shilishi mumkin
+  const mainPageRoutes = ["/faq", "/rating", "/main", "/about", "/contact"]; // Yangi yo'nalishlar qo'shilishi mumkin
 
   useEffect(() => {
     const path = location.pathname;
@@ -118,21 +131,20 @@ function Navbar() {
     const isPortfolioRoute = /^\/portfolio\/\w+/.test(path);
 
     // Load passport links and add Dashboard if registered
-    let passportLinks = [...linkOptions['/passport']];
+    let passportLinks = [...linkOptions["/passport"]];
     if (isAuth) {
-      passportLinks.unshift({ path: '/dashboard', label: 'Dashboard' });
+      passportLinks.unshift({ path: "/dashboard", label: "Dashboard" });
     }
 
     // Set links based on current path
-    const linksToSet =
-      mainPageRoutes.includes(path) ? linkOptions['/'] :
-        isPortfolioRoute ? passportLinks :
-          linkOptions[path] || linkOptions['/'];
+    const linksToSet = mainPageRoutes.includes(path)
+      ? linkOptions["/"]
+      : isPortfolioRoute
+      ? passportLinks
+      : linkOptions[path] || linkOptions["/"];
 
     setLinks(linksToSet);
   }, [location.pathname, isAuth]);
-
-
 
   const handleClick = (path) => {
     setActiveLink(path);
@@ -259,12 +271,9 @@ function Navbar() {
         className={`media_modal-container ${isMediaModalOpen ? "open" : ""}`}
       >
         {token ? (
-          <div className="userProfileName media_modal_userInfo">
-            <b>Bahromjon</b>
-            <img
-              src="https://gravatar.com/avatar/07f9820661965f5c65726c026a58a8b3?size=80&d=retro"
-              alt=""
-            />
+          <div className="media_modal-lang">
+            <FaGlobe />
+            <FiX onClick={() => setIsMediaModalOpen(false)} />
           </div>
         ) : (
           <div className="media_modal-btns">
@@ -350,6 +359,17 @@ function Navbar() {
             </div>
           )}
         </div>*/}
+
+        <div className="userProfileName media_modal_userInfo">
+          <div className="userProfileName_left">
+            <img
+              src="https://gravatar.com/avatar/07f9820661965f5c65726c026a58a8b3?size=80&d=retro"
+              alt=""
+            />
+            <b>Bahromjon</b>
+          </div>
+          <BsThreeDots />
+        </div>
       </div>
       <div
         onClick={() => setIsMediaModalOpen(false)}
@@ -357,8 +377,9 @@ function Navbar() {
       ></div>
 
       <div
-        className={`close-modal-signup ${isModalSinUp && "close-modal-signup-open"
-          }`}
+        className={`close-modal-signup ${
+          isModalSinUp && "close-modal-signup-open"
+        }`}
       >
         <SignUpModal
           setModalType={setModalType}
