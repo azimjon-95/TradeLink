@@ -6,7 +6,6 @@ import { IoChevronDown, IoChevronUpOutline } from "react-icons/io5";
 import { Link, useLocation } from "react-router-dom";
 import { AiFillHome, AiOutlineFileText } from 'react-icons/ai';
 import { FaPassport, FaStoreAlt } from 'react-icons/fa';
-// import { BsShop } from 'react-icons/bs';
 import SignUpModal from '../../pages/register/Register';
 
 import logo from "../../assets/kyt.png";
@@ -18,8 +17,8 @@ function Navbar() {
   const [isModalSinUp, setIsModalSinUp] = useState(false);
   const [modalType, setModalType] = useState(""); // Use a single state for modal type
   const location = useLocation();
-  const [activeLink, setActiveLink] = useState('');
   const [isAuth] = useState(true);
+  const [activeLink, setActiveLink] = useState("");
   // const [hasScrolled, setHasScrolled] = useState(false);
 
   let token = localStorage.getItem("access_token");
@@ -120,7 +119,7 @@ function Navbar() {
     // Load passport links and add Dashboard if registered
     let passportLinks = [...linkOptions['/passport']];
     if (isAuth) {
-      passportLinks.unshift({ path: '/dashboard', label: 'Dashboard' });
+      passportLinks.unshift({ path: '/passport/dashboard', label: 'Dashboard' });
     }
 
     // Set links based on current path
@@ -254,6 +253,7 @@ function Navbar() {
         </div>
       )}
 
+
       {/* Media modal */}
       <div
         className={`media_modal-container ${isMediaModalOpen ? "open" : ""}`}
@@ -287,6 +287,7 @@ function Navbar() {
             </button>
           </div>
         )}
+
 
         {/* KYT - Know Your Trader Section */}
         <div>

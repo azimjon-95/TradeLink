@@ -23,7 +23,7 @@
   margin-bottom: 40px;
 }
 
-.dashbord_main .my_keys > .my_keys_title {
+.dashbord_main .my_keys>.my_keys_title {
   font-size: 24px;
   display: flex;
   align-items: center;
@@ -32,10 +32,10 @@
   font-weight: 570;
 }
 
-.my_keys_title > svg {
+.my_keys_title>svg {
   transition: all 0.3s ease-in-out;
 }
 
-.my_keys_title > svg.icon_active {
+.my_keys_title>svg.icon_active {
   transform: rotate(180deg);
 }
