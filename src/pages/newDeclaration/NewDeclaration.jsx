@@ -3,9 +3,9 @@ import Declaration from "../../components/createDeclaration/Declaration";
 
 function NewDeclaration() {
   return (
-    <div>
+    <>
       <Declaration />
-    </div>
+    </>
   );
 }
 

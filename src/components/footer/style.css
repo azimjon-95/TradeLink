@@ -100,3 +100,36 @@
     font-size: 12px;
     color: #666;
 }
+
+@media screen and (max-width: 900px) {
+    .social-icon {
+        font-size: 17px;
+        padding: 8px;
+    }
+
+    .footer {
+        padding: 40px 10px 10px 10px;
+        color: #333;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer-top {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding-bottom: 10px;
+    }
+
+    .footer-section {
+        min-width: 150px !important;
+    }
+
+
+    .footer-icons {
+        display: flex;
+        gap: 5px;
+    }
+
+}

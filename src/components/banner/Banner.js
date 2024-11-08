@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './style.css';
+import './media.css';
 import Rating from 'react-rating-stars-component';
+import { Link } from 'react-router-dom';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import bt_binance from '../../assets/banner/supporters.png'
-import bt_marketplace from '../../assets/banner/marketplace.png'
 import bt_passport from '../../assets/banner/passport.png'
 import bt_widget from '../../assets/banner/widget.png'
 import bt_benefits_faces from '../../assets/banner/benefits-faces.png'
@@ -99,11 +100,6 @@ const Banner = () => {
                 "KYT - Know Your Trader Passport is an independent trader verification standard that allows you to validate and analyze exchange account statistics...",
         },
         {
-            question: "What is KYT - Know Your Trader Marketplace?",
-            answer:
-                "KYT - Know Your Trader Marketplace is a platform that allows you to copy the trading results of the best traders in the market...",
-        },
-        {
             question: "How does KYT - Know Your Trader help a trader?",
             answer:
                 "KYT - Know Your Trader products allow a trader to obtain complete statistics on your exchange account, analyze the data...",
@@ -120,8 +116,6 @@ const Banner = () => {
     const togglePanel = (key) => {
         setActiveKey(activeKey === key ? null : key);
     };
-
-
 
     const blogPosts = [
         {
@@ -149,6 +143,36 @@ const Banner = () => {
         },
     ];
 
+
+    // ----------------scroll cards--------------------------
+
+
+    const containerRef = useRef(null);
+
+
+    useEffect(() => {
+        const scrollInterval = setInterval(() => {
+            if (containerRef.current) {
+                containerRef.current.scrollBy({
+                    left: containerRef.current.offsetWidth, // Hozirgi o'lchamni qo'llash
+                    behavior: 'smooth'
+                });
+
+                // Kartalar oxiriga yetganda boshidan boshlash
+                if (
+                    containerRef.current.scrollLeft + containerRef.current.offsetWidth >=
+                    containerRef.current.scrollWidth
+                ) {
+                    containerRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+                }
+            }
+        }, 2000); // 2 soniyadan keyin o'zgaradi
+
+        return () => clearInterval(scrollInterval);
+    }, []);
+
+
+
     return (
         <>
             <div className="homePage">
@@ -166,57 +190,6 @@ const Banner = () => {
                 </div>
             </div>
 
-            {/* marketplace */}
-            <div className="marketplace">
-                <header className="product-header">
-                    <h2>Products</h2>
-                    <p>For professional traders and investors within the crypto market.</p>
-                </header>
-                <div className="marketplace-home">
-                    <div className="marketplace-home_img">
-                        <img src={bt_marketplace} alt="" />
-                    </div>
-                    <div className="marketplace-container">
-                        <p className="marketplace-subtitle">INVESTMENT PLATFORM IN CRYPTO INDEXES</p>
-                        <h1 className="marketplace-title">
-                            <span role="img" aria-label="logo">📊</span> KYT - Know Your Trader Marketplace
-                        </h1>
-                        <p className="marketplace-description">
-                            You can invest in risk-resistant crypto indexes, built up from strategies of the best algorithmic traders, using your personal Binance exchange account.
-                        </p>
-
-                        <ul className="marketplace-benefits">
-                            <li>
-                                <span className="check-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
-                                        <path d="M20.285 2.586l-11.949 11.95-4.95-4.95-1.416 1.415 6.365 6.364 13.364-13.364z" />
-                                    </svg>
-                                </span>
-                                Without placing funds under management
-                            </li>
-                            <li>
-                                <span className="check-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
-                                        <path d="M20.285 2.586l-11.949 11.95-4.95-4.95-1.416 1.415 6.365 6.364 13.364-13.364z" />
-                                    </svg>
-                                </span>
-                                It is a 30-day 0% commission on your profits
-                            </li>
-                            <li>
-                                <span className="check-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
-                                        <path d="M20.285 2.586l-11.949 11.95-4.95-4.95-1.416 1.415 6.365 6.364 13.364-13.364z" />
-                                    </svg>
-                                </span>
-                                Proven strategies with a transparent trading history of more than 180 days
-                            </li>
-                        </ul>
-
-
-                        <button className="learn-more-button">Learn more</button>
-                    </div>
-                </div>
-            </div>
 
             {/* passport */}
             <div className="marketplace">
@@ -260,8 +233,9 @@ const Banner = () => {
                             </li>
                         </ul>
 
-
-                        <button className="learn-more-button-passporte">Learn more</button>
+                        <Link to="/passport">
+                            <button className="learn-more-button-passporte">Learn more</button>
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -336,11 +310,10 @@ const Banner = () => {
                 </div>
             </div>
 
-
             <div className="account-container">
                 <h2 className="account-title">What traders and investors are saying about KYT - Know Your Trader</h2>
                 <p>We take into account your opinion, it helps us to improve.</p>
-                <div className="reviews-container">
+                <div className="reviews-container" ref={containerRef}>
                     {reviews.map((review, index) => (
                         <ReviewCard key={index} review={review} onClick={handleCardClick} />
                     ))}
@@ -384,6 +357,9 @@ const Banner = () => {
                         </div>
                     ))}
                 </div>
+
+                <button className="referral-btnAsked">More articles</button>
+
             </section>
         </>
     );

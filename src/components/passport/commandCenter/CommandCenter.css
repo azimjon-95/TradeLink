@@ -1,0 +1,137 @@
+.commandCenter {
+  width: 100%;
+}
+
+.commandCenter_container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 128px 11.5px;
+}
+
+.commandCenter_title {
+  font-size: 44px;
+  text-align: center;
+  font-weight: 570;
+  line-height: 1.375;
+  letter-spacing: 1px;
+}
+
+.command_center_services {
+  width: 100%;
+  height: 105px;
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  margin-bottom: 50px;
+}
+
+.command_center_services_item {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  place-content: center;
+  padding: 20px;
+  position: relative;
+  color: #1a2233;
+}
+
+.command_center_services_item::before {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  height: 4px;
+  width: 0;
+  background-color: black;
+  transition: width 7s linear;
+}
+
+.command_center_services_item.active::before {
+  width: 100%;
+}
+
+.command_center_services_item:not(.active)::before {
+  transition: none; /* boshqa itemlarga o'tganda kenglikni birdaniga 0% ga qaytarish */
+  width: 0;
+}
+
+.command_center_services_item::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background-color: #000;
+  opacity: 0.2;
+}
+
+.command_center_services_item > img {
+  width: 40px;
+  height: 40px;
+  aspect-ratio: 1 / 1;
+  opacity: 0.2;
+}
+
+.command_center_services_item.active > img {
+  opacity: 1;
+}
+
+.commandCenter_img_and_text {
+  background-color: #f3efe8;
+  border-radius: 25px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  height: 558px;
+  padding: 32px;
+  margin: 32px 0;
+}
+
+.commandCenter .commandCenter_img_and_text_left img {
+  width: 100%;
+  /* height: 100%; */
+}
+
+.commandCenter_img_and_text_right {
+  padding-left: 4.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  color: #1a2233;
+  padding-right: 10%;
+}
+
+.commandCenter_img_and_text_right > h1 {
+  font-size: 30px;
+  font-weight: 570;
+}
+
+.commandCenter_img_and_text_right > p {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.commandCenter_img_and_text_right > ul {
+  list-style-type: none;
+}
+
+.commandCenter_img_and_text_right > ul li {
+  display: flex;
+  align-items: center;
+  margin: 16px 0;
+}
+
+.commandCenter_img_and_text_right > ul li > svg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-image: linear-gradient(15deg, #fed758, #fff0c2);
+  padding: 5px;
+  margin-right: 8px;
+}
+
+.commandCenter_img_and_text_right > ul li span {
+  line-height: 1.5;
+  flex: 1;
+}
