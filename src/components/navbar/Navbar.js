@@ -19,8 +19,7 @@ function Navbar() {
   const location = useLocation();
   const [isAuth] = useState(true);
   const [activeLink, setActiveLink] = useState("");
-  // const [hasScrolled, setHasScrolled] = useState(false);
-
+  const [isProductDashboard, setIsProductDashboard] = useState(false);
   let token = localStorage.getItem("access_token");
 
   const openModal = () => {
@@ -93,7 +92,7 @@ function Navbar() {
     '/passport': [
       { path: '/passport#cabinet', label: "Trader's Cabinet" },
       { path: '/rating', label: 'Rating' },
-      { path: '/passport#hub', label: 'Hub' },
+      // { path: '/passport#hub', label: 'Hub' },
     ],
     "/": [
       { path: "/#about", label: "About", scrollTo: 0 },
@@ -108,25 +107,44 @@ function Navbar() {
   linkOptions['/portfolio/:id'] = [...linkOptions['/passport']];
 
   // Asosiy sahifa linklarini yuklash kerak bo'lgan yo'nalishlar ro'yxati
-  const mainPageRoutes = ['/faq', '/rating', '/main', '/about', '/contact']; // Yangi yo'nalishlar qo'shilishi mumkin
-
+  const mainPageRoutes = ['/faq', '/main', '/about', '/contact']; // Yangi yo'nalishlar qo'shilishi mumkin
+  // List of routes where '/passport' links should stay open
+  const passportOpenRoutes = [
+    "/passport",
+    "/passport/dashboard",
+    "/rating",
+    "/trader-cabinet/dashboard",
+    "/dashboard&ctx=product",
+    "/dashboard/success-fee",
+    "/user/portfolios",
+    "/user",
+  ];
   useEffect(() => {
     const path = location.pathname;
+
+    // Check if path is "/dashboard&ctx=product" and update state
+    if (path === "/dashboard&ctx=product") {
+      setIsProductDashboard(true);
+    } else {
+      setIsProductDashboard(false);
+    }
+
 
     // Check if path matches '/portfolio/:id' pattern
     const isPortfolioRoute = /^\/portfolio\/\w+/.test(path);
 
-    // Load passport links and add Dashboard if registered
+    // Load passport links and add 'Dashboard' link if authenticated
     let passportLinks = [...linkOptions['/passport']];
     if (isAuth) {
       passportLinks.unshift({ path: '/passport/dashboard', label: 'Dashboard' });
     }
 
-    // Set links based on current path
+    // Set the links based on route logic
     const linksToSet =
       mainPageRoutes.includes(path) ? linkOptions['/'] :
         isPortfolioRoute ? passportLinks :
-          linkOptions[path] || linkOptions['/'];
+          passportOpenRoutes.includes(path) ? passportLinks :
+            linkOptions[path] || linkOptions.default;
 
     setLinks(linksToSet);
   }, [location.pathname, isAuth]);
@@ -146,7 +164,7 @@ function Navbar() {
   };
 
   return (
-    <div className="navbar_container">
+    <div className={`navbar_container ${isProductDashboard ? 'navbar_static' : 'navbar_sticky'}`}>
       <div className="nav_links-box">
         <Link to="/" onClick={() => handleClick("/")}>
           <div className="nav_logo">
