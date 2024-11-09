@@ -8,7 +8,7 @@
     text-align: center;
     padding: 20px;
     background-color: #fff2e33e;
-    margin-top: 50px;
+    /* margin-top: 50px; */
     /* Responsive background image */
     background-image: url('../../assets/banner/hero.png');
     background-size: cover;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FacebookOutlined, LinkedinOutlined, TwitterOutlined, YoutubeOutlined } from '@ant-design/icons';
+// import { FacebookOutlined, LinkedinOutlined, TwitterOutlined, YoutubeOutlined } from '@ant-design/icons';
 import './style.css';
 import logo from '../../assets/kyt.png';
 
@@ -11,10 +11,10 @@ const Footer = () => {
                     <img src={logo} alt="LOGO" />
                 </div>
                 <div className="footer-icons">
-                    <TwitterOutlined className="social-icon" />
+                    {/* <TwitterOutlined className="social-icon" />
                     <LinkedinOutlined className="social-icon" />
                     <FacebookOutlined className="social-icon" />
-                    <YoutubeOutlined className="social-icon" />
+                    <YoutubeOutlined className="social-icon" /> */}
                 </div>
             </div>
 
