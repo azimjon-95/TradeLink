@@ -118,6 +118,7 @@ function Navbar() {
     "/dashboard/success-fee",
     "/user/portfolios",
     "/user",
+    "/dashboard"
   ];
   useEffect(() => {
     const path = location.pathname;

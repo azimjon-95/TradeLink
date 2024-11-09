@@ -9,7 +9,7 @@ function FeeHistory() {
       <Overall />
       <div className="fee-history-container">
         <div className="top-links">
-          <Link to={"/dashboard"}>Products</Link>
+          <Link to={"/trader-cabinet/dashboard"}>Products</Link>
           <Link className="active" to={"/dashboard/success-fee"}>
             Earned Success Fee history
           </Link>

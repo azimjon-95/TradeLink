@@ -66,7 +66,7 @@ function CommmantCenter() {
         "Showcase Your Portfolio: Share your portfolio globally, compete for the top, and display your achievements with pride.",
         "Advanced Filtering: Leverage our flexible filtering system to refine your search.",
         "Connect with Top Traders: Discover leading traders from around the world.",
-        "Independent Ratings: Benefit from TradeLink's innovative, transparent rating system.",
+        "Independent Ratings: Benefit from KYT-know your trader's innovative, transparent rating system.",
       ],
     },
     {
@@ -75,7 +75,7 @@ function CommmantCenter() {
       description:
         "Share your strategy, attract investors, and grow your capital together.",
       lists: [
-        "Attract Investments: Share your strategy on TradeLink Marketplace, collaborate with investors, and grow your capital together.",
+        "Attract Investments: Share your strategy on KYT-know your trader Marketplace, collaborate with investors, and grow your capital together.",
         "Unmatched Precision: Leverage our exclusive duplication technology for precise strategy replication.",
         "Custom Algorithmic Indexes: Tailor algorithmic indexes to meet your clients' specific needs with advanced strategies.",
         "Streamlined Billing: Revolutionize billing and commission calculations with our flexible system.",
@@ -102,9 +102,8 @@ function CommmantCenter() {
         <div className="command_center_services">
           {serviceData.map((item, index) => (
             <Link
-              className={`command_center_services_item ${
-                activeIndex === index ? "active" : ""
-              }`}
+              className={`command_center_services_item ${activeIndex === index ? "active" : ""
+                }`}
               key={index}
               onClick={() => setActiveIndex(index)}
             >
