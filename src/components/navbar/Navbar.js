@@ -90,7 +90,7 @@ function Navbar() {
   // Link to'plamlarini aniqlash
   const linkOptions = {
     '/passport': [
-      { path: '/passport#cabinet', label: "Trader's Cabinet" },
+      { path: '/trader-cabinet/dashboard', label: "Trader's Cabinet" },
       { path: '/rating', label: 'Rating' },
       // { path: '/passport#hub', label: 'Hub' },
     ],

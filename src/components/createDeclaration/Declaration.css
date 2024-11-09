@@ -22,6 +22,10 @@
   justify-content: flex-start;
 }
 
+.ant-progress-text {
+  display: none !important;
+}
+
 .Declaration .declaration-title h1 {
   font-size: 34px;
   line-height: 39.6px;

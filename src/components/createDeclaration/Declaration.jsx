@@ -228,61 +228,7 @@ function Declaration() {
           ></textarea>
           <label htmlFor="declaration-description">{`500`}</label>
         </div>
-        {/* <div className="form-item form-buttons">
-          <h2>Market Direction</h2>
-          <div className="trading-options-buttons market-direction">
-            <button onClick={() => handleInputChange("market_direction", "Counter Trend")}>Counter Trend</button>
-            <button onClick={() => handleInputChange("market_direction", "Market Neutral")}>Market Neutral</button>
-            <button onClick={() => handleInputChange("market_direction", "Trend")}>Trend</button>
-            <button onClick={() => handleInputChange("market_direction", "Any Direction")}>Any Direction</button>
-            <button onClick={() => handleInputChange("market_direction", "Other")}>Other</button>
-          </div>
-        </div>
-        <div className="form-item form-buttons">
-          <h2>Management Type</h2>
-          <div className="trading-options-buttons manage-type">
-            <button onClick={() => handleInputChange("management_type", "Algo")}>Algo</button>
-            <button onClick={() => handleInputChange("management_type", "Mixed Type")}>Mixed Type</button>
-            <button onClick={() => handleInputChange("management_type", "Hand Trading")}>Hand Trading</button>
-            <button onClick={() => handleInputChange("management_type", "Other")}>Other</button>
-          </div>
-        </div>
-        <div className="form-item form-buttons">
-          <h2>Trading Speed</h2>
-          <div className="trading-options-buttons trading-speed">
-            <button onClick={() => handleInputChange("trading_speed", "HFT")}>HFT</button>
-            <button onClick={() => handleInputChange("trading_speed", "Scalping")}>Scalping</button>
-            <button onClick={() => handleInputChange("trading_speed", "Short Term")}>Short Term</button>
-            <button onClick={() => handleInputChange("trading_speed", "Mid Term")}>Mid Term</button>
-            <button onClick={() => handleInputChange("trading_speed", "Long Term")}>Long Term</button>
-            <button onClick={() => handleInputChange("trading_speed", "Other")}>Other</button>
-          </div>
-        </div>
-        <div className="form-item form-buttons">
-          <h2>Position Type</h2>
-          <div className="trading-options-buttons">
-            <button onClick={() => handleInputChange("position_type", "Long")}>Long</button>
-            <button onClick={() => handleInputChange("position_type", "Short")}>Short</button>
-            <button onClick={() => handleInputChange("position_type", "Long & Short")}>Long & Short</button>
-          </div>
-        </div>
-        <div className="form-item form-buttons">
-          <h2>Risk Type</h2>
-          <div className="trading-options-buttons trading-speed">
-            <button onClick={() => handleInputChange("risk_type", "High Risk")}>High Risk</button>
-            <button onClick={() => handleInputChange("risk_type", "Medium Risk")}>Medium Risk</button>
-            <button onClick={() => handleInputChange("risk_type", "Conservative")}>Conservative</button>
-            <button onClick={() => handleInputChange("risk_type", "Safe")}>Safe</button>
-          </div>
-        </div>
-        <div className="form-item form-buttons">
-          <h2>Margin Type</h2>
-          <div className="trading-options-buttons trading-speed">
-            <button onClick={() => handleInputChange("margin_type", "Cross")}>Cross</button>
-            <button onClick={() => handleInputChange("margin_type", "Isolated")}>Isolated</button>
-            <button onClick={() => handleInputChange("margin_type", "Mixed")}>Mixed</button>
-          </div>
-        </div> */}
+
         <div className="form-item form-buttons">
           <h2>Market Direction</h2>
           <div className="trading-options-buttons market-direction">
