@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+.overall {
+  --main-color: #1a2233;
+  --secondary-color: #ffb700;
+
+  width: 100%;
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 32px 11.2px 32px;
+  color: var(--main-color);
+  font-family: "Roboto", sans-serif;
+}
+
+.overall :where(h1, span, b, a, button) {
+  font-family: "Roboto", sans-serif;
+}
+
+.overall .top {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0 24px;
+}
+
+.overall .top h1 {
+  font-size: 36px;
+}
+
+.overall .top a button {
+  all: unset;
+  padding: 9.6px 15.5px;
+  font-weight: 550;
+  font-size: 14px;
+  color: var(--main-color);
+  background-color: #fff;
+  border-radius: 0.5rem;
+  transition: 0.2s;
+
+  &:hover {
+    background-color: #e7ebf3;
+  }
+}
+
+.overal-statistics-cards {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1rem;
+}
+
+.overal-statistics-cards .statistics-card {
+  background-color: #fff;
+  padding: 20px 20px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.25rem;
+  font-family: var(--main-font-family);
+  border-radius: 1rem;
+}
+
+.overal-statistics-cards .statistics-card span {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.overal-statistics-cards .statistics-card .statistics b {
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 0;
+}
+
+/* media */
+
+@media screen and (max-width: 1023px) {
+  .overall {
+    padding: 32px 127.6px 64px;
+  }
+  .overal-statistics-cards {
+    grid-template-columns: none;
+    grid-template-rows: repeat(4, 1fr);
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .overall {
+    padding: 32px 100px 64px;
+  }
+}
+
+@media screen and (max-width: 930px) {
+  .overall {
+    padding: 32px 50px 64px;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .overall .top h1 {
+    font-size: 30px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .overall {
+    padding: 32px 11.2px 64px;
+  }
+
+  .overal-statistics-cards .statistics-card span {
+    font-size: 20px;
+  }
+
+  .overal-statistics-cards .statistics-card .statistics b {
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .overall .top {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}

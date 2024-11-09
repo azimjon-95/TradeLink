@@ -1,0 +1,482 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+.Declaration {
+  --main-color: #1a2233;
+  --main-border-color: #e7ebf3;
+  --basic-border-color: #d1d3d6;
+  --main-font-family: "Roboto", sans-serif;
+  margin-top: 64px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.Declaration .declaration-title {
+  width: 100%;
+  padding: 32px 11.2px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.Declaration .declaration-title h1 {
+  font-size: 36px;
+  line-height: 39.6px;
+  letter-spacing: -0.36px;
+  color: var(--main-color);
+  font-family: var(--main-font-family);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Declaration .declaration-title a {
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
+  color: var(--main-color);
+}
+
+/* publish-progress-bar */
+
+.progres-padding {
+  width: 100%;
+  padding: 0 11.2px;
+  margin-bottom: 32px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 33;
+}
+
+.publish-progress-bar {
+  width: 100%;
+  height: 115.6px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-radius: 1.5rem;
+  background-color: #fff;
+  border: 1px solid var(--main-border-color);
+  box-shadow: 0 1px 2px 0 #0000000d;
+}
+
+.publish-progress-bar .progress-index :where(h4, span, button) {
+  font-family: var(--main-font-family);
+  color: var(--main-color);
+}
+
+.publish-progress-bar .progress-index {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.publish-progress-bar .progress-index .progress-index-left {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.publish-progress-bar .progress-index .progress-index-left h4 {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: var(--main-color);
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.publish-progress-bar .progress-index .progress-index-left span {
+  font-size: 14px;
+  color: #1a2233b2;
+  margin-bottom: 3px;
+}
+
+/* publish button style ( active and unactive ) */
+
+.publish-progress-bar .progress-index button {
+  all: unset;
+  font-size: 14px;
+  line-height: 22.5px;
+  padding: 5.2px 14px;
+  border-radius: 0.5rem;
+  font-weight: 550;
+  color: #641d9a;
+  border: 2px solid #641d9a;
+}
+.publish-progress-bar button.publish-uncomplete {
+  border-color: #ced0d3;
+  color: #ced0d3;
+  cursor: default;
+  user-select: none;
+}
+
+/* hidden buttons progress bar  */
+
+.hidden-buttons {
+  z-index: 3;
+  height: 100%;
+  position: relative;
+  display: none;
+
+  span {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+  }
+}
+
+.hidden-buttons .publish-hidden {
+  width: 173px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  bottom: -200%;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  border: 1px solid var(--main-border-color);
+  box-shadow: 0 1px 2px 0 #0000000d;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* progress percentage */
+
+.publish-progress-bar .progress-indicator {
+  width: 100%;
+  height: 0.5rem;
+  border-radius: 10px;
+}
+
+/* declaration form */
+
+.new-declaration-form {
+  --input-border-radius: 0.5rem;
+  --input-pleaceholder-color: #c9cdd2;
+  --basic-pleaceholder-color: #8c9098;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2.5rem;
+  padding: calc(32px + 11.2px) 11.2px 11.2px;
+  border-radius: 2rem 2rem 0 0;
+  background-color: #fff;
+  position: relative;
+}
+
+/* basic input styles */
+
+.new-declaration-form :where(textarea, input) {
+  width: 100%;
+  padding: 8.8px 16px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--main-color);
+  font-family: var(--main-font-family);
+  border-radius: var(--input-border-radius);
+  outline: none;
+  border: 1px solid var(--basic-border-color);
+}
+
+.new-declaration-form input {
+  max-height: 36px;
+  height: 100%;
+}
+
+/* text area style */
+
+.new-declaration-form textarea {
+  max-width: 100%;
+  min-width: 100%;
+  min-height: 72px;
+  padding: 8px 16px;
+  resize: none;
+  overflow: hidden !important;
+  line-height: 2;
+}
+
+.new-declaration-form textarea::placeholder {
+  color: #9ca3af;
+}
+
+/* form item */
+
+.new-declaration-form .form-item label {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  font-family: var(--main-font-family);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  font-weight: 500;
+  margin: 0 0 0.25rem;
+}
+
+.new-declaration-form :where(input, textarea):focus {
+  outline: 2px solid var(--basic-border-color);
+}
+
+.new-declaration-form h2 {
+  font-size: 20px;
+  font-family: var(--main-font-family);
+  color: var(--main-color);
+  position: relative;
+  display: inline-block;
+  letter-spacing: -0.2px;
+  line-height: 30px;
+  margin-bottom: 2px;
+}
+
+.new-declaration-form p {
+  color: #1a2233b2;
+  line-height: 24px;
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+  font-family: var(--main-font-family);
+}
+
+.new-declaration-form h2::before {
+  content: "*";
+  color: #ef4444;
+  position: absolute;
+  top: 0;
+  right: -12px;
+}
+
+.new-declaration-form .form-item {
+  max-width: 42rem;
+  width: 100%;
+}
+
+.form-textArea p {
+  color: var(--main-color);
+}
+
+/* select portfolio ( div ) */
+
+.new-declaration-form .form-item .select-portfolio {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f5f7fa;
+  cursor: pointer;
+  padding: 9.2px 40px 10px 16px;
+  border-radius: 0.5rem;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: calc(100% - 20px) calc(1px + 50%),
+    calc(100% - 16px) calc(1px + 50%);
+  background-size: 4px 4px, 4px 4px;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.new-declaration-form .form-item .select-portfolio span {
+  color: #878c96;
+  font-weight: 600;
+  font-size: 0.875rem;
+  font-family: var(--main-font-family);
+  user-select: none;
+}
+
+/* inputs */
+
+.select-date-cover {
+  width: 100%;
+  max-height: 36px;
+  height: 100%;
+  position: relative;
+}
+
+.select-date-cover button {
+  all: unset;
+  height: 100%;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+.select-date-cover button svg {
+  color: var(--input-pleaceholder-color);
+}
+
+input.select-date {
+  width: 100%;
+  background-color: #f5f7fa;
+  border: none;
+  outline: none;
+  padding: 10px 16px 10px 40px;
+  font-size: 14px;
+  line-height: 22.4px;
+  border: 1px solid #e7ebf3;
+  border-radius: var(--input-border-radius);
+  font-weight: 500;
+  cursor: not-allowed;
+}
+
+input.select-date::placeholder {
+  color: var(--input-pleaceholder-color);
+}
+
+/* form item buttons */
+
+.form-item.form-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.form-item.form-buttons .trading-options-buttons {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  flex-wrap: wrap;
+}
+
+.form-item.form-buttons button {
+  all: unset;
+  background-color: #fff;
+  padding: 1.25rem;
+  border: 2px solid #e4e4e6;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  color: var(--main-color);
+  font-family: var(--main-font-family);
+  transition: 0.15s;
+  line-height: 24px;
+  user-select: none;
+}
+
+.form-item.form-buttons h2 {
+  margin-bottom: 0;
+}
+
+/* deposit inputs */
+
+.form-item > .lot-pleaceholder-container {
+  width: 100%;
+  position: relative;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.form-item .lot-pleaceholder-container input[type="number"] {
+  padding: 8.8px 16px 8.8px 40px;
+}
+
+.form-item .lot-pleaceholder-container span {
+  height: 100%;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 8px;
+  position: absolute;
+  z-index: 2;
+  color: var(--basic-pleaceholder-color);
+  font-family: var(--main-font-family);
+  font-weight: 400;
+  cursor: default;
+}
+
+.max-deposit h2 {
+  margin-bottom: 6px;
+}
+
+/* ant dizayn select style */
+
+.static-trading-options {
+  width: 100%;
+}
+
+.ant-select {
+  border: none !important;
+  outline: none !important;
+}
+
+.ant-select-selector {
+  border: none !important;
+  outline: none !important;
+  width: 100% !important;
+  padding: 3.4px 16px !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  color: var(--main-color) !important;
+  font-family: var(--main-font-family) !important;
+  border-radius: var(--input-border-radius) !important;
+  outline: none !important;
+  border: 1px solid var(--basic-border-color) !important;
+}
+
+.ant-select-outlined {
+  border: none !important;
+  outline: none !important;
+  box-shadow: 0 0 0 !important;
+}
+
+.ant-select-selector:focus {
+  outline: 2px solid var(--basic-border-color) !important;
+  box-shadow: 0 0 0 !important;
+}
+
+/* media */
+
+@media screen and (max-width: 1280px) {
+  .progres-padding {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .progres-padding {
+    width: 100%;
+  }
+
+  .publish-progress-bar .progress-index button {
+    display: none;
+  }
+  .publish-progress-bar button.publish-uncomplete {
+    display: none;
+  }
+
+  .hidden-buttons {
+    display: block;
+  }
+}

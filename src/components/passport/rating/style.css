@@ -1,5 +1,6 @@
 .leaderboard-container-box {
   background: #fbf3ee;
+  width: 100%;
 }
 
 .leaderboard-container {
@@ -191,6 +192,7 @@
 .leaderboard-user-avatar {
   border-radius: 50%;
   position: absolute;
+  background-color: #fff;
   border: 1px solid #ffff;
   right: 0;
 }

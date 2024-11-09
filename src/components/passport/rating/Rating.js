@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { GrBottomCorner } from "react-icons/gr";
-import { Select, Switch, Table } from "antd";
+import { Select, Skeleton, Switch, Table } from "antd";
 import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 import { FaCheck } from "react-icons/fa6";
+import moment from "moment/moment";
 import axios from "../../../api";
 import binance from "../../../assets/ed_khan/binance_rounded.svg";
 import avatar from "../../../assets/ed_khan/avatar.png";
@@ -11,426 +12,48 @@ import ret from "../../../assets/ed_khan/ret.svg";
 import InfoModal from "./InfoModal";
 import "./style.css";
 import scoreChartSvg from "./scoreChart.svg";
-
 const { Option } = Select;
+
 const Leaderboard = () => {
   const navigate = useNavigate();
+
   const [isModal, setIsModal] = useState(false);
-  // Initialize selectedOption from localStorage or default to "KYT"
   const [selectedOption, setSelectedOption] = useState(() => {
-    return localStorage.getItem("selectedOption") || "KYT";
+    return localStorage.getItem("selectedOption") || "score";
   });
   const modalRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContentType, setModalContentType] = useState("");
-  const [filterOption, setFilterOption] = useState("returnAsc"); // default sorting option
-  const [showInactive, setShowInactive] = useState(false); // toggle inactive portfolios
 
+  const [filterOption, setFilterOption] = useState("score");
+  const [showInactive, setShowInactive] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [loadingTop, setLoadingTop] = useState(true);
   const [portfolios, setPortfolios] = useState([]);
+  const [leaderboardData, setLeaderboardData] = useState(null);
 
-  // get LeaderBoard Data
   useEffect(() => {
+    setLoadingTop(true);
+    let API = `leaderboard/three-top-units?sort_type=${selectedOption}`;
     axios
-      .get("/leaderboard/top-traders?page=1")
+      .get(API)
+      .then((res) => setLeaderboardData(res?.data?.data))
+      .catch((err) => console.log(err))
+      .finally(() => setLoadingTop(false));
+  }, [selectedOption]);
+
+  // get LeaderBoard table Data
+  useEffect(() => {
+    setLoading(true);
+    let API = `/leaderboard/top-traders?page=1&show_non_active=${showInactive}&sort_type=${filterOption}`;
+    axios
+      .get(API)
       .then((res) => setPortfolios(res?.data?.data))
-      .catch((err) => console.log(err));
-  }, []);
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
+  }, [showInactive, filterOption]);
 
-  console.log(portfolios);
-
-  const handleChange = (value) => {
-    setFilterOption(value);
-  };
-  const leaderboardData = {
-    Profit: {
-      daily: {
-        title: "Daily Top",
-        date: "Nov 6",
-        data: [
-          {
-            id: 11,
-            rank: 1,
-            name: "AlgoMaster",
-            creator: "AlgoBot",
-            score: 140.52,
-          },
-          {
-            id: 12,
-            rank: 2,
-            name: "CryptoWizard",
-            creator: "WizardPro",
-            score: 78.34,
-          },
-          {
-            id: 13,
-            rank: 3,
-            name: "TrendCatcher",
-            creator: "TrendBot",
-            score: 67.89,
-          },
-        ],
-      },
-      weekly: {
-        title: "Weekly Top",
-        date: "Oct 31 - Nov 7",
-        data: [
-          {
-            id: 14,
-            rank: 1,
-            name: "ProfitXtreme",
-            creator: "ExtremeTrades",
-            score: 242.1,
-          },
-          {
-            id: 15,
-            rank: 2,
-            name: "BTC-Eth-Balancer",
-            creator: "CryptoGains",
-            score: 198.76,
-          },
-          {
-            id: 16,
-            rank: 3,
-            name: "Optimus-Trend",
-            creator: "OptimusFund",
-            score: 100.2,
-          },
-        ],
-      },
-      monthly: {
-        title: "Monthly Top",
-        date: "Nov 1 - Nov 30",
-        data: [
-          {
-            id: 17,
-            rank: 1,
-            name: "BigProfitMax",
-            creator: "MaxTrader",
-            score: 258.33,
-          },
-          {
-            id: 18,
-            rank: 2,
-            name: "AutoTradePlus",
-            creator: "SmartBot",
-            score: 187.65,
-          },
-          {
-            id: 19,
-            rank: 3,
-            name: "CatchWave",
-            creator: "WaveRider",
-            score: 160.55,
-          },
-        ],
-      },
-    },
-    KYT: {
-      monthly: {
-        title: "Monthly Top",
-        date: "Oct 8 - Nov 7",
-        data: [
-          {
-            id: 20,
-            rank: 1,
-            name: "RiskAnalyzer",
-            creator: "RiskBot",
-            score: 142.68,
-          },
-          {
-            id: 21,
-            rank: 2,
-            name: "MarketPulse",
-            creator: "PulseAI",
-            score: 92.5,
-          },
-          {
-            id: 22,
-            rank: 3,
-            name: "PredictIt",
-            creator: "InsightAI",
-            score: 75.42,
-          },
-        ],
-      },
-      quarterly: {
-        title: "Quarterly Top",
-        date: "Aug 9 - Nov 7",
-        data: [
-          {
-            id: 23,
-            rank: 1,
-            name: "SafeTrade",
-            creator: "SafeBots",
-            score: 220.89,
-          },
-          {
-            id: 24,
-            rank: 2,
-            name: "AnalyzerPro",
-            creator: "TradeMaster",
-            score: 198.45,
-          },
-          {
-            id: 25,
-            rank: 3,
-            name: "StableTrade",
-            creator: "StableBot",
-            score: 110.73,
-          },
-        ],
-      },
-      yearly: {
-        title: "Yearly Top",
-        date: "Nov 8 - Nov 7",
-        data: [
-          {
-            id: 26,
-            rank: 1,
-            name: "PrimeTrade",
-            creator: "PrimeBots",
-            score: 245.89,
-          },
-          {
-            id: 27,
-            rank: 2,
-            name: "AlphaGain",
-            creator: "AlphaTeam",
-            score: 175.63,
-          },
-          {
-            id: 28,
-            rank: 3,
-            name: "ZenithProfit",
-            creator: "ZenithBot",
-            score: 158.2,
-          },
-        ],
-      },
-    },
-  };
-  // Sample data structure (Replace with actual data)
-  //   const portfolios = [
-  //     {
-  //       id: 1,
-  //       name: "tradelink monitor binance futer",
-  //       by: "PosExRozina",
-  //       score: -44.94,
-  //       mdd: "100%",
-  //       return: -100,
-  //       avgMonthlyProfit: -100,
-  //       tracking: 704,
-  //       data: [90, 85, 78, 92, 65, 45, 100, 80, 75, 66, 88, 99],
-  //     },
-  //     {
-  //       id: 2,
-  //       name: "Evge",
-  //       by: "Evges",
-  //       score: -61.39,
-  //       mdd: "100%",
-  //       return: -100,
-  //       avgMonthlyProfit: -100,
-  //       tracking: 1358,
-  //       data: [80, 75, 65, 70, 50, 60, 100, 90, 88, 72, 85, 95],
-  //     },
-  //     {
-  //       id: 3,
-  //       name: "binaces",
-  //       by: "lexastav",
-  //       score: -71.87,
-  //       mdd: "100%",
-  //       return: -100,
-  //       avgMonthlyProfit: -100,
-  //       tracking: 1746,
-  //       data: [95, 90, 78, 67, 89, 55, 35, 76, 82, 91, 60, 72],
-  //     },
-  //     {
-  //       id: 4,
-  //       name: "Пппп",
-  //       by: "Aooaoaaaa",
-  //       score: -55.07,
-  //       mdd: "154.22%",
-  //       return: -100,
-  //       avgMonthlyProfit: -100,
-  //       tracking: 501,
-  //       data: [100, 65, 58, 80, 73, 45, 32, 90, 85, 78, 60, 90],
-  //     },
-  //     {
-  //       id: 5,
-  //       name: "Crypto Analyst",
-  //       by: "TraderX",
-  //       score: -49.23,
-  //       mdd: "130%",
-  //       return: -85,
-  //       avgMonthlyProfit: -90,
-  //       tracking: 839,
-  //       data: [88, 77, 66, 99, 54, 45, 66, 83, 91, 75, 72, 58],
-  //     },
-  //     {
-  //       id: 6,
-  //       name: "Binance Tracker",
-  //       by: "CoinMaster",
-  //       score: -67.5,
-  //       mdd: "98%",
-  //       return: -92,
-  //       avgMonthlyProfit: -93,
-  //       tracking: 1112,
-  //       data: [100, 65, 88, 77, 92, 60, 45, 80, 85, 75, 68, 74],
-  //     },
-  //     {
-  //       id: 7,
-  //       name: "Bullish Dreams",
-  //       by: "TradeKing",
-  //       score: -63.21,
-  //       mdd: "102%",
-  //       return: -94,
-  //       avgMonthlyProfit: -95,
-  //       tracking: 634,
-  //       data: [75, 78, 83, 67, 55, 45, 91, 80, 82, 79, 88, 65],
-  //     },
-  //     {
-  //       id: 8,
-  //       name: "Futures Manager",
-  //       by: "JohnDoe",
-  //       score: -50.32,
-  //       mdd: "150%",
-  //       return: -78,
-  //       avgMonthlyProfit: -85,
-  //       tracking: 920,
-  //       data: [91, 82, 76, 85, 65, 45, 100, 88, 77, 72, 60, 80],
-  //     },
-  //     {
-  //       id: 9,
-  //       name: "Crypto Guru",
-  //       by: "Satoshi99",
-  //       score: -46.78,
-  //       mdd: "110%",
-  //       return: -90,
-  //       avgMonthlyProfit: -88,
-  //       tracking: 728,
-  //       data: [100, 99, 85, 70, 65, 42, 60, 75, 88, 95, 82, 77],
-  //     },
-  //     {
-  //       id: 10,
-  //       name: "Binance Beast",
-  //       by: "AlphaTrader",
-  //       score: -52.89,
-  //       mdd: "120%",
-  //       return: -89,
-  //       avgMonthlyProfit: -92,
-  //       tracking: 1083,
-  //       data: [90, 85, 60, 73, 92, 45, 30, 85, 88, 75, 65, 78],
-  //     },
-  //     {
-  //       id: 11,
-  //       name: "Market Hawk",
-  //       by: "TradeNinja",
-  //       score: -53.11,
-  //       mdd: "125%",
-  //       return: -80,
-  //       avgMonthlyProfit: -85,
-  //       tracking: 887,
-  //       data: [88, 77, 65, 74, 45, 67, 95, 82, 70, 85, 93, 60],
-  //     },
-  //     {
-  //       id: 12,
-  //       name: "Crypto Champ",
-  //       by: "BettyBot",
-  //       score: -60.75,
-  //       mdd: "90%",
-  //       return: -95,
-  //       avgMonthlyProfit: -96,
-  //       tracking: 1432,
-  //       data: [100, 95, 78, 67, 54, 42, 75, 85, 92, 60, 72, 80],
-  //     },
-  //     {
-  //       id: 13,
-  //       name: "Risk Manager",
-  //       by: "RiskyBiz",
-  //       score: -57.44,
-  //       mdd: "85%",
-  //       return: -82,
-  //       avgMonthlyProfit: -89,
-  //       tracking: 950,
-  //       data: [100, 90, 85, 75, 60, 55, 45, 78, 70, 67, 80, 88],
-  //     },
-  //     {
-  //       id: 14,
-  //       name: "Trade Titan",
-  //       by: "MaxProf",
-  //       score: -65.66,
-  //       mdd: "105%",
-  //       return: -87,
-  //       avgMonthlyProfit: -90,
-  //       tracking: 1604,
-  //       data: [100, 95, 78, 65, 90, 50, 32, 88, 79, 85, 60, 73],
-  //     },
-  //     {
-  //       id: 15,
-  //       name: "Profit Hunter",
-  //       by: "QuickTrade",
-  //       score: -48.15,
-  //       mdd: "99%",
-  //       return: -88,
-  //       avgMonthlyProfit: -92,
-  //       tracking: 1139,
-  //       data: [92, 85, 78, 67, 55, 60, 80, 90, 70, 88, 77, 65],
-  //     },
-  //   ];
-
-  const getTimestamp = () => {
-    return Math.floor(Date.now() / 1000); // Get current timestamp in seconds
-  };
-
-  // Calculate maxValue based on all portfolios' data
-  const maxValue = Math.max(
-    ...portfolios?.flatMap((portfolio) => portfolio.data)
-  );
-
-  // Function to generate points for the line chart
-  const getPoints = (data, chartWidth, maxValue, chartHeight) => {
-    return data
-      ?.map((value, index) => {
-        const x =
-          (index / (data.length - 1)) *
-          (typeof chartWidth === "string" ? parseInt(chartWidth) : chartWidth);
-        const y = chartHeight - (value / maxValue) * chartHeight; // Adjust Y to start chart from the bottom
-        return `${x},${y}`;
-      })
-      .join(" ");
-  };
-
-  // Function to generate points for the filled area of the chart
-  const getFilledPoints = (data, chartWidth, maxValue, chartHeight) => {
-    const width =
-      typeof chartWidth === "string" ? parseInt(chartWidth, 10) : chartWidth;
-    const points = getPoints(data, chartWidth, maxValue, chartHeight);
-    return `0,${chartHeight} ${points} ${width},${chartHeight}`; // Close polygon at the bottom
-  };
-
-  // Chart dimensions
-  const chartWidth = 150; // Set your desired chart width here
-  const chartHeight = 40; // Set your desired chart height here
-
-  // Handle sorting based on filter option
-  const sortedPortfolios = [...portfolios].sort((a, b) => {
-    switch (filterOption) {
-      case "scoreAsc":
-        return a.score - b.score;
-      case "scoreDesc":
-        return b.score - a.score;
-      case "returnAsc":
-        return a.return - b.return;
-      case "returnDesc":
-        return b.return - a.return;
-      case "mddAsc":
-        return parseFloat(a.max_drawdown) - parseFloat(b.max_drawdown);
-      case "mddDesc":
-        return parseFloat(b.max_drawdown) - parseFloat(a.max_drawdown);
-      default:
-        return 0;
-    }
-  });
+  const getTimestamp = () => Math.floor(Date.now() / 1000); // Get current timestamp in seconds
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
@@ -468,14 +91,12 @@ const Leaderboard = () => {
       align: "center",
       render: (text, record, index) => {
         let rankStyle = {};
-
-        // Apply different styles for the top 3 ranks
         if (index === 0) {
-          rankStyle = { backgroundColor: "#FBAF3D" }; // Gold for 1st place
+          rankStyle = { backgroundColor: "#FBAF3D" };
         } else if (index === 1) {
-          rankStyle = { backgroundColor: "#C0C8E0" }; // Silver for 2nd place
+          rankStyle = { backgroundColor: "#C0C8E0" };
         } else if (index === 2) {
-          rankStyle = { backgroundColor: "#D5B678" }; // Bronze for 3rd place
+          rankStyle = { backgroundColor: "#D5B678" };
         }
 
         return (
@@ -496,14 +117,14 @@ const Leaderboard = () => {
             <img
               width={30}
               className="row-rating-image-avatar"
-              src={avatar}
+              src={record?.user_avatar || avatar}
               alt=""
               preview={"0"}
             />
           </div>
           <div className="row-rating-text">
-            <p className="ret-texOne">{record.name}</p>
-            {/* <p className="ret-texTwo">by {record.by}</p> */}
+            <p className="ret-texOne">{record.portfolio_name}</p>
+            <p className="ret-texTwo">by {record.user_name}</p>
           </div>
         </div>
       ),
@@ -525,7 +146,7 @@ const Leaderboard = () => {
       key: "mdd",
       align: "center",
       render: (_, record) => (
-        <p className="ret-texOne">{record.max_drawdown?.toFixed(2)}</p>
+        <p className="ret-texOne">{record.max_drawdown?.toFixed(2)}%</p>
       ),
     },
     {
@@ -534,7 +155,7 @@ const Leaderboard = () => {
       key: "return",
       align: "center",
       render: (_, record) => (
-        <p className="ret-texOne">{record.profit_percentage?.toFixed(2)}</p>
+        <p className="ret-texOne">{record.profit_percentage?.toFixed(2)}%</p>
       ),
     },
     {
@@ -544,7 +165,7 @@ const Leaderboard = () => {
       align: "center",
       render: (_, record) => (
         <p className="ret-texOne">
-          {record.average_monthly_profit?.toFixed(2)}
+          {record.average_monthly_profit?.toFixed(2)}%
         </p>
       ),
     },
@@ -553,36 +174,87 @@ const Leaderboard = () => {
       dataIndex: "tracking",
       key: "tracking",
       align: "center",
-      render: (_, record) => <p className="ret-texOne">{record.days}</p>,
+      render: (_, record) => <p className="ret-texOne">{record.days} days</p>,
     },
     {
       title: "",
       dataIndex: "tracking",
       key: "tracking",
       align: "center",
-      render: (_, record) => (
-        <div className="chart-table">
-          <svg width={chartWidth} height={chartHeight} className="jet-chart">
-            <polygon
-              points={getFilledPoints(
-                record.data,
-                chartWidth,
-                maxValue,
-                chartHeight
-              )}
-              fill="#f7e5e0"
-            />
-            <polyline
-              points={getPoints(record.data, chartWidth, maxValue, chartHeight)}
-              fill="none"
-              stroke="#e57373"
-              strokeWidth="1"
-            />
-          </svg>
-        </div>
-      ),
+      render: (_, record) => {
+        const chartWidth = 150; // Customize chart width
+        const chartHeight = 40; // Customize chart height
+
+        const maxValue =
+          Math.max(...record.profits?.map((d) => Math.abs(d.value))) || 1; // Maksimal qiymatni aniqlash
+
+        // x-o'qni miqyoslashi uchun minimal va maksimal `timestamp`larni olish
+        const minTimestamp = Math.min(
+          ...record.profits?.map((d) => d.timestamp)
+        );
+        const maxTimestamp = Math.max(
+          ...record.profits?.map((d) => d.timestamp)
+        );
+
+        // `timestamp` va `value`ni SVG nuqtalariga o‘tkazish funksiyasi
+        const getPoints = (data, width, maxVal, height) => {
+          return data
+            ?.map((point) => {
+              // `timestamp` asosida x-pozitsiyani hisoblash
+              const x =
+                ((point.timestamp - minTimestamp) /
+                  (maxTimestamp - minTimestamp)) *
+                width;
+              // Qiymat asosida y-pozitsiyani hisoblash
+              const y = height - (point.value / maxVal) * (height / 2); // Qiymatlarni miqyoslashi va markazlash
+              return `${x},${y}`;
+            })
+            .join(" ");
+        };
+
+        const getFilledPoints = (data, width, maxVal, height) => {
+          const points = getPoints(data, width, maxVal, height);
+          return `0,${height} ${points} ${width},${height}`; // Poligon shaklini yopish
+        };
+
+        return (
+          <div className="chart-table">
+            <svg width={chartWidth} height={chartHeight} className="jet-chart">
+              <polygon
+                points={getFilledPoints(
+                  record.profits,
+                  chartWidth,
+                  maxValue,
+                  chartHeight
+                )}
+                fill="#E2F1F0"
+              />
+              <polyline
+                points={getPoints(
+                  record.profits,
+                  chartWidth,
+                  maxValue,
+                  chartHeight
+                )}
+                fill="none"
+                stroke="#32C69B"
+                strokeWidth="1"
+              />
+            </svg>
+          </div>
+        );
+      },
     },
   ];
+
+  // Oct 10 - Nov 9
+  const today = moment().format("MMM DD");
+  const startMonth = moment().startOf("month").format("MMM DD");
+  const endMonth = moment().endOf("month").format("MMM DD");
+  const oneMonthAgo = moment().subtract(30, "days").format("MMM DD");
+  const fourMonthAgo = moment().subtract(90, "days").format("MMM DD");
+  const oneYearAgo = moment().subtract(365, "days").format("MMM DD");
+  const weeklAgo = moment().subtract(7, "days").format("MMM DD");
 
   return (
     <div className="leaderboard-container-box">
@@ -594,15 +266,15 @@ const Leaderboard = () => {
               style={{ cursor: "pointer", color: "#FFB700" }}
               onClick={() => setIsModal(!isModal)}
             >
-              {selectedOption} <GrBottomCorner />
+              {selectedOption === "score" ? "KYT" : "Profit"} <GrBottomCorner />
               {isModal && (
                 <div className="leaderboard-modal-smoll" ref={modalRef}>
-                  <button onClick={() => handleOptionClick("KYT")}>
+                  <button onClick={() => handleOptionClick("score")}>
                     KYT-Know your trader{" "}
-                    {selectedOption === "KYT" && <FaCheck />}
+                    {selectedOption === "score" && <FaCheck />}
                   </button>
-                  <button onClick={() => handleOptionClick("Profit")}>
-                    Profit {selectedOption === "Profit" && <FaCheck />}
+                  <button onClick={() => handleOptionClick("profit")}>
+                    Profit {selectedOption === "profit" && <FaCheck />}
                   </button>
                 </div>
               )}
@@ -624,20 +296,46 @@ const Leaderboard = () => {
             />
           </div>
         </div>
-
-        <div className="leaderboard-cards">
-          {Object.keys(leaderboardData[selectedOption]).map((key) => {
-            const { title, date, data } = leaderboardData[selectedOption][key];
-            return (
-              <LeaderboardCard
-                key={key}
-                title={title}
-                data={data}
-                date={date}
-              />
-            );
-          })}
-        </div>
+        {selectedOption !== "score" ? (
+          <div className="leaderboard-cards">
+            <LeaderboardCard
+              title={"Daily Top"}
+              data={leaderboardData?.daily}
+              date={today}
+            />
+            <LeaderboardCard
+              title={"Weekly Top"}
+              data={leaderboardData?.weekly}
+              date={`${weeklAgo} - ${today}`}
+            />
+            <LeaderboardCard
+              title={"November Top"}
+              data={leaderboardData?.monthly}
+              date={`${startMonth} - ${endMonth}`}
+            />
+          </div>
+        ) : (
+          <div className="leaderboard-cards">
+            <LeaderboardCard
+              loadingTop={loadingTop}
+              title={"Monthly Top"}
+              data={leaderboardData?.monthly}
+              date={`${oneMonthAgo} - ${today}`}
+            />
+            <LeaderboardCard
+              loadingTop={loadingTop}
+              title={"Quarterly Top"}
+              data={leaderboardData?.quarterly}
+              date={`${fourMonthAgo} - ${today}`}
+            />
+            <LeaderboardCard
+              loadingTop={loadingTop}
+              title={"Yearly Top"}
+              data={leaderboardData?.yearly}
+              date={`${oneYearAgo} - ${today}`}
+            />
+          </div>
+        )}
       </div>
 
       <div className="container-rating">
@@ -657,41 +355,39 @@ const Leaderboard = () => {
           {/* Filter select */}
           <Select
             value={filterOption}
-            onChange={handleChange}
+            onChange={(value) => setFilterOption(value)}
             style={{ width: 150 }}
             popupMatchSelectWidth={false} // Adjust dropdown width if needed
           >
-            <Option value="scoreAsc">
+            <Option value="score">
               Score{" "}
               <AiFillCaretDown style={{ fontSize: "18px", color: "#555" }} />
             </Option>
-            <Option value="scoreDesc">
-              Score{" "}
-              <AiFillCaretDown style={{ fontSize: "18px", color: "#555" }} />
-            </Option>
-            <Option value="returnAsc">
-              Return (%){" "}
+            <Option value="profit">
+              Profit{" "}
               <AiFillCaretUp style={{ fontSize: "18px", color: "#555" }} />
             </Option>
-            <Option value="returnDesc">
-              Return (%){" "}
+            <Option value="-profit">
+              Profit{" "}
               <AiFillCaretDown style={{ fontSize: "18px", color: "#555" }} />
             </Option>
-            <Option value="mddAsc">
-              MDD{" "}
+            <Option value="-maxdd">
+              MaxDD{" "}
               <AiFillCaretDown style={{ fontSize: "18px", color: "#555" }} />
             </Option>
-            <Option value="mddDesc">
-              MDD <AiFillCaretUp style={{ fontSize: "18px", color: "#555" }} />
+            <Option value="maxdd">
+              MaxDD{" "}
+              <AiFillCaretUp style={{ fontSize: "18px", color: "#555" }} />
             </Option>
           </Select>
         </div>
         {/* Portfolio Cards */}
         <div className="portfolio-list">
           <Table
+            loading={loading}
             columns={columns}
-            dataSource={sortedPortfolios}
-            rowKey="trader_data_id"
+            dataSource={portfolios}
+            rowKey="portfolio_id"
             pagination={false}
             scroll={{ x: "100%" }} // For responsive scrolling
             size="small"
@@ -708,19 +404,15 @@ const Leaderboard = () => {
   );
 };
 
-const LeaderboardCard = ({ title, data, date }) => {
-  const getRankColor = (rank) => {
-    switch (rank) {
-      case 1:
-        return "#FBAF3D";
-      case 2:
-        return "#C0C8E0";
-      case 3:
-        return "#D5B678";
-      default:
-        return "#fff";
-    }
-  };
+const LeaderboardCard = ({ title, data, date, loadingTop }) => {
+  const getRankColor = (rank) =>
+    rank === 1
+      ? "#FBAF3D"
+      : rank === 2
+      ? "#C0C8E0"
+      : rank === 3
+      ? "#D5B678"
+      : "#fff";
 
   return (
     <div className="leaderboard-card">
@@ -729,33 +421,47 @@ const LeaderboardCard = ({ title, data, date }) => {
         <p className="leaderboard-date">{date}</p>
       </div>
       <ul>
-        {data.map((item) => (
-          <Link to={`/user/${item.id}`} key={item.id}>
-            <li>
-              <div className="leaderboard-rank-box">
-                <span
-                  className="leaderboard-rank-icon"
-                  style={{ backgroundColor: getRankColor(item.rank) }}
-                >
-                  {item.rank}
-                </span>
-                <img width={30} src={binance} alt="No image" />
-                <img
-                  className="leaderboard-user-avatar"
-                  width={30}
-                  src={avatar}
-                  alt="User avatar"
-                />
-              </div>
-              <div className="leaderboard-details">
-                <p className="leaderboard-name">{item.name}</p>
-                <p className="leaderboard-creator">by {item.creator}</p>
-              </div>
-              <img src={ret} alt="Ret" />
-              <p className="leaderboard-score">{item.score}</p>
-            </li>
-          </Link>
-        ))}
+        {loadingTop ? (
+          <Skeleton
+            title={false}
+            active
+            paragraph={{ rows: 5, width: "100%", height: "40px" }}
+          />
+        ) : (
+          <>
+            {data?.map((item, index) => (
+              <Link to={`/user/${item?.user_id}`} key={index}>
+                <li>
+                  <div className="leaderboard-rank-box">
+                    <span
+                      className="leaderboard-rank-icon"
+                      style={{ backgroundColor: getRankColor(index + 1) }}
+                    >
+                      {index + 1}
+                    </span>
+                    <img width={30} src={binance} alt="No image" />
+                    <img
+                      className="leaderboard-user-avatar"
+                      width={30}
+                      src={item?.user_avatar || avatar}
+                      alt="User avatar"
+                    />
+                  </div>
+                  <div className="leaderboard-details">
+                    <p className="leaderboard-name">{item?.portfolio_name}</p>
+                    <p className="leaderboard-creator">by {item?.user_name} </p>
+                  </div>
+                  <img src={ret} alt="Ret" />
+                  <p className="leaderboard-score">
+                    {item?.score?.toFixed(2) ||
+                      item?.profit_percentage?.toFixed(2)}
+                    %
+                  </p>
+                </li>
+              </Link>
+            ))}
+          </>
+        )}
       </ul>
     </div>
   );

@@ -5,13 +5,13 @@ import { IoMenu } from "react-icons/io5";
 import { IoChevronDown, IoChevronUpOutline } from "react-icons/io5";
 import { Link, useLocation } from "react-router-dom";
 import { AiFillHome, AiOutlineFileText } from "react-icons/ai";
-import { FaPassport, FaStoreAlt, FaGlobe } from "react-icons/fa";
 import { BsThreeDots } from "react-icons/bs";
 import { FiX } from "react-icons/fi";
-// import { BsShop } from 'react-icons/bs';
+import { FaPassport, FaStoreAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import SignUpModal from "../../pages/register/Register";
 import { setModalType as setModalType2 } from "../../context/modalType";
+
 import logo from "../../assets/kyt.png";
 
 function Navbar() {
@@ -19,12 +19,12 @@ function Navbar() {
   const modalTypeValue = useSelector((s) => s?.modalType);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [timeoutId, setTimeoutId] = useState(null);
-  const [isMediaModalOpen, setIsMediaModalOpen] = useState(false); // State for media modal
+  const [isMediaModalOpen, setIsMediaModalOpen] = useState(false);
   const [isModalSinUp, setIsModalSinUp] = useState(false);
   const [modalType, setModalType] = useState(""); // Use a single state for modal type
   const location = useLocation();
-  const [activeLink, setActiveLink] = useState("");
   const [isAuth] = useState(true);
+  const [activeLink, setActiveLink] = useState("");
   // const [hasScrolled, setHasScrolled] = useState(false);
 
   let token = localStorage.getItem("access_token");
@@ -133,7 +133,10 @@ function Navbar() {
     // Load passport links and add Dashboard if registered
     let passportLinks = [...linkOptions["/passport"]];
     if (isAuth) {
-      passportLinks.unshift({ path: "/dashboard", label: "Dashboard" });
+      passportLinks.unshift({
+        path: "/passport/dashboard",
+        label: "Dashboard",
+      });
     }
 
     // Set links based on current path
@@ -272,7 +275,6 @@ function Navbar() {
       >
         {token ? (
           <div className="media_modal-lang">
-            <FaGlobe />
             <FiX onClick={() => setIsMediaModalOpen(false)} />
           </div>
         ) : (

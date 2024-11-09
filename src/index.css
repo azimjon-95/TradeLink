@@ -18,15 +18,11 @@
 
 .app {
   max-width: 1440px;
-  height: 100vh;
   margin: 0 auto;
   display: flex;
   align-items: center;
   flex-direction: column;
-  overflow-y: auto;
-  padding: 20px;
   background-color: #f9f9f9;
-  border-radius: 8px;
 }
 
 /* Scroll bar stili */
@@ -53,14 +49,12 @@ a {
 }
 
 :root {
-  --clip-path: polygon(
-    30% 0%,
-    70% 0%,
-    100% 30%,
-    100% 70%,
-    70% 100%,
-    30% 100%,
-    0% 70%,
-    0% 30%
-  );
+  --clip-path: polygon(30% 0%,
+      70% 0%,
+      100% 30%,
+      100% 70%,
+      70% 100%,
+      30% 100%,
+      0% 70%,
+      0% 30%);
 }
