@@ -529,6 +529,46 @@
   }
 }
 
+.media_modal_userInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0 30px 30px;
+
+  .userProfileName_left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    img {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+    }
+  }
+  svg {
+    font-size: 20px;
+  }
+}
+
+.media_modal-lang {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+  padding-left: 13px;
+  padding-right: 0;
+
+  svg {
+    font-size: 20px;
+    color: #1a2233;
+  }
+}
+
 /* Media query */
 @media screen and (max-width: 900px) {
   .nav_links-box {

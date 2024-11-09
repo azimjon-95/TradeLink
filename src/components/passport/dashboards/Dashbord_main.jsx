@@ -2,24 +2,42 @@ import React, { useState } from "react";
 import { FiChevronUp } from "react-icons/fi";
 import { Skeleton } from "antd";
 import "./Dashboard_main.css";
+import AddKeyModal from "./AddKeyModal";
 
 function Dashbord_main() {
   const [isOpen, setIsOpen] = useState(true);
   const [isOpen2, setIsOpen2] = useState(true);
   const [isOpen3, setIsOpen3] = useState(true);
+
+  const [openModal, setOpenModal] = useState(false);
+
   return (
     <div className="dashbord_main">
       <div className="password_dashboard_container">
+        {openModal && <AddKeyModal setOpenModal={setOpenModal} />}
         <div className="my_keys">
           <div onClick={() => setIsOpen(!isOpen)} className="my_keys_title">
             My Keys
             <FiChevronUp className={"icon" + (!isOpen ? "_active" : "")} />
           </div>
-          {false ? (
-            <div className="my_keys_content">
-              <div className="my_keys_content_item"></div>
-              <div className="my_keys_content_item"></div>
-              <div className="my_keys_content_item"></div>
+          {true ? (
+            <div>
+              {true ? (
+                <div className="empty_my_keys">
+                  <h3>There's nothing here yet</h3>
+                  <p>
+                    Add your first exchange API key to view trading statistics
+                    and create a portfolio.
+                  </p>
+                  <button onClick={() => setOpenModal(true)}>Add key</button>
+                </div>
+              ) : (
+                <div className="my_keys_content">
+                  <div className="my_keys_content_item"></div>
+                  <div className="my_keys_content_item"></div>
+                  <div className="my_keys_content_item"></div>
+                </div>
+              )}
             </div>
           ) : (
             <Skeleton
@@ -34,11 +52,24 @@ function Dashbord_main() {
             My Portfolios
             <FiChevronUp className={"icon" + (!isOpen2 ? "_active" : "")} />
           </div>
-          {false ? (
-            <div className="my_keys_content">
-              <div className="my_keys_content_item"></div>
-              <div className="my_keys_content_item"></div>
-              <div className="my_keys_content_item"></div>
+          {true ? (
+            <div>
+              {true ? (
+                <div className="empty_my_keys">
+                  <h3>There's nothing here yet</h3>
+                  <p>
+                    Create a portfolio to present to clients or participate in
+                    the trader rating
+                  </p>
+                  <button>Add portfolio</button>
+                </div>
+              ) : (
+                <div className="my_keys_content">
+                  <div className="my_keys_content_item"></div>
+                  <div className="my_keys_content_item"></div>
+                  <div className="my_keys_content_item"></div>
+                </div>
+              )}
             </div>
           ) : (
             <Skeleton
@@ -53,11 +84,24 @@ function Dashbord_main() {
             Favorites
             <FiChevronUp className={"icon" + (!isOpen3 ? "_active" : "")} />
           </div>
-          {false ? (
-            <div className="my_keys_content">
-              <div className="my_keys_content_item"></div>
-              <div className="my_keys_content_item"></div>
-              <div className="my_keys_content_item"></div>
+          {true ? (
+            <div>
+              {true ? (
+                <div className="empty_my_keys">
+                  <h3>Add your preferred strategy to your favorites</h3>
+                  <p>
+                    Go to the user's page from the leaderboard and add your
+                    favorite strategy to your favorites.
+                  </p>
+                  <button>Go to leraderboard page</button>
+                </div>
+              ) : (
+                <div className="my_keys_content">
+                  <div className="my_keys_content_item"></div>
+                  <div className="my_keys_content_item"></div>
+                  <div className="my_keys_content_item"></div>
+                </div>
+              )}
             </div>
           ) : (
             <Skeleton

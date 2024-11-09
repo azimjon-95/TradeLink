@@ -12,7 +12,9 @@ const NewDeclaration = lazy(() =>
 );
 const Faq = lazy(() => import("../pages/FAQ/Faq"));
 const UserProfile = lazy(() => import("../components/UserProfile/UserProfile"));
-const UtopiaOldMultiLine = lazy(() => import("../components/passport/utopiaOld/UtopiaOld"));
+const UtopiaOldMultiLine = lazy(() =>
+  import("../components/passport/utopiaOld/UtopiaOld")
+);
 const Rating = lazy(() => import("../components/passport/rating/Rating"));
 const PassportDashboard = lazy(() => import("../pages/passport/Dashboard"));
 const TradersCabinet = lazy(() =>
