@@ -1,4 +1,5 @@
 import { lazy } from "react";
+import NotFoundPage from "../components/PageNotFound";
 
 // Lazy-load pages
 const Home = lazy(() => import("../pages/home/Home"));
@@ -37,7 +38,7 @@ const routes = [
   { path: "/dashboard&ctx=product", element: <NewDeclaration />, protected: false, },
   { path: "/dashboard/success-fee", element: <SuccessFeeHistory />, protected: false, },
 
-  { path: "*", element: <Home />, protected: false },
+  { path: "*", element: <NotFoundPage />, protected: false },
 ];
 
 export default routes;
