@@ -42,8 +42,6 @@ const SignUpModal = ({
     setIsLoading(false);
   };
 
-
-
   const singIn = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -54,7 +52,6 @@ const SignUpModal = ({
 
       if (res?.data?.access_token) {
         localStorage.setItem("access_token", res.data.access_token);
-        console.log(res);
         handleClose();
       }
     } catch (error) {

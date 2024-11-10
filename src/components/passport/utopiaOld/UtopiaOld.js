@@ -21,7 +21,6 @@ const UtopiaOldMultiLine = () => {
   const [data, setData] = useState([]);
   const [topLoader, setTopLoader] = useState(false);
   const [chartData, setChartData] = useState({});
-
   const { id: baseId } = useParams();
   // const location = useLocation();
 
@@ -324,7 +323,11 @@ const UtopiaOldMultiLine = () => {
             </nav>
             <br />
             {/* Render the CardList component based on the active tab */}
-            <MyCards id={baseId} activeTab={activeTab} selectValue={selectValue} />
+            <MyCards
+              id={baseId}
+              activeTab={activeTab}
+              selectValue={selectValue}
+            />
           </div>
         )}
       </div>
