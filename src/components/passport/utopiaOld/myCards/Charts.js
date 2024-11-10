@@ -148,7 +148,7 @@ const Charts = ({ chartData, checkedItems, isOverlayVisible, customKey, id }) =>
     // ---------------------------12A-----------------------------------
     const [data, setData] = useState(null); // State for fetched data
     const [timeStep] = useState('hour'); // Default to "day"
-    console.log(id);
+
     useEffect(() => {
         // Function to fetch data with the chosen time_step
         const fetchRevenueData = async () => {
@@ -164,7 +164,7 @@ const Charts = ({ chartData, checkedItems, isOverlayVisible, customKey, id }) =>
         fetchRevenueData();
     }, [id, timeStep]); // Rerun effect when timeStep changes
 
-    console.log(data);
+
     const formattedData = data?.map(item => ({
         month: moment(item.timestamp).format('MMM YYYY'), // Convert timestamp to "MMM YYYY" format
         revenue: item.value,

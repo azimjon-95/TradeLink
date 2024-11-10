@@ -324,7 +324,7 @@ const UtopiaOldMultiLine = () => {
                         </nav>
                         <br />
                         {/* Render the CardList component based on the active tab */}
-                        <MyCards activeTab={activeTab} />
+                        <MyCards selectValue={selectValue} id={baseId} activeTab={activeTab} />
                     </div>
                 )}
             </div>

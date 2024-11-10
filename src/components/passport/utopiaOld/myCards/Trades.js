@@ -1,99 +1,87 @@
 import React, { useState } from 'react';
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import ReactApexChart from 'react-apexcharts';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, Legend, ResponsiveContainer, Cell } from 'recharts';
+import { Tooltip, Skeleton } from 'antd';
 import './style.css';
+import Distribution from './Distribution';
 
-const Trades = () => {
-    const data = {
+const Trades = ({ data }) => {
+    const datas = {
         trades: [
-            // Example trades data
             {
-                title: "Trade Summary",
+                title: "Orders by types",
+                tooltip: "This section shows the distribution of trades based on the order type, such as limit orders, market orders, and total trades.",
                 items: [
-                    { label: "Total trades", value: "9.41K" },
-                    { label: "Winning trades", value: "5.2K" },
-                    { label: "Losing trades", value: "4.21K" },
+                    {
+                        label: "Limit orders",
+                        value: `${data?.trades_stats?.orders_by_types?.limit_orders.toLocaleString() || 0}`,
+                        originalValue: data?.trades_stats?.orders_by_types?.limit_orders || 0,
+                        tooltip: "Number of limit orders placed by traders. A limit order is an order to buy or sell at a specific price or better.",
+                    },
+                    {
+                        label: "Market orders",
+                        value: `${data?.trades_stats?.orders_by_types?.market_orders.toLocaleString() || 0}`,
+                        originalValue: data?.trades_stats?.orders_by_types?.market_orders || 0,
+                        tooltip: "Number of market orders executed by traders. A market order is an order to buy or sell immediately at the best available price.",
+                    },
+                    {
+                        label: "Total trades",
+                        value: `${data?.trades_stats?.orders_by_types?.total_trades.toLocaleString() || 0}`,
+                        originalValue: data?.trades_stats?.orders_by_types?.total_trades || 0,
+                        tooltip: "Total number of trades executed during the period. This is the sum of all limit and market orders.",
+                    },
                 ],
             },
             {
-                title: "Trade Performance",
+                title: "Orders by side",
+                tooltip: "This section shows the distribution of trades based on the side of the order, either long (buy) or short (sell).",
                 items: [
-                    { label: "Average trade profit", value: "$320" },
-                    { label: "Average trade loss", value: "$250" },
-                    { label: "Largest win", value: "$5.6K" },
+                    {
+                        label: "Long orders",
+                        value: `${data?.trades_stats?.orders_by_side?.long_orders || 0}`,
+                        originalValue: data?.trades_stats?.orders_by_side?.long_orders || 0,
+                        tooltip: "Number of long orders, where the trader is betting that the price of an asset will rise.",
+                    },
+                    {
+                        label: "Short orders",
+                        value: `${data?.trades_stats?.orders_by_side?.short_orders || 0}`,
+                        originalValue: data?.trades_stats?.orders_by_side?.short_orders || 0,
+                        tooltip: "Number of short orders, where the trader is betting that the price of an asset will fall.",
+                    },
+                    {
+                        label: "Ratio",
+                        value: `${data?.trades_stats?.orders_by_side?.ratio.toFixed(2) || 0}`,
+                        originalValue: data?.trades_stats?.orders_by_side?.ratio || 0,
+                        tooltip: "The ratio of long orders to short orders. A higher ratio indicates more optimism about the market's upward movement.",
+                    },
                 ],
             },
             {
-                title: "Market Analysis",
+                title: "Orders size info",
+                tooltip: "This section provides information about the size of orders, including the maximum, minimum, and average order sizes.",
                 items: [
-                    { label: "Most traded market", value: "S&P 500" },
-                    { label: "Best performing market", value: "NASDAQ" },
-                    { label: "Worst performing market", value: "DAX" },
+                    {
+                        label: "Maximum",
+                        value: `${data?.trades_stats?.orders_size_info?.maximum.toLocaleString() || 0}`,
+                        originalValue: data?.trades_stats?.orders_size_info?.maximum || 0,
+                        tooltip: "The maximum size of a single order executed during the period. This indicates the largest trade made by a trader.",
+                    },
+                    {
+                        label: "Average",
+                        value: `${data?.trades_stats?.orders_size_info?.average.toFixed(2) || 0}`,
+                        originalValue: data?.trades_stats?.orders_size_info?.average,
+                        tooltip: "The average size of orders placed. This helps gauge the typical trade size in the market during the period.",
+                    },
+                    {
+                        label: "Minimum",
+                        value: `${data?.trades_stats?.orders_size_info?.minimum.toFixed(2) || 0}`,
+                        originalValue: data?.trades_stats?.orders_size_info?.minimum || 0,
+                        tooltip: "The minimum size of a single order executed during the period. This indicates the smallest trade made by a trader.",
+                    },
                 ],
             },
         ],
-    }
-
-    const datatrades = [
-        // Daily entries with specific hours
-        { hour: '12:00 AM', revenue: 15, period: 'Daily' },
-        { hour: '1:00 AM', revenue: 20, period: 'Daily' },
-        { hour: '2:00 AM', revenue: 10, period: 'Daily' },
-        { hour: '3:00 AM', revenue: 5, period: 'Daily' },
-        { hour: '4:00 AM', revenue: 8, period: 'Daily' },
-        { hour: '5:00 AM', revenue: 12, period: 'Daily' },
-        { hour: '6:00 AM', revenue: 18, period: 'Daily' },
-        { hour: '7:00 AM', revenue: 22, period: 'Daily' },
-        { hour: '8:00 AM', revenue: 30, period: 'Daily' },
-        { hour: '9:00 AM', revenue: 25, period: 'Daily' },
-        { hour: '10:00 AM', revenue: 120, period: 'Daily' },
-        { hour: '11:00 AM', revenue: 45, period: 'Daily' },
-        { hour: '12:00 PM', revenue: 25, period: 'Daily' },
-        { hour: '1:00 PM', revenue: 35, period: 'Daily' },
-        { hour: '2:00 PM', revenue: 28, period: 'Daily' },
-        { hour: '3:00 PM', revenue: 50, period: 'Daily' },
-        { hour: '4:00 PM', revenue: 40, period: 'Daily' },
-        { hour: '5:00 PM', revenue: 55, period: 'Daily' },
-        { hour: '6:00 PM', revenue: 60, period: 'Daily' },
-        { hour: '7:00 PM', revenue: 70, period: 'Daily' },
-        { hour: '8:00 PM', revenue: 35, period: 'Daily' },
-        { hour: '9:00 PM', revenue: 45, period: 'Daily' },
-        { hour: '10:00 PM', revenue: 38, period: 'Daily' },
-        { hour: '11:00 PM', revenue: 50, period: 'Daily' },
-
-        // Weekly entries with specific days of the week
-        { day: 'Monday', revenue: 15, period: 'Weekly' },
-        { day: 'Tuesday', revenue: 40, period: 'Weekly' },
-        { day: 'Wednesday', revenue: 20, period: 'Weekly' },
-        { day: 'Thursday', revenue: 50, period: 'Weekly' },
-        { day: 'Friday', revenue: 10, period: 'Weekly' },
-        { day: 'Saturday', revenue: 60, period: 'Weekly' },
-        { day: 'Sunday', revenue: 30, period: 'Weekly' }
-    ];
-
-    const CustomTooltip = ({ active, payload, label }) => {
-        if (active && payload && payload.length) {
-            const revenue = payload[0].value;
-            return (
-                <div className="PLByMonth">
-                    <p>{label}</p>
-                    <p>P/L by month: <strong>{revenue}%</strong></p>
-                </div>
-            );
-        }
-        return null;
     };
-    const [activePeriod, setActivePeriod] = useState("Daily");
-
-    // Filter data based on active period
-    const filteredData = datatrades.filter(data => data.period === activePeriod);
-
-
-
-
-
-    const [apexChart, setApexChart] = useState("volume"); // Set initial chart type to "volume"
 
     const [options] = useState({
         legend: {
@@ -102,7 +90,7 @@ const Trades = () => {
         chart: {
             height: 500,
             width: 500,
-            type: 'treemap',
+            // type: 'treemap',
             toolbar: {
                 show: true,
             },
@@ -121,7 +109,7 @@ const Trades = () => {
         plotOptions: {
             treemap: {
                 distributed: true,
-                enableShades: false,
+                enableShades: true,
                 labels: {
                     show: true, // Show data labels
                     style: {
@@ -147,7 +135,7 @@ const Trades = () => {
                 formatter: (value) => `Currency: ${value}`,
             },
             y: {
-                formatter: (value) => `Value: ${value.toFixed(2)}`,
+                formatter: (value) => ` ${value.toFixed(2)}`,
             },
         },
         responsive: [
@@ -174,130 +162,81 @@ const Trades = () => {
     });
 
 
-    const getDataByChartType = (type) => {
-        switch (type) {
-            case "volume":
-                return [
-                    { x: "BTCUSDT", y: 34.74 },
-                    { x: "ETHUSDT", y: 15.81 },
-                    { x: "BCHUSDT", y: 11.91 },
-                    { x: "XRPUSDT", y: 10.14 },
-                    { x: "LTCUSDT", y: 5.31 },
-                    { x: "EOSUSDT", y: 5.34 },
-                    { x: "ETCUSDT", y: 4.69 },
-                    { x: "LINKUSDT", y: 4.12 },
-                    { x: "ZECUSDT", y: 3.02 },
-                    { x: "TRXUSDT", y: 3.2 },
-                    { x: "DOGEUSDT", y: 0.95 },
-                    { x: "DASHUSDT", y: 0.76 },
-                ];
-            case "average":
-                return [
-                    { x: "BTCUSDT", y: 40.00 },
-                    { x: "ETHUSDT", y: 20.00 },
-                    { x: "BCHUSDT", y: 15.00 },
-                    { x: "XRPUSDT", y: 8.00 },
-                    { x: "LTCUSDT", y: 4.00 },
-                    { x: "EOSUSDT", y: 5.00 },
-                    { x: "ETCUSDT", y: 4.50 },
-                    { x: "LINKUSDT", y: 3.50 },
-                    { x: "ZECUSDT", y: 2.50 },
-                    { x: "TRXUSDT", y: 3.00 },
-                    { x: "DOGEUSDT", y: 1.00 },
-                    { x: "DASHUSDT", y: 0.80 },
-                ];
-            case "profit":
-                return [
-                    { x: "BTCUSDT", y: 25.00 },
-                    { x: "ETHUSDT", y: 15.00 },
-                    { x: "BCHUSDT", y: 10.00 },
-                    { x: "XRPUSDT", y: 5.00 },
-                    { x: "LTCUSDT", y: 2.50 },
-                    { x: "EOSUSDT", y: 2.00 },
-                    { x: "ETCUSDT", y: 1.50 },
-                    { x: "LINKUSDT", y: 1.00 },
-                    { x: "ZECUSDT", y: 0.75 },
-                    { x: "TRXUSDT", y: 0.50 },
-                    { x: "DOGEUSDT", y: 0.30 },
-                    { x: "DASHUSDT", y: 0.20 },
-                ];
-            default:
-                return [];
-        }
+    const mapStatsToChartData = (data, type) => {
+        return data?.map((item) => {
+            switch (type) {
+                case "volume":
+                    return { x: item.symbol, y: item.volume.abs };
+                case "pnl":
+                    return { x: item.symbol, y: item.pnl.abs };
+                case "average_qty":
+                    return { x: item.symbol, y: item.qty.avg };
+                default:
+                    return { x: item.symbol, y: 0 };
+            }
+        });
     };
 
-    const [series, setSeries] = useState([{
-        data: getDataByChartType(apexChart) // Set initial data based on the default chart type
-    }]);
+
+    const [chartType, setChartType] = useState("volume");
+    const [series, setSeries] = useState([
+        {
+            data: mapStatsToChartData(data?.stats_by_trading_pair?.symbols, chartType)
+        }
+    ]);
 
     const handleButtonClick = (type) => {
-        setApexChart(type);
-        setSeries([{ data: getDataByChartType(type) }]); // Update series based on the selected type
+        setChartType(type);
+        setSeries([{ data: mapStatsToChartData(data?.stats_by_trading_pair?.symbols, type) }]);
     };
+
     return <>
         <div className="trades-cont">
             {
-                data?.trades?.map((card, index) => (
-                    <div key={index} className="single-card">
-                        <h3>{card.title} <AiOutlineQuestionCircle /></h3>
-                        <ul>
-                            {card.items?.map((item, i) => (
-                                <li key={i} className="single-card-item">
-                                    <span className="single-label"> {item.label}</span>
-                                    <span className="single-values">{item.value}</span>
-                                </li>
+                data && Object.keys(data).length > 0 ? (
+                    datas?.trades?.map((section, inx) => (
+                        <div className="single-card" key={inx}>
+                            <h3>
+                                <Tooltip title={`${section?.tooltip}`}>
+                                    <span>{section?.title} <AiOutlineQuestionCircle /></span>
+                                </Tooltip>
+                            </h3>
+                            {section.items?.map((item, index) => (
+                                <div className="single-card-item" key={index}>
+                                    <Tooltip title={`${item?.tooltip}`}>
+                                        <span className="single-label">{item?.label}</span>
+                                    </Tooltip>
+                                    <Tooltip title={`${item?.originalValue}`}>
+                                        <span className="single-values">{item?.value}</span>
+                                    </Tooltip>
+                                </div>
                             ))}
-                        </ul>
-                    </div>
-                ))
+                        </div>
+                    ))
+                ) : (
+                    datas?.trades?.map((card, index) => (
+                        <div key={index} className="single-card">
+                            <h3>
+                                <Skeleton.Input style={{ width: 180 }} active loading={true} />
+                            </h3>
+                            <ul>
+                                <Skeleton active paragraph={{ rows: 1 }} />
+                            </ul>
+                        </div>
+                    ))
+                )
             }
+
         </div>
 
-        <h2 className="ket-inxTitle">Distribution of orders by amount</h2>
-        <nav className="single-tabs">
-            <button
-                onClick={() => setActivePeriod("Daily")}
-                className={activePeriod === "Daily" ? "active" : ""}
-            >
-                Daily
-            </button>
-            <button
-                onClick={() => setActivePeriod("Weekly")}
-                className={activePeriod === "Weekly" ? "active" : ""}
-            >
-                Weekly
-            </button>
-        </nav>
-        <div className="revenue-by-month">
-            <div></div><span>Distribution</span>
-        </div>
-        <ResponsiveContainer width="100%" height={240}>
-            <BarChart data={filteredData} margin={{ top: 20, right: 0, left: 0, bottom: 5 }}>
-                <CartesianGrid vertical={false} strokeDasharray="0" stroke="#ccc" />
-                <XAxis
-                    dataKey={activePeriod === "Daily" ? "hour" : "day"} // Use hour for daily, day for weekly
-                    tick={{ fontSize: 10 }}
-                    axisLine={false}
-                    tickLine={false}
-                />
-                <YAxis tick={{ fontSize: 10 }} axisLine={{ stroke: '#a9a9a978' }} tickLine={{ stroke: '#a9a9a978' }} />
-                <Tooltip content={<CustomTooltip />} />
-                <Legend />
-                <Bar dataKey="revenue" barSize={activePeriod === "Daily" ? 20 : 120}>
-                    {filteredData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={'#14C886'} />
-                    ))}
-                </Bar>
-            </BarChart>
-        </ResponsiveContainer>
-
+        <Distribution data={data?.distribution_of_orders_by_amount} />
 
         <h2 className="ket-inxTitle">Stats by trading pair</h2><br />
         <div className="single-tabs">
             <button
                 onClick={() => handleButtonClick("volume")}
                 style={{
-                    backgroundColor: apexChart === "volume" ? "#fff" : "#f1f1f1",
+                    backgroundColor: chartType === "volume" ? "#fff" : "#f1f1f1",
                     color: "#000000",
                     border: "none",
                     cursor: "pointer",
@@ -307,9 +246,9 @@ const Trades = () => {
                 Volume
             </button>
             <button
-                onClick={() => handleButtonClick("average")}
+                onClick={() => handleButtonClick("average_qty")}
                 style={{
-                    backgroundColor: apexChart === "average" ? "#fff" : "#f1f1f1",
+                    backgroundColor: chartType === "average" ? "#fff" : "#f1f1f1",
                     color: "#000000",
                     border: "none",
                     cursor: "pointer",
@@ -319,9 +258,9 @@ const Trades = () => {
                 Average position size
             </button>
             <button
-                onClick={() => handleButtonClick("profit")}
+                onClick={() => handleButtonClick("pnl")}
                 style={{
-                    backgroundColor: apexChart === "profit" ? "#fff" : "#f1f1f1",
+                    backgroundColor: chartType === "profit" ? "#fff" : "#f1f1f1",
                     color: "#000000",
                     border: "none",
                     cursor: "pointer",
@@ -336,13 +275,9 @@ const Trades = () => {
             <ReactApexChart options={options} series={series} type="treemap" height={500} />
         </div>
 
-    </>;
+    </>
 };
 
 export default Trades;
-
-
-
-
 
 

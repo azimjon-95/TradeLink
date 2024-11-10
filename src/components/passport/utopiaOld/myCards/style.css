@@ -30,6 +30,7 @@
   gap: 5px;
   line-height: 24px;
   font-weight: 500;
+  cursor: help;
   background-color: rgb(255, 255, 255);
 }
 
