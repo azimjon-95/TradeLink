@@ -5,7 +5,7 @@ import {
     XAxis,
     YAxis,
     Tooltip,
-    LineChart,
+    // LineChart,
     CartesianGrid,
     Area,
     Line,
@@ -14,12 +14,11 @@ import {
     Cell,
     ComposedChart,
 } from "recharts";
-import moment from 'moment';
+import moment from "moment";
 import axios from "../../../../api";
 import "./style.css";
 
-const Charts = ({ chartData, checkedItems, isOverlayVisible, customKey, id }) => {
-    console.log(">>>>", chartData);
+const Charts = ({ chartData, checkedItems, isOverlayVisible, customKey, id, selectValue }) => {
 
     const dataMain = chartData?.balances?.map((balance, index) => ({
         name: new Date(balance.timestamp).toLocaleDateString(),
@@ -37,68 +36,144 @@ const Charts = ({ chartData, checkedItems, isOverlayVisible, customKey, id }) =>
         console.log(payload);
         return (
             <div className="PLByMonth" style={{ color: "#fff", fontSize: "12px" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>{label}</div>
-                {payload.map((item, index) => (
-                    item.value !== undefined && (
-                        <div key={index} style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                    {label}
+                </div>
+                {payload.map(
+                    (item, index) =>
+                        item.value !== undefined && (
                             <div
-                                style={{
-                                    width: "8px",
-                                    height: "8px",
-                                    borderRadius: "50%",
-                                    border: `2px solid ${item.color || '#EA3941'}`,
-                                }}
-                            ></div>
-                            {item.name}: <strong>{Math.floor(item.value)}</strong>
-                        </div>
-                    )
-                ))}
+                                key={index}
+                                style={{ display: "flex", alignItems: "center", gap: "5px" }}
+                            >
+                                <div
+                                    style={{
+                                        width: "8px",
+                                        height: "8px",
+                                        borderRadius: "50%",
+                                        border: `2px solid ${item.color || "#EA3941"}`,
+                                    }}
+                                ></div>
+                                {item.name}: <strong>{Math.floor(item.value)}</strong>
+                            </div>
+                        )
+                )}
             </div>
         );
     };
 
-    {/* ---------------------------10A----------------------------------- */ }
-    // Mock Data Example
-    const generateMockData = () => {
-        const dataMain = [];
-        const startDate = new Date(2022, 0); // Starting from January 2022
+    // const generateMockData = () => {
+    //   const dataMain = [];
+    //   const dataGrowth = chartData?.used_lerage || [];
 
-        // Generate some mock data
-        const dataGrowth = Array.from({ length: 60 }, (_, i) => 100 + i * 5 + Math.sin(i / 3) * 15);
+    //   for (let i = 0; i < dataGrowth.length; i++) {
+    //     const startDate = new Date(dataGrowth[i].timestamp);
+    //     const date = new Date(startDate).toLocaleDateString();
 
-        // Loop to generate `dataMain` for each month
-        for (let i = 0; i < 60; i++) {
-            const date = `${startDate.toLocaleString('default', { month: 'short' })} '${startDate.getFullYear().toString().slice(-2)}`;
+    //     dataMain.push({
+    //       date: date,
+    //       growth: dataGrowth[i]?.value,
+    //     });
+    //   }
 
-            dataMain.push({
-                date: date,
-                growth: dataGrowth[i],
-            });
+    //   return dataMain;
+    // };
 
-            startDate.setMonth(startDate.getMonth() + 1);
-        }
-
-        return dataMain;
-    };
-
-    // Mock data for the chart
-    const dataLine = generateMockData();
-
-
+    // const dataLine = generateMockData();
+    const dataLine = [
+        {
+            day: "2024-11-01",
+            leverage: 10, // Leverage foizlar
+            long_posotions: 1500, // Uzoq pozitsiyalar
+            short_posotions: -300, // Qisqa pozitsiyalar
+            revenue: 1500, // Daromad
+        },
+        {
+            day: "2024-11-02",
+            leverage: 5,
+            long_posotions: 800,
+            short_posotions: -200,
+            revenue: 600,
+        },
+        {
+            day: "2024-11-03",
+            leverage: 12,
+            long_posotions: -500,
+            short_posotions: 1000,
+            revenue: 500,
+        },
+        {
+            day: "2024-11-04",
+            leverage: 8,
+            long_posotions: 1200,
+            short_posotions: -600,
+            revenue: 600,
+        },
+        {
+            day: "2024-11-05",
+            leverage: 20,
+            long_posotions: 2000,
+            short_posotions: -1000,
+            revenue: 1000,
+        },
+        {
+            day: "2024-11-06",
+            leverage: 15,
+            long_posotions: -400,
+            short_posotions: 700,
+            revenue: 300,
+        },
+        {
+            day: "2024-11-07",
+            leverage: 18,
+            long_posotions: 1700,
+            short_posotions: -800,
+            revenue: 900,
+        },
+        {
+            day: "2024-11-08",
+            leverage: -5,
+            long_posotions: -600,
+            short_posotions: 500,
+            revenue: -100,
+        },
+        {
+            day: "2024-11-09",
+            leverage: 7,
+            long_posotions: 400,
+            short_posotions: -200,
+            revenue: 200,
+        },
+        {
+            day: "2024-11-10",
+            leverage: 10,
+            long_posotions: 1300,
+            short_posotions: -300,
+            revenue: 1000,
+        },
+    ];
 
     const CustomTooltipTwo = ({ active, payload, label }) => {
         if (active && payload && payload.length) {
+            console.log("payload", payload);
+
             return (
-                <div className="PLByMonth" >
-                    <p>{label}</p> {/* This will display the date */}
-                    <p> Used Leverage:<strong>{payload[0]?.value}</strong> </p>
+                <div className="PLByMonth">
+                    <p>{label}</p>
+                    <p>
+                        Used Leverage:<strong>{payload[0]?.value}</strong>{" "}
+                    </p>
+                    <p>
+                        Long positions:<strong>{payload[1]?.value}</strong>{" "}
+                    </p>
+                    <p>
+                        Short positions:<strong>{payload[2]?.value}</strong>{" "}
+                    </p>
                 </div>
             );
         }
         return null;
     };
-
-
 
     // ---------------------------11A-----------------------------------
     // Mock Data Example
@@ -107,7 +182,9 @@ const Charts = ({ chartData, checkedItems, isOverlayVisible, customKey, id }) =>
         const startDate = new Date(2023, 3); // Start from April 2023
 
         for (let i = 0; i < 15; i++) {
-            const monthLabel = `${startDate.toLocaleString('default', { month: 'short' })} '${startDate.getFullYear().toString().slice(-2)}`;
+            const monthLabel = `${startDate.toLocaleString("default", {
+                month: "short",
+            })} '${startDate.getFullYear().toString().slice(-2)}`;
 
             // Generate leverage and drawdown values
             const leverageValue = 20 + Math.sin(i / 2) * 10 + i * 0.3;
@@ -125,36 +202,37 @@ const Charts = ({ chartData, checkedItems, isOverlayVisible, customKey, id }) =>
         return dataBottom;
     };
 
-    // Generate chart data
-    const dataBottom = generateBottomData();
+    const dataBottom = generateBottomData;
 
     // Custom Tooltip Component
     const CustomTooltipBottom = ({ active, payload, label }) => {
         if (active && payload && payload.length) {
             return (
                 <div className="PLByMonth">
-                    <p style={{ fontWeight: 'bold' }}>{label}</p>
-                    <p>Leverage: <strong>{payload[0].payload.leverage.toFixed(2)}%</strong></p>
-                    <p>DrawDown: <strong>{payload[0].payload.drawdown.toFixed(2)}%</strong></p>
+                    <p style={{ fontWeight: "bold" }}>{label}</p>
+                    <p>
+                        Leverage: <strong>{payload[0].payload.leverage.toFixed(2)}%</strong>
+                    </p>
+                    <p>
+                        DrawDown: <strong>{payload[0].payload.drawdown.toFixed(2)}%</strong>
+                    </p>
                 </div>
             );
         }
         return null;
     };
 
-
-
-
     // ---------------------------12A-----------------------------------
+
     const [data, setData] = useState(null); // State for fetched data
-    const [timeStep] = useState('hour'); // Default to "day"
+
 
     useEffect(() => {
         // Function to fetch data with the chosen time_step
         const fetchRevenueData = async () => {
             try {
                 // API request with portfolio_id and dynamic time_step
-                const response = await axios.get(`/portfolio/revenue-by-month/?portfolio_id=${id}&time_step=${timeStep}`)
+                const response = await axios.get(`/portfolio/revenue-by-month/?portfolio_id=${id}&time_step=${selectValue}`)
                 setData(response?.data?.data); // Set data after successful fetch
             } catch (err) {
                 console.log('Error fetching data', err);
@@ -162,7 +240,7 @@ const Charts = ({ chartData, checkedItems, isOverlayVisible, customKey, id }) =>
         };
 
         fetchRevenueData();
-    }, [id, timeStep]); // Rerun effect when timeStep changes
+    }, [id, selectValue]); // Rerun effect when timeStep changes
 
 
     const formattedData = data?.map(item => ({
@@ -183,7 +261,6 @@ const Charts = ({ chartData, checkedItems, isOverlayVisible, customKey, id }) =>
         }
         return null;
     };
-
 
 
     return (
@@ -313,11 +390,15 @@ const Charts = ({ chartData, checkedItems, isOverlayVisible, customKey, id }) =>
             <div style={{ display: `${customKey && "none"}` }}>
                 {checkedItems.usedLeverage && (
                     <ResponsiveContainer width="100%" height={130}>
-                        <LineChart
+                        <ComposedChart
                             data={dataLine}
-                            size="midle"
                             margin={{ top: 30, right: 0, left: 0, bottom: 30 }}
                         >
+                            {/* <LineChart
+                data={dataLine}
+                size="midle"
+                margin={{ top: 30, right: 0, left: 0, bottom: 30 }}
+              > */}
                             <CartesianGrid
                                 vertical={false}
                                 strokeDasharray="0"
@@ -349,12 +430,43 @@ const Charts = ({ chartData, checkedItems, isOverlayVisible, customKey, id }) =>
                             <Line
                                 yAxisId="left"
                                 type="linear"
-                                dataKey="growth"
+                                dataKey="leverage"
                                 stroke="#954FC4"
                                 strokeWidth={1.5}
                                 dot={false}
                             />
-                        </LineChart>
+
+                            <Bar
+                                yAxisId="left"
+                                z={2}
+                                name="P\L by day"
+                                dataKey="long_posotions"
+                                barSize={2}
+                            >
+                                {dataLine?.map((entry, index) => (
+                                    <Cell
+                                        key={`cell-${index}`}
+                                        fill={entry.long_posotions >= 0 ? "#14C886" : "#EA3941"}
+                                    />
+                                ))}
+                            </Bar>
+                            <Bar
+                                yAxisId="left"
+                                z={2}
+                                name="P\L by day"
+                                dataKey="sh
+                "
+                                barSize={2}
+                            >
+                                {dataLine?.map((entry, index) => (
+                                    <Cell
+                                        key={`cell-${index}`}
+                                        fill={entry.short_posotions >= 0 ? "#14C886" : "#EA3941"}
+                                    />
+                                ))}
+                            </Bar>
+                            {/* </LineChart> */}
+                        </ComposedChart>
                     </ResponsiveContainer>
                 )}
             </div>
@@ -437,9 +549,11 @@ const Charts = ({ chartData, checkedItems, isOverlayVisible, customKey, id }) =>
                 <div></div>
                 <span>Revenue by month (%)</span>{" "}
             </div>
-
             <ResponsiveContainer width="100%" height={isOverlayVisible ? 200 : 240}>
-                <BarChart data={formattedData} margin={{ top: 20, right: 0, left: 0, bottom: 5 }}>
+                <BarChart
+                    data={formattedData}
+                    margin={{ top: 20, right: 0, left: 0, bottom: 5 }}
+                >
                     <CartesianGrid vertical={false} strokeDasharray="0" stroke="#ccc" />
 
                     <XAxis
@@ -447,30 +561,33 @@ const Charts = ({ chartData, checkedItems, isOverlayVisible, customKey, id }) =>
                         angle={-45}
                         textAnchor="end"
                         height={60}
-                        tick={{ fontSize: 10 }} // Smaller font size for month labels
+                        tick={{ fontSize: 10 }} /* Smaller font size for month labels */
                         axisLine={false}
                         tickLine={false}
-                    />
-
-                    <YAxis
-                        tick={{ fontSize: 10 }}
-                        axisLine={{ stroke: "#a9a9a978" }}
-                        tickLine={{ stroke: "#a9a9a978" }}
                     />
 
                     <Bar dataKey="revenue" barSize={20}>
                         {formattedData?.map((entry, index) => (
                             <Cell
                                 key={`cell-${index}`}
-                                fill={entry.revenue >= 0 ? "#14C886" : "#EA3941"} // Color based on positive or negative values
+                                fill={entry.revenue >= 0 ? "#14C886" : "#EA3941"}
                             />
                         ))}
                     </Bar>
-
+                    <YAxis
+                        tick={{ fontSize: 10 }}
+                        axisLine={{ stroke: "#a9a9a978" }}
+                        tickLine={{ stroke: "#a9a9a978" }}
+                    />
+                    <XAxis
+                        tick={{ fontSize: 10 }}
+                        axisLine={{ stroke: "#a9a9a978" }}
+                        tickLine={{ stroke: "#a9a9a978" }}
+                    />
                     <Tooltip content={<CustomTooltip />} />
                     <Legend />
                 </BarChart>
-            </ResponsiveContainer>;
+            </ResponsiveContainer>
         </>
     );
 };

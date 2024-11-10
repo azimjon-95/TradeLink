@@ -3,8 +3,9 @@ import "./style.css";
 import { CgMenuGridO } from "react-icons/cg";
 import { Popover, Button, message } from "antd";
 import {
-  // SettingOutlined, 
-  LogoutOutlined, UserOutlined
+  // SettingOutlined,
+  LogoutOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 import { IoMenu } from "react-icons/io5";
 import { IoChevronDown, IoChevronUpOutline } from "react-icons/io5";
@@ -35,15 +36,16 @@ function Navbar() {
 
   function parseJwt(token) {
     try {
-      const base64Url = token?.split('.')[1]; // tokenning ikkinchi qismi - payload
+      const base64Url = token?.split(".")[1]; // tokenning ikkinchi qismi - payload
       if (!base64Url) {
         throw new Error("Invalid token format");
       }
-      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      const jsonPayload = decodeURIComponent(atob(base64)
-        .split('')
-        .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-        .join('')
+      const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+      const jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split("")
+          .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+          .join("")
       );
       return JSON.parse(jsonPayload); // JSON formatiga o'girib qaytarish
     } catch (e) {
@@ -55,8 +57,6 @@ function Navbar() {
   // Tokenni olish
   let token = localStorage.getItem("access_token");
   const payload = parseJwt(token);
-
-
 
   useEffect(() => {
     if (modalTypeValue) {
@@ -159,7 +159,7 @@ function Navbar() {
     "/dashboard&ctx=product",
     "/dashboard/success-fee",
     "/user/",
-    "/traders-cabinet"
+    "/traders-cabinet",
   ];
 
   useEffect(() => {
@@ -180,8 +180,8 @@ function Navbar() {
     if (token) {
       // If token is true, change the path for Trader's Cabinet
       passportLinks.unshift({
-        path: "/trader-cabinet/dashboard",  // Use the default path when token is false
-        label: "Trader's Cabinet",  // Use the correct label
+        path: "/trader-cabinet/dashboard", // Use the default path when token is false
+        label: "Trader's Cabinet", // Use the correct label
       });
     } else {
       passportLinks.unshift({
@@ -197,16 +197,16 @@ function Navbar() {
     }
 
     // Check if the path is a "/user/:id" route, making it universal
-    const isUserRoute = /^\/user\/\w+/.test(path);  // Match '/user/anything'
+    const isUserRoute = /^\/user\/\w+/.test(path); // Match '/user/anything'
 
     // Set the links based on route logic
     const linksToSet = mainPageRoutes.includes(path)
       ? linkOptions["/"]
       : isUserRoute || isPortfolioRoute
-        ? passportLinks
-        : passportOpenRoutes.includes(path)
-          ? passportLinks
-          : linkOptions[path] || linkOptions.default;
+      ? passportLinks
+      : passportOpenRoutes.includes(path)
+      ? passportLinks
+      : linkOptions[path] || linkOptions.default;
 
     setLinks(linksToSet);
   }, [location.pathname, token]);
@@ -222,8 +222,6 @@ function Navbar() {
       behavior: "smooth",
     });
   };
-
-
 
   // ===========================
   const [visible, setVisible] = useState(false);
@@ -248,7 +246,7 @@ function Navbar() {
 
   const popoverContent = (
     <div className="popoverContent">
-      <Link to={`/user/${payload?.exp}`}>
+      <Link to={`/user/${payload?.user_id}`}>
         <Button>
           <UserOutlined /> Profile
         </Button>
@@ -258,17 +256,16 @@ function Navbar() {
           <SettingOutlined /> Settings
         </Button>
       </Link> */}
-      <Button onClick={handleLogout}
-        type="danger"
-      >
+      <Button onClick={handleLogout} type="danger">
         <LogoutOutlined /> Log Out
       </Button>
     </div>
   );
   return (
     <div
-      className={`navbar_container ${isProductDashboard ? "navbar_static" : "navbar_sticky"
-        }`}
+      className={`navbar_container ${
+        isProductDashboard ? "navbar_static" : "navbar_sticky"
+      }`}
     >
       <div className="nav_links-box">
         <Link to="/" onClick={() => handleClick("/")}>
@@ -493,8 +490,9 @@ function Navbar() {
       ></div>
 
       <div
-        className={`close-modal-signup ${isModalSinUp && "close-modal-signup-open"
-          }`}
+        className={`close-modal-signup ${
+          isModalSinUp && "close-modal-signup-open"
+        }`}
       >
         <SignUpModal
           setModalType={setModalType}

@@ -8,7 +8,7 @@ import Trades from './Trades';
 
 const MyCards = ({ activeTab, id, selectValue }) => {
     const [stats, setStats] = useState([]);
-
+    console.log(selectValue);
     useEffect(() => {
         const fetchStats = async () => {
             try {

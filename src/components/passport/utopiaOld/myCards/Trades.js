@@ -163,14 +163,15 @@ const Trades = ({ data }) => {
 
 
     const mapStatsToChartData = (data, type) => {
-        return data?.map((item) => {
+        if (!data) return []; // Return an empty array if data is undefined
+        return data.map((item) => {
             switch (type) {
                 case "volume":
-                    return { x: item.symbol, y: item.volume.abs };
+                    return { x: item.symbol, y: item.volume?.abs || 0 };
                 case "pnl":
-                    return { x: item.symbol, y: item.pnl.abs };
+                    return { x: item.symbol, y: item.pnl?.abs || 0 };
                 case "average_qty":
-                    return { x: item.symbol, y: item.qty.avg };
+                    return { x: item.symbol, y: item.qty?.avg || 0 };
                 default:
                     return { x: item.symbol, y: 0 };
             }
@@ -179,17 +180,25 @@ const Trades = ({ data }) => {
 
 
     const [chartType, setChartType] = useState("volume");
+    // const [series, setSeries] = useState([
+    //     {
+    //         data: mapStatsToChartData(data?.stats_by_trading_pair?.symbols, chartType)
+    //     }
+    // ]);
     const [series, setSeries] = useState([
         {
-            data: mapStatsToChartData(data?.stats_by_trading_pair?.symbols, chartType)
+            data: mapStatsToChartData(data?.stats_by_trading_pair?.symbols || [], chartType)
         }
     ]);
 
+    // const handleButtonClick = (type) => {
+    //     setChartType(type);
+    //     setSeries([{ data: mapStatsToChartData(data?.stats_by_trading_pair?.symbols, type) }]);
+    // };
     const handleButtonClick = (type) => {
         setChartType(type);
-        setSeries([{ data: mapStatsToChartData(data?.stats_by_trading_pair?.symbols, type) }]);
+        setSeries([{ data: mapStatsToChartData(data?.stats_by_trading_pair?.symbols || [], type) }]);
     };
-
     return <>
         <div className="trades-cont">
             {

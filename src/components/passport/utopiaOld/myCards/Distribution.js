@@ -11,12 +11,12 @@ const Distribution = ({ data }) => {
 
     // Format data to include hour/day labels
     const formattedData = activePeriod === "Daily"
-        ? data.daily.map((item, index) => ({ ...item, hour: hours[index] }))
-        : data.weekly.map((item, index) => ({ ...item, day: weekDays[index] }));
+        ? data?.daily.map((item, index) => ({ ...item, hour: hours[index] }))
+        : data?.weekly.map((item, index) => ({ ...item, day: weekDays[index] }));
 
 
     const CustomTooltip = ({ active, payload, label }) => {
-        if (active && payload && payload.length) {
+        if (active && payload && payload?.length) {
             const { abs, rel, long, short } = payload[0].payload; // Destructure data from payload
             return (
                 <div className="PLByMonth">
@@ -63,7 +63,7 @@ const Distribution = ({ data }) => {
                     <Tooltip content={<CustomTooltip />} />
                     <Legend />
                     <Bar dataKey="abs" name="Order Amount" barSize={activePeriod === "Daily" ? 20 : 60} fill="#14C886">
-                        {formattedData.map((entry, index) => (
+                        {formattedData?.map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={'#14C886'} />
                         ))}
                     </Bar>
