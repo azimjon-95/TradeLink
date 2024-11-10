@@ -647,11 +647,33 @@
   left: 19%;
   width: 250px;
   height: 220px;
-  background: linear-gradient(
-    to bottom,
-    #ffffff 50%,
-    rgba(255, 255, 255, 0) 50%
-  );
+  background: linear-gradient(to bottom, #ffffff 50%, #ffffff00 50%);
   border-radius: 50%;
   z-index: -1;
+}
+
+.loader_box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.loader {
+  width: 60px;
+  aspect-ratio: 4;
+  --_g: no-repeat radial-gradient(circle closest-side, #ddd 90%, #0000);
+  background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
+  background-size: calc(100% / 3) 100%;
+  animation: l7 1s infinite linear;
+}
+@keyframes l7 {
+  33% {
+    background-size: calc(100% / 3) 0%, calc(100% / 3) 100%, calc(100% / 3) 100%;
+  }
+  50% {
+    background-size: calc(100% / 3) 100%, calc(100% / 3) 0%, calc(100% / 3) 100%;
+  }
+  66% {
+    background-size: calc(100% / 3) 100%, calc(100% / 3) 100%, calc(100% / 3) 0%;
+  }
 }

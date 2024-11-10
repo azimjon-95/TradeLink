@@ -1,47 +1,60 @@
 import React, { useState, useEffect } from "react";
 import { ImStarEmpty } from "react-icons/im";
-import { Checkbox, Select, DatePicker, Space, Switch } from 'antd';
-import { CheckSquareTwoTone } from '@ant-design/icons';
+import { Checkbox, Select, DatePicker, Space, Switch } from "antd";
+import { CheckSquareTwoTone } from "@ant-design/icons";
 import { RiExpandDiagonalLine } from "react-icons/ri";
-import { useParams, useLocation } from 'react-router-dom';
-import bin from '../../../assets/ed_khan/binance_rounded.svg';
-import MyCards from './myCards/MyCards';
-import './style.css';
+import { useParams, useLocation } from "react-router-dom";
+import axios from "../../../api";
+import bin from "../../../assets/ed_khan/binance_rounded.svg";
+import MyCards from "./myCards/MyCards";
+import "./style.css";
 import KeyIndicators from "./myCards/KeyIndicators";
 import Charts from "./myCards/Charts";
 import Investment from "./myCards/Investment";
 
-
 const { RangePicker } = DatePicker;
 
 const UtopiaOldMultiLine = () => {
+    const [isLite, setIsLite] = useState(false);
+    const [activeTab, setActiveTab] = useState("main");
+    const [selectValue, setSelectValue] = useState("hour");
+    const [data, setData] = useState([]);
+    const [topLoader, setTopLoader] = useState(false);
+
+    const { id: baseId } = useParams();
+    const location = useLocation();
+
+    // getData
+    useEffect(() => {
+        setTopLoader(true);
+        let API = `/leaderboard/main-indicators/?portfolio_id=${baseId}&time_step=${selectValue}`;
+        axios
+            .get(API)
+            .then((res) => setData(res?.data?.data))
+            .catch((err) => console.log(err))
+            .finally(() => setTopLoader(false));
+    }, [selectValue, baseId]);
+
+    console.log(">>>>>", data);
 
     // ===============useParams========================
-    const { id: baseId } = useParams(); // Extract base ID
-    const location = useLocation(); // Access URL's query parameters
-    // Function to parse query parameters
     const getQueryParams = () => {
         const params = new URLSearchParams(location.search);
 
         return {
             baseId, // From useParams
-            t: params.get('t'),
-            startDate: params.get('startDate'),
-            endDate: params.get('endDate'),
-            step: params.get('step'),
-            profit: params.get('profit'),
-            marginBalance: params.get('margin-balance'),
-            balance: params.get('balance'),
+            t: params.get("t"),
+            startDate: params.get("startDate"),
+            endDate: params.get("endDate"),
+            step: params.get("step"),
+            profit: params.get("profit"),
+            marginBalance: params.get("margin-balance"),
+            balance: params.get("balance"),
         };
     };
-    // =======================================
-
     const queryData = getQueryParams();
-    console.log(queryData);
+    console.log("queryData", queryData);
 
-
-    const [isLite, setIsLite] = useState(false);
-    const [activeTab, setActiveTab] = useState("main");
     const handleChange = (value) => {
         console.log(`selected ${value}`);
     };
@@ -57,42 +70,48 @@ const UtopiaOldMultiLine = () => {
         }));
     };
 
-
-
-
     const [isOverlayVisible, setOverlayVisible] = useState(false);
     useEffect(() => {
         if (isOverlayVisible) {
             // Disable scrolling on the body when overlay is visible
-            document.body.style.overflow = 'hidden';
+            document.body.style.overflow = "hidden";
         } else {
             // Re-enable scrolling on the body when overlay is hidden
-            document.body.style.overflow = '';
+            document.body.style.overflow = "";
         }
 
         // Cleanup function to reset overflow when component unmounts
         return () => {
-            document.body.style.overflow = '';
+            document.body.style.overflow = "";
         };
     }, [isOverlayVisible]);
 
-    {/* ---------------------------8A----------------------------------- */ }
+    {
+        /* ---------------------------8A----------------------------------- */
+    }
     const checkboxData = [
-        { key: 'benchmarkBTC', label: 'Benchmark BTC', color: '#FFD700' },
-        { key: 'return', label: 'Return (%)', color: '#FFA500' },
-        { key: 'realizedReturn', label: 'Realized Return', color: '#1E90FF' },
-        { key: 'marginBalance', label: 'Margin Balance', color: '#3CB371' },
-        { key: 'balance', label: 'Balance', color: '#A52A2A' },
-        { key: 'plByday', label: 'P\\L by day', color: '#20B2AA' },
-        { key: 'profit', label: 'Profit ($)', color: '#4B0082' },
-        { key: 'usedLeverage', label: 'Used Leverage', color: '#9370DB' },
-        { key: 'drawDown', label: 'DrawDown', color: '#4169E1' },
-        { key: 'drawDownDuration', label: 'DrawDown Duration', color: '#1E90FF' },
+        { key: "benchmarkBTC", label: "Benchmark BTC", color: "#FFD700" },
+        { key: "return", label: "Return (%)", color: "#FFA500" },
+        { key: "realizedReturn", label: "Realized Return", color: "#1E90FF" },
+        { key: "marginBalance", label: "Margin Balance", color: "#3CB371" },
+        { key: "balance", label: "Balance", color: "#A52A2A" },
+        { key: "plByday", label: "P\\L by day", color: "#20B2AA" },
+        { key: "profit", label: "Profit ($)", color: "#4B0082" },
+        { key: "usedLeverage", label: "Used Leverage", color: "#9370DB" },
+        { key: "drawDown", label: "DrawDown", color: "#4169E1" },
+        { key: "drawDownDuration", label: "DrawDown Duration", color: "#1E90FF" },
     ];
-    const allowedKeys = new Set(['benchmarkBTC', 'return', 'realizedReturn', 'drawDown', 'profit']);
+    const allowedKeys = new Set([
+        "benchmarkBTC",
+        "return",
+        "realizedReturn",
+        "drawDown",
+        "profit",
+    ]);
 
-
-    {/* ---------------------------9A----------------------------------- */ }
+    {
+        /* ---------------------------9A----------------------------------- */
+    }
     const [checkedItems, setCheckedItems] = useState({
         benchmarkBTC: true,
         return: true,
@@ -111,17 +130,20 @@ const UtopiaOldMultiLine = () => {
             <div className="oldMultiLine-header">
                 <div className="imgSubtitle">
                     <img width={30} src={bin} alt="" />
-                    <h2>Utopia Old</h2>
+                    <h2>{data?.portfolio_name || ""}</h2>
                 </div>
                 <div className="SubtitleInfo">
-                    <img width={25} src={bin} alt="" />
-                    <p>Azimjon dev</p>
+                    <img width={25} src={data?.user_avatar || bin} alt="" />
+                    <p>{data?.user_name || ""}</p>
                     <p>•</p>
-                    <p>701 views</p>
+                    <p>0 views</p>
                     <p>•</p>
-                    <p> 2 stars <ImStarEmpty /></p>
+                    <p>
+                        {" "}
+                        0 stars <ImStarEmpty />
+                    </p>
                 </div>
-                <p>My copy trading: https://bingx.com/partner/multiknife/2jwpDP</p>
+                <p>My copy trading: https://example.com</p>
             </div>
             <div className="oldMultiLine-main">
                 <div className="oldMultiLine-main-head">
@@ -130,25 +152,32 @@ const UtopiaOldMultiLine = () => {
                     </Space>
                     <div className="oldMultiLine-calendar">
                         <Select
-                            defaultValue="Day"
+                            defaultValue="hour"
                             style={{
                                 width: 100,
                             }}
-                            onChange={handleChange}
+                            onChange={(value) => setSelectValue(value)}
                             options={[
-                                { value: 'day', label: 'Day' },
-                                { value: 'time', label: 'Time' },
-                                { value: 'sunday', label: 'Sunday' },
+                                { value: "hour", label: "Hour" },
+                                { value: "day", label: "Day" },
+                                { value: "week", label: "Week" },
                             ]}
                         />
 
-                        <div style={{ color: "#591d87", display: "flex", alignItems: "center", fontSize: "12px" }}>
+                        <div
+                            style={{
+                                color: "#591d87",
+                                display: "flex",
+                                alignItems: "center",
+                                fontSize: "12px",
+                            }}
+                        >
                             {isLite ? "Lite" : "A little"}
                             &nbsp;&nbsp;
                             <Switch
                                 checked={isLite}
                                 onChange={handleSwitchChange}
-                                className={isLite ? 'switch-checked' : 'switch-unchecked'}
+                                className={isLite ? "switch-checked" : "switch-unchecked"}
                             />
                         </div>
                     </div>
@@ -156,28 +185,30 @@ const UtopiaOldMultiLine = () => {
 
                 {/* -----------------------7A------------------------- */}
                 <h2 className="ket-inxTitle">Key indicators</h2>
-                <KeyIndicators customKey={isLite} />
+                <KeyIndicators topLoader={topLoader} data={data} customKey={isLite} />
 
                 <div
                     className="overlayVisible"
                     style={{
-                        position: isOverlayVisible ? 'fixed' : 'static',
+                        position: isOverlayVisible ? "fixed" : "static",
                         top: 0,
                         left: 0,
-                        width: '100%',
-                        height: isOverlayVisible ? '100vh' : 'auto',
-                        backgroundColor: '#ffffff',
+                        width: "100%",
+                        height: isOverlayVisible ? "100vh" : "auto",
+                        backgroundColor: "#ffffff",
                         zIndex: isOverlayVisible ? 9 : 0,
-                        overflow: isOverlayVisible ? 'auto' : 'hidden',
+                        overflow: isOverlayVisible ? "auto" : "hidden",
                     }}
                 >
-                    {isOverlayVisible &&
-                        <div style={{ padding: "10px 20px" }} className="oldMultiLine-main-head">
+                    {isOverlayVisible && (
+                        <div
+                            style={{ padding: "10px 20px" }}
+                            className="oldMultiLine-main-head"
+                        >
                             <Space className="RangePicker" direction="vertical" size={12}>
                                 <RangePicker />
                             </Space>
                             <div className="oldMultiLine-calendar">
-
                                 <Select
                                     defaultValue="Day"
                                     style={{
@@ -185,71 +216,101 @@ const UtopiaOldMultiLine = () => {
                                     }}
                                     onChange={handleChange}
                                     options={[
-                                        { value: 'day', label: 'Day' },
-                                        { value: 'time', label: 'Time' },
-                                        { value: 'sunday', label: 'Sunday' },
+                                        { value: "day", label: "Day" },
+                                        { value: "time", label: "Time" },
+                                        { value: "sunday", label: "Sunday" },
                                     ]}
                                 />
-                                <div style={{ color: "#591d87", display: "flex", alignItems: "center", fontSize: "12px" }}>
+                                <div
+                                    style={{
+                                        color: "#591d87",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        fontSize: "12px",
+                                    }}
+                                >
                                     {isLite ? "Lite" : "A little"}
                                     &nbsp;&nbsp;
                                     <Switch
                                         checked={isLite}
                                         onChange={handleSwitchChange}
-                                        className={isLite ? 'switch-checked' : 'switch-unchecked'}
+                                        className={isLite ? "switch-checked" : "switch-unchecked"}
                                     />
-                                    &nbsp;&nbsp;
-                                    &nbsp;&nbsp;
-                                    <button className="isOverlayVisible-btn" onClick={() => setOverlayVisible(!isOverlayVisible)}>
+                                    &nbsp;&nbsp; &nbsp;&nbsp;
+                                    <button
+                                        className="isOverlayVisible-btn"
+                                        onClick={() => setOverlayVisible(!isOverlayVisible)}
+                                    >
                                         <RiExpandDiagonalLine />
                                     </button>
-
                                 </div>
                             </div>
                         </div>
-                    }
+                    )}
 
-                    <div style={{ padding: `${isOverlayVisible && "10px 20px"}` }} className="ket-inxBox">
+                    <div
+                        style={{ padding: `${isOverlayVisible && "10px 20px"}` }}
+                        className="ket-inxBox"
+                    >
                         <h2>Chart</h2>
-                        {!isOverlayVisible &&
-                            <button className="isOverlayVisible-btn" onClick={() => setOverlayVisible(!isOverlayVisible)}>
+                        {!isOverlayVisible && (
+                            <button
+                                className="isOverlayVisible-btn"
+                                onClick={() => setOverlayVisible(!isOverlayVisible)}
+                            >
                                 <RiExpandDiagonalLine />
                             </button>
-                        }
+                        )}
                     </div>
 
-                    <div style={{ padding: `${isOverlayVisible && "10px 20px"}` }} className="checkbox-old">
-                        {checkboxData.filter(item => !isLite || allowedKeys.has(item.key)).map(({ key, label, color }) => (
-                            <div key={key} className="checkbox-oldMain">
-                                <Checkbox
-                                    checked={checkedItems[key]}
-                                    onChange={() => handleCheckboxChange(key)}
-                                    style={{ color }}
-                                    icon={<CheckSquareTwoTone twoToneColor={color} />}
-                                />
-                                <span style={{ color }}>{label}</span>
-                            </div>
-                        ))}
+                    <div
+                        style={{ padding: `${isOverlayVisible && "10px 20px"}` }}
+                        className="checkbox-old"
+                    >
+                        {checkboxData
+                            .filter((item) => !isLite || allowedKeys.has(item.key))
+                            .map(({ key, label, color }) => (
+                                <div key={key} className="checkbox-oldMain">
+                                    <Checkbox
+                                        checked={checkedItems[key]}
+                                        onChange={() => handleCheckboxChange(key)}
+                                        style={{ color }}
+                                        icon={<CheckSquareTwoTone twoToneColor={color} />}
+                                    />
+                                    <span style={{ color }}>{label}</span>
+                                </div>
+                            ))}
                     </div>
-                    <Charts id={baseId} customKey={isLite} checkedItems={checkedItems} isOverlayVisible={isOverlayVisible} />
-                    {
-                        isLite &&
+                    <Charts
+                        customKey={isLite}
+                        checkedItems={checkedItems}
+                        isOverlayVisible={isOverlayVisible}
+                    />
+                    {isLite && (
                         <div className="single-cards-container">
                             <Investment key={isLite} />
                         </div>
-                    }
+                    )}
                 </div>
-                {
-                    !isLite &&
+                {!isLite && (
                     <div className="single-container-main">
                         <nav className="single-tabs">
-                            <button onClick={() => setActiveTab("main")} className={activeTab === "main" ? "active" : ""}>
+                            <button
+                                onClick={() => setActiveTab("main")}
+                                className={activeTab === "main" ? "active" : ""}
+                            >
                                 Main
                             </button>
-                            <button onClick={() => setActiveTab("investment")} className={activeTab === "investment" ? "active" : ""}>
+                            <button
+                                onClick={() => setActiveTab("investment")}
+                                className={activeTab === "investment" ? "active" : ""}
+                            >
                                 Investment
                             </button>
-                            <button onClick={() => setActiveTab("trades")} className={activeTab === "trades" ? "active" : ""}>
+                            <button
+                                onClick={() => setActiveTab("trades")}
+                                className={activeTab === "trades" ? "active" : ""}
+                            >
                                 Trades
                             </button>
                         </nav>
@@ -257,10 +318,9 @@ const UtopiaOldMultiLine = () => {
                         {/* Render the CardList component based on the active tab */}
                         <MyCards activeTab={activeTab} />
                     </div>
-                }
-
+                )}
             </div>
-        </div >
+        </div>
     );
 };
 

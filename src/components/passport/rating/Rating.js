@@ -32,6 +32,9 @@ const Leaderboard = () => {
   const [portfolios, setPortfolios] = useState([]);
   const [leaderboardData, setLeaderboardData] = useState(null);
 
+  const loader = useRef(null);
+  const [page, setPage] = useState(1);
+  const [lastData, setLastData] = useState([]);
   useEffect(() => {
     setLoadingTop(true);
     let API = `leaderboard/three-top-units?sort_type=${selectedOption}`;
@@ -45,13 +48,42 @@ const Leaderboard = () => {
   // get LeaderBoard table Data
   useEffect(() => {
     setLoading(true);
-    let API = `/leaderboard/top-traders?page=1&show_non_active=${showInactive}&sort_type=${filterOption}`;
+    let API = `/leaderboard/top-traders?page=${page}&show_non_active=${showInactive}&sort_type=${filterOption}`;
     axios
       .get(API)
-      .then((res) => setPortfolios(res?.data?.data))
+      .then((res) => {
+        setPortfolios([...portfolios, ...res?.data?.data]);
+        setLastData(res?.data?.data);
+      })
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
-  }, [showInactive, filterOption]);
+  }, [showInactive, filterOption, page]);
+
+  // ----------------------------------------------------------------------------
+  useEffect(() => {
+    if (lastData?.length <= 25) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            setPage((prevPage) => prevPage + 1);
+          }
+        },
+        { threshold: 1 }
+      );
+
+      if (loader.current) {
+        observer.observe(loader.current);
+      }
+
+      return () => {
+        if (loader.current) {
+          observer.unobserve(loader.current);
+        }
+      };
+    }
+  }, []);
+
+  // ----------------------------------------------------------------------------
 
   const getTimestamp = () => Math.floor(Date.now() / 1000); // Get current timestamp in seconds
 
@@ -394,10 +426,17 @@ const Leaderboard = () => {
             onRow={(record) => ({
               onClick: () => {
                 const timestamp = getTimestamp();
-                navigate(`/portfolio/${record.id}?t=${timestamp}`);
+                navigate(`/portfolio/${record.portfolio_id}?t=${timestamp}`);
               },
             })}
           />
+          {/* {loading && <p>Loading...</p>} */}
+
+          <div ref={loader} className="loader_box">
+            {loading && (
+              <div className="loader" style={{ height: "20px" }}></div>
+            )}
+          </div>
         </div>
       </div>
     </div>
