@@ -5,7 +5,7 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  LineChart,
+  // LineChart,
   CartesianGrid,
   Area,
   Line,
@@ -61,48 +61,110 @@ const Charts = ({ chartData, checkedItems, isOverlayVisible, customKey }) => {
     );
   };
 
-  {
-    /* ---------------------------10A----------------------------------- */
-  }
-  // Mock Data Example
-  const generateMockData = () => {
-    const dataMain = [];
-    const startDate = new Date(2022, 0); // Starting from January 2022
+  // const generateMockData = () => {
+  //   const dataMain = [];
+  //   const dataGrowth = chartData?.used_lerage || [];
 
-    // Generate some mock data
-    const dataGrowth = Array.from(
-      { length: 60 },
-      (_, i) => 100 + i * 5 + Math.sin(i / 3) * 15
-    );
+  //   for (let i = 0; i < dataGrowth.length; i++) {
+  //     const startDate = new Date(dataGrowth[i].timestamp);
+  //     const date = new Date(startDate).toLocaleDateString();
 
-    // Loop to generate `dataMain` for each month
-    for (let i = 0; i < 60; i++) {
-      const date = `${startDate.toLocaleString("default", {
-        month: "short",
-      })} '${startDate.getFullYear().toString().slice(-2)}`;
+  //     dataMain.push({
+  //       date: date,
+  //       growth: dataGrowth[i]?.value,
+  //     });
+  //   }
 
-      dataMain.push({
-        date: date,
-        growth: dataGrowth[i],
-      });
+  //   return dataMain;
+  // };
 
-      startDate.setMonth(startDate.getMonth() + 1);
-    }
-
-    return dataMain;
-  };
-
-  // Mock data for the chart
-  const dataLine = generateMockData();
+  // const dataLine = generateMockData();
+  // const dataLine = [
+  //   {
+  //     day: "2024-11-01",
+  //     used_lerage: 10, // used_lerage foizlar
+  //     long_posotions: 1500, // Uzoq pozitsiyalar
+  //     short_posotions: -300, // Qisqa pozitsiyalar
+  //     revenue: 1500, // Daromad
+  //   },
+  //   {
+  //     day: "2024-11-02",
+  //     used_lerage: 5,
+  //     long_posotions: 800,
+  //     short_posotions: -200,
+  //     revenue: 600,
+  //   },
+  //   {
+  //     day: "2024-11-03",
+  //     used_lerage: 12,
+  //     long_posotions: -500,
+  //     short_posotions: 1000,
+  //     revenue: 500,
+  //   },
+  //   {
+  //     day: "2024-11-04",
+  //     used_lerage: 8,
+  //     long_posotions: 1200,
+  //     short_posotions: -600,
+  //     revenue: 600,
+  //   },
+  //   {
+  //     day: "2024-11-05",
+  //     used_lerage: 20,
+  //     long_posotions: 2000,
+  //     short_posotions: -1000,
+  //     revenue: 1000,
+  //   },
+  //   {
+  //     day: "2024-11-06",
+  //     used_lerage: 15,
+  //     long_posotions: -400,
+  //     short_posotions: 700,
+  //     revenue: 300,
+  //   },
+  //   {
+  //     day: "2024-11-07",
+  //     used_lerage: 18,
+  //     long_posotions: 1700,
+  //     short_posotions: -800,
+  //     revenue: 900,
+  //   },
+  //   {
+  //     day: "2024-11-08",
+  //     used_lerage: -5,
+  //     long_posotions: -600,
+  //     short_posotions: 500,
+  //     revenue: -100,
+  //   },
+  //   {
+  //     day: "2024-11-09",
+  //     used_lerage: 7,
+  //     long_posotions: 400,
+  //     short_posotions: -200,
+  //     revenue: 200,
+  //   },
+  //   {
+  //     day: "2024-11-10",
+  //     used_lerage: 10,
+  //     long_posotions: 1300,
+  //     short_posotions: -300,
+  //     revenue: 1000,
+  //   },
+  // ];
 
   const CustomTooltipTwo = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
         <div className="PLByMonth">
-          <p>{label}</p> {/* This will display the date */}
+          <p>{label}</p>
           <p>
-            {" "}
             Used Leverage:<strong>{payload[0]?.value}</strong>{" "}
+          </p>
+          <p>
+            Long positions:<strong>{payload[1]?.value}</strong>{" "}
+          </p>
+          <p>
+            Short positions:<strong>{payload[2]?.value}</strong>{" "}
           </p>
         </div>
       );
@@ -137,8 +199,7 @@ const Charts = ({ chartData, checkedItems, isOverlayVisible, customKey }) => {
     return dataBottom;
   };
 
-  // Generate chart data
-  const dataBottom = generateBottomData();
+  const dataBottom = generateBottomData;
 
   // Custom Tooltip Component
   const CustomTooltipBottom = ({ active, payload, label }) => {
@@ -329,10 +390,88 @@ const Charts = ({ chartData, checkedItems, isOverlayVisible, customKey }) => {
       {/* ---------------------------10A----------------------------------- */}
       <div style={{ display: `${customKey && "none"}` }}>
         {checkedItems.usedLeverage && (
+          // <ResponsiveContainer width="100%" height={130}>
+          //   <ComposedChart
+          //     data={dataMain}
+          //     margin={{ top: 30, right: 0, left: 0, bottom: 30 }}
+          //   >
+          //     {/* <LineChart
+          //       data={dataLine}
+          //       size="midle"
+          //       margin={{ top: 30, right: 0, left: 0, bottom: 30 }}
+          //     > */}
+          //     <CartesianGrid
+          //       vertical={false}
+          //       strokeDasharray="0"
+          //       stroke="#ccc"
+          //     />
+
+          //     <YAxis
+          //       yAxisId="left"
+          //       orientation="left"
+          //       domain={[0, "auto"]}
+          //       tickFormatter={(value) => `${value}%`} // Keep as percentage format (unchanged)
+          //       tick={{ fontSize: 10 }}
+          //       axisLine={{ stroke: "#a9a9a978" }}
+          //       tickLine={{ stroke: "#a9a9a978" }}
+          //     />
+
+          //     {/* Right Y-Axis with "$" and "K" suffix */}
+          //     <YAxis
+          //       yAxisId="right"
+          //       orientation="right"
+          //       domain={["auto", 0]}
+          //       tickFormatter={(value) => `$${(value / 1000).toFixed(1)}K`} // Format with "$" and "K"
+          //       axisLine={{ stroke: "#a9a9a978" }}
+          //       tickLine={{ stroke: "#a9a9a978" }}
+          //       tick={{ fontSize: 10 }}
+          //     />
+
+          //     <Tooltip content={<CustomTooltipTwo />} />
+          //     <Line
+          //       yAxisId="left"
+          //       type="linear"
+          //       dataKey="negative0"
+          //       stroke="#954FC4"
+          //       strokeWidth={1.5}
+          //       dot={false}
+          //     />
+
+          //     <Bar
+          //       yAxisId="left"
+          //       z={2}
+          //       name="P\L by day"
+          //       dataKey="long_posotions"
+          //       barSize={2}
+          //     >
+          //       {dataMain?.map((entry, index) => (
+          //         <Cell
+          //           // key={`cell-${index}`}
+          //           key={`negative2`}
+          //           fill={entry.negative2 >= 0 ? "#14C886" : "#EA3941"}
+          //         />
+          //       ))}
+          //     </Bar>
+          //     <Bar
+          //       yAxisId="left"
+          //       z={2}
+          //       name="P\L by day"
+          //       dataKey="short_posotions"
+          //       barSize={2}
+          //     >
+          //       {dataLine?.map((entry, index) => (
+          //         <Cell
+          //           key={`cell-${index}`}
+          //           fill={entry.negative1 >= 0 ? "#14C886" : "#EA3941"}
+          //         />
+          //       ))}
+          //     </Bar>
+          //     {/* </LineChart> */}
+          //   </ComposedChart>
+          // </ResponsiveContainer>
           <ResponsiveContainer width="100%" height={130}>
-            <LineChart
-              data={dataLine}
-              size="midle"
+            <ComposedChart
+              data={dataMain}
               margin={{ top: 30, right: 0, left: 0, bottom: 30 }}
             >
               <CartesianGrid
@@ -341,37 +480,86 @@ const Charts = ({ chartData, checkedItems, isOverlayVisible, customKey }) => {
                 stroke="#ccc"
               />
 
+              {/* Chap Y-o'qi */}
               <YAxis
                 yAxisId="left"
                 orientation="left"
                 domain={[0, "auto"]}
-                tickFormatter={(value) => `${value}%`} // Keep as percentage format (unchanged)
+                tickFormatter={(value) => `${value}%`}
                 tick={{ fontSize: 10 }}
                 axisLine={{ stroke: "#a9a9a978" }}
                 tickLine={{ stroke: "#a9a9a978" }}
               />
 
-              {/* Right Y-Axis with "$" and "K" suffix */}
+              {/* O'ng Y-o'qi */}
               <YAxis
                 yAxisId="right"
                 orientation="right"
                 domain={["auto", 0]}
-                tickFormatter={(value) => `$${(value / 1000).toFixed(1)}K`} // Format with "$" and "K"
+                tickFormatter={(value) => `$${(value / 1000).toFixed(1)}K`}
                 axisLine={{ stroke: "#a9a9a978" }}
                 tickLine={{ stroke: "#a9a9a978" }}
                 tick={{ fontSize: 10 }}
               />
 
               <Tooltip content={<CustomTooltipTwo />} />
+
+              {/* Line diagramma */}
               <Line
                 yAxisId="left"
                 type="linear"
-                dataKey="growth"
+                dataKey="negative0"
                 stroke="#954FC4"
                 strokeWidth={1.5}
                 dot={false}
               />
-            </LineChart>
+              <Line
+                yAxisId="left"
+                type="linear"
+                dataKey="negative1"
+                stroke="#E0F5DF"
+                strokeWidth={1.5}
+                dot={false}
+              />
+              <Line
+                yAxisId="left"
+                type="linear"
+                dataKey="negative2"
+                stroke="#F9EDEC"
+                strokeWidth={1.5}
+                dot={false}
+              />
+
+              {/* Uzoq pozitsiyalar Bar diagrammasi */}
+              {/* <Bar
+                yAxisId="left"
+                name="P\L by day"
+                dataKey="long_posotions"
+                barSize={2}
+              >
+                {dataMain?.map((entry, index) => (
+                  <Cell
+                    key={`cell-long-${index}`}
+                    fill={entry.negative2 >= 0 ? "#14C886" : "#EA3941"}
+                  />
+                ))}
+              </Bar> */}
+
+              {/* Qisqa pozitsiyalar Bar diagrammasi */}
+              {/* <Bar
+                yAxisId="left"
+                name="P\L by day"
+                dataKey="short_posotions"
+                barSize={2}
+              >
+                {dataMain?.map((entry, index) => (
+                  <Cell
+                    key={`cell-short-${index}`}
+                    fill={entry.negative1 >= 0 ? "#14C886" : "#EA3941"}
+                  />
+                ))}
+              </Bar> */}
+            </ComposedChart>
           </ResponsiveContainer>
         )}
       </div>

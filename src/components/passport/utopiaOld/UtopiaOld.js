@@ -3,7 +3,7 @@ import { ImStarEmpty } from "react-icons/im";
 import { Checkbox, Select, DatePicker, Space, Switch } from "antd";
 import { CheckSquareTwoTone } from "@ant-design/icons";
 import { RiExpandDiagonalLine } from "react-icons/ri";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "../../../api";
 import bin from "../../../assets/ed_khan/binance_rounded.svg";
 import MyCards from "./myCards/MyCards";
@@ -23,7 +23,7 @@ const UtopiaOldMultiLine = () => {
   const [chartData, setChartData] = useState({});
 
   const { id: baseId } = useParams();
-  const location = useLocation();
+  // const location = useLocation();
 
   // getData
   useEffect(() => {
@@ -48,22 +48,22 @@ const UtopiaOldMultiLine = () => {
   }, []);
 
   // ===============useParams========================
-  const getQueryParams = () => {
-    const params = new URLSearchParams(location.search);
+  // const getQueryParams = () => {
+  //   const params = new URLSearchParams(location.search);
 
-    return {
-      baseId, // From useParams
-      t: params.get("t"),
-      startDate: params.get("startDate"),
-      endDate: params.get("endDate"),
-      step: params.get("step"),
-      profit: params.get("profit"),
-      marginBalance: params.get("margin-balance"),
-      balance: params.get("balance"),
-    };
-  };
-  const queryData = getQueryParams();
-  console.log("queryData", queryData);
+  //   return {
+  //     baseId, // From useParams
+  //     t: params.get("t"),
+  //     startDate: params.get("startDate"),
+  //     endDate: params.get("endDate"),
+  //     step: params.get("step"),
+  //     profit: params.get("profit"),
+  //     marginBalance: params.get("margin-balance"),
+  //     balance: params.get("balance"),
+  //   };
+  // };
+  // const queryData = getQueryParams();
+  // console.log("queryData", queryData);
 
   const handleSwitchChange = (checked) => {
     setIsLite(checked);
