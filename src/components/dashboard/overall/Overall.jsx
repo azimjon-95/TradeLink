@@ -7,7 +7,7 @@ function Overall() {
     <div className="overall">
       <div className="top">
         <h1>Overall statistics</h1>
-        <Link to={"/landing"}>
+        <Link to={"/"}>
           <button>View landing</button>
         </Link>
       </div>

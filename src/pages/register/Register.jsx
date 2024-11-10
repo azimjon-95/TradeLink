@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import "./style.css";
 import { Button } from "antd";
-import { useNavigate } from "react-router-dom";
 import axios from "../../api";
 
 Modal.setAppElement("#root");
@@ -16,8 +15,6 @@ const SignUpModal = ({
 }) => {
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  const navigate = useNavigate();
 
   const handleClose = () => {
     onRequestClose(false);
@@ -45,28 +42,7 @@ const SignUpModal = ({
     setIsLoading(false);
   };
 
-  // const singIn = async (e) => {
-  //   e.preventDefault();
-  //   setIsLoading(true);
-  //   let formData = new FormData(e.target);
-  //   let body = Object.fromEntries(formData.entries());
 
-  //   const data = new URLSearchParams();
-  //   data.append("email", body.email);
-  //   data.append("password", body.password);
-
-  //   try {
-  //     let res = await axios.post("/auth/sign-in/login", data);
-  //     if (res?.data?.access_token) {
-  //       localStorage.setItem("access_token", res.data.access_token);
-  //       navigate("/");
-  //       handleClose();
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  //   setIsLoading(false);
-  // };
 
   const singIn = async (e) => {
     e.preventDefault();
@@ -78,7 +54,7 @@ const SignUpModal = ({
 
       if (res?.data?.access_token) {
         localStorage.setItem("access_token", res.data.access_token);
-        navigate("/");
+        console.log(res);
         handleClose();
       }
     } catch (error) {

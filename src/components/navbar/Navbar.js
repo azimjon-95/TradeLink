@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
 import { CgMenuGridO } from "react-icons/cg";
+import { Popover, Button, message } from "antd";
+import {
+  // SettingOutlined,
+  LogoutOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import { IoMenu } from "react-icons/io5";
 import { IoChevronDown, IoChevronUpOutline } from "react-icons/io5";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiFillHome, AiOutlineFileText } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
 import { FiX } from "react-icons/fi";
 import { FaPassport, FaStoreAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+// import axios from "../../api";
 import SignUpModal from "../../pages/register/Register";
 import { setModalType as setModalType2 } from "../../context/modalType";
 
@@ -23,10 +30,33 @@ function Navbar() {
   const [isModalSinUp, setIsModalSinUp] = useState(false);
   const [modalType, setModalType] = useState(""); // Use a single state for modal type
   const location = useLocation();
-  const [isAuth] = useState(true);
   const [activeLink, setActiveLink] = useState("");
   const [isProductDashboard, setIsProductDashboard] = useState(false);
+  const navigate = useNavigate();
+
+  function parseJwt(token) {
+    try {
+      const base64Url = token?.split(".")[1]; // tokenning ikkinchi qismi - payload
+      if (!base64Url) {
+        throw new Error("Invalid token format");
+      }
+      const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+      const jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split("")
+          .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+          .join("")
+      );
+      return JSON.parse(jsonPayload); // JSON formatiga o'girib qaytarish
+    } catch (e) {
+      console.error("Tokenni tahlil qilishda xatolik:", e);
+      return null;
+    }
+  }
+
+  // Tokenni olish
   let token = localStorage.getItem("access_token");
+  const payload = parseJwt(token);
 
   useEffect(() => {
     if (modalTypeValue) {
@@ -104,7 +134,6 @@ function Navbar() {
   // Link to'plamlarini aniqlash
   const linkOptions = {
     "/passport": [
-      { path: "/trader-cabinet/dashboard", label: "Trader's Cabinet" },
       { path: "/rating", label: "Rating" },
       // { path: '/passport#hub', label: 'Hub' },
     ],
@@ -113,16 +142,15 @@ function Navbar() {
       { path: "/#products", label: "Passport", scrollTo: 570 },
       { path: "/faq", label: "FAQ" },
     ],
-    default: [{ path: "/#default", label: "Default", scrollTo: 0 }],
+    default: [{ path: "/", label: "", scrollTo: 0 }],
   };
 
   // Add the '/user' link options after 'linkOptions' is fully defined
-  linkOptions["/user"] = [...linkOptions["/"]];
   linkOptions["/portfolio/:id"] = [...linkOptions["/passport"]];
 
   // Asosiy sahifa linklarini yuklash kerak bo'lgan yo'nalishlar ro'yxati
   const mainPageRoutes = ["/faq", "/main", "/about", "/contact"]; // Yangi yo'nalishlar qo'shilishi mumkin
-  // List of routes where '/passport' links should stay open
+
   const passportOpenRoutes = [
     "/passport",
     "/passport/dashboard",
@@ -130,9 +158,10 @@ function Navbar() {
     "/trader-cabinet/dashboard",
     "/dashboard&ctx=product",
     "/dashboard/success-fee",
-    "/user/portfolios",
-    "/user",
+    "/user/",
+    "/traders-cabinet",
   ];
+
   useEffect(() => {
     const path = location.pathname;
 
@@ -148,24 +177,39 @@ function Navbar() {
 
     // Load passport links and add 'Dashboard' link if authenticated
     let passportLinks = [...linkOptions["/passport"]];
-    if (isAuth) {
+    if (token) {
+      // If token is true, change the path for Trader's Cabinet
+      passportLinks.unshift({
+        path: "/trader-cabinet/dashboard", // Use the default path when token is false
+        label: "Trader's Cabinet", // Use the correct label
+      });
+    } else {
+      passportLinks.unshift({
+        path: "/traders-cabinet",
+        label: "Trader's Cabinet",
+      });
+    }
+    if (token) {
       passportLinks.unshift({
         path: "/passport/dashboard",
         label: "Dashboard",
       });
     }
 
+    // Check if the path is a "/user/:id" route, making it universal
+    const isUserRoute = /^\/user\/\w+/.test(path); // Match '/user/anything'
+
     // Set the links based on route logic
     const linksToSet = mainPageRoutes.includes(path)
       ? linkOptions["/"]
-      : isPortfolioRoute
+      : isUserRoute || isPortfolioRoute
       ? passportLinks
       : passportOpenRoutes.includes(path)
       ? passportLinks
       : linkOptions[path] || linkOptions.default;
 
     setLinks(linksToSet);
-  }, [location.pathname, isAuth]);
+  }, [location.pathname, token]);
 
   const handleClick = (path) => {
     setActiveLink(path);
@@ -179,6 +223,44 @@ function Navbar() {
     });
   };
 
+  // ===========================
+  const [visible, setVisible] = useState(false);
+
+  const handleVisibleChange = (newVisible) => {
+    setVisible(newVisible);
+  };
+
+  const handleLogout = async () => {
+    try {
+      // Send request to the server logout API endpoint with Bearer token
+      // const res = await axios.post("/auth/sign-in/logout");
+      // console.log(res);
+      localStorage.removeItem("access_token");
+      message.success("Successfully logged out!");
+      navigate("/");
+    } catch (error) {
+      console.error("Logout failed:", error);
+      message.error("Logout failed. Please try again.");
+    }
+  };
+
+  const popoverContent = (
+    <div className="popoverContent">
+      <Link to={`/user/${payload?.user_id}`}>
+        <Button>
+          <UserOutlined /> Profile
+        </Button>
+      </Link>
+      {/* <Link to={`/setting`}>
+        <Button>
+          <SettingOutlined /> Settings
+        </Button>
+      </Link> */}
+      <Button onClick={handleLogout} type="danger">
+        <LogoutOutlined /> Log Out
+      </Button>
+    </div>
+  );
   return (
     <div
       className={`navbar_container ${
@@ -263,13 +345,22 @@ function Navbar() {
       </div>
 
       {token ? (
-        <div className="userProfileName">
-          <b>Bahromjon</b>
-          <img
-            src="https://gravatar.com/avatar/07f9820661965f5c65726c026a58a8b3?size=80&d=retro"
-            alt=""
-          />
-        </div>
+        <Popover
+          content={popoverContent}
+          trigger="click"
+          open={visible}
+          onOpenChange={handleVisibleChange}
+          overlayClassName="popoverAnimation"
+        >
+          <div className="userProfileName">
+            <b>{payload?.user}</b>
+            <img
+              src="https://gravatar.com/avatar/07f9820661965f5c65726c026a58a8b3?size=80&d=retro"
+              alt="Profile"
+              style={{ cursor: "pointer" }}
+            />
+          </div>
+        </Popover>
       ) : (
         <div className="right-btns">
           <button
@@ -365,8 +456,6 @@ function Navbar() {
             <div className="media-nav-links">
               <p>Trader's Cabinet</p>
               <p>Rating</p>
-              <p>Feed</p>
-              <p>Hub</p>
             </div>
           )}
         </div>
@@ -390,7 +479,7 @@ function Navbar() {
               src="https://gravatar.com/avatar/07f9820661965f5c65726c026a58a8b3?size=80&d=retro"
               alt=""
             />
-            <b>Bahromjon</b>
+            <b>{payload?.user}</b>
           </div>
           <BsThreeDots />
         </div>

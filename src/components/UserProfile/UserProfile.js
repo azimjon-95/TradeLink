@@ -1,163 +1,217 @@
 import { useState, useEffect } from "react";
-import { FaShare, FaGlobe, FaTelegramPlane } from "react-icons/fa";
-import { Routes, Route, Link, Navigate, Outlet, useLocation } from "react-router-dom"; // Import Outlet
-import { Tooltip } from 'antd';
+import { FaShare } from "react-icons/fa";
+import {
+  Routes,
+  Route,
+  Link,
+  Navigate,
+  Outlet,
+  useParams,
+  useLocation,
+} from "react-router-dom"; // Import Outlet
+import { Tooltip } from "antd";
+import axios from "../../api";
 import ed_khan from "../../assets/ed_khan/Ed_Khan.png";
-import Overview from './Overview';
-import Portfolios from './Portfolios';
-import Jet from './Jet';
-import Feed from './Feed';
-import ShareModal from './ShareModal';
-import './styles/style.css'; // Import the CSS file
-import './styles/media.css'; // Import the CSS file
+import Overview from "./Overview";
+import Portfolios from "./Portfolios";
+import Jet from "./Jet";
+import ShareModal from "./ShareModal";
+import "./styles/style.css"; // Import the CSS file
+import "./styles/media.css"; // Import the CSS file
 
 const UserProfile = () => {
-    const [telegramHandle, setTelegramHandle] = useState("");
-    const location = useLocation(); // Hozirgi yo'nalishni olish
-    const [currentPath, setCurrentPath] = useState("/user"); // Default yo'nalish
-    const [isModalOpen, setModalOpen] = useState(false);
+  //   const [telegramHandle, setTelegramHandle] = useState("");
+  const location = useLocation();
+  const [currentPath, setCurrentPath] = useState("/user");
+  const [isModalOpen, setModalOpen] = useState(false);
+  const { id } = useParams();
 
-    // Simulate fetching Telegram handle from the server
-    useEffect(() => {
-        const fetchTelegramHandle = async () => {
-            const handleFromServer = "@Azimjon_M"; // Simulated response
-            setTelegramHandle(handleFromServer);
-        };
+  const [profileData, setProfileData] = useState(null);
+  const profileInfo = profileData?.statistic;
+  //   const overviewInfo = profileData?.overview;
+  const portFolioData = profileData?.overview;
+  const public_portfolios = profileData?.public_portfolios;
+  const portfolio_chartData = profileData?.profits?.profits;
 
-        fetchTelegramHandle();
-    }, []);
-    // Hozirgi yo'nalishni eslab qolish
-    useEffect(() => {
-        setCurrentPath(location.pathname);
-    }, [location]);
+  useEffect(() => {
+    let API = "/user-profile/user/?user_id=" + id;
+    axios
+      .get(API)
+      .then((res) => setProfileData(res.data?.data))
+      .catch((err) => console.log(err));
+  }, []);
 
+  // Simulate fetching Telegram handle from the server
+  //   useEffect(() => {
+  //     const fetchTelegramHandle = async () => {
+  //       const handleFromServer = "@Azimjon_M"; // Simulated response
+  //       setTelegramHandle(handleFromServer);
+  //     };
 
-    useEffect(() => {
-        const fetchTelegramHandle = async () => {
-            const handleFromServer = "@Azimjon_M"; // Simulated response
-            setTelegramHandle(handleFromServer);
-        };
+  //     fetchTelegramHandle();
+  //   }, []);
+  // Hozirgi yo'nalishni eslab qolish
+  useEffect(() => {
+    setCurrentPath(location.pathname);
+  }, [location]);
 
-        fetchTelegramHandle();
-    }, []);
+  //   useEffect(() => {
+  //     const fetchTelegramHandle = async () => {
+  //       const handleFromServer = "@Azimjon_M"; // Simulated response
+  //       //   setTelegramHandle(handleFromServer);
+  //     };
 
-    const handleTelegramClick = () => {
-        if (telegramHandle) {
-            window.open(`https://t.me/${telegramHandle.replace("@", "")}`, "_blank");
-        }
-    };
+  //     fetchTelegramHandle();
+  //   }, []);
 
-    const handleEdvitradeClick = () => {
-        window.open(`https://edvitrade.com/ru/`, "_blank");
-    };
+  //   const handleTelegramClick = () => {
+  //     if (telegramHandle) {
+  //       window.open(`https://t.me/${telegramHandle.replace("@", "")}`, "_blank");
+  //     }
+  //   };
 
+  //   const handleEdvitradeClick = () => {
+  //     window.open(`https://edvitrade.com/ru/`, "_blank");
+  //   };
 
+  const toggleModal = () => {
+    setModalOpen(!isModalOpen);
+  };
 
+  return (
+    <div className="ed_khan">
+      <h1>User Profile</h1>
 
-    const toggleModal = () => {
-        setModalOpen(!isModalOpen);
-    };
-
-    return (
-        <div className="ed_khan">
-            <h1>User Profile</h1>
-
-            <div className="user-share-container">
-
-                <div className="user-share">
-                    <div className="ed-khan-image">
-                        <img src={ed_khan} alt="" />
-                    </div>
-                    <div className="ed-khan-text">
-                        <div className="ed-khan-main">
-                            <h1> <img className="user-image-mob" src={ed_khan} alt="" /> Azimjon Dev</h1>
-                            <p>7.98K</p>
-                            <Tooltip title="Days in market">
-                                <span>Days in market</span>
-                            </Tooltip>
-                        </div>
-                        <div className="ed-khan-main">
-                            <p>2</p>
-                            <Tooltip title="Days investing">
-                                <span>Days investing</span>
-                            </Tooltip>
-                        </div>
-                        <div className="ed-khan-main">
-                            <p>18</p>
-                            <Tooltip title="Active Portfolios">
-                                <span>Active Portfolios</span>
-                            </Tooltip>
-                        </div>
-                        <div className="ed-khan-main">
-                            <p>1</p>
-                            <Tooltip title="Active Jets">
-                                <span>Active Jets</span>
-                            </Tooltip>
-                        </div>
-                        <div className="ed-khan-main">
-                            <p>14.95K</p>
-                            <Tooltip title="Total Views">
-                                <span>Total Views</span>
-                            </Tooltip>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="khan-maps">
-                    <button onClick={handleTelegramClick} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                        <FaTelegramPlane />
-                    </button>
-                    <button onClick={handleEdvitradeClick} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                        <FaGlobe />
-                    </button>
-                </div>
-                <div className="khan-inps">
-                    Telegram
-                    <input
-                        type="text"
-                        value={telegramHandle}
-                        readOnly
-                        style={{ padding: "8px", fontSize: "16px" }}
-                    />
-                </div>
-
-                <button onClick={toggleModal}>
-                    <FaShare style={{ fontSize: "16px" }} />
-                    Share
-                </button>
+      <div className="user-share-container">
+        <div className="user-share">
+          <div className="ed-khan-image">
+            <img src={ed_khan} alt="" />
+          </div>
+          <div className="ed-khan-text">
+            <div className="ed-khan-main">
+              <h1>
+                {" "}
+                <img className="user-image-mob" src={ed_khan} alt="" /> Azimjon
+                Dev
+              </h1>
+              <p>{profileInfo?.days_in_market || 0}</p>
+              <Tooltip title="Days in market">
+                <span>Days in market</span>
+              </Tooltip>
             </div>
-
-            <div className="user-menus-khan">
-                <div className="strategies-layout">
-                    <nav className="nav-bar">
-                        <Link to="/user" className={currentPath === "/user" ? "active" : ""}>Overview</Link>
-                        <Link to="/user/portfolios" className={currentPath === "/user/portfolios" ? "active" : ""}>Portfolios</Link>
-                        <Link to="/user/jet" className={currentPath === "/user/jet" ? "active" : ""}>Jet</Link>
-                        <Link to="/user/feed" className={currentPath === "/user/feed" ? "active" : ""}>Feed</Link>
-                    </nav>
-
-                    <div className="user-menus">
-                        <div className="khan-pages">
-                            <Outlet /> {/* This will render the matching route components here */}
-                        </div>
-
-                        <div className="menus-khan-page">
-                            <Routes>
-                                <Route path="/" element={<Overview />} />
-                                <Route path="/portfolios" element={<Portfolios />} />
-                                <Route path="/jet" element={<Jet />} />
-                                <Route path="/feed" element={<Feed />} />
-
-                                <Route path="*" element={<Navigate to="/user" />} /> {/* Redirect to Overview */}
-                            </Routes>
-                        </div>
-                    </div>
-                </div>
+            <div className="ed-khan-main">
+              <p>{profileInfo?.days_investing || 0}</p>
+              <Tooltip title="Days investing">
+                <span>Days investing</span>
+              </Tooltip>
             </div>
-            {isModalOpen && <ShareModal closeModal={toggleModal} />}
+            <div className="ed-khan-main">
+              <p>{profileInfo?.active_portfolios || 0}</p>
+              <Tooltip title="Active Portfolios">
+                <span>Active Portfolios</span>
+              </Tooltip>
+            </div>
+            <div className="ed-khan-main">
+              <p>{profileInfo?.active_jets || 0}</p>
+              <Tooltip title="Active Jets">
+                <span>Active Jets</span>
+              </Tooltip>
+            </div>
+            <div className="ed-khan-main">
+              <p>{(profileInfo?.total_views / 1000 || 0)?.toFixed(2)}K</p>
+              <Tooltip title="Total Views">
+                <span>Total Views</span>
+              </Tooltip>
+            </div>
+          </div>
         </div>
-    );
+
+        {/* <div className="khan-maps">
+          <button
+            onClick={handleTelegramClick}
+            style={{ display: "flex", alignItems: "center", gap: "8px" }}
+          >
+            <FaTelegramPlane />
+          </button>
+          <button
+            onClick={handleEdvitradeClick}
+            style={{ display: "flex", alignItems: "center", gap: "8px" }}
+          >
+            <FaGlobe />
+          </button>
+        </div> */}
+        {/* <div className="khan-inps">
+          Telegram
+          <input
+            type="text"
+            value={telegramHandle}
+            readOnly
+            style={{ padding: "8px", fontSize: "16px" }}
+          />
+        </div> */}
+
+        <button onClick={toggleModal}>
+          <FaShare style={{ fontSize: "16px" }} />
+          Share
+        </button>
+      </div>
+
+      <div className="user-menus-khan">
+        <div className="strategies-layout">
+          <nav className="nav-bar">
+            <Link
+              to={`/user/${id}`}
+              className={currentPath === `/user/${id}` ? "active" : ""}
+            >
+              Strategies
+            </Link>
+            <Link
+              to={`/user/${id}/portfolios`}
+              className={
+                currentPath === `/user/${id}/portfolios` ? "active" : ""
+              }
+            >
+              Portfolios
+            </Link>
+            <Link
+              to={`/user/${id}/jet`}
+              className={currentPath === `/user/${id}/jet` ? "active" : ""}
+            >
+              Jet
+            </Link>
+          </nav>
+
+          <div className="user-menus">
+            <div className="khan-pages">
+              <Outlet />{" "}
+              {/* This will render the matching route components here */}
+            </div>
+
+            <div className="menus-khan-page">
+              <Routes>
+                <Route path="/" element={<Overview />} />
+                <Route
+                  path="portfolios"
+                  element={
+                    <Portfolios
+                      portFolioData={portFolioData}
+                      public_portfolios={public_portfolios}
+                      portfolio_chartData={portfolio_chartData}
+                    />
+                  }
+                />
+                <Route path="jet" element={<Jet />} />
+
+                {/* Redirect any unknown paths under /user/:id to the Overview page */}
+                <Route path="*" element={<Navigate to={`/user/${id}`} />} />
+              </Routes>
+            </div>
+          </div>
+        </div>
+      </div>
+      {isModalOpen && <ShareModal closeModal={toggleModal} />}
+    </div>
+  );
 };
 
 export default UserProfile;
-

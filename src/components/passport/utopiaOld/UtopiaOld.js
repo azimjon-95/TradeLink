@@ -192,7 +192,6 @@ const UtopiaOldMultiLine = () => {
         {/* -----------------------7A------------------------- */}
         <h2 className="ket-inxTitle">Key indicators</h2>
         <KeyIndicators topLoader={topLoader} data={data} customKey={isLite} />
-
         <div
           className="overlayVisible"
           style={{
@@ -270,7 +269,7 @@ const UtopiaOldMultiLine = () => {
           </div>
 
           <div
-            style={{ padding: `${isOverlayVisible && "10px 20px"}` }}
+            style={{ padding: `${isOverlayVisible && "10px 20px"} ` }}
             className="checkbox-old"
           >
             {checkboxData
@@ -288,6 +287,7 @@ const UtopiaOldMultiLine = () => {
               ))}
           </div>
           <Charts
+            id={baseId}
             chartData={chartData}
             customKey={isLite}
             checkedItems={checkedItems}
