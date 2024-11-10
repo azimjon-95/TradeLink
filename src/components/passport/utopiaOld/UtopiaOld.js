@@ -20,6 +20,7 @@ const UtopiaOldMultiLine = () => {
     const [selectValue, setSelectValue] = useState("hour");
     const [data, setData] = useState([]);
     const [topLoader, setTopLoader] = useState(false);
+    const [chartData, setChartData] = useState({});
 
     const { id: baseId } = useParams();
     const location = useLocation();
@@ -27,15 +28,24 @@ const UtopiaOldMultiLine = () => {
     // getData
     useEffect(() => {
         setTopLoader(true);
-        let API = `/leaderboard/main-indicators/?portfolio_id=${baseId}&time_step=${selectValue}`;
+        let API = `/portfolio/main-indicators/?portfolio_id=${baseId}&time_step=${selectValue}`;
         axios
             .get(API)
-            .then((res) => setData(res?.data?.data))
+            .then((res) => {
+                setData(res?.data?.data);
+            })
             .catch((err) => console.log(err))
             .finally(() => setTopLoader(false));
     }, [selectValue, baseId]);
 
-    console.log(">>>>>", data);
+    // getData for chart
+    useEffect(() => {
+        let API = `/portfolio/chart/?portfolio_id=${baseId}&time_step=${selectValue}`;
+        axios
+            .get(API)
+            .then((res) => setChartData(res?.data?.data))
+            .catch((err) => console.log(err));
+    }, []);
 
     // ===============useParams========================
     const getQueryParams = () => {
@@ -54,10 +64,6 @@ const UtopiaOldMultiLine = () => {
     };
     const queryData = getQueryParams();
     console.log("queryData", queryData);
-
-    const handleChange = (value) => {
-        console.log(`selected ${value}`);
-    };
 
     const handleSwitchChange = (checked) => {
         setIsLite(checked);
@@ -108,6 +114,7 @@ const UtopiaOldMultiLine = () => {
         "drawDown",
         "profit",
     ]);
+
 
     {
         /* ---------------------------9A----------------------------------- */
@@ -186,7 +193,6 @@ const UtopiaOldMultiLine = () => {
                 {/* -----------------------7A------------------------- */}
                 <h2 className="ket-inxTitle">Key indicators</h2>
                 <KeyIndicators topLoader={topLoader} data={data} customKey={isLite} />
-
                 <div
                     className="overlayVisible"
                     style={{
@@ -210,15 +216,15 @@ const UtopiaOldMultiLine = () => {
                             </Space>
                             <div className="oldMultiLine-calendar">
                                 <Select
-                                    defaultValue="Day"
+                                    defaultValue="hour"
                                     style={{
                                         width: 100,
                                     }}
-                                    onChange={handleChange}
+                                    onChange={(value) => setSelectValue(value)}
                                     options={[
+                                        { value: "hour", label: "Hour" },
                                         { value: "day", label: "Day" },
-                                        { value: "time", label: "Time" },
-                                        { value: "sunday", label: "Sunday" },
+                                        { value: "week", label: "Week" },
                                     ]}
                                 />
                                 <div
@@ -264,7 +270,7 @@ const UtopiaOldMultiLine = () => {
                     </div>
 
                     <div
-                        style={{ padding: `${isOverlayVisible && "10px 20px"}` }}
+                        style={{ padding: `${isOverlayVisible && "10px 20px"} ` }}
                         className="checkbox-old"
                     >
                         {checkboxData
@@ -282,6 +288,8 @@ const UtopiaOldMultiLine = () => {
                             ))}
                     </div>
                     <Charts
+                        id={baseId}
+                        chartData={chartData}
                         customKey={isLite}
                         checkedItems={checkedItems}
                         isOverlayVisible={isOverlayVisible}
@@ -320,7 +328,7 @@ const UtopiaOldMultiLine = () => {
                     </div>
                 )}
             </div>
-        </div>
+        </div >
     );
 };
 
