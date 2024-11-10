@@ -7,7 +7,7 @@ import "./style.css";
 const KeyIndicators = ({ data, topLoader }) => {
   const indicators = [
     {
-      value: data?.open_story_coefficient || 0,
+      value: data?.open_story_coefficient?.toFixed(0) || 0,
       label: "Open History Coefficient",
       isProgress: true,
     },
