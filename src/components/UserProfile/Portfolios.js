@@ -1,7 +1,7 @@
 import React, { useState } from "react"; // Import React at the top
 import { EyeOutlined, StarOutlined, SearchOutlined } from "@ant-design/icons"; // Consolidated icon imports
 import { Link } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 import { Input, Tooltip } from "antd"; // Ant Design components
 import binance_rounded from "../../assets/ed_khan/binance_rounded.svg"; // Image import
 import LineChart from "../../hooks/LineChart"; // Custom hook or component import
@@ -109,8 +109,30 @@ const Portfolios = ({
     setSearchQuery(e.target.value);
   };
 
+  function parseJwt() {
+    try {
+      let token = localStorage.getItem("access_token");
+      const base64Url = token?.split(".")[1]; // tokenning ikkinchi qismi - payload
+      if (!base64Url) {
+        throw new Error("Invalid token format");
+      }
+      const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+      const jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split("")
+          .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+          .join("")
+      );
+      return JSON.parse(jsonPayload); // JSON formatiga o'girib qaytarish
+    } catch (e) {
+      console.error("Tokenni tahlil qilishda xatolik:", e);
+      return null;
+    }
+  }
+
   const generateUniqueId = () => {
-    const baseId = uuidv4();
+    // const baseId = uuidv4();
+    const baseId = parseJwt()?.user_id;
     const tParam = Math.floor(Date.now() / 1000); // using a Unix timestamp
     const startDate = "2019-12-04";
     const endDate = "2023-01-28";
