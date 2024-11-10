@@ -21,7 +21,7 @@ const UtopiaOldMultiLine = () => {
   const [data, setData] = useState([]);
   const [topLoader, setTopLoader] = useState(false);
   const [chartData, setChartData] = useState({});
-
+  console.log(chartData);
   const { id: baseId } = useParams();
   // const location = useLocation();
 
