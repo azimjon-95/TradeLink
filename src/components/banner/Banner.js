@@ -240,7 +240,7 @@ const Banner = () => {
       <div className="homePage">
         <header className="homePage__header">
           <h1 className="homePage__title">
-            Independent Assessment Standard of traders <br /> and investments in
+            Independent Assessment Standard of traders  and investments in
             the world's best strategies
           </h1>
           <p className="homePage__subtitle">

@@ -38,7 +38,7 @@ function AddKeyModal({ setOpenModal }) {
               <div>
                 <h3>Create Binance API Keyt</h3>
                 <p>
-                  To view your trading statistics on TradeLink Passport, add an
+                  To view your trading statistics on KYT Passport, add an
                   API key to your exchange account. The key must have the only
                   permission "Read-only"
                 </p>

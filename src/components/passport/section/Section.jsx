@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import "./Section.css";
 import { useNavigate } from "react-router-dom";
-import section_img from "../../../assets/section_img.png";
+import section_img from "../../../assets/banner/passport.png";
 import supporters from "../../../assets/banner/supporters.png";
 import { setModalType } from "../../../context/modalType";
 

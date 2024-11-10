@@ -18,13 +18,13 @@ const Passport = () => {
       <OurMission />
       <Ads
         extra_class="ads_1"
-        ads_title="Hear What the Community is Saying About TradeLink Passport"
+        ads_title="Hear What the Community is Saying About KYT Passport"
         ads_text="We value your feedback; it helps us improve."
         ads_button={"Review us on Trustpilot"}
       />
       <Ads
         extra_class="ads_2"
-        ads_title="Grow Your Funds on TradeLink Marketplace"
+        ads_title="Grow Your Funds on KYT Marketplace"
         ads_text="Connect with investors, expand your reach, and earn commissions on profits - with no hidden fees."
         ads_button={"Learn more"}
       />
@@ -32,7 +32,7 @@ const Passport = () => {
 
       <Ads
         extra_class="ads_3"
-        ads_title="Build Your Crypto Trading Reputation on TradeLink Passport"
+        ads_title="Build Your Crypto Trading Reputation on KYT Passport"
         ads_text="Showcase your verified performance and connect with the world's leading investors."
         ads_button={"Get Started For FREE"}
       />

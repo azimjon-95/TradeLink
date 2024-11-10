@@ -64,24 +64,47 @@ const Leaderboard = () => {
     if (lastData?.length <= 25) {
       const observer = new IntersectionObserver(
         (entries) => {
-          if (entries[0].isIntersecting) {
+          if (entries.some(entry => entry.isIntersecting)) {
             setPage((prevPage) => prevPage + 1);
           }
         },
         { threshold: 1 }
       );
 
-      if (loader.current) {
-        observer.observe(loader.current);
+      const currentLoader = loader.current;
+      if (currentLoader) {
+        observer.observe(currentLoader);
       }
 
       return () => {
-        if (loader.current) {
-          observer.unobserve(loader.current);
+        if (currentLoader) {
+          observer.unobserve(currentLoader);
         }
       };
     }
-  }, []);
+  }, [lastData, loader]);
+  // useEffect(() => {
+  //   if (lastData?.length <= 25) {
+  //     const observer = new IntersectionObserver(
+  //       (entries) => {
+  //         if (entries[0].isIntersecting) {
+  //           setPage((prevPage) => prevPage + 1);
+  //         }
+  //       },
+  //       { threshold: 1 }
+  //     );
+
+  //     if (loader.current) {
+  //       observer.observe(loader.current);
+  //     }
+
+  //     return () => {
+  //       if (loader.current) {
+  //         observer.unobserve(loader.current);
+  //       }
+  //     };
+  //   }
+  // }, []);
 
   // ----------------------------------------------------------------------------
 
@@ -448,10 +471,10 @@ const LeaderboardCard = ({ title, data, date, loadingTop }) => {
     rank === 1
       ? "#FBAF3D"
       : rank === 2
-      ? "#C0C8E0"
-      : rank === 3
-      ? "#D5B678"
-      : "#fff";
+        ? "#C0C8E0"
+        : rank === 3
+          ? "#D5B678"
+          : "#fff";
 
   return (
     <div className="leaderboard-card">

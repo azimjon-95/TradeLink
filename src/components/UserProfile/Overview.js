@@ -172,7 +172,7 @@ const Overview = () => {
                 <div className="overview-container">
                     <div className="menus-khan-card">
                         <Tooltip title="This shows the total assets under management">
-                            <h3>TradeLink AUM</h3>
+                            <h3>KYT AUM</h3>
                         </Tooltip>
                         <p>$34.86K</p>
                         <span>Impressive capital!</span>

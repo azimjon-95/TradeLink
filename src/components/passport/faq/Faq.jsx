@@ -6,19 +6,19 @@ import { FiChevronDown } from "react-icons/fi";
 function Faq() {
   const data = [
     {
-      title: "What is a TradeLink Passport?",
-      desc: "TradeLink Passport is a powerful analytical platform designed for crypto traders. It allows you to analyze, verify, and showcase your trading performance to the world. Use Passport to improve your strategies and confidently share your verified results with potential investors, partners, and the trading community.",
+      title: "What is a KYT Passport?",
+      desc: "KYT Passport is a powerful analytical platform designed for crypto traders. It allows you to analyze, verify, and showcase your trading performance to the world. Use Passport to improve your strategies and confidently share your verified results with potential investors, partners, and the trading community.",
     },
     {
-      title: "Why should I trust the TradeLink Passport?",
-      desc: "TradeLink Passport uses advanced security measures to ensure your data is safe.",
+      title: "Why should I trust the KYT Passport?",
+      desc: "KYT Passport uses advanced security measures to ensure your data is safe.",
     },
     {
-      title: "Will TradeLink steal my trading strategies?",
-      desc: "No, TradeLink is committed to ensuring the privacy and protection of user data.",
+      title: "Will KYT steal my trading strategies?",
+      desc: "No, KYT is committed to ensuring the privacy and protection of user data.",
     },
     {
-      title: "Is TradeLink Passport secure?",
+      title: "Is KYT Passport secure?",
       desc: "Yes, we employ state-of-the-art encryption to protect your information.",
     },
   ];

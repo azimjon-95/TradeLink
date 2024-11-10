@@ -38,7 +38,7 @@ const Jet = ({ data = [100, 100, 85, 75, 75, 10, 30, 100, 100, 85, 75, 75], maxV
                 <div className="overview-container">
                     <div className="menus-khan-card">
                         <Tooltip title="This shows the total assets under management">
-                            <h3>TradeLink AUM</h3>
+                            <h3>KUT AUM</h3>
                         </Tooltip>
                         <p>-$8.9</p>
                         <span>Impressive capital!</span>

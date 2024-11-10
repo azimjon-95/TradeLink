@@ -187,17 +187,24 @@
 
 /* Media query uchun */
 @media screen and (max-width: 450px) {
+    .homePage__header {
+        max-width: 1000px;
+        margin-top: 40px !important;
+    }
+
     .homePage__title {
-        width: 85%;
-        font-size: 22px;
-        font-weight: 600 !important;
-        line-height: 30px;
-        letter-spacing: 1px;
+        width: 100%;
+        font-size: 28px;
+        font-weight: 550 !important;
+        line-height: 35px;
+        letter-spacing: 2px;
+        margin-bottom: 15px;
     }
 
     .homePage__subtitle {
         font-size: 18px;
         text-align: start;
+        margin: 40px 0;
     }
 
 

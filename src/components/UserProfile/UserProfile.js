@@ -41,38 +41,12 @@ const UserProfile = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  // Simulate fetching Telegram handle from the server
-  //   useEffect(() => {
-  //     const fetchTelegramHandle = async () => {
-  //       const handleFromServer = "@Azimjon_M"; // Simulated response
-  //       setTelegramHandle(handleFromServer);
-  //     };
 
-  //     fetchTelegramHandle();
-  //   }, []);
-  // Hozirgi yo'nalishni eslab qolish
   useEffect(() => {
     setCurrentPath(location.pathname);
   }, [location]);
 
-  //   useEffect(() => {
-  //     const fetchTelegramHandle = async () => {
-  //       const handleFromServer = "@Azimjon_M"; // Simulated response
-  //       //   setTelegramHandle(handleFromServer);
-  //     };
 
-  //     fetchTelegramHandle();
-  //   }, []);
-
-  //   const handleTelegramClick = () => {
-  //     if (telegramHandle) {
-  //       window.open(`https://t.me/${telegramHandle.replace("@", "")}`, "_blank");
-  //     }
-  //   };
-
-  //   const handleEdvitradeClick = () => {
-  //     window.open(`https://edvitrade.com/ru/`, "_blank");
-  //   };
 
   const toggleModal = () => {
     setModalOpen(!isModalOpen);

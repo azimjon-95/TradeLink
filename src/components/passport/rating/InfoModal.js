@@ -101,15 +101,15 @@ function InfoModal({ isOpen, onClose, contentType }) {
         <div className="info-modal-mainTwo">
           <h3>KYT-Know your trader Rating</h3>
           <p>
-            The purpose of the TradeLink Rating is to identify strategies with
+            The purpose of the KYT-know your trader Rating is to identify strategies with
             the best risk-to-reward ratio while also considering a range of
             indirect factors such as the strategy's lifespan, average deposit,
             and profitability over different time periods. An integral
-            indicator, the TradeLink Score, is used for a comprehensive
+            indicator, the KYT-know your trader Score, is used for a comprehensive
             assessment of each strategy.
           </p>
           <p>
-            The higher the TradeLink Score, the more balanced the strategy is in
+            The higher the KYT-know your trader Score, the more balanced the strategy is in
             terms of risk relative to profit and trading history.
           </p>
           <p>
@@ -119,7 +119,7 @@ function InfoModal({ isOpen, onClose, contentType }) {
           <h3>The general formula is:</h3>
           <img src={beta_formula} alt="" />
           <h3>
-            The following indicators are used to calculate the TradeLink Score:
+            The following indicators are used to calculate the KYT-know your trader Score:
           </h3>
           <p>
             <strong>Growth Rate:</strong> The growth indicator over time

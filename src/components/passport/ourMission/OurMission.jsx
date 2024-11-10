@@ -21,7 +21,7 @@ function OurMission() {
             <div className="steps_wrap_item">
               <h1 className="steps_wrap_item_order">1</h1>
               <h2>Create Your Account</h2>
-              <p>Register on TradeLink Passport in under 5 minutes.</p>
+              <p>Register on KYT-know your trader Passport in under 5 minutes.</p>
               <button>Get Started For FREE</button>
             </div>
             <div className="steps_wrap_item">
@@ -29,7 +29,7 @@ function OurMission() {
               <h2>Connect Your Exchange:</h2>
               <p>
                 Securely link your exchange account using a Read-Only API key.
-                TradeLink automatically imports your trading history.
+                KYT-know your trader automatically imports your trading history.
               </p>
             </div>
             <div className="steps_wrap_item">
@@ -52,7 +52,7 @@ function OurMission() {
               <h1 className="steps_wrap_item_order">5</h1>
               <h2>Earn Recognition:</h2>
               <p>
-                Validate your expertise with TradeLink's trusted reputation. The
+                Validate your expertise with KYT's trusted reputation. The
                 Trader's Passport is a powerful signal of credibility for
                 investors.
               </p>

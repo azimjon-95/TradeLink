@@ -203,10 +203,10 @@ function Navbar() {
     const linksToSet = mainPageRoutes.includes(path)
       ? linkOptions["/"]
       : isUserRoute || isPortfolioRoute
-      ? passportLinks
-      : passportOpenRoutes.includes(path)
-      ? passportLinks
-      : linkOptions[path] || linkOptions.default;
+        ? passportLinks
+        : passportOpenRoutes.includes(path)
+          ? passportLinks
+          : linkOptions[path] || linkOptions.default;
 
     setLinks(linksToSet);
   }, [location.pathname, token]);
@@ -263,9 +263,8 @@ function Navbar() {
   );
   return (
     <div
-      className={`navbar_container ${
-        isProductDashboard ? "navbar_static" : "navbar_sticky"
-      }`}
+      className={`navbar_container ${isProductDashboard ? "navbar_static" : "navbar_sticky"
+        }`}
     >
       <div className="nav_links-box">
         <Link to="/" onClick={() => handleClick("/")}>
@@ -287,18 +286,20 @@ function Navbar() {
               tabIndex={0}
               onBlur={handleModalBlur}
             >
-              <div className="trade-link-header">
-                <div className="trade-link-header-icon">
-                  <FaStoreAlt size={32} style={{ color: "#6e44ff" }} />
+              <Link to="/">
+                <div className="trade-link-header">
+                  <div className="trade-link-header-icon">
+                    <FaStoreAlt size={32} style={{ color: "#6e44ff" }} />
+                  </div>
+                  <div className="trade-link-header-text">
+                    <h3>KYT - Know Your Trader</h3>
+                    <p>
+                      For professional traders and investors within the crypto
+                      market.
+                    </p>
+                  </div>
                 </div>
-                <div className="trade-link-header-text">
-                  <h3>KYT - Know Your Trader</h3>
-                  <p>
-                    For professional traders and investors within the crypto
-                    market.
-                  </p>
-                </div>
-              </div>
+              </Link>
               <Link to="/passport">
                 <div className="trade-link-header">
                   <div className="trade-link-header-icon">
@@ -490,9 +491,8 @@ function Navbar() {
       ></div>
 
       <div
-        className={`close-modal-signup ${
-          isModalSinUp && "close-modal-signup-open"
-        }`}
+        className={`close-modal-signup ${isModalSinUp && "close-modal-signup-open"
+          }`}
       >
         <SignUpModal
           setModalType={setModalType}

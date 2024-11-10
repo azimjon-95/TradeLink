@@ -45,7 +45,7 @@ const UtopiaOldMultiLine = () => {
       .get(API)
       .then((res) => setChartData(res?.data?.data))
       .catch((err) => console.log(err));
-  }, []);
+  }, [baseId, selectValue]); // re-fetch if baseId or selectValue changes
 
   // ===============useParams========================
   // const getQueryParams = () => {
