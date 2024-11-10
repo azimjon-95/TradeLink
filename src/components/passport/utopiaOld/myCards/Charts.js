@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, LineChart, CartesianGrid, Area, Line, Legend, ResponsiveContainer, Cell, ComposedChart } from 'recharts';
 import './style.css';
+import axios from "../../../../api";
 
 
 
-const Charts = ({ checkedItems, isOverlayVisible, customKey }) => {
+const Charts = ({ checkedItems, isOverlayVisible, customKey, id }) => {
 
 
     const generateData = () => {
@@ -173,34 +174,59 @@ const Charts = ({ checkedItems, isOverlayVisible, customKey }) => {
 
 
     // ---------------------------12A-----------------------------------
-    const data = [
-        { month: 'Dec ’19', revenue: 30 },
-        { month: 'Jan ’20', revenue: -10 },
-        { month: 'Feb ’20', revenue: 25 },
-        { month: 'Mar ’20', revenue: 15 },
-        { month: 'Apr ’20', revenue: 40 },
-        { month: 'May ’20', revenue: 35 },
-        { month: 'Jun ’20', revenue: 5 },
-        { month: 'Jul ’20', revenue: -2 },
-        { month: 'Aug ’20', revenue: 20 },
-        { month: 'Sep ’20', revenue: 50 },
-        { month: 'Oct ’20', revenue: -58 },
-        { month: 'Nov ’22', revenue: 10 },
-        { month: 'Nov ’23', revenue: 10 },
-        { month: 'Nov ’24', revenue: 120 },
-        { month: 'Nov ’25', revenue: -40 },
-        { month: 'Nov ’26', revenue: 10 },
-        { month: 'Mar ’20', revenue: 15 },
-        { month: 'Apr ’20', revenue: 40 },
-        { month: 'May ’20', revenue: 35 },
-        { month: 'Jun ’20', revenue: 5 },
-        { month: 'Jul ’20', revenue: -2 },
-        { month: 'Aug ’20', revenue: 20 },
-        { month: 'Sep ’20', revenue: 50 },
-        { month: 'Oct ’20', revenue: -58 },
-        { month: 'Nov ’22', revenue: 10 },
-        // Continue with more data as needed
-    ];
+    // const data = [
+    //     { month: 'Dec ’19', revenue: 30 },
+    //     { month: 'Jan ’20', revenue: -10 },
+    //     { month: 'Feb ’20', revenue: 25 },
+    //     { month: 'Mar ’20', revenue: 15 },
+    //     { month: 'Apr ’20', revenue: 40 },
+    //     { month: 'May ’20', revenue: 35 },
+    //     { month: 'Jun ’20', revenue: 5 },
+    //     { month: 'Jul ’20', revenue: -2 },
+    //     { month: 'Aug ’20', revenue: 20 },
+    //     { month: 'Sep ’20', revenue: 50 },
+    //     { month: 'Oct ’20', revenue: -58 },
+    //     { month: 'Nov ’22', revenue: 10 },
+    //     { month: 'Nov ’23', revenue: 10 },
+    //     { month: 'Nov ’24', revenue: 120 },
+    //     { month: 'Nov ’25', revenue: -40 },
+    //     { month: 'Nov ’26', revenue: 10 },
+    //     { month: 'Mar ’20', revenue: 15 },
+    //     { month: 'Apr ’20', revenue: 40 },
+    //     { month: 'May ’20', revenue: 35 },
+    //     { month: 'Jun ’20', revenue: 5 },
+    //     { month: 'Jul ’20', revenue: -2 },
+    //     { month: 'Aug ’20', revenue: 20 },
+    //     { month: 'Sep ’20', revenue: 50 },
+    //     { month: 'Oct ’20', revenue: -58 },
+    //     { month: 'Nov ’22', revenue: 10 },
+    //     // Continue with more data as needed
+    // ];
+    const [data, setData] = useState(null); // State for fetched data
+    const [timeStep] = useState('hour'); // Default to "day"
+    useEffect(() => {
+        // Function to fetch data with the chosen time_step
+        const fetchRevenueData = async () => {
+            try {
+                // API request with portfolio_id and dynamic time_step
+                const response = await axios.get(`/portfolio/revenue-by-month/?portfolio_id=${id}&time_step=${timeStep}`)
+                // , {
+                //     params: {
+                //         portfolio_id: id,
+                //         time_step: timeStep, // Use selected time_step
+                //     },
+                // };
+                console.log(response);
+                setData(response.data); // Set data after successful fetch
+            } catch (err) {
+                console.log('Error fetching data', err);
+            }
+        };
+
+        fetchRevenueData();
+    }, [id, timeStep]); // Rerun effect when timeStep changes
+
+    console.log(data);
 
     const CustomTooltip = ({ active, payload, label }) => {
         if (active && payload && payload.length) {
@@ -409,7 +435,7 @@ const Charts = ({ checkedItems, isOverlayVisible, customKey }) => {
                     />
 
                     <Bar dataKey="revenue" barSize={20}>
-                        {data.map((entry, index) => (
+                        {data?.map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={entry.revenue >= 0 ? '#14C886' : '#EA3941'} />
                         ))}
                     </Bar>

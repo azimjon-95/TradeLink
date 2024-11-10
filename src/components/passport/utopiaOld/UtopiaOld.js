@@ -231,7 +231,7 @@ const UtopiaOldMultiLine = () => {
                             </div>
                         ))}
                     </div>
-                    <Charts customKey={isLite} checkedItems={checkedItems} isOverlayVisible={isOverlayVisible} />
+                    <Charts id={baseId} customKey={isLite} checkedItems={checkedItems} isOverlayVisible={isOverlayVisible} />
                     {
                         isLite &&
                         <div className="single-cards-container">

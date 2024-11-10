@@ -16,6 +16,7 @@ import { setModalType } from "../../context/modalType";
 const Banner = () => {
   const dispatch = useDispatch();
   const [selectedReview, setSelectedReview] = useState(null);
+  let token = localStorage.getItem("access_token");
 
   const reviews = [
     {
@@ -247,12 +248,23 @@ const Banner = () => {
             investments, and we provide investors with proven low-risk trading
             strategies
           </p>
-          <button
-            onClick={() => dispatch(setModalType("signUp"))}
-            className="homePage__signUpButton"
-          >
-            Sign up
-          </button>
+          {token ? (
+            <button style={{ background: "transparent", color: "transparent" }}
+              className="homePage__signUpButton"
+            >
+
+            </button>
+          ) : (
+            <button
+              onClick={() => dispatch(setModalType("signUp"))}
+              className="homePage__signUpButton"
+            >
+              Sign up
+            </button>
+          )
+
+          }
+
         </header>
         <p className="homePage__subtitle-bottom">We support</p>
         <div className="homePage__support">
@@ -354,8 +366,8 @@ const Banner = () => {
             <span>
               <h2 className="marketplace-title">
                 Submit your strategy on the <br />
-                KYT - Know Your Trader Marketplace <br />
-                and get new clients
+                KYT - Know Your Trader <br />
+                get new clients
               </h2>
               <p className="marketplace-subtitle">
                 We take care of all other work with the investor.
@@ -387,7 +399,7 @@ const Banner = () => {
 
           <div className="section referral-section">
             <h2 className="referral-title">
-              KYT - Know Your Trader Marketplace Referral Program
+              KYT - Know Your Trader Referral Program
             </h2>
             <p className="referral-subtitle">
               Earn a commission on your invited friends' profits without hidden
@@ -420,7 +432,9 @@ const Banner = () => {
           </div>
         ))}
         <div className="faq-more-btn-box">
-          <button className="faq-more-btn">Sign up</button>
+          {!token &&
+            <button className="faq-more-btn">Sign up</button>
+          }
         </div>
       </div>
 
@@ -436,7 +450,7 @@ const Banner = () => {
         </div>
         <ReviewModal review={selectedReview} onClose={closeModal} />
 
-        <button className="referral-btnAsked">Leave a Review</button>
+        {/* <button className="referral-btnAsked">Leave a Review</button> */}
       </div>
 
       {/* Blog */}
@@ -476,7 +490,7 @@ const Banner = () => {
           ))}
         </div>
 
-        <button className="referral-btnAsked">More articles</button>
+        {/* <button className="referral-btnAsked">More articles</button> */}
       </section>
     </>
   );

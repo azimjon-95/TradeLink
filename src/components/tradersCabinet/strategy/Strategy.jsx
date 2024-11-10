@@ -44,7 +44,7 @@ function Strategy() {
         </div>
 
         <h1 className="strategy_caption">
-          The most popular TradeLink Marketplace traders
+          The most popular KYT-know your trader
         </h1>
         <p className="strategy_text">
           This is the AUM that traders have already managed to gather
@@ -60,7 +60,7 @@ function Strategy() {
                 <b className="traders_item_order">1</b>
                 <div>
                   <p className="traders_item_name">John Doe</p>
-                  <p className="traders_item_info">944 days in Marketplace</p>
+                  <p className="traders_item_info">944 days in KYT-know your trader</p>
                 </div>
               </div>
               <div className="traders_item_right">
@@ -76,7 +76,7 @@ function Strategy() {
                 <b className="traders_item_order">1</b>
                 <div>
                   <p className="traders_item_name">John Doe</p>
-                  <p className="traders_item_info">944 days in Marketplace</p>
+                  <p className="traders_item_info">944 days in KYT-know your trader</p>
                 </div>
               </div>
               <div className="traders_item_right">
@@ -92,7 +92,7 @@ function Strategy() {
                 <b className="traders_item_order">1</b>
                 <div>
                   <p className="traders_item_name">John Doe</p>
-                  <p className="traders_item_info">944 days in Marketplace</p>
+                  <p className="traders_item_info">944 days in KYT-know your trader</p>
                 </div>
               </div>
               <div className="traders_item_right">
@@ -108,7 +108,7 @@ function Strategy() {
                 <b className="traders_item_order">1</b>
                 <div>
                   <p className="traders_item_name">John Doe</p>
-                  <p className="traders_item_info">944 days in Marketplace</p>
+                  <p className="traders_item_info">944 days in KYT-know your trader</p>
                 </div>
               </div>
               <div className="traders_item_right">
@@ -124,7 +124,7 @@ function Strategy() {
                 <b className="traders_item_order">1</b>
                 <div>
                   <p className="traders_item_name">John Doe</p>
-                  <p className="traders_item_info">944 days in Marketplace</p>
+                  <p className="traders_item_info">944 days in KYT-know your trader</p>
                 </div>
               </div>
               <div className="traders_item_right">
@@ -199,7 +199,7 @@ function Strategy() {
         <h1 className="strategy_caption">How to get started</h1>
         <p className="strategy_text">
           Here are some easy steps you need to do in order to start earning more
-          with TradeLink
+          with KYT-know your trader
         </p>
 
         <div className="work_steps get_started_steps">
@@ -220,7 +220,7 @@ function Strategy() {
               <path d="M46.6397 28.0261C46.4797 28.0261 46.3197 27.9994 46.133 27.9727L33.1997 24.6927C32.133 24.4261 31.493 23.3327 31.7597 22.2661C32.0263 21.1994 33.1197 20.5594 34.1863 20.8261L47.1197 24.1061C48.1863 24.3727 48.8263 25.4661 48.5597 26.5327C48.3463 27.4127 47.5197 28.0261 46.6397 28.0261Z"></path>
               <path d="M38.8257 37.0397C38.6657 37.0397 38.5057 37.013 38.319 36.9864L30.559 35.013C29.4924 34.7464 28.8524 33.6531 29.119 32.5864C29.3857 31.5197 30.479 30.8797 31.5457 31.1464L39.3057 33.1197C40.3724 33.3864 41.0124 34.4797 40.7457 35.5464C40.5324 36.453 39.7324 37.0397 38.8257 37.0397Z"></path>
             </svg>
-            <p>Add your strategy to TradeLink passport</p>
+            <p>Add your strategy to KYT-know your trader passport</p>
           </div>
           <div className="work_step_item">
             <svg

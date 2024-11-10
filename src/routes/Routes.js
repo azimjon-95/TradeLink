@@ -26,8 +26,8 @@ const TradersCabinet = lazy(() =>
 const routes = [
   // ====Home=====
   { path: "/traders-cabinet", element: <TradersCabinet />, protected: false },
-  { path: "/user/*", element: <UserProfile />, protected: false },
-  { path: "/portfolio/:id", element: <UtopiaOldMultiLine />, protected: false },
+  { path: "/user/:id/*", element: <UserProfile />, protected: true },
+  { path: "/portfolio/:id", element: <UtopiaOldMultiLine />, protected: true },
   { path: "/faq", element: <Faq />, protected: false },
   { path: "/", element: <Home />, protected: false },
   // ====Passport=====

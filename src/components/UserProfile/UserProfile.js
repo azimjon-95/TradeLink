@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import { FaShare, FaGlobe, FaTelegramPlane } from "react-icons/fa";
-import { Routes, Route, Link, Navigate, Outlet, useLocation } from "react-router-dom"; // Import Outlet
+import { Routes, Route, Link, Navigate, Outlet, useParams, useLocation } from "react-router-dom"; // Import Outlet
 import { Tooltip } from 'antd';
 import ed_khan from "../../assets/ed_khan/Ed_Khan.png";
 import Overview from './Overview';
 import Portfolios from './Portfolios';
 import Jet from './Jet';
-import Feed from './Feed';
 import ShareModal from './ShareModal';
 import './styles/style.css'; // Import the CSS file
 import './styles/media.css'; // Import the CSS file
@@ -16,6 +15,8 @@ const UserProfile = () => {
     const location = useLocation(); // Hozirgi yo'nalishni olish
     const [currentPath, setCurrentPath] = useState("/user"); // Default yo'nalish
     const [isModalOpen, setModalOpen] = useState(false);
+    const { id } = useParams(); // Get the dynamic user ID from the URL
+
 
     // Simulate fetching Telegram handle from the server
     useEffect(() => {
@@ -130,10 +131,9 @@ const UserProfile = () => {
             <div className="user-menus-khan">
                 <div className="strategies-layout">
                     <nav className="nav-bar">
-                        <Link to="/user" className={currentPath === "/user" ? "active" : ""}>Overview</Link>
-                        <Link to="/user/portfolios" className={currentPath === "/user/portfolios" ? "active" : ""}>Portfolios</Link>
-                        <Link to="/user/jet" className={currentPath === "/user/jet" ? "active" : ""}>Jet</Link>
-                        <Link to="/user/feed" className={currentPath === "/user/feed" ? "active" : ""}>Feed</Link>
+                        <Link to={`/user/${id}`} className={currentPath === `/user/${id}` ? "active" : ""}>Overview</Link>
+                        <Link to={`/user/${id}/portfolios`} className={currentPath === `/user/${id}/portfolios` ? "active" : ""}>Portfolios</Link>
+                        <Link to={`/user/${id}/jet`} className={currentPath === `/user/${id}/jet` ? "active" : ""}>Jet</Link>
                     </nav>
 
                     <div className="user-menus">
@@ -144,11 +144,11 @@ const UserProfile = () => {
                         <div className="menus-khan-page">
                             <Routes>
                                 <Route path="/" element={<Overview />} />
-                                <Route path="/portfolios" element={<Portfolios />} />
-                                <Route path="/jet" element={<Jet />} />
-                                <Route path="/feed" element={<Feed />} />
+                                <Route path="portfolios" element={<Portfolios />} />
+                                <Route path="jet" element={<Jet />} />
 
-                                <Route path="*" element={<Navigate to="/user" />} /> {/* Redirect to Overview */}
+                                {/* Redirect any unknown paths under /user/:id to the Overview page */}
+                                <Route path="*" element={<Navigate to={`/user/${id}`} />} />
                             </Routes>
                         </div>
                     </div>
