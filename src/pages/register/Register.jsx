@@ -28,7 +28,6 @@ const SignUpModal = ({
       let formData = new FormData(e.target);
       let body = Object.fromEntries(formData);
       body.role_id = 0;
-      console.log(body);
 
       setError(false);
       let res = await axios.post("/auth/sign-up/register", body);
@@ -42,8 +41,6 @@ const SignUpModal = ({
     setIsLoading(false);
   };
 
-
-
   const singIn = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -54,7 +51,6 @@ const SignUpModal = ({
 
       if (res?.data?.access_token) {
         localStorage.setItem("access_token", res.data.access_token);
-        console.log(res);
         handleClose();
       }
     } catch (error) {

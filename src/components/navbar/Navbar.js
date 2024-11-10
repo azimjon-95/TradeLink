@@ -234,7 +234,7 @@ function Navbar() {
     try {
       // Send request to the server logout API endpoint with Bearer token
       // const res = await axios.post("/auth/sign-in/logout");
-      // console.log(res);
+
       localStorage.removeItem("access_token");
       message.success("Successfully logged out!");
       navigate("/");
