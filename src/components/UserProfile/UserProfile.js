@@ -32,6 +32,8 @@ const UserProfile = () => {
   const portFolioData = profileData?.overview;
   const public_portfolios = profileData?.public_portfolios;
   const portfolio_chartData = profileData?.profits?.profits;
+  // user_profile_header_data
+  const user_profile_header_data = profileData?.user_profile_header_data || {};
 
   useEffect(() => {
     let API = "/user-profile/user/?user_id=" + id;
@@ -41,12 +43,9 @@ const UserProfile = () => {
       .catch((err) => console.log(err));
   }, []);
 
-
   useEffect(() => {
     setCurrentPath(location.pathname);
   }, [location]);
-
-
 
   const toggleModal = () => {
     setModalOpen(!isModalOpen);
@@ -59,14 +58,18 @@ const UserProfile = () => {
       <div className="user-share-container">
         <div className="user-share">
           <div className="ed-khan-image">
-            <img src={ed_khan} alt="" />
+            <img src={user_profile_header_data?.avatar || ed_khan} alt="" />
           </div>
           <div className="ed-khan-text">
             <div className="ed-khan-main">
               <h1>
                 {" "}
-                <img className="user-image-mob" src={ed_khan} alt="" /> Azimjon
-                Dev
+                <img
+                  className="user-image-mob"
+                  src={user_profile_header_data?.avatar || ed_khan}
+                  alt=""
+                />{" "}
+                {user_profile_header_data?.name || ""}
               </h1>
               <p>{profileInfo?.days_in_market || 0}</p>
               <Tooltip title="Days in market">
