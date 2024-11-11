@@ -47,7 +47,7 @@ const SignUpModal = ({
 
     try {
       const formData = new FormData(e.target);
-      const res = await axios.post("/auth/sign-in/login", formData);
+      const res = await axios.post("/api/auth/sign-in/login", formData);
 
       if (res?.data?.access_token) {
         localStorage.setItem("access_token", res.data.access_token);
