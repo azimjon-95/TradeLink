@@ -3,6 +3,7 @@
   background: linear-gradient(to right, #5736da 0%, #3d1978 100%) 0% 0% / auto
     repeat scroll padding-box border-box rgb(245, 247, 250);
   line-height: 24px;
+
   * {
     font-family: "Roboto", sans-serif;
   }
@@ -90,6 +91,7 @@
     object-fit: contain;
   }
 }
+
 @media screen and (max-width: 768px) {
   .tradersCabinetBanner__container {
     display: flex;

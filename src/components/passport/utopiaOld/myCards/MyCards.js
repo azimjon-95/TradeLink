@@ -16,7 +16,7 @@ const MyCards = ({ activeTab, id, selectValue }) => {
         );
         setStats(response?.data?.data);
       } catch (error) {
-        console.error("my_card_error", error);
+        console.error(error);
       }
     };
 

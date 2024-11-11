@@ -4,10 +4,10 @@ import Strategy from "../../components/tradersCabinet/strategy/Strategy";
 
 function TradersCabinet() {
   return (
-    <div>
+    <>
       <TradersCabinetBanner />
       <Strategy />
-    </div>
+    </>
   );
 }
 

@@ -240,8 +240,8 @@ const Banner = () => {
       <div className="homePage">
         <header className="homePage__header">
           <h1 className="homePage__title">
-            Independent Assessment Standard of traders  and investments in
-            the world's best strategies
+            Independent Assessment Standard of traders and investments in the
+            world's best strategies
           </h1>
           <p className="homePage__subtitle">
             We help traders to verify trading statistics and attract
@@ -249,11 +249,10 @@ const Banner = () => {
             strategies
           </p>
           {token ? (
-            <button style={{ background: "transparent", color: "transparent" }}
+            <button
+              style={{ background: "transparent", color: "transparent" }}
               className="homePage__signUpButton"
-            >
-
-            </button>
+            ></button>
           ) : (
             <button
               onClick={() => dispatch(setModalType("signUp"))}
@@ -261,10 +260,7 @@ const Banner = () => {
             >
               Sign up
             </button>
-          )
-
-          }
-
+          )}
         </header>
         <p className="homePage__subtitle-bottom">We support</p>
         <div className="homePage__support">
@@ -432,9 +428,7 @@ const Banner = () => {
           </div>
         ))}
         <div className="faq-more-btn-box">
-          {!token &&
-            <button className="faq-more-btn">Sign up</button>
-          }
+          {!token && <button className="faq-more-btn">Sign up</button>}
         </div>
       </div>
 
@@ -443,7 +437,7 @@ const Banner = () => {
           What traders and investors are saying about KYT - Know Your Trader
         </h2>
         <p>We take into account your opinion, it helps us to improve.</p>
-        <div className="reviews-container" >
+        <div className="reviews-container">
           {reviews.map((review, index) => (
             <ReviewCard key={index} review={review} onClick={handleCardClick} />
           ))}
