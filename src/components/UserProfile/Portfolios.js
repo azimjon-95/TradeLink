@@ -108,30 +108,8 @@ const Portfolios = ({
     setSearchQuery(e.target.value);
   };
 
-  function parseJwt() {
-    try {
-      let token = localStorage.getItem("access_token");
-      const base64Url = token?.split(".")[1]; // tokenning ikkinchi qismi - payload
-      if (!base64Url) {
-        throw new Error("Invalid token format");
-      }
-      const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-      const jsonPayload = decodeURIComponent(
-        atob(base64)
-          .split("")
-          .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
-          .join("")
-      );
-      return JSON.parse(jsonPayload); // JSON formatiga o'girib qaytarish
-    } catch (e) {
-      console.error("Tokenni tahlil qilishda xatolik:", e);
-      return null;
-    }
-  }
-
-  const generateUniqueId = () => {
-    // const baseId = uuidv4();
-    const baseId = parseJwt()?.user_id;
+  const generateUniqueId = (index) => {
+    const baseId = public_portfolios[index]?.portfolio_id;
     const tParam = Math.floor(Date.now() / 1000); // using a Unix timestamp
     // const startDate = "2019-12-04";
     // const endDate = "2023-01-28";
@@ -166,8 +144,8 @@ const Portfolios = ({
   //   },
   // ];
 
-  const portfoliosData = public_portfolios?.map((portfolio) => ({
-    id: generateUniqueId(),
+  const portfoliosData = public_portfolios?.map((portfolio, index) => ({
+    id: generateUniqueId(index),
     title: "Utopia",
     returnPercentage: portfolio?.margin_balance?.toFixed(2) || 0,
     drawDown: portfolio?.profit_percent?.toFixed(2) || 0,

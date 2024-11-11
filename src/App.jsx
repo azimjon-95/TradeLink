@@ -7,7 +7,13 @@ import Footer from "./components/footer/Footer";
 
 function App() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense
+      fallback={
+        <div className="main_loader">
+          <div id="loader"></div>
+        </div>
+      }
+    >
       <div className="app">
         <Navbar />
         <Routes>

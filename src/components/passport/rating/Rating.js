@@ -33,14 +33,22 @@ const Leaderboard = () => {
   const [leaderboardData, setLeaderboardData] = useState(null);
 
   const loader = useRef(null);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [lastData, setLastData] = useState([]);
   useEffect(() => {
     setLoadingTop(true);
     let API = `leaderboard/three-top-units?sort_type=${selectedOption}`;
     axios
       .get(API)
-      .then((res) => setLeaderboardData(res?.data?.data))
+      .then((res) => {
+        for (const key in res?.data?.data) {
+          let data = res?.data?.data[key].slice(0, 3);
+          setLeaderboardData((prevData) => ({
+            ...prevData,
+            [key]: data,
+          }));
+        }
+      })
       .catch((err) => console.log(err))
       .finally(() => setLoadingTop(false));
   }, [selectedOption]);
@@ -60,6 +68,29 @@ const Leaderboard = () => {
   }, [showInactive, filterOption, page]);
 
   // ----------------------------------------------------------------------------
+  // useEffect(() => {
+  //   if (lastData?.length <= 25) {
+  //     const observer = new IntersectionObserver(
+  //       (entries) => {
+  //         if (entries[0].isIntersecting) {
+  //           setPage((prevPage) => prevPage + 1);
+  //         }
+  //       },
+  //       { threshold: 1 }
+  //     );
+
+  //     if (loader.current) {
+  //       observer.observe(loader.current);
+  //     }
+
+  //     return () => {
+  //       if (loader.current) {
+  //         observer.unobserve(loader.current);
+  //       }
+  //     };
+  //   }
+  // }, []);
+
   useEffect(() => {
     if (lastData?.length <= 25) {
       const observer = new IntersectionObserver(
@@ -71,17 +102,20 @@ const Leaderboard = () => {
         { threshold: 1 }
       );
 
-      if (loader.current) {
-        observer.observe(loader.current);
+      // Copy loader.current to a local variable
+      const loaderElement = loader.current;
+
+      if (loaderElement) {
+        observer.observe(loaderElement);
       }
 
       return () => {
-        if (loader.current) {
-          observer.unobserve(loader.current);
+        if (loaderElement) {
+          observer.unobserve(loaderElement);
         }
       };
     }
-  }, []);
+  }, [lastData]);
 
   // ----------------------------------------------------------------------------
 
@@ -487,7 +521,11 @@ const LeaderboardCard = ({ title, data, date, loadingTop }) => {
                     />
                   </div>
                   <div className="leaderboard-details">
-                    <p className="leaderboard-name">{item?.portfolio_name}</p>
+                    <p className="leaderboard-name">
+                      {item?.portfolio_name.length > 19
+                        ? `${item?.portfolio_name.substring(0, 19)}...`
+                        : item?.portfolio_name}
+                    </p>
                     <p className="leaderboard-creator">by {item?.user_name} </p>
                   </div>
                   <img src={ret} alt="Ret" />
