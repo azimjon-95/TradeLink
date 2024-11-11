@@ -7,6 +7,7 @@ import Trades from "./Trades";
 
 const MyCards = ({ activeTab, id, selectValue }) => {
   const [stats, setStats] = useState([]);
+
   useEffect(() => {
     const fetchStats = async () => {
       try {
@@ -15,7 +16,7 @@ const MyCards = ({ activeTab, id, selectValue }) => {
         );
         setStats(response?.data?.data);
       } catch (error) {
-        console.error("Failed to fetch stats:", error);
+        console.error("my_card_error", error);
       }
     };
 
