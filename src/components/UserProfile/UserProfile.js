@@ -36,7 +36,7 @@ const UserProfile = () => {
   const user_profile_header_data = profileData?.user_profile_header_data || {};
 
   useEffect(() => {
-    let API = "/api/user-profile/user/?user_id=" + id;
+    let API = "/user-profile/user/?user_id=" + id;
     axios
       .get(API)
       .then((res) => setProfileData(res.data?.data))

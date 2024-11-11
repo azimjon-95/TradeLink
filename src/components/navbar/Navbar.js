@@ -243,6 +243,7 @@ function Navbar() {
       message.error("Logout failed. Please try again.");
     }
   };
+  console.log(payload);
 
   const popoverContent = (
     <div className="popoverContent">
