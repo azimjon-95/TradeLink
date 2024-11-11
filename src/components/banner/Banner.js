@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import "./style.css";
 import "./media.css";
 import Rating from "react-rating-stars-component";
@@ -212,28 +212,28 @@ const Banner = () => {
 
   // ----------------scroll cards--------------------------
 
-  const containerRef = useRef(null);
+  // const containerRef = useRef(null);
 
-  useEffect(() => {
-    const scrollInterval = setInterval(() => {
-      if (containerRef.current) {
-        containerRef.current.scrollBy({
-          left: containerRef.current.offsetWidth, // Hozirgi o'lchamni qo'llash
-          behavior: "smooth",
-        });
+  // useEffect(() => {
+  //   const scrollInterval = setInterval(() => {
+  //     if (containerRef.current) {
+  //       containerRef.current.scrollBy({
+  //         left: containerRef.current.offsetWidth, // Hozirgi o'lchamni qo'llash
+  //         behavior: "smooth",
+  //       });
 
-        // Kartalar oxiriga yetganda boshidan boshlash
-        if (
-          containerRef.current.scrollLeft + containerRef.current.offsetWidth >=
-          containerRef.current.scrollWidth
-        ) {
-          containerRef.current.scrollTo({ left: 0, behavior: "smooth" });
-        }
-      }
-    }, 2000); // 2 soniyadan keyin o'zgaradi
+  //       // Kartalar oxiriga yetganda boshidan boshlash
+  //       if (
+  //         containerRef.current.scrollLeft + containerRef.current.offsetWidth >=
+  //         containerRef.current.scrollWidth
+  //       ) {
+  //         containerRef.current.scrollTo({ left: 0, behavior: "smooth" });
+  //       }
+  //     }
+  //   }, 2000); // 2 soniyadan keyin o'zgaradi
 
-    return () => clearInterval(scrollInterval);
-  }, []);
+  //   return () => clearInterval(scrollInterval);
+  // }, []);
 
   return (
     <>
@@ -443,7 +443,7 @@ const Banner = () => {
           What traders and investors are saying about KYT - Know Your Trader
         </h2>
         <p>We take into account your opinion, it helps us to improve.</p>
-        <div className="reviews-container" ref={containerRef}>
+        <div className="reviews-container" >
           {reviews.map((review, index) => (
             <ReviewCard key={index} review={review} onClick={handleCardClick} />
           ))}

@@ -154,21 +154,27 @@
         width: 100%;
         display: flex;
         /* Flex modeli qo'llash */
-        flex-wrap: nowrap;
-        /* Kartalar bitta qatorga joylashtiriladi */
-        overflow-x: auto;
-        /* Gorizontal skrolldir */
-        scroll-snap-type: x mandatory;
-        /* Skrolldirni teskari oling */
-        scroll-padding-left: 1rem;
-        /* Skrolldirning boshida bo'sh joy qo'shish */
-        scrollbar-width: none;
-        /* Firefox uchun skrolldirni yashirish */
+        flex-wrap: wrap;
     }
 
-    /* Chrome, Safari, Edge uchun skrolldirni yashirish */
-    .reviews-container::-webkit-scrollbar {
-        display: none;
+    @media (max-width: 450px) {
+        .review-card {
+            display: none;
+        }
+
+        .review-card:nth-child(-n + 4) {
+            display: block;
+            flex: 1 1 100%;
+        }
+
+        .blog-section__card {
+            background-color: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 360px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
     }
 
     .review-card {
@@ -294,7 +300,7 @@
     }
 
     .blog-section__container {
-        padding: 1rem;
+        padding: .5rem;
     }
 }
 
