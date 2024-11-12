@@ -160,6 +160,7 @@ function Navbar() {
     "/dashboard/success-fee",
     "/user/",
     "/traders-cabinet",
+    "/referral"
   ];
 
   useEffect(() => {

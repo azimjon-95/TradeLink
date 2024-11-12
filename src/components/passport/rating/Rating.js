@@ -532,7 +532,7 @@ const LeaderboardCard = ({ title, data, date, loadingTop }) => {
                   <p className="leaderboard-score">
                     {item?.score?.toFixed(2) ||
                       item?.profit_percentage?.toFixed(2)}
-                    %
+
                   </p>
                 </li>
               </Link>

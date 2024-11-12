@@ -369,7 +369,9 @@ const Banner = () => {
                 We take care of all other work with the investor.
               </p>
             </span>
-            <button className="learn-more-btn">Learn more</button>
+            <Link to="/traders-cabinet">
+              <button className="learn-more-btn">Learn more</button>
+            </Link>
           </div>
           <div className="index-cards">
             <img src={bt_indexes} alt="" />
@@ -401,7 +403,9 @@ const Banner = () => {
               Earn a commission on your invited friends' profits without hidden
               platform fees.
             </p>
-            <button className="btn referral-btn">How does it work?</button>
+            <Link to="/referral">
+              <button className="btn referral-btn">How does it work?</button>
+            </Link>
             <div className="referral-avatars">
               <img src={bt_benefits_faces} alt="" />
             </div>

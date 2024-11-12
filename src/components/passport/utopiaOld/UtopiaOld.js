@@ -129,7 +129,7 @@ const UtopiaOldMultiLine = () => {
     drawDown: true,
     drawDownDuration: true,
   });
-
+  // const currentUrl = window.location.href;
   return (
     <div className="oldMultiLine">
       <div className="oldMultiLine-header">
@@ -148,7 +148,7 @@ const UtopiaOldMultiLine = () => {
             0 stars <ImStarEmpty />
           </p>
         </div>
-        <p>My copy trading: https://example.com</p>
+        {/* <p>My copy trading: <a href={currentUrl} target="_blank" rel="noopener noreferrer">{currentUrl}</a> https://example.com</p> */}
       </div>
       <div className="oldMultiLine-main">
         <div className="oldMultiLine-main-head">

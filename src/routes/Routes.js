@@ -8,6 +8,9 @@ const Dashboard = lazy(() => import("../pages/dashboard/Dashbord"));
 const SuccessFeeHistory = lazy(() =>
   import("../pages/successFeeHistory/SuccessFeeHistiry")
 );
+const Referral = lazy(() =>
+  import("../pages/referral/Referral")
+);
 const NewDeclaration = lazy(() =>
   import("../pages/newDeclaration/NewDeclaration")
 );
@@ -25,6 +28,7 @@ const TradersCabinet = lazy(() =>
 // Define routes
 const routes = [
   // ====Home=====
+  { path: "/trader-cabinet", element: <TradersCabinet />, protected: false },
   { path: "/traders-cabinet", element: <TradersCabinet />, protected: false },
   { path: "/user/:id/*", element: <UserProfile />, protected: true },
   { path: "/portfolio/:id", element: <UtopiaOldMultiLine />, protected: true },
@@ -37,6 +41,7 @@ const routes = [
   { path: "/trader-cabinet/dashboard", element: <Dashboard />, protected: false },
   { path: "/dashboard&ctx=product", element: <NewDeclaration />, protected: false, },
   { path: "/dashboard/success-fee", element: <SuccessFeeHistory />, protected: false, },
+  { path: "/referral", element: <Referral />, protected: false, },
 
   { path: "*", element: <NotFoundPage />, protected: false },
 ];
