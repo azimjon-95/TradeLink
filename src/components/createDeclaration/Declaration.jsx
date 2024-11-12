@@ -77,11 +77,7 @@ function Declaration() {
   const handleSubmit = () => {
     const dataToSubmit = { ...inputs };
     console.log("Submitted data:", dataToSubmit);
-    // Add server submission logic here
   };
-
-
-
 
   return (
     <div className="Declaration">
@@ -146,7 +142,11 @@ function Declaration() {
               Publish
             </button>
           </div>
-          <Progress percent={Math.floor(progressPercent)} strokeColor={progressPercent === 100 ? "#52c41a" : "#591D87"} status={progressPercent === 100 ? "success" : "active"} />
+          <Progress
+            percent={Math.floor(progressPercent)}
+            strokeColor={progressPercent === 100 ? "#52c41a" : "#591D87"}
+            status={progressPercent === 100 ? "success" : "active"}
+          />
         </div>
       </div>
       <div className="new-declaration-form">
@@ -195,7 +195,8 @@ function Declaration() {
             className="declaration-name"
             type="text"
             maxLength="40"
-            value={inputs.name} onChange={(e) => handleInputChange("name", e.target.value)}
+            value={inputs.name}
+            onChange={(e) => handleInputChange("name", e.target.value)}
           />
           <label htmlFor="declaration-name">{`40`}</label>
         </div>
@@ -211,7 +212,9 @@ function Declaration() {
               e.target.style.height = `${e.target.scrollHeight}px`;
             }}
             value={inputs.description_english}
-            onChange={(e) => handleInputChange("description_english", e.target.value)}
+            onChange={(e) =>
+              handleInputChange("description_english", e.target.value)
+            }
           ></textarea>
           <label htmlFor="declaration-description">{`500`}</label>
           <p>Русский</p>
@@ -224,7 +227,9 @@ function Declaration() {
               e.target.style.height = `${e.target.scrollHeight}px`;
             }}
             value={inputs.description_russian}
-            onChange={(e) => handleInputChange("description_russian", e.target.value)}
+            onChange={(e) =>
+              handleInputChange("description_russian", e.target.value)
+            }
           ></textarea>
           <label htmlFor="declaration-description">{`500`}</label>
         </div>
@@ -233,14 +238,22 @@ function Declaration() {
           <h2>Market Direction</h2>
           <div className="trading-options-buttons market-direction">
             <button
-              onClick={() => handleInputChange("market_direction", "Counter Trend")}
-              className={inputs.market_direction === "Counter Trend" ? "active" : ""}
+              onClick={() =>
+                handleInputChange("market_direction", "Counter Trend")
+              }
+              className={
+                inputs.market_direction === "Counter Trend" ? "active" : ""
+              }
             >
               Counter Trend
             </button>
             <button
-              onClick={() => handleInputChange("market_direction", "Market Neutral")}
-              className={inputs.market_direction === "Market Neutral" ? "active" : ""}
+              onClick={() =>
+                handleInputChange("market_direction", "Market Neutral")
+              }
+              className={
+                inputs.market_direction === "Market Neutral" ? "active" : ""
+              }
             >
               Market Neutral
             </button>
@@ -251,8 +264,12 @@ function Declaration() {
               Trend
             </button>
             <button
-              onClick={() => handleInputChange("market_direction", "Any Direction")}
-              className={inputs.market_direction === "Any Direction" ? "active" : ""}
+              onClick={() =>
+                handleInputChange("market_direction", "Any Direction")
+              }
+              className={
+                inputs.market_direction === "Any Direction" ? "active" : ""
+              }
             >
               Any Direction
             </button>
@@ -276,13 +293,19 @@ function Declaration() {
             </button>
             <button
               onClick={() => handleInputChange("management_type", "Mixed Type")}
-              className={inputs.management_type === "Mixed Type" ? "active" : ""}
+              className={
+                inputs.management_type === "Mixed Type" ? "active" : ""
+              }
             >
               Mixed Type
             </button>
             <button
-              onClick={() => handleInputChange("management_type", "Hand Trading")}
-              className={inputs.management_type === "Hand Trading" ? "active" : ""}
+              onClick={() =>
+                handleInputChange("management_type", "Hand Trading")
+              }
+              className={
+                inputs.management_type === "Hand Trading" ? "active" : ""
+              }
             >
               Hand Trading
             </button>
@@ -354,7 +377,9 @@ function Declaration() {
             </button>
             <button
               onClick={() => handleInputChange("position_type", "Long & Short")}
-              className={inputs.position_type === "Long & Short" ? "active" : ""}
+              className={
+                inputs.position_type === "Long & Short" ? "active" : ""
+              }
             >
               Long & Short
             </button>
@@ -417,8 +442,12 @@ function Declaration() {
         <div className="form-item form-buttons">
           <h2>Lot Type</h2>
           <div className="trading-options-buttons trading-speed">
-            <button onClick={() => handleInputChange("lot_type", "Static")}>Static</button>
-            <button onClick={() => handleInputChange("lot_type", "Dynamic")}>Dynamic</button>
+            <button onClick={() => handleInputChange("lot_type", "Static")}>
+              Static
+            </button>
+            <button onClick={() => handleInputChange("lot_type", "Dynamic")}>
+              Dynamic
+            </button>
           </div>
         </div>
         <div className="form-item">
@@ -431,35 +460,65 @@ function Declaration() {
           </p>
           <div className="lot-pleaceholder-container">
             <span>%</span>
-            <input value={inputs.minimal_lot} onChange={(e) => handleInputChange("minimal_lot", e.target.value)} name="minimal-lot" className="minimal-lot" type="number" />
+            <input
+              value={inputs.minimal_lot}
+              onChange={(e) => handleInputChange("minimal_lot", e.target.value)}
+              name="minimal-lot"
+              className="minimal-lot"
+              type="number"
+            />
           </div>
         </div>
         <div className="form-item max-deposit">
           <h2>Max Deposit Load</h2>
           <div className="lot-pleaceholder-container">
             <span>%</span>
-            <input value={inputs.max_deposit_load} onChange={(e) => handleInputChange("max_deposit_load", e.target.value)} name="max-deposit" className="max-deposit" type="number" />
+            <input
+              value={inputs.max_deposit_load}
+              onChange={(e) =>
+                handleInputChange("max_deposit_load", e.target.value)
+              }
+              name="max-deposit"
+              className="max-deposit"
+              type="number"
+            />
           </div>
         </div>
         <div className="form-item form-buttons">
           <h2>Hedge Mode</h2>
           <div className="trading-options-buttons">
-            <button onClick={() => handleInputChange("hedge_mode", "Yes")}>Yes</button>
-            <button onClick={() => handleInputChange("hedge_mode", "No")}>No</button>
+            <button onClick={() => handleInputChange("hedge_mode", "Yes")}>
+              Yes
+            </button>
+            <button onClick={() => handleInputChange("hedge_mode", "No")}>
+              No
+            </button>
           </div>
         </div>
         <div className="form-item form-buttons">
           <h2>Margin Mode</h2>
           <div className="trading-options-buttons">
-            <button onClick={() => handleInputChange("margin_mode", "Single Asset")}>Single Asset</button>
-            <button onClick={() => handleInputChange("margin_mode", "Multi Asset")}>Multi Asset</button>
+            <button
+              onClick={() => handleInputChange("margin_mode", "Single Asset")}
+            >
+              Single Asset
+            </button>
+            <button
+              onClick={() => handleInputChange("margin_mode", "Multi Asset")}
+            >
+              Multi Asset
+            </button>
           </div>
         </div>
         <div className="form-item max-deposit">
           <h2>Liquidity Cap</h2>
           <div className="lot-pleaceholder-container">
             <span>$</span>
-            <input value={inputs.liquidity_cap} onChange={(e) => handleInputChange("liquidity_cap", e.target.value)}
+            <input
+              value={inputs.liquidity_cap}
+              onChange={(e) =>
+                handleInputChange("liquidity_cap", e.target.value)
+              }
               name="liquidity-cap"
               className="max-deposit liquidity-cap"
               type="number"
@@ -474,7 +533,15 @@ function Declaration() {
           </p>
           <div className="lot-pleaceholder-container">
             <span>$</span>
-            <input value={inputs.minimum_deposit} onChange={(e) => handleInputChange("minimum_deposit", e.target.value)} name="minimal-lot" className="minimal-lot" type="number" />
+            <input
+              value={inputs.minimum_deposit}
+              onChange={(e) =>
+                handleInputChange("minimum_deposit", e.target.value)
+              }
+              name="minimal-lot"
+              className="minimal-lot"
+              type="number"
+            />
           </div>
         </div>
         <div className="form-item form-buttons">
@@ -521,7 +588,10 @@ function Declaration() {
                 e.target.style.height = "auto";
                 e.target.style.height = `${e.target.scrollHeight}px`;
               }}
-              value={inputs.declaration_description_eng} onChange={(e) => handleInputChange("declaration_description_eng", e.target.value)}
+              value={inputs.declaration_description_eng}
+              onChange={(e) =>
+                handleInputChange("declaration_description_eng", e.target.value)
+              }
             ></textarea>
             <label htmlFor="declaration-description">{`500`}</label>
             <p>Русский</p>
@@ -534,7 +604,10 @@ function Declaration() {
                 e.target.style.height = "auto";
                 e.target.style.height = `${e.target.scrollHeight}px`;
               }}
-              value={inputs.declaration_description_rus} onChange={(e) => handleInputChange("declaration_description_rus", e.target.value)}
+              value={inputs.declaration_description_rus}
+              onChange={(e) =>
+                handleInputChange("declaration_description_rus", e.target.value)
+              }
             ></textarea>
             <label htmlFor="declaration-description">{`500`}</label>
           </div>
@@ -569,7 +642,10 @@ function Declaration() {
               name="max-drawdown-limit"
               className="max-deposit max-drawdown-limit"
               type="number"
-              value={inputs.maximum_drawdown} onChange={(e) => handleInputChange("maximum_drawdown", e.target.value)}
+              value={inputs.maximum_drawdown}
+              onChange={(e) =>
+                handleInputChange("maximum_drawdown", e.target.value)
+              }
             />
           </div>
         </div>
@@ -599,7 +675,15 @@ function Declaration() {
           <h2>Maximum drawdown limit</h2>
           <div className="lot-pleaceholder-container">
             <span>$</span>
-            <input value={inputs.maximum_drawdown_limit} onChange={(e) => handleInputChange("maximum_drawdown_limit", e.target.value)} name="max-drawdown" className="max-deposit" type="number" />
+            <input
+              value={inputs.maximum_drawdown_limit}
+              onChange={(e) =>
+                handleInputChange("maximum_drawdown_limit", e.target.value)
+              }
+              name="max-drawdown"
+              className="max-deposit"
+              type="number"
+            />
           </div>
         </div>
         <div className="form-item form-textArea">
@@ -614,7 +698,8 @@ function Declaration() {
               e.target.style.height = "auto";
               e.target.style.height = `${e.target.scrollHeight}px`;
             }}
-            value={inputs.strategy_eng} onChange={(e) => handleInputChange("strategy_eng", e.target.value)}
+            value={inputs.strategy_eng}
+            onChange={(e) => handleInputChange("strategy_eng", e.target.value)}
           ></textarea>
           <label htmlFor="declaration-description">{`500`}</label>
           <p>Русский</p>
@@ -627,8 +712,8 @@ function Declaration() {
               e.target.style.height = "auto";
               e.target.style.height = `${e.target.scrollHeight}px`;
             }}
-            value={inputs.strategy_rus} onChange={(e) => handleInputChange("strategy_rus", e.target.value)}
-
+            value={inputs.strategy_rus}
+            onChange={(e) => handleInputChange("strategy_rus", e.target.value)}
           ></textarea>
           <label htmlFor="declaration-description">{`500`}</label>
         </div>
@@ -644,7 +729,8 @@ function Declaration() {
               e.target.style.height = "auto";
               e.target.style.height = `${e.target.scrollHeight}px`;
             }}
-            value={inputs.execution_eng} onChange={(e) => handleInputChange("execution_eng", e.target.value)}
+            value={inputs.execution_eng}
+            onChange={(e) => handleInputChange("execution_eng", e.target.value)}
           ></textarea>
           <label htmlFor="declaration-description">{`500`}</label>
           <p>Русский</p>
@@ -657,7 +743,8 @@ function Declaration() {
               e.target.style.height = "auto";
               e.target.style.height = `${e.target.scrollHeight}px`;
             }}
-            value={inputs.execution_rus} onChange={(e) => handleInputChange("execution_rus", e.target.value)}
+            value={inputs.execution_rus}
+            onChange={(e) => handleInputChange("execution_rus", e.target.value)}
           ></textarea>
           <label htmlFor="declaration-description">{`500`}</label>
         </div>
@@ -673,7 +760,10 @@ function Declaration() {
               e.target.style.height = "auto";
               e.target.style.height = `${e.target.scrollHeight}px`;
             }}
-            value={inputs.optimization_eng} onChange={(e) => handleInputChange("optimization_eng", e.target.value)}
+            value={inputs.optimization_eng}
+            onChange={(e) =>
+              handleInputChange("optimization_eng", e.target.value)
+            }
           ></textarea>
           <label htmlFor="declaration-description">{`500`}</label>
           <p>Русский</p>
@@ -686,7 +776,10 @@ function Declaration() {
               e.target.style.height = "auto";
               e.target.style.height = `${e.target.scrollHeight}px`;
             }}
-            value={inputs.optimization_rus} onChange={(e) => handleInputChange("optimization_rus", e.target.value)}
+            value={inputs.optimization_rus}
+            onChange={(e) =>
+              handleInputChange("optimization_rus", e.target.value)
+            }
           ></textarea>
           <label htmlFor="declaration-description">{`500`}</label>
         </div>

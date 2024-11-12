@@ -91,9 +91,7 @@ const UtopiaOldMultiLine = () => {
     };
   }, [isOverlayVisible]);
 
-  {
-    /* ---------------------------8A----------------------------------- */
-  }
+  /* ---------------------------8A----------------------------------- */
   const checkboxData = [
     { key: "benchmarkBTC", label: "Benchmark BTC", color: "#FFD700" },
     { key: "return", label: "Return (%)", color: "#FFA500" },
@@ -114,9 +112,8 @@ const UtopiaOldMultiLine = () => {
     "profit",
   ]);
 
-  {
-    /* ---------------------------9A----------------------------------- */
-  }
+  /* ---------------------------9A----------------------------------- */
+
   const [checkedItems, setCheckedItems] = useState({
     benchmarkBTC: true,
     return: true,

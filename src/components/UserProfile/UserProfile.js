@@ -41,7 +41,7 @@ const UserProfile = () => {
       .get(API)
       .then((res) => setProfileData(res.data?.data))
       .catch((err) => console.log(err));
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     setCurrentPath(location.pathname);

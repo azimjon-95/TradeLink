@@ -91,7 +91,7 @@ function CommmantCenter() {
     }, 7000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [serviceData.length]);
 
   return (
     <div className="commandCenter">
@@ -102,8 +102,9 @@ function CommmantCenter() {
         <div className="command_center_services">
           {serviceData.map((item, index) => (
             <Link
-              className={`command_center_services_item ${activeIndex === index ? "active" : ""
-                }`}
+              className={`command_center_services_item ${
+                activeIndex === index ? "active" : ""
+              }`}
               key={index}
               onClick={() => setActiveIndex(index)}
             >
