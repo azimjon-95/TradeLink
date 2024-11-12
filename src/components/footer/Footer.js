@@ -24,10 +24,10 @@ const Footer = () => {
           <h3 className="footer-title">Products</h3>
           <ul className="footer-list">
             <li>
-              <Link to={"/"}>KYT - Know Your Trader Marketplace</Link>
+              <Link to={"/rating"}>KYT - Rating</Link>
             </li>
             <li>
-              <Link to={"/"}>KYT - Know Your Trader Passport</Link>
+              <Link to={"/passport"}>KYT - Passport</Link>
             </li>
           </ul>
         </div>
@@ -45,9 +45,6 @@ const Footer = () => {
             </li>
             <li>
               <Link to={"/faq"}> FAQ</Link>
-            </li>
-            <li>
-              <Link to={"/"}> Blog</Link>
             </li>
             <li>
               <Link to={"/"}> Contact</Link>

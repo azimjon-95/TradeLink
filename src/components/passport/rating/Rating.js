@@ -60,7 +60,8 @@ const Leaderboard = () => {
     axios
       .get(API)
       .then((res) => {
-        setPortfolios([...portfolios, ...res?.data?.data]);
+        // setPortfolios([...portfolios, ...res?.data?.data]);
+        setPortfolios((p) => [...p, ...res?.data?.data]);
         setLastData(res?.data?.data);
       })
       .catch((err) => console.log(err))
@@ -95,7 +96,7 @@ const Leaderboard = () => {
     if (lastData?.length <= 25) {
       const observer = new IntersectionObserver(
         (entries) => {
-          if (entries.some(entry => entry.isIntersecting)) {
+          if (entries.some((entry) => entry.isIntersecting)) {
             setPage((prevPage) => prevPage + 1);
           }
         },
@@ -482,10 +483,10 @@ const LeaderboardCard = ({ title, data, date, loadingTop }) => {
     rank === 1
       ? "#FBAF3D"
       : rank === 2
-        ? "#C0C8E0"
-        : rank === 3
-          ? "#D5B678"
-          : "#fff";
+      ? "#C0C8E0"
+      : rank === 3
+      ? "#D5B678"
+      : "#fff";
 
   return (
     <div className="leaderboard-card">
@@ -512,7 +513,7 @@ const LeaderboardCard = ({ title, data, date, loadingTop }) => {
                     >
                       {index + 1}
                     </span>
-                    <img width={30} src={binance} alt="No image" />
+                    <img width={30} src={binance} alt="logo" />
                     <img
                       className="leaderboard-user-avatar"
                       width={30}

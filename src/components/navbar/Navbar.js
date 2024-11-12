@@ -204,13 +204,19 @@ function Navbar() {
     const linksToSet = mainPageRoutes.includes(path)
       ? linkOptions["/"]
       : isUserRoute || isPortfolioRoute
-        ? passportLinks
-        : passportOpenRoutes.includes(path)
-          ? passportLinks
-          : linkOptions[path] || linkOptions.default;
+      ? passportLinks
+      : passportOpenRoutes.includes(path)
+      ? passportLinks
+      : linkOptions[path] || linkOptions.default;
 
     setLinks(linksToSet);
-  }, [location.pathname, token]);
+  }, [
+    location.pathname,
+    token,
+    linkOptions,
+    mainPageRoutes,
+    passportOpenRoutes,
+  ]);
 
   const handleClick = (path) => {
     setActiveLink(path);
@@ -265,8 +271,9 @@ function Navbar() {
   );
   return (
     <div
-      className={`navbar_container ${isProductDashboard ? "navbar_static" : "navbar_sticky"
-        }`}
+      className={`navbar_container ${
+        isProductDashboard ? "navbar_static" : "navbar_sticky"
+      }`}
     >
       <div className="nav_links-box">
         <Link to="/" onClick={() => handleClick("/")}>
@@ -493,8 +500,9 @@ function Navbar() {
       ></div>
 
       <div
-        className={`close-modal-signup ${isModalSinUp && "close-modal-signup-open"
-          }`}
+        className={`close-modal-signup ${
+          isModalSinUp && "close-modal-signup-open"
+        }`}
       >
         <SignUpModal
           setModalType={setModalType}
