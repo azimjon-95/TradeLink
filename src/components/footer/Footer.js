@@ -41,9 +41,6 @@ const Footer = () => {
               <Link to={"/"}> Reviews</Link>
             </li>
             <li>
-              <Link to={"/"}> Careers</Link>
-            </li>
-            <li>
               <Link to={"/faq"}> FAQ</Link>
             </li>
             <li>
@@ -54,7 +51,7 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        <div className="footer-section">
+        {/* <div className="footer-section">
           <h3 className="footer-title">Legal</h3>
           <ul className="footer-list">
             <li>
@@ -67,7 +64,7 @@ const Footer = () => {
               <Link to={"/"}> Terms and Conditions </Link>{" "}
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
 
       <div className="footer-bottom">

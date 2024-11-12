@@ -8,13 +8,10 @@
 
 .footer-top {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding-bottom: 20px;
 }
 
-.footer-section {
-  flex: 1;
-}
 
 .footer-title {
   font-size: 18px;
@@ -59,7 +56,7 @@
   align-items: center;
 }
 
-.footer-head-logo > img {
+.footer-head-logo>img {
   width: 100%;
   height: 100%;
 }
