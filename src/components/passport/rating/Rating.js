@@ -19,13 +19,13 @@ const Leaderboard = () => {
 
   const [isModal, setIsModal] = useState(false);
   const [selectedOption, setSelectedOption] = useState(() => {
-    return localStorage.getItem("selectedOption") || "score";
+    return localStorage.getItem("selectedOption") || "return";
   });
   const modalRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContentType, setModalContentType] = useState("");
 
-  const [filterOption, setFilterOption] = useState("score");
+  const [filterOption, setFilterOption] = useState("return");
   const [showInactive, setShowInactive] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loadingTop, setLoadingTop] = useState(true);
@@ -420,7 +420,7 @@ const Leaderboard = () => {
           </label>
 
           {/* Filter select */}
-          <Select
+          {/* <Select
             value={filterOption}
             onChange={(value) => setFilterOption(value)}
             style={{ width: 150 }}
@@ -445,6 +445,37 @@ const Leaderboard = () => {
             <Option value="maxdd">
               MaxDD{" "}
               <AiFillCaretUp style={{ fontSize: "18px", color: "#555" }} />
+            </Option>
+          </Select> */}
+          <Select
+            value={filterOption}
+            onChange={(value) => setFilterOption(value)}
+            style={{ width: 150 }}
+            popupMatchSelectWidth={false} // Adjust dropdown width if needed
+          >
+            <Option className="custom-option" value="return">
+              Return (%){" "}
+              <AiFillCaretDown />
+            </Option>
+            <Option className="custom-option" value="-return">
+              Return (%){" "}
+              <AiFillCaretUp />
+            </Option>
+            <Option className="custom-option" value="profit">
+              Profit ($){" "}
+              <AiFillCaretDown />
+            </Option>
+            <Option className="custom-option" value="-profit">
+              Profit ($){" "}
+              <AiFillCaretUp />
+            </Option>
+            <Option className="custom-option" value="-maxdd">
+              MDD{" "}
+              <AiFillCaretDown />
+            </Option>
+            <Option className="custom-option" value="maxdd">
+              MDD{" "}
+              <AiFillCaretUp />
             </Option>
           </Select>
         </div>
@@ -483,10 +514,10 @@ const LeaderboardCard = ({ title, data, date, loadingTop }) => {
     rank === 1
       ? "#FBAF3D"
       : rank === 2
-      ? "#C0C8E0"
-      : rank === 3
-      ? "#D5B678"
-      : "#fff";
+        ? "#C0C8E0"
+        : rank === 3
+          ? "#D5B678"
+          : "#fff";
 
   return (
     <div className="leaderboard-card">
