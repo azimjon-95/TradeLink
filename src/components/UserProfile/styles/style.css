@@ -74,12 +74,12 @@
 
 .ed-khan-image {
     vertical-align: middle;
-    height: 105.99px;
-    max-width: 128px;
+    height: 85px;
+    width: 85px;
     border-radius: 16px;
     object-fit: cover;
+    overflow: hidden;
     max-height: 128px;
-    width: 105.99px;
     line-height: 24px;
     background-color: rgb(157, 144, 144);
 }
@@ -258,7 +258,7 @@
     display: flex;
     gap: 20px;
     align-items: center;
-    border-bottom: .3px solid gray;
+    border-bottom: .2px solid #80808059;
 }
 
 .nav-bar a {

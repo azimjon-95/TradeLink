@@ -24,6 +24,7 @@ const UtopiaOldMultiLine = () => {
   const { id: baseId } = useParams();
   // const location = useLocation();
 
+  console.log(">>>>>", data);
   // getData
   useEffect(() => {
     setTopLoader(true);

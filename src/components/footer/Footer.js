@@ -13,9 +13,10 @@ const Footer = () => {
         </div>
         <div className="footer-icons">
           {/* <TwitterOutlined className="social-icon" />
-                    <LinkedinOutlined className="social-icon" />
-                    <FacebookOutlined className="social-icon" />
-                    <YoutubeOutlined className="social-icon" /> */}
+            <LinkedinOutlined className="social-icon" />
+            <FacebookOutlined className="social-icon" />
+            <YoutubeOutlined className="social-icon" /> 
+          */}
         </div>
       </div>
 

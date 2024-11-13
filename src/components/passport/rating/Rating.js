@@ -19,18 +19,19 @@ const Leaderboard = () => {
 
   const [isModal, setIsModal] = useState(false);
   const [selectedOption, setSelectedOption] = useState(() => {
-    return localStorage.getItem("selectedOption") || "return";
+    return localStorage.getItem("selectedOption") || "score";
   });
   const modalRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContentType, setModalContentType] = useState("");
 
-  const [filterOption, setFilterOption] = useState("return");
+  const [filterOption, setFilterOption] = useState("score");
   const [showInactive, setShowInactive] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loadingTop, setLoadingTop] = useState(true);
   const [portfolios, setPortfolios] = useState([]);
   const [leaderboardData, setLeaderboardData] = useState(null);
+
 
   const loader = useRef(null);
   const [page, setPage] = useState(0);
@@ -198,8 +199,8 @@ const Leaderboard = () => {
     },
     {
       title: "Return",
-      dataIndex: "score",
-      key: "score",
+      dataIndex: "return",
+      key: "return",
       align: "center",
       render: (_, record) => (
         <p className="ret-texOne score">
@@ -217,9 +218,9 @@ const Leaderboard = () => {
       ),
     },
     {
-      title: "Return (%)",
-      dataIndex: "return",
-      key: "return",
+      title: "Profit ($)",
+      dataIndex: "profit",
+      key: "profit",
       align: "center",
       render: (_, record) => (
         <p className="ret-texOne">{record.profit_percentage?.toFixed(2)}%</p>
@@ -351,7 +352,7 @@ const Leaderboard = () => {
             <button onClick={() => openModal("portfolio")}>
               How to add your portfolio to the rating?
             </button>
-            {selectedOption === "KYT" && (
+            {selectedOption === "score" && (
               <button onClick={() => openModal("score")}>
                 <img src={ret} alt="Info" /> How do we measure the Score?
               </button>
@@ -485,7 +486,7 @@ const Leaderboard = () => {
             loading={loading}
             columns={columns}
             dataSource={portfolios}
-            rowKey="portfolio_id"
+            rowKey={(record, index) => index}
             pagination={false}
             scroll={{ x: "100%" }} // For responsive scrolling
             size="small"
@@ -509,7 +510,12 @@ const Leaderboard = () => {
   );
 };
 
+// ====================Boshqa file bu=======================
 const LeaderboardCard = ({ title, data, date, loadingTop }) => {
+  console.log(data);
+
+  const getTimestamp = () => Math.floor(Date.now() / 1000); // Get current timestamp in seconds
+
   const getRankColor = (rank) =>
     rank === 1
       ? "#FBAF3D"
@@ -534,8 +540,9 @@ const LeaderboardCard = ({ title, data, date, loadingTop }) => {
           />
         ) : (
           <>
+            {/* `/portfolio/${record.portfolio_id}?t=${timestamp}` */}
             {data?.map((item, index) => (
-              <Link to={`/user/${item?.user_id}`} key={index}>
+              <Link to={`/portfolio/${item?.portfolio_id}?t=${getTimestamp()}`} key={index}>
                 <li>
                   <div className="leaderboard-rank-box">
                     <span

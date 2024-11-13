@@ -11,7 +11,7 @@ import {
 } from "react-router-dom"; // Import Outlet
 import { Tooltip } from "antd";
 import axios from "../../api";
-import ed_khan from "../../assets/ed_khan/Ed_Khan.png";
+import ed_khan from "../../assets/ed_khan/avatar.png";
 import Overview from "./Overview";
 import Portfolios from "./Portfolios";
 import Jet from "./Jet";
@@ -43,7 +43,7 @@ const UserProfile = () => {
       .catch((err) => console.log(err));
   }, [id]);
 
-  console.log(profileData);
+  console.log(">>>", profileData);
 
   useEffect(() => {
     setCurrentPath(location.pathname);
@@ -55,7 +55,7 @@ const UserProfile = () => {
 
   return (
     <div className="ed_khan">
-      <h1>User Profile</h1>
+      <h1>My Profile</h1>
 
       <div className="user-share-container">
         <div className="user-share">
@@ -105,30 +105,6 @@ const UserProfile = () => {
           </div>
         </div>
 
-        {/* <div className="khan-maps">
-          <button
-            onClick={handleTelegramClick}
-            style={{ display: "flex", alignItems: "center", gap: "8px" }}
-          >
-            <FaTelegramPlane />
-          </button>
-          <button
-            onClick={handleEdvitradeClick}
-            style={{ display: "flex", alignItems: "center", gap: "8px" }}
-          >
-            <FaGlobe />
-          </button>
-        </div> */}
-        {/* <div className="khan-inps">
-          Telegram
-          <input
-            type="text"
-            value={telegramHandle}
-            readOnly
-            style={{ padding: "8px", fontSize: "16px" }}
-          />
-        </div> */}
-
         <button onClick={toggleModal}>
           <FaShare style={{ fontSize: "16px" }} />
           Share
@@ -137,59 +113,73 @@ const UserProfile = () => {
 
       <div className="user-menus-khan">
         <div className="strategies-layout">
-          <nav className="nav-bar">
-            <Link
-              to={`/user/${id}`}
-              className={currentPath === `/user/${id}` ? "active" : ""}
-            >
-              Strategies
-            </Link>
-            <Link
-              to={`/user/${id}/portfolios`}
-              className={
-                currentPath === `/user/${id}/portfolios` ? "active" : ""
-              }
-            >
-              Portfolios
-            </Link>
-            <Link
-              to={`/user/${id}/jet`}
-              className={currentPath === `/user/${id}/jet` ? "active" : ""}
-            >
-              Jet
-            </Link>
-          </nav>
-
-          <div className="user-menus">
-            <div className="khan-pages">
-              <Outlet />{" "}
-              {/* This will render the matching route components here */}
-            </div>
-
-            <div className="menus-khan-page">
-              <Routes>
-                <Route path="/" element={<Overview />} />
-                <Route
-                  path="portfolios"
-                  element={
-                    <Portfolios
-                      portFolioData={portFolioData}
-                      public_portfolios={public_portfolios}
-                      portfolio_chartData={portfolio_chartData}
-                    />
+          {
+            true ?
+              <nav nav className="nav-bar">
+                <Link
+                  to={`/user/${id}`}
+                  className={currentPath === `/user/${id}` ? "active" : ""}
+                >
+                  Strategies
+                </Link>
+                <Link
+                  to={`/user/${id}/portfolios`}
+                  className={
+                    currentPath === `/user/${id}/portfolios` ? "active" : ""
                   }
-                />
-                <Route path="jet" element={<Jet />} />
+                >
+                  Portfolios
+                </Link>
+                <Link
+                  to={`/user/${id}/jet`}
+                  className={currentPath === `/user/${id}/jet` ? "active" : ""}
+                >
+                  Jet
+                </Link>
+              </nav>
+              :
+              <nav className="nav-bar">
+                <Link className="active">
+                  Overview
+                </Link>
+              </nav>
+          }
 
-                {/* Redirect any unknown paths under /user/:id to the Overview page */}
-                <Route path="*" element={<Navigate to={`/user/${id}`} />} />
-              </Routes>
-            </div>
-          </div>
+          {
+            true ?
+              <div className="user-menus">
+                <div className="khan-pages">
+                  <Outlet />{" "}
+                </div>
+
+                <div className="menus-khan-page">
+                  <Routes>
+                    <Route path="/" element={<Overview />} />
+                    <Route
+                      path="portfolios"
+                      element={
+                        <Portfolios
+                          portFolioData={portFolioData}
+                          public_portfolios={public_portfolios}
+                          portfolio_chartData={portfolio_chartData}
+                        />
+                      }
+                    />
+                    <Route path="jet" element={<Jet />} />
+
+                    {/* Redirect any unknown paths under /user/:id to the Overview page */}
+                    <Route path="*" element={<Navigate to={`/user/${id}`} />} />
+                  </Routes>
+                </div>
+
+              </div>
+              :
+              <p className="user-menus">You don't have a public portfolio yet. You can either create one or choose to make an existing portfolio public in the <Link style={{ textDecoration: "underline", color: "#000" }} to="/passport/dashboard">dashboard.</Link> </p>
+          }
         </div>
       </div>
       {isModalOpen && <ShareModal closeModal={toggleModal} />}
-    </div>
+    </div >
   );
 };
 

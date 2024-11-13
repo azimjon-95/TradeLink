@@ -11,9 +11,8 @@ import raket from '../../assets/ed_khan/raket.png';
 import './styles/style.css'; // Import the CSS file
 
 function ShareModal({ closeModal }) {
-    // Refs to access the modal image container and the link to be copied
     const imageRef = useRef(null);
-    const linkRef = useRef('https://kytknowyourtrader.vercel.app/user');
+    const linkRef = useRef(window.location.href); // Dynamically set the link to the current page URL
 
     const handleDownloadImage = () => {
         if (imageRef.current) {
@@ -42,18 +41,29 @@ function ShareModal({ closeModal }) {
         }
     };
 
+
+    const shareMessage = `
+Hello 👋
+KYT is a great platform for investing in crypto strategies.
+The emphasis here is on profit, not turnover!
+    
+Let's invest wisely and strive for profits in the long term! 💸`;
+
+    // Twitter
     const openTwitterShare = () => {
-        const twitterUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(linkRef.current)}`;
+        const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareMessage)}`;
         window.open(twitterUrl, '_blank');
     };
 
+    // Facebook
     const openFacebookShare = () => {
-        const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(linkRef.current)}`;
+        const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(linkRef.current)}&quote=${encodeURIComponent(shareMessage)}`;
         window.open(facebookUrl, '_blank');
     };
 
+    // Telegram
     const openTelegramShare = () => {
-        const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(linkRef.current)}&text=Check out this trading strategy!`;
+        const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(linkRef.current)}&text=${encodeURIComponent(shareMessage)}`;
         window.open(telegramUrl, '_blank');
     };
 
