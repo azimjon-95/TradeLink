@@ -43,8 +43,6 @@ const UserProfile = () => {
       .catch((err) => console.log(err));
   }, [id]);
 
-  console.log(">>>", profileData);
-
   useEffect(() => {
     setCurrentPath(location.pathname);
   }, [location]);
@@ -113,73 +111,77 @@ const UserProfile = () => {
 
       <div className="user-menus-khan">
         <div className="strategies-layout">
-          {
-            true ?
-              <nav nav className="nav-bar">
-                <Link
-                  to={`/user/${id}`}
-                  className={currentPath === `/user/${id}` ? "active" : ""}
-                >
-                  Strategies
-                </Link>
-                <Link
-                  to={`/user/${id}/portfolios`}
-                  className={
-                    currentPath === `/user/${id}/portfolios` ? "active" : ""
-                  }
-                >
-                  Portfolios
-                </Link>
-                <Link
-                  to={`/user/${id}/jet`}
-                  className={currentPath === `/user/${id}/jet` ? "active" : ""}
-                >
-                  Jet
-                </Link>
-              </nav>
-              :
-              <nav className="nav-bar">
-                <Link className="active">
-                  Overview
-                </Link>
-              </nav>
-          }
+          {true ? (
+            <nav nav className="nav-bar">
+              <Link
+                to={`/user/${id}`}
+                className={currentPath === `/user/${id}` ? "active" : ""}
+              >
+                Strategies
+              </Link>
+              <Link
+                to={`/user/${id}/portfolios`}
+                className={
+                  currentPath === `/user/${id}/portfolios` ? "active" : ""
+                }
+              >
+                Portfolios
+              </Link>
+              <Link
+                to={`/user/${id}/jet`}
+                className={currentPath === `/user/${id}/jet` ? "active" : ""}
+              >
+                Jet
+              </Link>
+            </nav>
+          ) : (
+            <nav className="nav-bar">
+              <Link className="active">Overview</Link>
+            </nav>
+          )}
 
-          {
-            true ?
-              <div className="user-menus">
-                <div className="khan-pages">
-                  <Outlet />{" "}
-                </div>
-
-                <div className="menus-khan-page">
-                  <Routes>
-                    <Route path="/" element={<Overview />} />
-                    <Route
-                      path="portfolios"
-                      element={
-                        <Portfolios
-                          portFolioData={portFolioData}
-                          public_portfolios={public_portfolios}
-                          portfolio_chartData={portfolio_chartData}
-                        />
-                      }
-                    />
-                    <Route path="jet" element={<Jet />} />
-
-                    {/* Redirect any unknown paths under /user/:id to the Overview page */}
-                    <Route path="*" element={<Navigate to={`/user/${id}`} />} />
-                  </Routes>
-                </div>
-
+          {true ? (
+            <div className="user-menus">
+              <div className="khan-pages">
+                <Outlet />{" "}
               </div>
-              :
-              <p className="user-menus">You don't have a public portfolio yet. You can either create one or choose to make an existing portfolio public in the <Link style={{ textDecoration: "underline", color: "#000" }} to="/passport/dashboard">dashboard.</Link> </p>
-          }
+
+              <div className="menus-khan-page">
+                <Routes>
+                  <Route path="/" element={<Overview />} />
+                  <Route
+                    path="portfolios"
+                    element={
+                      <Portfolios
+                        portFolioData={portFolioData}
+                        public_portfolios={public_portfolios}
+                        portfolio_chartData={portfolio_chartData}
+                      />
+                    }
+                  />
+                  <Route path="jet" element={<Jet />} />
+
+                  {/* Redirect any unknown paths under /user/:id to the Overview page */}
+                  <Route path="*" element={<Navigate to={`/user/${id}`} />} />
+                </Routes>
+              </div>
+            </div>
+          ) : (
+            <p className="user-menus">
+              You don't have a public portfolio yet. You can either create one
+              or choose to make an existing portfolio public in the{" "}
+              <Link
+                style={{ textDecoration: "underline", color: "#000" }}
+                to="/passport/dashboard"
+              >
+                dashboard.
+              </Link>{" "}
+            </p>
+          )}
         </div>
       </div>
       {isModalOpen && <ShareModal closeModal={toggleModal} />}
-    </div >
+    </div>
   );
 };
 
