@@ -121,28 +121,7 @@ const Portfolios = ({
     // return `${baseId}?t=${tParam}&startDate=${startDate}&endDate=${endDate}&step=${step}&profit=${profit}&margin-balance=${marginBalance}&balance=${balance}`;
     return `${baseId}?t=${tParam}`;
   };
-  // const portfoliosData = [
-  //   {
-  //     id: generateUniqueId(),
-  //     title: "Utopia",
-  //     returnPercentage: public_portfolios?.margin_balance?.toFixed(2) || 0,
-  //     drawDown: public_portfolios?.profit_percent?.toFixed(2) || 0,
-  //     minDeposit: public_portfolios?.mdd?.toFixed(2) || 0,
-  //     data: portfolio_chartData?.map((i) => i.value) || [], // Correct: 'data' is an array
-  //     tooltipReturn: "Total return percentage achieved",
-  //     tooltipDrawDown: "Maximum drawdown percentage",
-  //     tooltipMinDeposit: "Minimum deposit required",
-  //     tooltipProfit: "Profit in dollars",
-  //     labelReturn: "Margin Balance",
-  //     labelDrawDown: "Profit, All",
-  //     labelMinDeposit: "MDD",
-  //     profit: public_portfolios?.profit?.toFixed(2) || 0,
-  //     image: binance_rounded, // Correct: 'binance_rounded' is an image
-  //     view: "0",
-  //     started: start, // Correct: 'start' is a string
-  //     result: "3",
-  //   },
-  // ];
+
 
   const portfoliosData = public_portfolios?.map((portfolio, index) => ({
     id: generateUniqueId(index),

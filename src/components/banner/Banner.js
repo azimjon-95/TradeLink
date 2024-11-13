@@ -18,64 +18,66 @@ const Banner = () => {
   const [selectedReview, setSelectedReview] = useState(null);
   let token = localStorage.getItem("access_token");
 
+
   const reviews = [
     {
       name: "Bogdan Miroshnichenko",
       store: 3,
       text: "very good balance-profit tracker. cozy chat, support. developing copytrading marketplace.",
       date: "Jun 10, 2024",
-      image: "",
+      image: "https://randomuser.me/api/portraits/men/10.jpg",
     },
     {
       name: "Zhas Ak",
       store: 5,
       text: "In total I have been working with project KYT - Know Your Trader passport for about two years. During this time, I was pleased with the convenience of displaying trading statistics, clear monitoring of the current portfolio situation, and correct dynamics graphs. The opportunity to participate in ratings provides motivation and an incentive for growth. All this data improves trading and makes it more profitable. Special thanks to the support team who are always in touch and eliminate any controversial issues. I recommend this product to all active traders and crypto investors.",
       date: "Jun 12, 2024",
-      image: "",
+      image: "https://randomuser.me/api/portraits/men/11.jpg",
     },
     {
       name: "Anna Petrov",
       store: 3.5,
       text: "An excellent service for monitoring your trading results. I've been using it for a long time and enjoy it. All good",
       date: "Jun 14, 2024",
-      image: "",
+      image: "https://randomuser.me/api/portraits/women/10.jpg",
     },
     {
       name: "Ivan Ivanov",
       store: 4,
       text: "Great resource for trading account monitoring. Works perfectly. My exp. more than 2 years, totally recomended!",
       date: "Jun 15, 2024",
-      image: "",
+      image: "https://randomuser.me/api/portraits/men/12.jpg",
     },
     {
       name: "Sara Lee",
       store: 2,
       text: "Good service with detailed trading account statistics. Shows not only PnL history, but also 50+ other parameters. Very convenient and clear for demonstrating to investors.",
       date: "Jun 16, 2024",
-      image: "",
+      image: "https://randomuser.me/api/portraits/women/11.jpg",
     },
     {
       name: "Liam Johnson",
       store: 2.7,
       text: "Among the many scammers in the market, this is one of the best ways to prove your competence and transparency for free. I really liked the service’s approach to statistics. This is much more than a regular trader's diary!",
       date: "Jun 17, 2024",
-      image: "",
+      image: "https://randomuser.me/api/portraits/men/13.jpg",
     },
     {
       name: "Sophia Kim",
       store: 5,
       text: "I’ve been using this platform to build my reputation as a trader, and it’s been incredibly effective. The verification of my trading history and the detailed performance stats help showcase my skills to potential investors and followers. It’s a great way to gain visibility and credibility in the trading community.",
       date: "Jun 18, 2024",
-      image: "",
+      image: "https://randomuser.me/api/portraits/women/12.jpg",
     },
     {
       name: "James Chen",
       store: 3.5,
       text: "With the copy trading feature, I can maximize my earnings without putting in the work of an active trader. I pick top traders to copy and let the platform handle the rest. It’s been an easy and efficient way to grow my portfolio and generate passive income. Can’t forget to add that I can always manage my assets myself, so that I don't need to worry about my money like if I manage my assets directly to a trader. Overall copy trading on this platform is fantastic and clear, highly recommend",
       date: "Jun 19, 2024",
-      image: "",
+      image: "https://randomuser.me/api/portraits/men/14.jpg",
     },
   ];
+
 
   // Extract initials from the name
   const getInitials = (name) => {
@@ -131,14 +133,18 @@ const Banner = () => {
           <button className="close-button-review" onClick={onClose}>
             X
           </button>
-          <img
-            src={review.image}
-            alt={review.name}
-            className="review-avatar-large"
-          />
-          <h4 className="review-name">{review.name}</h4>
+          <div className="modal-overlay-head">
+            <div className="modal-overlay-head-box">
+              <img
+                src={review.image}
+                alt={review.name}
+                className="review-avatar-large"
+              />
+              <h4 className="review-name-modal">{review.name}</h4>
+            </div>
+            <p className="review-date">{review.date}</p>
+          </div>
           <p className="review-full-text">{review.text}</p>
-          <p className="review-date">{review.date}</p>
         </div>
       </div>
     );

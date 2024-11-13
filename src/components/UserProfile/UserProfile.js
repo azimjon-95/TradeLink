@@ -35,6 +35,22 @@ const UserProfile = () => {
   // user_profile_header_data
   const user_profile_header_data = profileData?.user_profile_header_data || {};
 
+
+  useEffect(() => {
+    // Update the current path in localStorage whenever it changes
+    localStorage.setItem('currentPath', location.pathname);
+    setCurrentPath(location.pathname);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    // Retrieve the stored path from localStorage on component mount
+    const storedPath = localStorage.getItem('currentPath');
+    if (storedPath) {
+      setCurrentPath(storedPath);
+    }
+  }, []);
+
+
   useEffect(() => {
     let API = "/user-profile/user/?user_id=" + id;
     axios
@@ -115,24 +131,34 @@ const UserProfile = () => {
         <div className="strategies-layout">
           {
             true ?
-              <nav nav className="nav-bar">
+              <nav className="nav-bar">
                 <Link
                   to={`/user/${id}`}
                   className={currentPath === `/user/${id}` ? "active" : ""}
+                  style={{
+                    color: currentPath === `/user/${id}` ? '#4A27A9' : 'gray', // Active color
+                    fontWeight: currentPath === `/user/${id}` ? 'bold' : 'normal', // Bold for active
+                  }}
                 >
                   Strategies
                 </Link>
                 <Link
                   to={`/user/${id}/portfolios`}
-                  className={
-                    currentPath === `/user/${id}/portfolios` ? "active" : ""
-                  }
+                  className={currentPath === `/user/${id}/portfolios` ? "active" : ""}
+                  style={{
+                    color: currentPath === `/user/${id}/portfolios` ? '#4A27A9' : 'gray',
+                    fontWeight: currentPath === `/user/${id}/portfolios` ? 'bold' : 'normal',
+                  }}
                 >
                   Portfolios
                 </Link>
                 <Link
                   to={`/user/${id}/jet`}
                   className={currentPath === `/user/${id}/jet` ? "active" : ""}
+                  style={{
+                    color: currentPath === `/user/${id}/jet` ? '#4A27A9' : 'gray',
+                    fontWeight: currentPath === `/user/${id}/jet` ? 'bold' : 'normal',
+                  }}
                 >
                   Jet
                 </Link>

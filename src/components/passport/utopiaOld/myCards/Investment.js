@@ -186,7 +186,7 @@ const Investment = ({ data }) => {
                             <div
                                 style={{
                                     position: 'absolute',
-                                    left: `${sliderValue}%`,
+                                    left: `${sliderValue <= 3 ? sliderValue * (5 / 3) : Math.min(sliderValue, 100)}%`,
                                     transform: 'translateX(-50%)', // Markazdan ko'rsatish
                                     width: '12px', // Sliderning kengligi
                                     height: '12px', // Sliderning balandligi

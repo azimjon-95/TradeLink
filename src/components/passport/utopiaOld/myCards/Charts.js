@@ -83,13 +83,13 @@ const Charts = ({
         <div className="PLByMonth">
           <p>{label}</p>
           <p>
-            Used Leverage:<strong>{payload[0]?.value}</strong>{" "}
+            Used Leverage:<strong>{payload[0]?.value.toFixed(2)}</strong>{" "}
           </p>
           <p>
-            Long positions:<strong>{payload[1]?.value}</strong>{" "}
+            Long positions:<strong>{payload[1]?.value.toFixed(2)}</strong>{" "}
           </p>
           <p>
-            Short positions:<strong>{payload[2]?.value}</strong>{" "}
+            Short positions:<strong>{payload[2]?.value.toFixed(2)}</strong>{" "}
           </p>
         </div>
       );
@@ -398,7 +398,7 @@ const Charts = ({
           >
             <CartesianGrid
               vertical={false}
-              strokeDasharray="3 3"
+              strokeDasharray="0"
               stroke="#e0e0e0"
             />
 
@@ -476,7 +476,12 @@ const Charts = ({
           data={formattedData}
           margin={{ top: 20, right: 0, left: 0, bottom: 5 }}
         >
-          <CartesianGrid vertical={false} strokeDasharray="0" stroke="#ccc" />
+          <CartesianGrid
+            vertical={true} // Enable vertical lines for a full grid
+            horizontal={true} // Ensure horizontal lines are also enabled
+            strokeDasharray="0 0" // Adjust for small dashed pattern
+            stroke="#ccccccd5" // Keep your preferred color
+          />
 
           <XAxis
             dataKey="month"
@@ -496,6 +501,7 @@ const Charts = ({
               />
             ))}
           </Bar>
+
           <YAxis
             tick={{ fontSize: 10 }}
             axisLine={{ stroke: "#a9a9a978" }}
@@ -506,7 +512,7 @@ const Charts = ({
             axisLine={{ stroke: "#a9a9a978" }}
             tickLine={{ stroke: "#a9a9a978" }}
           />
-          <Tooltip content={<CustomTooltip />} />
+          <Tooltip content={<CustomTooltip />} cursor={false} />
           <Legend />
         </BarChart>
       </ResponsiveContainer>
