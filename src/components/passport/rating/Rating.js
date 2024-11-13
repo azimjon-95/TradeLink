@@ -197,7 +197,7 @@ const Leaderboard = () => {
       ),
     },
     {
-      title: "Score",
+      title: "Return",
       dataIndex: "score",
       key: "score",
       align: "center",
