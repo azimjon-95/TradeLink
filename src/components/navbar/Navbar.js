@@ -160,7 +160,7 @@ function Navbar() {
     "/dashboard/success-fee",
     "/user/",
     "/traders-cabinet",
-    "/referral"
+    "/referral",
   ];
 
   useEffect(() => {
@@ -213,9 +213,9 @@ function Navbar() {
   }, [
     location.pathname,
     token,
-    linkOptions,
-    mainPageRoutes,
-    passportOpenRoutes,
+    // linkOptions,
+    // mainPageRoutes,
+    // passportOpenRoutes,
   ]);
 
   const handleClick = (path) => {
@@ -250,7 +250,6 @@ function Navbar() {
       message.error("Logout failed. Please try again.");
     }
   };
-  console.log(payload);
 
   const popoverContent = (
     <div className="popoverContent">

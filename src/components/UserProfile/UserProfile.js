@@ -43,6 +43,8 @@ const UserProfile = () => {
       .catch((err) => console.log(err));
   }, [id]);
 
+  console.log(profileData);
+
   useEffect(() => {
     setCurrentPath(location.pathname);
   }, [location]);
