@@ -5,6 +5,7 @@ import { CheckSquareTwoTone } from "@ant-design/icons";
 import { RiExpandDiagonalLine } from "react-icons/ri";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import myAxios from "axios";
 import { setModalType } from "../../../context/modalType";
 import axios from "../../../api";
 import bin from "../../../assets/ed_khan/binance_rounded.svg";
@@ -13,8 +14,6 @@ import "./style.css";
 import KeyIndicators from "./myCards/KeyIndicators";
 import Charts from "./myCards/Charts";
 import Investment from "./myCards/Investment";
-
-
 
 const { RangePicker } = DatePicker;
 
@@ -34,19 +33,18 @@ const UtopiaOldMultiLine = () => {
   const handleClick = () => {
     if (token) {
       // Toggle stars between 1 and 0, and switch icon
-      setStars(prevStars => (prevStars === 0 ? 1 : 0));
-      setIsClicked(prevIsClicked => !prevIsClicked);
+      setStars((prevStars) => (prevStars === 0 ? 1 : 0));
+      setIsClicked((prevIsClicked) => !prevIsClicked);
     } else {
       dispatch(setModalType("signUp")); // Show sign-up modal if token is missing
     }
   };
 
-
-  // getData
+  // getData;
   useEffect(() => {
     setTopLoader(true);
-    let API = `/portfolio/main-indicators/?portfolio_id=${baseId}&time_step=${selectValue}`;
-    axios
+    let API = `https://api.kyt.systems/portfolio/main-indicators?portfolio_id=${baseId}&time_step=${selectValue}`;
+    myAxios
       .get(API)
       .then((res) => {
         setData(res?.data?.data);
@@ -62,7 +60,7 @@ const UtopiaOldMultiLine = () => {
       .get(API)
       .then((res) => setChartData(res?.data?.data))
       .catch((err) => console.log(err));
-  }, [baseId, selectValue]); // re-fetch if baseId or selectValue changes
+  }, [baseId, selectValue]);
 
   // ===============useParams========================
   // const getQueryParams = () => {

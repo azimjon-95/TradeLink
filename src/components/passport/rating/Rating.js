@@ -5,6 +5,7 @@ import { Select, Skeleton, Switch, Table } from "antd";
 import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 import { FaCheck } from "react-icons/fa6";
 import moment from "moment/moment";
+import InfiniteScroll from "react-infinite-scroll-component";
 import axios from "../../../api";
 import binance from "../../../assets/ed_khan/binance_rounded.svg";
 import avatar from "../../../assets/ed_khan/avatar.png";
@@ -18,24 +19,20 @@ const Leaderboard = () => {
   const navigate = useNavigate();
 
   const [isModal, setIsModal] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(() => {
-    return localStorage.getItem("selectedOption") || "score";
-  });
+  const [selectedOption, setSelectedOption] = useState("score");
   const modalRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContentType, setModalContentType] = useState("");
 
-  const [filterOption, setFilterOption] = useState("score");
+  const [filterOption, setFilterOption] = useState("");
   const [showInactive, setShowInactive] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loadingTop, setLoadingTop] = useState(true);
   const [portfolios, setPortfolios] = useState([]);
   const [leaderboardData, setLeaderboardData] = useState(null);
 
-
-  const loader = useRef(null);
   const [page, setPage] = useState(0);
-  const [lastData, setLastData] = useState([]);
+
   useEffect(() => {
     setLoadingTop(true);
     let API = `leaderboard/three-top-units?sort_type=${selectedOption}`;
@@ -57,67 +54,19 @@ const Leaderboard = () => {
   // get LeaderBoard table Data
   useEffect(() => {
     setLoading(true);
-    let API = `/leaderboard/top-traders?page=${page}&show_non_active=${showInactive}&sort_type=${filterOption}`;
+    let API = `/leaderboard/top-traders?page=${page}&show_non_active=${showInactive}&sort_type=${
+      filterOption || selectedOption
+    }`;
+
     axios
       .get(API)
       .then((res) => {
-        // setPortfolios([...portfolios, ...res?.data?.data]);
-        setPortfolios((p) => [...p, ...res?.data?.data]);
-        setLastData(res?.data?.data);
+        // setPortfolios((p) => [...p, ...res?.data?.data]);
+        setPortfolios(res?.data?.data);
       })
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
-  }, [showInactive, filterOption, page]);
-
-  // ----------------------------------------------------------------------------
-  // useEffect(() => {
-  //   if (lastData?.length <= 25) {
-  //     const observer = new IntersectionObserver(
-  //       (entries) => {
-  //         if (entries[0].isIntersecting) {
-  //           setPage((prevPage) => prevPage + 1);
-  //         }
-  //       },
-  //       { threshold: 1 }
-  //     );
-
-  //     if (loader.current) {
-  //       observer.observe(loader.current);
-  //     }
-
-  //     return () => {
-  //       if (loader.current) {
-  //         observer.unobserve(loader.current);
-  //       }
-  //     };
-  //   }
-  // }, []);
-
-  useEffect(() => {
-    if (lastData?.length <= 25) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          if (entries.some((entry) => entry.isIntersecting)) {
-            setPage((prevPage) => prevPage + 1);
-          }
-        },
-        { threshold: 1 }
-      );
-
-      // Copy loader.current to a local variable
-      const loaderElement = loader.current;
-
-      if (loaderElement) {
-        observer.observe(loaderElement);
-      }
-
-      return () => {
-        if (loaderElement) {
-          observer.unobserve(loaderElement);
-        }
-      };
-    }
-  }, [lastData]);
+  }, [showInactive, filterOption, page, selectedOption]);
 
   // ----------------------------------------------------------------------------
 
@@ -125,7 +74,6 @@ const Leaderboard = () => {
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
-    localStorage.setItem("selectedOption", option);
     setIsModal(false);
   };
 
@@ -419,91 +367,68 @@ const Leaderboard = () => {
             />
             Show non-active
           </label>
-
-          {/* Filter select */}
-          {/* <Select
-            value={filterOption}
-            onChange={(value) => setFilterOption(value)}
-            style={{ width: 150 }}
-            popupMatchSelectWidth={false} // Adjust dropdown width if needed
-          >
-            <Option value="score">
-              Score{" "}
-              <AiFillCaretDown style={{ fontSize: "18px", color: "#555" }} />
-            </Option>
-            <Option value="profit">
-              Profit{" "}
-              <AiFillCaretUp style={{ fontSize: "18px", color: "#555" }} />
-            </Option>
-            <Option value="-profit">
-              Profit{" "}
-              <AiFillCaretDown style={{ fontSize: "18px", color: "#555" }} />
-            </Option>
-            <Option value="-maxdd">
-              MaxDD{" "}
-              <AiFillCaretDown style={{ fontSize: "18px", color: "#555" }} />
-            </Option>
-            <Option value="maxdd">
-              MaxDD{" "}
-              <AiFillCaretUp style={{ fontSize: "18px", color: "#555" }} />
-            </Option>
-          </Select> */}
           <Select
             value={filterOption}
             onChange={(value) => setFilterOption(value)}
             style={{ width: 150 }}
             popupMatchSelectWidth={false} // Adjust dropdown width if needed
           >
-            <Option className="custom-option" value="return">
-              Return (%){" "}
-              <AiFillCaretDown />
-            </Option>
-            <Option className="custom-option" value="-return">
-              Return (%){" "}
-              <AiFillCaretUp />
-            </Option>
-            <Option className="custom-option" value="profit">
-              Profit ($){" "}
-              <AiFillCaretDown />
+            <Option className="custom-option" value="score">
+              Score <AiFillCaretDown />
             </Option>
             <Option className="custom-option" value="-profit">
-              Profit ($){" "}
-              <AiFillCaretUp />
+              Return (%) <AiFillCaretDown />
+            </Option>
+            <Option className="custom-option" value="profit">
+              Return (%) <AiFillCaretUp />
             </Option>
             <Option className="custom-option" value="-maxdd">
-              MDD{" "}
-              <AiFillCaretDown />
+              MDD <AiFillCaretDown />
             </Option>
             <Option className="custom-option" value="maxdd">
-              MDD{" "}
-              <AiFillCaretUp />
+              MDD <AiFillCaretUp />
             </Option>
           </Select>
         </div>
-        {/* Portfolio Cards */}
         <div className="portfolio-list">
-          <Table
-            loading={loading}
-            columns={columns}
-            dataSource={portfolios}
-            rowKey={(record, index) => index}
-            pagination={false}
-            scroll={{ x: "100%" }} // For responsive scrolling
-            size="small"
-            onRow={(record) => ({
-              onClick: () => {
-                const timestamp = getTimestamp();
-                navigate(`/portfolio/${record.portfolio_id}?t=${timestamp}`);
-              },
-            })}
-          />
-          {/* {loading && <p>Loading...</p>} */}
+          <InfiniteScroll
+            dataLength={portfolios?.length} // Current number of portfolios
+            next={() => setPage((prevPage) => prevPage + 1)} // Load more data
+            hasMore={!loading} // Continue loading if not already loading
+            // loader={<h4>Loading...</h4>} // Loading indicator
+            // endMessage={
+            // <p style={{ textAlign: "center" }}>
+            //   <b>Yay! You have seen it all</b>
+            // </p>
+            // }
+          >
+            {/* O'rab turgan div InfiniteScroll uchun kerak */}
+            <div>
+              <Table
+                loading={loading}
+                columns={columns}
+                dataSource={portfolios}
+                rowKey={(record) => record.portfolio_id} //
+                pagination={false}
+                scroll={{ x: "100%" }} // Responsive scrolling
+                size="small"
+                onRow={(record) => ({
+                  onClick: () => {
+                    const timestamp = getTimestamp();
+                    navigate(
+                      `/portfolio/${record.portfolio_id}?t=${timestamp}`
+                    );
+                  },
+                })}
+              />
 
-          <div ref={loader} className="loader_box">
-            {loading && (
-              <div className="loader" style={{ height: "20px" }}></div>
-            )}
-          </div>
+              <div className="loader_box">
+                {loading && (
+                  <div className="loader" style={{ height: "20px" }}></div>
+                )}
+              </div>
+            </div>
+          </InfiniteScroll>
         </div>
       </div>
     </div>
@@ -512,18 +437,16 @@ const Leaderboard = () => {
 
 // ====================Boshqa file bu=======================
 const LeaderboardCard = ({ title, data, date, loadingTop }) => {
-  console.log(data);
-
   const getTimestamp = () => Math.floor(Date.now() / 1000); // Get current timestamp in seconds
 
   const getRankColor = (rank) =>
     rank === 1
       ? "#FBAF3D"
       : rank === 2
-        ? "#C0C8E0"
-        : rank === 3
-          ? "#D5B678"
-          : "#fff";
+      ? "#C0C8E0"
+      : rank === 3
+      ? "#D5B678"
+      : "#fff";
 
   return (
     <div className="leaderboard-card">
@@ -542,7 +465,10 @@ const LeaderboardCard = ({ title, data, date, loadingTop }) => {
           <>
             {/* `/portfolio/${record.portfolio_id}?t=${timestamp}` */}
             {data?.map((item, index) => (
-              <Link to={`/portfolio/${item?.portfolio_id}?t=${getTimestamp()}`} key={index}>
+              <Link
+                to={`/portfolio/${item?.portfolio_id}?t=${getTimestamp()}`}
+                key={index}
+              >
                 <li>
                   <div className="leaderboard-rank-box">
                     <span
@@ -571,7 +497,6 @@ const LeaderboardCard = ({ title, data, date, loadingTop }) => {
                   <p className="leaderboard-score">
                     {item?.score?.toFixed(2) ||
                       item?.profit_percentage?.toFixed(2)}
-
                   </p>
                 </li>
               </Link>
