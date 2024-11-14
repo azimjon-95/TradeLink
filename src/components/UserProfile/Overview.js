@@ -1,6 +1,7 @@
 import React, { useState } from "react"; // Import React at the top
 import { Input, Tooltip } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 import LineChart from "../../hooks/LineChart";
 import ed_khan from "../../assets/ed_khan/Ed_Khan.png";
 import binance_rounded from "../../assets/ed_khan/binance_rounded.svg";
@@ -197,50 +198,56 @@ const Overview = () => {
     portfolio.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
   return (
-    <>
-      <div className="menus-khan-page">
-        <h2>Overview</h2>
-        <div className="overview-container">
-          <div className="menus-khan-card">
-            <Tooltip title="This shows the total assets under management">
-              <h3>KYT AUM</h3>
-            </Tooltip>
-            <p>$00.00K</p>
-            <span>Impressive capital!</span>
+    <>{false ?
+      <>
+        <div className="menus-khan-page">
+          <h2>Overview</h2>
+          <div className="overview-container">
+            <div className="menus-khan-card">
+              <Tooltip title="This shows the total assets under management">
+                <h3>KYT AUM</h3>
+              </Tooltip>
+              <p>$00.00K</p>
+              <span>Impressive capital!</span>
+            </div>
+            <div className="menus-khan-card">
+              <Tooltip title="Total number of investors">
+                <h3>Total Investors</h3>
+              </Tooltip>
+              <p>0</p>
+              <span>A lot of investors respect this user!</span>
+            </div>
+            <div className="menus-khan-card">
+              <Tooltip title="Average monthly income percentage">
+                <h3>Average Monthly Income</h3>
+              </Tooltip>
+              <p>0.00%</p>
+              <span>It's sad to think about the loss.</span>
+            </div>
           </div>
-          <div className="menus-khan-card">
-            <Tooltip title="Total number of investors">
-              <h3>Total Investors</h3>
-            </Tooltip>
-            <p>0</p>
-            <span>A lot of investors respect this user!</span>
-          </div>
-          <div className="menus-khan-card">
-            <Tooltip title="Average monthly income percentage">
-              <h3>Average Monthly Income</h3>
-            </Tooltip>
-            <p>0.00%</p>
-            <span>It's sad to think about the loss.</span>
+          <div className="khan-search">
+            <b>Public strategies</b>
+            <Input
+              className="menus-khan-search-bar"
+              placeholder="Search by name"
+              prefix={<SearchOutlined />}
+              size="small"
+              value={searchQuery}
+              onChange={handleSearchChange} // Update search query on input change
+            />
           </div>
         </div>
-        <div className="khan-search">
-          <b>Public strategies</b>
-          <Input
-            className="menus-khan-search-bar"
-            placeholder="Search by name"
-            prefix={<SearchOutlined />}
-            size="small"
-            value={searchQuery}
-            onChange={handleSearchChange} // Update search query on input change
-          />
-        </div>
-      </div>
 
-      <div className="overview-container">
-        {filteredPortfolios?.map((portfolio, index) => (
-          <OverviewCard key={index} {...portfolio} />
-        ))}
-      </div>
+        <div className="overview-container">
+          {filteredPortfolios?.map((portfolio, index) => (
+            <OverviewCard key={index} {...portfolio} />
+          ))}
+        </div>
+      </>
+      :
+      <p className="user-menus">You don't have a public portfolio yet. You can either create one or choose to make an existing portfolio public in the <Link style={{ textDecoration: "underline", color: "#000" }} to="/passport/dashboard">dashboard.</Link> </p>
+
+    }
     </>
   );
 };

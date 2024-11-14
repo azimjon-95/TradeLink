@@ -57,7 +57,6 @@ const Leaderboard = () => {
     let API = `/leaderboard/top-traders?page=${page}&show_non_active=${showInactive}&sort_type=${
       filterOption || selectedOption
     }`;
-    console.log(API);
 
     axios
       .get(API)

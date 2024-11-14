@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Input, Tooltip } from "antd";
+import { Link } from "react-router-dom";
 import { SearchOutlined } from "@ant-design/icons";
 import binance_rounded from "../../assets/ed_khan/binance_rounded.svg";
 import "./styles/style.css"; // Import the CSS file
@@ -46,85 +47,92 @@ const Jet = ({
 
   return (
     <>
-      <div className="menus-khan-page">
-        <h2>Overview</h2>
-        <div className="overview-container">
-          <div className="menus-khan-card">
-            <Tooltip title="This shows the total assets under management">
-              <h3>KYT AUM</h3>
-            </Tooltip>
-            <p>-$0.0</p>
-            <span>Impressive capital!</span>
-          </div>
-          <div className="menus-khan-card">
-            <Tooltip title="Total number of investors">
-              <h3>Total Investors</h3>
-            </Tooltip>
-            <p>$0.0K</p>
-            <span>A lot of investors respect this user!</span>
-          </div>
-        </div>
-        <div className="khan-search">
-          <b>Public strategies</b>
-          <Input
-            className="menus-khan-search-bar"
-            placeholder="Search by name"
-            prefix={<SearchOutlined />}
-            size="small"
-          />
-        </div>
-      </div>
-
-      <div className="overview-container">
-        <div className="over-card">
-          <div className="jet-header">
-            <div className="over-header">
-              <div className="image-khan-portf">
-                <img src={binance_rounded} alt="Logo" />
+      {false ?
+        <>
+          <div className="menus-khan-page">
+            <h2>Overview</h2>
+            <div className="overview-container">
+              <div className="menus-khan-card">
+                <Tooltip title="This shows the total assets under management">
+                  <h3>KYT AUM</h3>
+                </Tooltip>
+                <p>-$0.0</p>
+                <span>Impressive capital!</span>
               </div>
-              <div>
-                <h4 className="over-title">Counter Trend Index Lite</h4>
+              <div className="menus-khan-card">
+                <Tooltip title="Total number of investors">
+                  <h3>Total Investors</h3>
+                </Tooltip>
+                <p>$0.0K</p>
+                <span>A lot of investors respect this user!</span>
               </div>
             </div>
-
-            <span className="jet-strategies">5 strategies</span>
-          </div>
-
-          <div className="jet-stats">
-            <div>
-              <p className="jet-value">$0.00K</p>
-              <p className="jet-label">Margin Balance</p>
-            </div>
-            <div>
-              <p className="jet-value">-0.00%</p>
-              <p className="jet-label">Profit, All</p>
-            </div>
-            <div>
-              <p className="jet-value">0.00%</p>
-              <p className="jet-label">MDD</p>
-            </div>
-            <div>
-              <p className="jet-value">-$00</p>
-              <p className="jet-label">Profit ($)</p>
+            <div className="khan-search">
+              <b>Public strategies</b>
+              <Input
+                className="menus-khan-search-bar"
+                placeholder="Search by name"
+                prefix={<SearchOutlined />}
+                size="small"
+              />
             </div>
           </div>
 
-          <svg width={chartWidth} height={chartHeight} className="jet-chart">
-            <polygon points={filledPoints} fill="#f7e5e0" />
-            <polyline
-              points={points}
-              fill="none"
-              stroke="#e57373"
-              strokeWidth="1"
-            />
-          </svg>
+          <div className="overview-container">
+            <div className="over-card">
+              <div className="jet-header">
+                <div className="over-header">
+                  <div className="image-khan-portf">
+                    <img src={binance_rounded} alt="Logo" />
+                  </div>
+                  <div>
+                    <h4 className="over-title">Counter Trend Index Lite</h4>
+                  </div>
+                </div>
 
-          <div className="jet-footer">
-            <span className="jet-status">Running</span>
-            <button className="jet-moreButton">More</button>
+                <span className="jet-strategies">5 strategies</span>
+              </div>
+
+              <div className="jet-stats">
+                <div>
+                  <p className="jet-value">$0.00K</p>
+                  <p className="jet-label">Margin Balance</p>
+                </div>
+                <div>
+                  <p className="jet-value">-0.00%</p>
+                  <p className="jet-label">Profit, All</p>
+                </div>
+                <div>
+                  <p className="jet-value">0.00%</p>
+                  <p className="jet-label">MDD</p>
+                </div>
+                <div>
+                  <p className="jet-value">-$00</p>
+                  <p className="jet-label">Profit ($)</p>
+                </div>
+              </div>
+
+              <svg width={chartWidth} height={chartHeight} className="jet-chart">
+                <polygon points={filledPoints} fill="#f7e5e0" />
+                <polyline
+                  points={points}
+                  fill="none"
+                  stroke="#e57373"
+                  strokeWidth="1"
+                />
+              </svg>
+
+              <div className="jet-footer">
+                <span className="jet-status">Running</span>
+                <button className="jet-moreButton">More</button>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </>
+        :
+        <p className="user-menus">You don't have a public portfolio yet. You can either create one or choose to make an existing portfolio public in the <Link style={{ textDecoration: "underline", color: "#000" }} to="/passport/dashboard">dashboard.</Link> </p>
+
+      }
     </>
   );
 };

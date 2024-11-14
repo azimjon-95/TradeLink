@@ -31,7 +31,7 @@ const routes = [
   { path: "/trader-cabinet", element: <TradersCabinet />, protected: false },
   { path: "/traders-cabinet", element: <TradersCabinet />, protected: false },
   { path: "/user/:id/*", element: <UserProfile />, protected: true },
-  { path: "/portfolio/:id", element: <UtopiaOldMultiLine />, protected: true },
+  { path: "/portfolio/:id", element: <UtopiaOldMultiLine />, protected: false },
   { path: "/faq", element: <Faq />, protected: false },
   { path: "/", element: <Home />, protected: false },
   // ====Passport=====

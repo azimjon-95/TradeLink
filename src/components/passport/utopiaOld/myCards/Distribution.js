@@ -60,7 +60,7 @@ const Distribution = ({ data }) => {
                         tickLine={false}
                     />
                     <YAxis tick={{ fontSize: 10 }} axisLine={{ stroke: '#a9a9a978' }} tickLine={{ stroke: '#a9a9a978' }} />
-                    <Tooltip content={<CustomTooltip />} />
+                    <Tooltip content={<CustomTooltip />} cursor={false} />
                     <Legend />
                     <Bar dataKey="abs" name="Order Amount" barSize={activePeriod === "Daily" ? 20 : 60} fill="#14C886">
                         {formattedData?.map((entry, index) => (

@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { ImStarEmpty } from "react-icons/im";
+import { ImStarEmpty, ImStarFull } from "react-icons/im";
 import { Checkbox, Select, DatePicker, Space, Switch } from "antd";
 import { CheckSquareTwoTone } from "@ant-design/icons";
 import { RiExpandDiagonalLine } from "react-icons/ri";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import myAxios from "axios";
+import { setModalType } from "../../../context/modalType";
 import axios from "../../../api";
 import bin from "../../../assets/ed_khan/binance_rounded.svg";
 import MyCards from "./myCards/MyCards";
@@ -15,6 +18,7 @@ import Investment from "./myCards/Investment";
 const { RangePicker } = DatePicker;
 
 const UtopiaOldMultiLine = () => {
+  const dispatch = useDispatch();
   const [isLite, setIsLite] = useState(false);
   const [activeTab, setActiveTab] = useState("main");
   const [selectValue, setSelectValue] = useState("hour");
@@ -22,14 +26,25 @@ const UtopiaOldMultiLine = () => {
   const [topLoader, setTopLoader] = useState(false);
   const [chartData, setChartData] = useState({});
   const { id: baseId } = useParams();
-  // const location = useLocation();
+  const [stars, setStars] = useState(0);
+  const [isClicked, setIsClicked] = useState(false); // Track icon click state
+  const token = localStorage.getItem("access_token");
 
-  console.log(">>>>>", data);
-  // getData
+  const handleClick = () => {
+    if (token) {
+      // Toggle stars between 1 and 0, and switch icon
+      setStars((prevStars) => (prevStars === 0 ? 1 : 0));
+      setIsClicked((prevIsClicked) => !prevIsClicked);
+    } else {
+      dispatch(setModalType("signUp")); // Show sign-up modal if token is missing
+    }
+  };
+
+  // getData;
   useEffect(() => {
     setTopLoader(true);
-    let API = `/portfolio/main-indicators/?portfolio_id=${baseId}&time_step=${selectValue}`;
-    axios
+    let API = `https://api.kyt.systems/portfolio/main-indicators?portfolio_id=${baseId}&time_step=${selectValue}`;
+    myAxios
       .get(API)
       .then((res) => {
         setData(res?.data?.data);
@@ -45,7 +60,7 @@ const UtopiaOldMultiLine = () => {
       .get(API)
       .then((res) => setChartData(res?.data?.data))
       .catch((err) => console.log(err));
-  }, [baseId, selectValue]); // re-fetch if baseId or selectValue changes
+  }, [baseId, selectValue]);
 
   // ===============useParams========================
   // const getQueryParams = () => {
@@ -142,8 +157,12 @@ const UtopiaOldMultiLine = () => {
           <p>0 views</p>
           <p>•</p>
           <p>
-            {" "}
-            0 stars <ImStarEmpty />
+            {stars} stars{" "}
+            {isClicked ? (
+              <ImStarFull color="gold" onClick={handleClick} /> // Filled gold icon after click
+            ) : (
+              <ImStarEmpty color="black" onClick={handleClick} /> // Empty icon before click
+            )}
           </p>
         </div>
         {/* <p>My copy trading: <a href={currentUrl} target="_blank" rel="noopener noreferrer">{currentUrl}</a> https://example.com</p> */}
