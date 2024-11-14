@@ -144,7 +144,11 @@ const UtopiaOldMultiLine = () => {
     drawDown: true,
     drawDownDuration: true,
   });
-  // const currentUrl = window.location.href;
+
+  useEffect(() => {
+    document.title = data?.user_name || "KYT-know your trader";
+  }, [data?.user_name]);
+
   return (
     <div className="oldMultiLine">
       <div className="oldMultiLine-header">
@@ -156,10 +160,10 @@ const UtopiaOldMultiLine = () => {
           <img width={25} src={data?.user_avatar || bin} alt="" />
           <p>{data?.user_name || ""}</p>
           <p>•</p>
-          <p>0 views</p>
+          <p>{data?.views || 0} views</p>
           <p>•</p>
           <p>
-            {stars} stars{" "}
+            {(data?.stars ?? 0) + stars}{" "}
             {isClicked ? (
               <ImStarFull color="gold" onClick={handleClick} /> // Filled gold icon after click
             ) : (

@@ -56,7 +56,7 @@ const Charts = ({
                     width: "8px",
                     height: "8px",
                     borderRadius: "50%",
-                    border: `2px solid ${item.color || "#EA3941"}`,
+                    border: `2px solid ${"#14C886" || "#EA3941"}`,
                   }}
                 ></div>
                 {item.name}: <strong>{Math.floor(item.value)}</strong>
@@ -83,19 +83,55 @@ const Charts = ({
         <div className="PLByMonth">
           <p>{label}</p>
           <p>
-            Used Leverage:<strong>{payload[0]?.value.toFixed(2)}</strong>{" "}
+            <strong style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+              <div
+                style={{
+                  width: "8px",
+                  height: "8px",
+                  borderRadius: "50%",
+                  border: `2px solid #14C886`,
+                }}
+              ></div>
+              Used Leverage:
+              {payload[0]?.value.toFixed(2)}
+            </strong>
           </p>
           <p>
-            Long positions:<strong>{payload[1]?.value.toFixed(2)}</strong>{" "}
+            <strong style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+              <div
+                style={{
+                  width: "8px",
+                  height: "8px",
+                  borderRadius: "50%",
+                  border: `2px solid  #EA3941`,
+                }}
+              ></div>
+              Long positions:
+              {payload[1]?.value.toFixed(2)}
+            </strong>
           </p>
           <p>
-            Short positions:<strong>{payload[2]?.value.toFixed(2)}</strong>{" "}
+            <strong style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+
+              <div
+                style={{
+                  display: "inline-block",
+                  width: "8px",
+                  height: "8px",
+                  borderRadius: "50%",
+                  border: `2px solid  ${payload[2]?.stroke}`,
+                }}
+              ></div>
+              Short positions:
+              {payload[2]?.value.toFixed(2)}
+            </strong>
           </p>
         </div>
       );
     }
     return null;
   };
+
 
   let dataBottom = chartData?.drawdown_duration?.map((item, index) => {
     let data = new Date(item?.timestamp);
@@ -106,28 +142,50 @@ const Charts = ({
     };
   });
 
-  // Custom Tooltip Component
+
   const CustomTooltipBottom = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
         <div className="PLByMonth">
-          <p style={{ fontWeight: "bold" }}>{label}</p>
+          <p>{label}</p>
           <p>
-            DrawDown:{" "}
-            <strong>{payload[0]?.payload?.drawdown?.toFixed(2)}%</strong>
+            <strong style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+
+              <div
+                style={{
+                  display: "inline-block",
+                  width: "8px",
+                  height: "8px",
+                  borderRadius: "50%",
+                  border: `2px solid #85bafe`, // Color based on value
+                }}
+              ></div>
+              DrawDown:{" "}
+              {payload[0]?.payload?.drawdown?.toFixed(2)}%
+            </strong>
           </p>
           <p>
-            DrawDown Duration:{" "}
-            <strong>
+            <strong style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+
+              <div
+                style={{
+                  display: "inline-block",
+                  width: "8px",
+                  height: "8px",
+                  borderRadius: "50%",
+                  border: `2px solid #4180D2`, // Color based on value
+                }}
+              ></div>
+              DrawDown Duration:{" "}
               {payload[1]?.payload?.drawdown_duration?.toFixed(2)}%
             </strong>
           </p>
+
         </div>
       );
     }
     return null;
   };
-
   // ---------------------------12A-----------------------------------
 
   const [data, setData] = useState(null); // State for fetched data
@@ -156,11 +214,24 @@ const Charts = ({
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       const revenue = payload[0].value;
+      const isPositive = revenue >= 0;
+
       return (
         <div className="PLByMonth">
           <p>{label}</p>
           <p>
-            P/L by month:<strong>{Math.floor(revenue)}%</strong>{" "}
+            <span
+              style={{
+                display: 'inline-block',
+                width: '8px',
+                height: '8px',
+                borderRadius: '50%',
+                backgroundColor: isPositive ? 'green' : 'red',
+                marginRight: '5px'
+              }}
+            ></span>
+            P/L by month:
+            <strong>{Math.floor(revenue)}%</strong>
           </p>
         </div>
       );
@@ -493,7 +564,7 @@ const Charts = ({
             tickLine={false}
           />
 
-          <Bar dataKey="revenue" barSize={20}>
+          <Bar dataKey="revenue" barSize={formattedData?.length <= 5 ? 40 : formattedData?.length <= 10 ? 30 : 20}>
             {formattedData?.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
