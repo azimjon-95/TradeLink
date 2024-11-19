@@ -18,7 +18,7 @@ const Passport = () => {
       <OurMission />
       <Ads
         extra_class="ads_1"
-        ads_title="Hear What the Community is Saying About KYT Passport"
+        ads_title="Hear What the Community is Saying About KYT Traders Passport"
         ads_text="We value your feedback; it helps us improve."
         ads_button={"Review us on Trustpilot"}
       />
@@ -32,7 +32,7 @@ const Passport = () => {
 
       <Ads
         extra_class="ads_3"
-        ads_title="Build Your Crypto Trading Reputation on KYT Passport"
+        ads_title="Build Your Crypto Trading Reputation on KYT Traders Passport"
         ads_text="Showcase your verified performance and connect with the world's leading investors."
         ads_button={"Get Started For FREE"}
       />

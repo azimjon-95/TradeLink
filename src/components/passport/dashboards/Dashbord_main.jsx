@@ -24,10 +24,9 @@ function Dashbord_main() {
             <div>
               {true ? (
                 <div className="empty_my_keys">
-                  <h3>There's nothing here yet</h3>
+                  <h3>Content is coming soon, stay tuned!</h3>
                   <p>
-                    Add your first exchange API key to view trading statistics
-                    and create a portfolio.
+                    Connect your first exchange API key to access trading stats and build your portfolio.
                   </p>
                   <button onClick={() => setOpenModal(true)}>Add key</button>
                 </div>
@@ -58,8 +57,7 @@ function Dashbord_main() {
                 <div className="empty_my_keys">
                   <h3>There's nothing here yet</h3>
                   <p>
-                    Create a portfolio to present to clients or participate in
-                    the trader rating
+                    Build a portfolio to showcase to clients or take part in the trader ranking.
                   </p>
                   <button>Add portfolio</button>
                 </div>
@@ -90,8 +88,7 @@ function Dashbord_main() {
                 <div className="empty_my_keys">
                   <h3>Add your preferred strategy to your favorites</h3>
                   <p>
-                    Go to the user's page from the leaderboard and add your
-                    favorite strategy to your favorites.
+                    Visit the user's page from the leaderboard and add your favorite strategy to your list of favorites.
                   </p>
                   <button>Go to leraderboard page</button>
                 </div>

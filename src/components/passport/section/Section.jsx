@@ -21,11 +21,10 @@ function Section() {
     <section>
       <div className="section_container">
         <h1 className="section_title">
-          The Definitive Global Benchmark <br /> for Crypto Traders
+          The Ultimate Global Standard for Crypto Traders.
         </h1>
         <h3>
-          Authenticate your trading success with unalterable data from <br />
-          trusted exchanges.
+          Verify your trading success with immutable data from reliable exchanges.
         </h3>
         {
           !token &&

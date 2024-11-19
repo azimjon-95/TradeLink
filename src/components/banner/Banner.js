@@ -8,7 +8,9 @@ import { useDispatch } from "react-redux";
 import bt_binance from "../../assets/banner/supporters.png";
 import bt_passport from "../../assets/banner/passport.png";
 import bt_widget from "../../assets/banner/widget.png";
-import bt_benefits_faces from "../../assets/banner/benefits-faces.png";
+import avatar_img1 from "../../assets/banner/fase2.png";
+import avatar_img2 from "../../assets/banner/fase3.png";
+import avatar_img3 from "../../assets/banner/fase1.png";
 import bt_indexes from "../../assets/banner/indexes.png";
 import bt_jet from "../../assets/banner/Instagram-post.png";
 import { setModalType } from "../../context/modalType";
@@ -21,60 +23,60 @@ const Banner = () => {
 
   const reviews = [
     {
-      name: "Bogdan Miroshnichenko",
-      store: 3,
-      text: "very good balance-profit tracker. cozy chat, support. developing copytrading marketplace.",
-      date: "Jun 10, 2024",
-      image: "https://randomuser.me/api/portraits/men/10.jpg",
-    },
-    {
-      name: "Zhas Ak",
+      name: "Maria Ivanova",
       store: 5,
-      text: "In total I have been working with project KYT - Know Your Trader passport for about two years. During this time, I was pleased with the convenience of displaying trading statistics, clear monitoring of the current portfolio situation, and correct dynamics graphs. The opportunity to participate in ratings provides motivation and an incentive for growth. All this data improves trading and makes it more profitable. Special thanks to the support team who are always in touch and eliminate any controversial issues. I recommend this product to all active traders and crypto investors.",
-      date: "Jun 12, 2024",
-      image: "https://randomuser.me/api/portraits/men/11.jpg",
+      text: "I absolutely love this service! It provides detailed trading analytics, easy portfolio management, and the support team is always responsive. A must-have for any trader.",
+      date: "Jun 21, 2024",
+      image: "https://randomuser.me/api/portraits/women/13.jpg",
     },
     {
-      name: "Anna Petrov",
-      store: 3.5,
-      text: "An excellent service for monitoring your trading results. I've been using it for a long time and enjoy it. All good",
-      date: "Jun 14, 2024",
-      image: "https://randomuser.me/api/portraits/women/10.jpg",
-    },
-    {
-      name: "Ivan Ivanov",
+      name: "Alexey Smirnov",
       store: 4,
-      text: "Great resource for trading account monitoring. Works perfectly. My exp. more than 2 years, totally recomended!",
-      date: "Jun 15, 2024",
-      image: "https://randomuser.me/api/portraits/men/12.jpg",
+      text: "The platform offers a user-friendly interface for tracking trading results. I’ve been using it for a year, and it has helped me improve my strategies. Highly recommended!",
+      date: "Jun 20, 2024",
+      image: "https://randomuser.me/api/portraits/men/8.jpg",
     },
     {
-      name: "Sara Lee",
-      store: 2,
-      text: "Good service with detailed trading account statistics. Shows not only PnL history, but also 50+ other parameters. Very convenient and clear for demonstrating to investors.",
-      date: "Jun 16, 2024",
-      image: "https://randomuser.me/api/portraits/women/11.jpg",
-    },
-    {
-      name: "Liam Johnson",
-      store: 2.7,
-      text: "Among the many scammers in the market, this is one of the best ways to prove your competence and transparency for free. I really liked the service’s approach to statistics. This is much more than a regular trader's diary!",
-      date: "Jun 17, 2024",
-      image: "https://randomuser.me/api/portraits/men/13.jpg",
-    },
-    {
-      name: "Sophia Kim",
-      store: 5,
-      text: "I’ve been using this platform to build my reputation as a trader, and it’s been incredibly effective. The verification of my trading history and the detailed performance stats help showcase my skills to potential investors and followers. It’s a great way to gain visibility and credibility in the trading community.",
-      date: "Jun 18, 2024",
-      image: "https://randomuser.me/api/portraits/women/12.jpg",
-    },
-    {
-      name: "James Chen",
+      name: "Dmitry Petrov",
       store: 3.5,
-      text: "With the copy trading feature, I can maximize my earnings without putting in the work of an active trader. I pick top traders to copy and let the platform handle the rest. It’s been an easy and efficient way to grow my portfolio and generate passive income. Can’t forget to add that I can always manage my assets myself, so that I don't need to worry about my money like if I manage my assets directly to a trader. Overall copy trading on this platform is fantastic and clear, highly recommend",
-      date: "Jun 19, 2024",
-      image: "https://randomuser.me/api/portraits/men/14.jpg",
+      text: "A good platform for monitoring trades and keeping track of performance. The analytics could be more detailed, but overall, it’s a solid choice.",
+      date: "Jun 22, 2024",
+      image: "https://randomuser.me/api/portraits/men/21.jpg",
+    },
+    {
+      name: "Svetlana Kuznetsova",
+      store: 4.5,
+      text: "Great experience so far. The charts and performance metrics are clear and helpful. This service has become a key part of my trading routine.",
+      date: "Jun 23, 2024",
+      image: "https://randomuser.me/api/portraits/women/14.jpg",
+    },
+    {
+      name: "Igor Sokolov",
+      store: 2.5,
+      text: "The platform is decent but needs improvements in some areas, like loading times and UI design. It’s useful, but not perfect.",
+      date: "Jun 24, 2024",
+      image: "https://randomuser.me/api/portraits/men/17.jpg",
+    },
+    {
+      name: "Elena Morozova",
+      store: 5,
+      text: "This is a fantastic service for showcasing my trading skills to investors. The detailed reports and verification system make it very reliable.",
+      date: "Jun 25, 2024",
+      image: "https://randomuser.me/api/portraits/women/15.jpg",
+    },
+    {
+      name: "Vladimir Pavlov",
+      store: 3,
+      text: "The copy trading feature is interesting but could use more transparency about trader risks. Still, it’s a great addition to the platform.",
+      date: "Jun 26, 2024",
+      image: "https://randomuser.me/api/portraits/men/18.jpg",
+    },
+    {
+      name: "Olga Novikova",
+      store: 4.8,
+      text: "I’ve been using this tool for months now, and it’s helped me stay organized and improve my trading results. The support team is amazing too!",
+      date: "Jun 27, 2024",
+      image: "https://randomuser.me/api/portraits/women/33.jpg",
     },
   ];
 
@@ -160,26 +162,27 @@ const Banner = () => {
 
   const faqData = [
     {
-      question: "What is KYT - Know Your Trader?",
+      question: "What is KYT - Know Your Trader all about?",
       answer:
-        "KYT - Know Your Trader is a community project cleaning up the cryptocurrency market. Our goal is to become the “point of truth” in the cryptocurrency sea, with the help of which every user will be able to validate financial information with 100% confidence.",
+        "KYT - Know Your Trader is a revolutionary platform designed to bring transparency to the cryptocurrency market, enabling users to confidently validate trading data and make informed decisions.",
     },
     {
-      question: "What is KYT - Know Your Trader Passport?",
+      question: "What is the KYT Passport, and how does it work?",
       answer:
-        "KYT - Know Your Trader Passport is an independent trader verification standard that allows you to validate and analyze exchange account statistics...",
+        "The KYT Passport is a trusted standard for trader verification, offering detailed analytics and insights into exchange account performance, ensuring transparency and credibility.",
     },
     {
-      question: "How does KYT - Know Your Trader help a trader?",
+      question: "How can KYT - Know Your Trader benefit traders?",
       answer:
-        "KYT - Know Your Trader products allow a trader to obtain complete statistics on your exchange account, analyze the data...",
+        "KYT provides traders with comprehensive exchange account statistics and tools to analyze their performance, optimize trading strategies, and build trust with potential investors.",
     },
     {
-      question: "How does KYT - Know Your Trader help an investor?",
+      question: "What advantages does KYT offer to investors?",
       answer:
-        "KYT - Know Your Trader selects the best strategies from thousands, allowing investors to choose only among proven and high-quality strategies...",
+        "KYT helps investors by curating a selection of top-performing strategies, allowing them to invest confidently in verified and reliable trading plans.",
     },
   ];
+
 
   const [activeKey, setActiveKey] = useState(null);
 
@@ -192,29 +195,30 @@ const Banner = () => {
       date: "2024-08-02",
       kyt: "WHAT IS CRYPTOTRADING?",
       tags: ["Crypto", "Guides"],
-      title: "What is Crypto Trading and How to Trade Cryptocurrency?",
+      title: "Understanding Crypto Trading: A Beginner's Guide",
       description:
-        "Crypto trading is becoming an increasingly popular form of investment activity, attracting both professional traders and beginners...",
+        "Crypto trading has gained immense popularity, offering opportunities for both seasoned investors and newcomers alike to explore the digital currency market...",
       image: "path/to/crypto-image.jpg",
     },
     {
       date: "2024-08-01",
       kyt: "WHAT IS COPYTRADING?",
       tags: ["Crypto", "Guides"],
-      title: "What is Copy Trading?",
+      title: "Exploring Copy Trading: How to Follow Expert Traders",
       description:
-        "Copy trading is an investment strategy that allows inexperienced traders to execute trades made by more experienced and successful market specialists...",
+        "Copy trading lets you mimic the trades of seasoned traders, making it easier for novices to participate in the financial markets without in-depth knowledge...",
       image: "path/to/copytrading-image.jpg",
     },
     {
       date: "2024-04-11",
       tags: ["News"],
-      title: "Jet 2.0 launch!",
+      title: "Introducing Jet 2.0: The Next Generation of Trading Tools",
       description:
-        "We have great news: we have launched a new version of Jet 2.0...",
+        "We're excited to unveil Jet 2.0, a new version packed with enhanced features and better performance for all your trading needs...",
       image: "path/to/jet2-image.jpg",
     },
   ];
+
 
   // ----------------scroll cards--------------------------
 
@@ -246,13 +250,10 @@ const Banner = () => {
       <div className="homePage">
         <header className="homePage__header">
           <h1 className="homePage__title">
-            Independent Assessment Standard of traders and investments in the
-            world's best strategies
+            Global standard for the independent evaluation of traders and investments in the best strategies
           </h1>
           <p className="homePage__subtitle">
-            We help traders to verify trading statistics and attract
-            investments, and we provide investors with proven low-risk trading
-            strategies
+            We support traders in validating their trading performance and securing investments, and provide investors with verified, low-risk trading strategies.
           </p>
           {token ? (
             <button
@@ -282,7 +283,7 @@ const Banner = () => {
           </div>
           <div className="marketplace-container">
             <p className="marketplace-subtitle_pass ">
-              International standard of trader assessment
+              Global standard for trader evaluation.
             </p>
             <h1 className="marketplace-title">
               <span role="img" aria-label="logo">
@@ -291,8 +292,7 @@ const Banner = () => {
               KYT - Know Your Trader Passport
             </h1>
             <p className="marketplace-description">
-              Objective and independent assessment of traders’ skills and
-              performance.
+              An objective and unbiased evaluation of traders' skills and performance.
             </p>
 
             <ul className="marketplace-benefits">
@@ -308,7 +308,7 @@ const Banner = () => {
                     <path d="M20.285 2.586l-11.949 11.95-4.95-4.95-1.416 1.415 6.365 6.364 13.364-13.364z" />
                   </svg>
                 </span>
-                To enhance investor confidence
+                To build greater confidence among investors.
               </li>
               <li>
                 <span className="check-icon-pass">
@@ -322,7 +322,7 @@ const Banner = () => {
                     <path d="M20.285 2.586l-11.949 11.95-4.95-4.95-1.416 1.415 6.365 6.364 13.364-13.364z" />
                   </svg>
                 </span>
-                Secure data upload via API key with read-only permissions
+                Securely upload your data with an API key that has read-only permissions.
               </li>
               <li>
                 <span className="check-icon-pass">
@@ -336,8 +336,7 @@ const Banner = () => {
                     <path d="M20.285 2.586l-11.949 11.95-4.95-4.95-1.416 1.415 6.365 6.364 13.364-13.364z" />
                   </svg>
                 </span>
-                All tools available in one place starting from statistics to
-                investment attraction
+                Everything you need, from statistics to investment attraction, all in one place.
               </li>
             </ul>
 
@@ -355,7 +354,7 @@ const Banner = () => {
         <div className="mission-content">
           <h4>Our mission</h4>
           <h2>
-            We make the crypto trading market fair <br /> and transparent
+            We make the cryptocurrency trading market fair <br /> and transparent.
           </h2>
         </div>
       </div>
@@ -367,12 +366,10 @@ const Banner = () => {
             <span className="badge-pro-traders">For PRO-traders</span>
             <span>
               <h2 className="marketplace-title">
-                Submit your strategy on the <br />
-                KYT - Know Your Trader <br />
-                get new clients
+                Submit your strategy on the <br /> KYT - Know Your Trader <br /> to acquire new clients.
               </h2>
               <p className="marketplace-subtitle">
-                We take care of all other work with the investor.
+                We take care of everything else with the investor.
               </p>
             </span>
             <Link to="/traders-cabinet">
@@ -388,12 +385,10 @@ const Banner = () => {
           <div className="section widget-section">
             <div className="statistics">
               <h2 className="widget-title">
-                Place KYT - Know Your Trader
-                <br /> widget on your website
+                Integrate the KYT - Know Your Trader widget into your website.
               </h2>
               <p className="widget-subtitle">
-                Share your strategy results on your
-                <br /> personal website using widget.
+                Share your strategy performance on your <br /> personal website with the help of the widget.
               </p>
             </div>
             <div className="statistics-bar-chart">
@@ -403,17 +398,25 @@ const Banner = () => {
 
           <div className="section referral-section">
             <h2 className="referral-title">
-              KYT - Know Your Trader Referral Program
+              KYT - Know Your Trader Invitation Program
             </h2>
             <p className="referral-subtitle">
-              Earn a commission on your invited friends' profits without hidden
-              platform fees.
+              Get a commission from the profits of your referrals, free from any hidden platform charges.
             </p>
             <Link to="/referral">
-              <button className="btn referral-btn">How does it work?</button>
+              <button className="btn referral-btn">How does it function?</button>
             </Link>
             <div className="referral-avatars">
-              <img src={bt_benefits_faces} alt="" />
+              <div className="referral-avatars_box1">
+                <img src={avatar_img1} alt="" />
+              </div>
+              <div className="referral-avatars_box2">
+                <img src={avatar_img2} alt="" />
+              </div>
+              <div className="referral-avatars_box3">
+                <img src={avatar_img3} alt="" />
+              </div>
+              <div className="referral-avatars_box4">+</div>
             </div>
           </div>
         </div>
@@ -421,7 +424,7 @@ const Banner = () => {
 
       {/* Frequently Asked Questions */}
       <div className="faq-container">
-        <h1 className="faq-title">Frequently Asked Questions</h1>
+        <h1 className="faq-title">Questions We Get Asked Often</h1>
         {faqData.map((item, index) => (
           <div key={index} className="faq-card">
             <div className="faq-header" onClick={() => togglePanel(index)}>
@@ -444,9 +447,9 @@ const Banner = () => {
 
       <div className="account-container">
         <h2 className="account-title">
-          What traders and investors are saying about KYT - Know Your Trader
+          Discover what traders and investors love about KYT - Know Your Trader.
         </h2>
-        <p>We take into account your opinion, it helps us to improve.</p>
+        <p>We consider your input, as it helps us enhance our service.</p>
         <div className="reviews-container">
           {reviews.map((review, index) => (
             <ReviewCard key={index} review={review} onClick={handleCardClick} />
@@ -459,8 +462,8 @@ const Banner = () => {
 
       {/* Blog */}
       <section className="blog-section__container">
-        <h2 className="blog-section__title">Blog</h2>
-        <p className="blog-section__subtitle">Recent updates</p>
+        <h2 className="blog-section__title">Our Posts</h2>
+        <p className="blog-section__subtitle">Updates & News</p>
         <div className="blog-section__grid">
           {blogPosts.map((post, index) => (
             <div key={index} className="blog-section__card">

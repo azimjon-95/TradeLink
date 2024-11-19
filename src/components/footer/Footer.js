@@ -28,7 +28,7 @@ const Footer = () => {
               <Link to={"/rating"}>KYT - Rating</Link>
             </li>
             <li>
-              <Link to={"/passport"}>KYT - Passport</Link>
+              <Link to={"/passport"}>KYT - Traders Passport</Link>
             </li>
           </ul>
         </div>

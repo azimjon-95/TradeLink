@@ -4,7 +4,9 @@ import { useDispatch } from "react-redux";
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import RigthImg from "../../assets/referral/referrals-preview.png";
-import benefits from "../../assets/banner/benefits-faces.png";
+import avatar_img1 from "../../assets/banner/fase2.png";
+import avatar_img2 from "../../assets/banner/fase3.png";
+import avatar_img3 from "../../assets/banner/fase1.png";
 import { setModalType } from "../../context/modalType";
 
 function Referral() {
@@ -33,28 +35,29 @@ function Referral() {
 
   const faqData = [
     {
-      question: "How payments are made?",
+      question: "How are payments processed?",
       answer:
-        "The user's commissions, as well as referee profits, are calculated once a month. All of your earnings are transferred to your KYT wallet, and are always available to withdraw!",
+        "Your monthly commissions and referral profits are calculated and deposited directly into your KYT wallet. These funds are always available for withdrawal at your convenience!",
     },
     {
-      question: "Does my friend lose any profit by registering with the referral link?",
+      question: "Will my friend’s earnings be affected by using my referral link?",
       answer:
-        "No, he does not. Regardless of the referral link, the service commission is fixed, so from the user's perspective, it doesn't matter if he was registered with the referral link.",
+        "Not at all. The platform’s service fee remains the same regardless of registration method, so your friend’s profits will not be impacted by signing up via your referral link.",
     },
     {
-      question: "I have additional questions, where can I receive answers?",
+      question: "Where can I get help with additional questions?",
       answer:
-        "Feel free to contact us at KYT, we will be happy to answer any of your questions.",
+        "You can reach out to our KYT support team anytime. We’re here to assist you with any queries or concerns you might have.",
     },
   ];
+
   return (
     <div className="referring-main-continer">
       <div className="referringBanner">
         <div className="referringBanner__container">
           <div >
-            <h1>Refer Friends. <br /> Earn Crypto Together.</h1>
-            <p>Earn up to 25% commission on every friend's profitable month across KYT Marketplace</p>
+            <h1>Invite Friends. <br /> Grow Your Crypto Together.</h1>
+            <p>Get up to 25% commission from your friend's monthly profits on the KYT Marketplace.</p>
             {
               token ?
                 <Link onClick={() => Effect()}>Log In to invite friends</Link>
@@ -69,28 +72,37 @@ function Referral() {
       </div>
 
       <div className="referring-container">
-        <h2 className="referring-title">Benefits of Referring your Friends</h2>
-        <p className="referring-subtitle">Transparent terms, 5 referral levels, and lots of earnings from each side!</p>
+        <h2 className="referring-title">Advantages of Inviting Your Friends.</h2>
+        <p className="referring-subtitle">Clear conditions, 5 referral levels, and mutual earning opportunities!</p>
 
         <div className="referring-grid">
           <div className="referring-card-green">
-            <p>(Coming soon) is the record earnings for 1 referee in the previous month</p>
-            <div className="referring-avatar-container">
-              <img src={benefits} alt="" />
+            <p>(Coming soon) highlights the top earnings from a single referee last month.</p>
+            <div className="referral-avatars">
+              <div className="referral-avatars_box1">
+                <img src={avatar_img1} alt="" />
+              </div>
+              <div className="referral-avatars_box2">
+                <img src={avatar_img2} alt="" />
+              </div>
+              <div className="referral-avatars_box3">
+                <img src={avatar_img3} alt="" />
+              </div>
+              <div className="referral-avatars_box4">+</div>
             </div>
           </div>
           <div className="referring-main">
             <div className="referring-card-blue">
-              <p>Detailed analytics panel, condition improvements as you go,</p>
-              <p>5 levels of referral program</p>
+              <p>Comprehensive analytics panel with evolving benefits as you progress.</p>
+              <p>5-Tier Referral Program.</p>
             </div>
             <div className="referring-box">
               <div className="referring-card-purple">
-                <p>Up to 25% commission from referral's profit</p>
+                <p>Earn up to 25% commission from your referral’s earnings.</p>
               </div>
 
               <div className="referring-card-yellow">
-                <p>No minimum payment threshold</p>
+                <p>No minimum withdrawal limit.</p>
               </div>
             </div>
           </div>
@@ -99,20 +111,20 @@ function Referral() {
 
 
         <h2 className="rarn-title">How it works</h2>
-        <p className="rarn-subtitle">Earn money while others work!</p>
+        <p className="rarn-subtitle">Generate income while others do the work!</p>
 
         <div className="rarn-info-grid">
           <div className="rarn-info-card">
             <h3 className="rarn-info-number">01</h3>
-            <p className="rarn-info-text">Invite your friends, watch them invite their friends, and get rich together</p>
+            <p className="rarn-info-text">Invite your friends, watch your network grow, and earn together!</p>
           </div>
           <div className="rarn-info-card">
             <h3 className="rarn-info-number">02</h3>
-            <p className="rarn-info-text">The greater the total AUM of your referrals, the better the terms</p>
+            <p className="rarn-info-text">The larger the total AUM of your referrals, the more favorable the terms.</p>
           </div>
           <div className="rarn-info-card">
             <h3 className="rarn-info-number">03</h3>
-            <p className="rarn-info-text">Earn money from up to 5 levels of referrals, and analyze in detail the results from each level</p>
+            <p className="rarn-info-text">Earn from up to 5 referral levels and analyze detailed results at each level.</p>
           </div>
         </div>
 
@@ -139,8 +151,8 @@ function Referral() {
 
         <div className="affiliate-levels-container-box">
           <div className="affiliate-levels">
-            <h1>Affiliate Program (Up to 35% commission)</h1>
-            <p>If you have access to a large amount of traffic and want to receive special conditions for cooperation, <br /> please do not hesitate to apply to our influencer program.</p>
+            <h1>Affiliate Program (Earn up to 35% commission)</h1>
+            <p>If you have access to significant traffic and wish to receive exclusive cooperation terms, <br /> feel free to apply for our influencer program.</p>
           </div>
           {/* <button>Apply now</button> */}
         </div>
@@ -148,7 +160,7 @@ function Referral() {
 
         <div className="hottest-container">
           <h1 className="hottest-title">FAQ</h1>
-          <p className="hottest-subtitle">Here are the answers for the hottest questions</p>
+          <p className="hottest-subtitle">Here are the answers to the most frequently asked questions.</p>
           {faqData.map((item, index) => (
             <div key={index} className="hottest-card">
               <div className="hottest-header" onClick={() => togglePanel(index)}>

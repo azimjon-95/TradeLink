@@ -7,63 +7,56 @@ function Solving() {
   let solvigData = {
     trader: [
       {
-        title:
-          "Difficulty proving your trading history is accurate and trustworthy",
+        title: "Difficulty in proving the accuracy and trustworthiness of your trading history",
         description:
-          "Validate Your Expertise. With KYT Passport, you get independent verification of your trading performance. Confidently share your verified results with investors, the community, and partners.",
+          "Certify Your Expertise. KYT Traders Passport provides an independent, verifiable record of your trading results. Share your proven performance with confidence, reaching investors, partners, and the crypto community.",
       },
       {
-        title:
-          "Spending too much time creating reports for investors and partners.",
+        title: "Spending excessive time preparing reports for investors and stakeholders",
         description:
-          "Effortless Reporting. KYT Passport generates insightful reports, analyzing dozens of key metrics. Easily share comprehensive data with your team and clients, saving time and effort.",
+          "Automate Your Reports. KYT Traders Passport generates in-depth reports, offering a detailed analysis of critical performance metrics. Save time by effortlessly sharing your data with your team and clients.",
       },
       {
-        title: "Struggling to attract investors to your trading strategies.",
+        title: "Challenges in attracting investors to your trading strategies",
         description:
-          "Reach a Wider Audience. Gain visibility on KYT Marketplace. Connect directly with investors and expand your reach without costly marketing campaigns.",
+          "Expand Your Reach. Gain exposure on KYT Marketplace. Connect directly with investors and grow your audience without the need for expensive marketing efforts.",
       },
       {
-        title:
-          "Lacking a professional online presence to showcase your trading accomplishments.",
+        title: "Not having a professional online presence to showcase your trading success",
         description:
-          "Build Your Trading Brand. Create a compelling KYT Passport profile that acts as your digital business card. Highlight your winning strategies and track record to attract potential investors.",
+          "Establish Your Trading Brand. Create a standout profile on KYT Traders Passport. Present your best strategies and results to potential investors and partners.",
       },
       {
-        title:
-          "Feeling isolated and seeking a community of like-minded traders.",
+        title: "Feeling disconnected and looking for a network of like-minded traders",
         description:
-          "Join a Thriving Community. Connect with top traders from around the globe through KYT Passport. Participate in exciting tournaments, benchmark your performance, and celebrate your successes.",
+          "Join a Thriving Network. Connect with top traders globally via KYT Traders Passport. Take part in competitions, track your progress, and celebrate your wins together.",
       },
       {
-        title:
-          "The complexity and expense of managing individual client accounts.",
+        title: "The complexity and costs associated with managing multiple client accounts",
         description:
-          "Scale Your Strategy. Set up a virtual fund on KYT Marketplace and effortlessly manage investors. Our platform provides precise trade duplication, personalized risk management, and automated reporting.",
+          "Scale Effortlessly. Manage multiple investors with ease using KYT Marketplace. Our platform simplifies trade duplication, risk management, and automated reporting.",
       },
     ],
     investor: [
       {
-        title: "Uncertainty about a trader's claimed performance.",
+        title: "Doubts about the authenticity of a trader’s performance claims",
         description:
-          "Verify Before You Invest. Always request a KYT Passport link. See tamper-proof trading history, sourced directly from exchanges, giving you complete confidence.",
+          "Verify Before You Invest. Request a KYT Traders Passport link to access unaltered trading data sourced directly from exchanges, ensuring complete transparency.",
       },
       {
-        title:
-          "Lack of transparency and real-time insight into your investments.",
+        title: "Lack of visibility and real-time updates on your investments",
         description:
-          "Lack of transparency and real-time insight into your investments.",
+          "Gain Full Transparency. Stay informed with live data and performance tracking, providing you with constant updates and insights into your investments.",
       },
       {
-        title: "Difficulty understanding complex trading charts and metrics.",
+        title: "Struggling to make sense of complicated trading charts and metrics",
         description:
-          "Simplify Your Analysis. Receive clear, concise weekly reports from KYT Passport. Gain insights into your portfolio's performance without getting lost in data overload.",
+          "Simplify Your Investment Analysis. KYT Traders Passport offers clear and concise reports, breaking down complex data into digestible insights for your portfolio.",
       },
       {
-        title:
-          "The challenge of finding trustworthy and skilled traders to manage your investments.",
+        title: "Difficulty finding trustworthy and skilled traders to manage your investments",
         description:
-          "Discover Top Talent. Explore KYT Marketplace, a curated platform featuring the world's best crypto traders. Find the perfect strategy to match your investment goals and unlock new opportunities.",
+          "Discover Top Traders. Browse KYT Marketplace to find carefully vetted crypto traders. Select the strategy that aligns with your investment goals and unlock new growth opportunities.",
       },
     ],
   };
@@ -72,11 +65,10 @@ function Solving() {
     <div className="solving">
       <div className="solving_container">
         <h1 className="solving_title">
-          KYT Passport: Solving Key Challenges for Crypto Traders &
-          Investors
+          KYT Traders Passport: Overcoming Major Challenges for Crypto Traders & Investors
         </h1>
         <p className="solving_description">
-          Gain a competitive edge with these powerful solutions.
+          Unlock your advantage with these impactful solutions.
         </p>
         <div className="solving_type">
           <button

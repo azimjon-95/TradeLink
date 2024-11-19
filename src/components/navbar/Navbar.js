@@ -139,7 +139,7 @@ function Navbar() {
     ],
     "/": [
       { path: "/#about", label: "About", scrollTo: 0 },
-      { path: "/#products", label: "Passport", scrollTo: 570 },
+      { path: "/#products", label: "Traders Passport", scrollTo: 570 },
       { path: "/faq", label: "FAQ" },
     ],
     default: [{ path: "/", label: "", scrollTo: 0 }],
@@ -313,7 +313,7 @@ function Navbar() {
                     <FaPassport size={32} style={{ color: "#f7b267" }} />
                   </div>
                   <div className="trade-link-header-text">
-                    <h3>Passport</h3>
+                    <h3>Traders Passport</h3>
                     <p>
                       Worldwide Independent confirmation of traders' results
                     </p>
@@ -452,7 +452,7 @@ function Navbar() {
           >
             <span>
               <AiOutlineFileText />
-              Passport
+              Traders Passport
             </span>
             {openSections.passport ? (
               <IoChevronDown className="nav-chevron" />

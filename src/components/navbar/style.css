@@ -113,7 +113,7 @@
 }
 
 .right-btns>button:first-child {
-  color: #641d9a;
+  color: #142230;
   height: 2rem;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
@@ -130,7 +130,7 @@
 }
 
 .right-btns>button:last-child {
-  background: #641d9a;
+  background: #142230;
   height: 2rem;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
@@ -258,8 +258,8 @@
 .media_modal-btns>button:first-child {
   padding: 7px 20px;
   background-color: #ffffff;
-  color: #6a0dad;
-  border: 1.5px solid #6a0dad;
+  color: #142230;
+  border: 1.5px solid #142230;
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -269,7 +269,7 @@
 .media_modal-btns>button:last-child {
   margin-bottom: 10px;
   padding: 8px 20px;
-  background-color: #6a0dad;
+  background-color: #142230;
   color: #fff;
   border: none;
   border-radius: 5px;

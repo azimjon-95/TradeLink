@@ -12,26 +12,26 @@ function Strategy() {
   return (
     <div className="strategy">
       <div className="strategy_container">
-        <h1 className="strategy_caption">Benefits of listing your strategy</h1>
+        <h1 className="strategy_caption">Advantages of showcasing your strategy.</h1>
         <p className="strategy_text">
-          Here are some of the main reasons to work with us
+          Discover several compelling reasons to collaborate with us.
         </p>
         <div className="strategy_items">
           <div className="strategy_item">
             <h1 className="strategy_item_order">01</h1>
             <p className="strategy_item_info">
-              Additional income with a guarantee of safety
+              Earn extra income with guaranteed security.
             </p>
           </div>
           <div className="strategy_item">
             <h1 className="strategy_item_order">02</h1>
             <p className="strategy_item_info">
-              We take on every communication with investors
+              We handle all communications with investors.
             </p>
           </div>
           <div className="strategy_item">
             <p className="strategy_item_info">
-              Passive attraction of the capital
+              Effortless capital attraction.
             </p>
             <h1 className="strategy_item_order">03</h1>
           </div>
@@ -47,7 +47,7 @@ function Strategy() {
           The most popular KYT-know your trader
         </h1>
         <p className="strategy_text">
-          This is the AUM that traders have already managed to gather
+          This is the AUM that traders have successfully accumulated.
         </p>
 
         <div className="best_marketplace_traders">
@@ -176,21 +176,19 @@ function Strategy() {
             <div className="safety_desc_item">
               <FaCheck />
               <span>
-                Not a single strategy has been copied without the consent of its
-                owner, is not being copied, and will never be
+                Not a single strategy has been copied without its owner's consent, nor will it be in the future.
               </span>
             </div>
             <div className="safety_desc_item">
               <FaCheck />
               <span>
-                The investor does not have trader contacts that the trader did
-                not provide voluntarily
+                The investor does not have access to the trader's contact information unless voluntarily provided by the trader.
               </span>
             </div>
             <div className="safety_desc_item">
               <FaCheck />
               <span>
-                Auto-copying process occurs exclusively using Read-Only API keys
+                The auto-copying process is carried out exclusively using Read-Only API keys.
               </span>
             </div>
           </div>
@@ -198,8 +196,7 @@ function Strategy() {
 
         <h1 className="strategy_caption">How to get started</h1>
         <p className="strategy_text">
-          Here are some easy steps you need to do in order to start earning more
-          with KYT-know your trader
+          Follow these simple steps to start earning more with KYT - Know Your Trader.
         </p>
 
         <div className="work_steps get_started_steps">
@@ -262,8 +259,7 @@ function Strategy() {
               <path d="M29.5987 21.334H18.3987C9.06536 21.334 5.33203 25.0673 5.33203 34.4007V45.6007C5.33203 54.934 9.06536 58.6673 18.3987 58.6673H29.5987C38.932 58.6673 42.6654 54.934 42.6654 45.6007V34.4007C42.6654 25.0673 38.932 21.334 29.5987 21.334ZM32.772 36.4007L22.8787 46.294C22.5054 46.6673 22.0254 46.854 21.5187 46.854C21.012 46.854 20.532 46.6673 20.1587 46.294L15.1987 41.334C14.452 40.5873 14.452 39.3873 15.1987 38.6407C15.9454 37.894 17.1454 37.894 17.892 38.6407L21.492 42.2407L30.052 33.6807C30.7987 32.934 31.9987 32.934 32.7454 33.6807C33.492 34.4273 33.5187 35.654 32.772 36.4007Z"></path>
             </svg>
             <p>
-              Apply for placing your strategy using Trader's Cabinet, or by
-              clicking the button below
+              Submit your strategy for listing through the Trader's Cabinet, or by clicking the button below
             </p>
           </div>
         </div>
