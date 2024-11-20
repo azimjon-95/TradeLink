@@ -112,7 +112,7 @@
   opacity: 0.8;
 }
 
-.right-btns>button:first-child {
+.right-btns>button:nth-child(2) {
   color: #142230;
   height: 2rem;
   padding-left: 0.75rem;
@@ -125,11 +125,11 @@
   font-weight: 550;
 }
 
-.right-btns>button:first-child:hover {
+.right-btns>button:nth-child(2):hover {
   background: #3b13592b;
 }
 
-.right-btns>button:last-child {
+.right-btns>button:nth-child(3) {
   background: #142230;
   height: 2rem;
   padding-left: 0.75rem;
