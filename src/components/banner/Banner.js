@@ -5,7 +5,7 @@ import Rating from "react-rating-stars-component";
 import { Link } from "react-router-dom";
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import bt_binance from "../../assets/banner/supporters.png";
 import bt_passport from "../../assets/banner/passport.png";
 import bt_widget from "../../assets/banner/widget.png";
@@ -15,176 +15,175 @@ import avatar_img3 from "../../assets/banner/fase1.png";
 import bt_indexes from "../../assets/banner/indexes.png";
 import bt_jet from "../../assets/banner/Instagram-post.png";
 import { setModalType } from "../../context/modalType";
+// import { useSelector } from "react-redux";
 
 const Banner = () => {
   const dispatch = useDispatch();
   const [selectedReview, setSelectedReview] = useState(null);
   let token = localStorage.getItem("access_token");
 
-  const currentLanguage = useSelector(
-    (state) => state.language.currentLanguage
-  );
-  console.log(currentLanguage);
-  const reviews = [
-    {
-      name: "Maria Ivanova",
-      store: 5,
-      text: {
-        en: "I absolutely love this service! It provides detailed trading analytics, easy portfolio management, and the support team is always responsive. A must-have for any trader.",
-        es: "¡Me encanta este servicio! Ofrece análisis detallados de trading, una gestión de portafolios fácil, y el equipo de soporte siempre está disponible. Imprescindible para cualquier trader.",
-        de: "Ich liebe diesen Service! Es bietet detaillierte Handelsanalysen, einfaches Portfolio-Management und das Support-Team ist immer erreichbar. Ein Muss für jeden Trader.",
-        ru: "Я абсолютно люблю этот сервис! Он предоставляет подробную торговую аналитику, легкое управление портфелем, а команда поддержки всегда отзывчива. Необходимый инструмент для любого трейдера.",
-      },
-      date: "Jun 21, 2024",
-      image: "https://randomuser.me/api/portraits/women/13.jpg",
-    },
-    {
-      name: "Alexey Smirnov",
-      store: 4,
-      text: {
-        en: "The platform offers a user-friendly interface for tracking trading results. I’ve been using it for a year, and it has helped me improve my strategies. Highly recommended!",
-        es: "La plataforma ofrece una interfaz fácil de usar para seguir los resultados del trading. Lo he estado usando durante un año y me ha ayudado a mejorar mis estrategias. ¡Muy recomendado!",
-        de: "Die Plattform bietet eine benutzerfreundliche Oberfläche zur Verfolgung von Handelsergebnissen. Ich benutze sie seit einem Jahr und sie hat mir geholfen, meine Strategien zu verbessern. Sehr empfehlenswert!",
-        ru: "Платформа предлагает удобный интерфейс для отслеживания торговых результатов. Я использую её уже год, и она помогла мне улучшить мои стратегии. Настоятельно рекомендую!",
-      },
-      date: "Jun 20, 2024",
-      image: "https://randomuser.me/api/portraits/men/8.jpg",
-    },
-    {
-      name: "Dmitry Petrov",
-      store: 3.5,
-      text: {
-        en: "A good platform for monitoring trades and keeping track of performance. The analytics could be more detailed, but overall, it’s a solid choice.",
-        es: "Una buena plataforma para monitorear operaciones y hacer seguimiento de rendimiento. La analítica podría ser más detallada, pero en general, es una buena opción.",
-        de: "Eine gute Plattform zum Überwachen von Trades und zur Leistungskontrolle. Die Analysen könnten detaillierter sein, aber insgesamt ist es eine solide Wahl.",
-        ru: "Хорошая платформа для мониторинга сделок и отслеживания производительности. Аналитика могла бы быть более детализированной, но в целом это хороший выбор.",
-      },
-      date: "Jun 22, 2024",
-      image: "https://randomuser.me/api/portraits/men/21.jpg",
-    },
-    {
-      name: "Svetlana Kuznetsova",
-      store: 4.5,
-      text: {
-        en: "Great experience so far. The charts and performance metrics are clear and helpful. This service has become a key part of my trading routine.",
-        es: "Excelente experiencia hasta ahora. Los gráficos y métricas de rendimiento son claros y útiles. Este servicio se ha convertido en una parte clave de mi rutina de trading.",
-        de: "Tolle Erfahrung bisher. Die Diagramme und Leistungskennzahlen sind klar und hilfreich. Dieser Service ist ein wesentlicher Bestandteil meiner Handelsroutine geworden.",
-        ru: "Отличный опыт. Графики и показатели эффективности ясны и полезны. Этот сервис стал важной частью моей торговой рутины.",
-      },
-      date: "Jun 23, 2024",
-      image: "https://randomuser.me/api/portraits/women/14.jpg",
-    },
-    {
-      name: "Igor Sokolov",
-      store: 2.5,
-      text: {
-        en: "The platform is decent but needs improvements in some areas, like loading times and UI design. It’s useful, but not perfect.",
-        es: "La plataforma es decente, pero necesita mejoras en algunas áreas, como los tiempos de carga y el diseño de la interfaz. Es útil, pero no perfecta.",
-        de: "Die Plattform ist anständig, muss jedoch in einigen Bereichen verbessert werden, wie Ladezeiten und UI-Design. Sie ist nützlich, aber nicht perfekt.",
-        ru: "Платформа хорошая, но требует улучшений в некоторых областях, таких как время загрузки и дизайн интерфейса. Это полезно, но не идеально.",
-      },
-      date: "Jun 24, 2024",
-      image: "https://randomuser.me/api/portraits/men/17.jpg",
-    },
-    {
-      name: "Elena Morozova",
-      store: 5,
-      text: {
-        en: "This is a fantastic service for showcasing my trading skills to investors. The detailed reports and verification system make it very reliable.",
-        es: "Este es un servicio fantástico para mostrar mis habilidades de trading a los inversores. Los informes detallados y el sistema de verificación lo hacen muy confiable.",
-        de: "Dies ist ein fantastischer Service, um meine Handelsfähigkeiten Investoren zu zeigen. Die detaillierten Berichte und das Verifizierungssystem machen es sehr zuverlässig.",
-        ru: "Это фантастический сервис для демонстрации моих торговых навыков инвесторам. Подробные отчеты и система проверки делают его очень надежным.",
-      },
-      date: "Jun 25, 2024",
-      image: "https://randomuser.me/api/portraits/women/15.jpg",
-    },
-    {
-      name: "Vladimir Pavlov",
-      store: 3,
-      text: {
-        en: "The copy trading feature is interesting but could use more transparency about trader risks. Still, it’s a great addition to the platform.",
-        es: "La función de copy trading es interesante, pero podría tener más transparencia sobre los riesgos de los traders. Aun así, es una excelente adición a la plataforma.",
-        de: "Die Copy-Trading-Funktion ist interessant, könnte aber mehr Transparenz über die Risiken von Händlern bieten. Trotzdem ist es eine tolle Ergänzung zur Plattform.",
-        ru: "Функция копи-трейдинга интересная, но ей не хватает прозрачности относительно рисков трейдеров. Тем не менее, это отличное дополнение к платформе.",
-      },
-      date: "Jun 26, 2024",
-      image: "https://randomuser.me/api/portraits/men/18.jpg",
-    },
-    {
-      name: "Olga Novikova",
-      store: 4.8,
-      text: {
-        en: "I’ve been using this tool for months now, and it’s helped me stay organized and improve my trading results. The support team is amazing too!",
-        es: "He estado usando esta herramienta durante meses y me ha ayudado a mantenerme organizado y mejorar mis resultados de trading. ¡El equipo de soporte también es increíble!",
-        de: "Ich benutze dieses Tool nun schon seit Monaten und es hat mir geholfen, organisiert zu bleiben und meine Handelsergebnisse zu verbessern. Das Support-Team ist auch großartig!",
-        ru: "Я использую этот инструмент уже несколько месяцев, и он помог мне оставаться организованным и улучшать мои торговые результаты. Команда поддержки тоже потрясающая!",
-      },
-      date: "Jun 27, 2024",
-      image: "https://randomuser.me/api/portraits/women/33.jpg",
-    },
-  ];
-
+  // const currentLanguage = useSelector(
+  //   (state) => state.language.currentLanguage
+  // );
   // const reviews = [
   //   {
   //     name: "Maria Ivanova",
   //     store: 5,
-  //     text: "I absolutely love this service! It provides detailed trading analytics, easy portfolio management, and the support team is always responsive. A must-have for any trader.",
+  //     text: {
+  //       en: "I absolutely love this service! It provides detailed trading analytics, easy portfolio management, and the support team is always responsive. A must-have for any trader.",
+  //       es: "¡Me encanta este servicio! Ofrece análisis detallados de trading, una gestión de portafolios fácil, y el equipo de soporte siempre está disponible. Imprescindible para cualquier trader.",
+  //       de: "Ich liebe diesen Service! Es bietet detaillierte Handelsanalysen, einfaches Portfolio-Management und das Support-Team ist immer erreichbar. Ein Muss für jeden Trader.",
+  //       ru: "Я абсолютно люблю этот сервис! Он предоставляет подробную торговую аналитику, легкое управление портфелем, а команда поддержки всегда отзывчива. Необходимый инструмент для любого трейдера."
+  //     },
   //     date: "Jun 21, 2024",
   //     image: "https://randomuser.me/api/portraits/women/13.jpg",
   //   },
   //   {
   //     name: "Alexey Smirnov",
   //     store: 4,
-  //     text: "The platform offers a user-friendly interface for tracking trading results. I’ve been using it for a year, and it has helped me improve my strategies. Highly recommended!",
+  //     text: {
+  //       en: "The platform offers a user-friendly interface for tracking trading results. I’ve been using it for a year, and it has helped me improve my strategies. Highly recommended!",
+  //       es: "La plataforma ofrece una interfaz fácil de usar para seguir los resultados del trading. Lo he estado usando durante un año y me ha ayudado a mejorar mis estrategias. ¡Muy recomendado!",
+  //       de: "Die Plattform bietet eine benutzerfreundliche Oberfläche zur Verfolgung von Handelsergebnissen. Ich benutze sie seit einem Jahr und sie hat mir geholfen, meine Strategien zu verbessern. Sehr empfehlenswert!",
+  //       ru: "Платформа предлагает удобный интерфейс для отслеживания торговых результатов. Я использую её уже год, и она помогла мне улучшить мои стратегии. Настоятельно рекомендую!"
+  //     },
   //     date: "Jun 20, 2024",
   //     image: "https://randomuser.me/api/portraits/men/8.jpg",
   //   },
   //   {
   //     name: "Dmitry Petrov",
   //     store: 3.5,
-  //     text: "A good platform for monitoring trades and keeping track of performance. The analytics could be more detailed, but overall, it’s a solid choice.",
+  //     text: {
+  //       en: "A good platform for monitoring trades and keeping track of performance. The analytics could be more detailed, but overall, it’s a solid choice.",
+  //       es: "Una buena plataforma para monitorear operaciones y hacer seguimiento de rendimiento. La analítica podría ser más detallada, pero en general, es una buena opción.",
+  //       de: "Eine gute Plattform zum Überwachen von Trades und zur Leistungskontrolle. Die Analysen könnten detaillierter sein, aber insgesamt ist es eine solide Wahl.",
+  //       ru: "Хорошая платформа для мониторинга сделок и отслеживания производительности. Аналитика могла бы быть более детализированной, но в целом это хороший выбор."
+  //     },
   //     date: "Jun 22, 2024",
   //     image: "https://randomuser.me/api/portraits/men/21.jpg",
   //   },
   //   {
   //     name: "Svetlana Kuznetsova",
   //     store: 4.5,
-  //     text: "Great experience so far. The charts and performance metrics are clear and helpful. This service has become a key part of my trading routine.",
+  //     text: {
+  //       en: "Great experience so far. The charts and performance metrics are clear and helpful. This service has become a key part of my trading routine.",
+  //       es: "Excelente experiencia hasta ahora. Los gráficos y métricas de rendimiento son claros y útiles. Este servicio se ha convertido en una parte clave de mi rutina de trading.",
+  //       de: "Tolle Erfahrung bisher. Die Diagramme und Leistungskennzahlen sind klar und hilfreich. Dieser Service ist ein wesentlicher Bestandteil meiner Handelsroutine geworden.",
+  //       ru: "Отличный опыт. Графики и показатели эффективности ясны и полезны. Этот сервис стал важной частью моей торговой рутины."
+  //     },
   //     date: "Jun 23, 2024",
   //     image: "https://randomuser.me/api/portraits/women/14.jpg",
   //   },
   //   {
   //     name: "Igor Sokolov",
   //     store: 2.5,
-  //     text: "The platform is decent but needs improvements in some areas, like loading times and UI design. It’s useful, but not perfect.",
+  //     text: {
+  //       en: "The platform is decent but needs improvements in some areas, like loading times and UI design. It’s useful, but not perfect.",
+  //       es: "La plataforma es decente, pero necesita mejoras en algunas áreas, como los tiempos de carga y el diseño de la interfaz. Es útil, pero no perfecta.",
+  //       de: "Die Plattform ist anständig, muss jedoch in einigen Bereichen verbessert werden, wie Ladezeiten und UI-Design. Sie ist nützlich, aber nicht perfekt.",
+  //       ru: "Платформа хорошая, но требует улучшений в некоторых областях, таких как время загрузки и дизайн интерфейса. Это полезно, но не идеально."
+  //     },
   //     date: "Jun 24, 2024",
   //     image: "https://randomuser.me/api/portraits/men/17.jpg",
   //   },
   //   {
   //     name: "Elena Morozova",
   //     store: 5,
-  //     text: "This is a fantastic service for showcasing my trading skills to investors. The detailed reports and verification system make it very reliable.",
+  //     text: {
+  //       en: "This is a fantastic service for showcasing my trading skills to investors. The detailed reports and verification system make it very reliable.",
+  //       es: "Este es un servicio fantástico para mostrar mis habilidades de trading a los inversores. Los informes detallados y el sistema de verificación lo hacen muy confiable.",
+  //       de: "Dies ist ein fantastischer Service, um meine Handelsfähigkeiten Investoren zu zeigen. Die detaillierten Berichte und das Verifizierungssystem machen es sehr zuverlässig.",
+  //       ru: "Это фантастический сервис для демонстрации моих торговых навыков инвесторам. Подробные отчеты и система проверки делают его очень надежным."
+  //     },
   //     date: "Jun 25, 2024",
   //     image: "https://randomuser.me/api/portraits/women/15.jpg",
   //   },
   //   {
   //     name: "Vladimir Pavlov",
   //     store: 3,
-  //     text: "The copy trading feature is interesting but could use more transparency about trader risks. Still, it’s a great addition to the platform.",
+  //     text: {
+  //       en: "The copy trading feature is interesting but could use more transparency about trader risks. Still, it’s a great addition to the platform.",
+  //       es: "La función de copy trading es interesante, pero podría tener más transparencia sobre los riesgos de los traders. Aun así, es una excelente adición a la plataforma.",
+  //       de: "Die Copy-Trading-Funktion ist interessant, könnte aber mehr Transparenz über die Risiken von Händlern bieten. Trotzdem ist es eine tolle Ergänzung zur Plattform.",
+  //       ru: "Функция копи-трейдинга интересная, но ей не хватает прозрачности относительно рисков трейдеров. Тем не менее, это отличное дополнение к платформе."
+  //     },
   //     date: "Jun 26, 2024",
   //     image: "https://randomuser.me/api/portraits/men/18.jpg",
   //   },
   //   {
   //     name: "Olga Novikova",
   //     store: 4.8,
-  //     text: "I’ve been using this tool for months now, and it’s helped me stay organized and improve my trading results. The support team is amazing too!",
+  //     text: {
+  //       en: "I’ve been using this tool for months now, and it’s helped me stay organized and improve my trading results. The support team is amazing too!",
+  //       es: "He estado usando esta herramienta durante meses y me ha ayudado a mantenerme organizado y mejorar mis resultados de trading. ¡El equipo de soporte también es increíble!",
+  //       de: "Ich benutze dieses Tool nun schon seit Monaten und es hat mir geholfen, organisiert zu bleiben und meine Handelsergebnisse zu verbessern. Das Support-Team ist auch großartig!",
+  //       ru: "Я использую этот инструмент уже несколько месяцев, и он помог мне оставаться организованным и улучшать мои торговые результаты. Команда поддержки тоже потрясающая!"
+  //     },
   //     date: "Jun 27, 2024",
   //     image: "https://randomuser.me/api/portraits/women/33.jpg",
-  //   },
+  //   }
   // ];
 
-  // Extract initials from the name
+  const reviews = [
+    {
+      name: "Maria Ivanova",
+      store: 5,
+      text: "I absolutely love this service! It provides detailed trading analytics, easy portfolio management, and the support team is always responsive. A must-have for any trader.",
+      date: "Jun 21, 2024",
+      image: "https://randomuser.me/api/portraits/women/13.jpg",
+    },
+    {
+      name: "Alexey Smirnov",
+      store: 4,
+      text: "The platform offers a user-friendly interface for tracking trading results. I’ve been using it for a year, and it has helped me improve my strategies. Highly recommended!",
+      date: "Jun 20, 2024",
+      image: "https://randomuser.me/api/portraits/men/8.jpg",
+    },
+    {
+      name: "Dmitry Petrov",
+      store: 3.5,
+      text: "A good platform for monitoring trades and keeping track of performance. The analytics could be more detailed, but overall, it’s a solid choice.",
+      date: "Jun 22, 2024",
+      image: "https://randomuser.me/api/portraits/men/21.jpg",
+    },
+    {
+      name: "Svetlana Kuznetsova",
+      store: 4.5,
+      text: "Great experience so far. The charts and performance metrics are clear and helpful. This service has become a key part of my trading routine.",
+      date: "Jun 23, 2024",
+      image: "https://randomuser.me/api/portraits/women/14.jpg",
+    },
+    {
+      name: "Igor Sokolov",
+      store: 2.5,
+      text: "The platform is decent but needs improvements in some areas, like loading times and UI design. It’s useful, but not perfect.",
+      date: "Jun 24, 2024",
+      image: "https://randomuser.me/api/portraits/men/17.jpg",
+    },
+    {
+      name: "Elena Morozova",
+      store: 5,
+      text: "This is a fantastic service for showcasing my trading skills to investors. The detailed reports and verification system make it very reliable.",
+      date: "Jun 25, 2024",
+      image: "https://randomuser.me/api/portraits/women/15.jpg",
+    },
+    {
+      name: "Vladimir Pavlov",
+      store: 3,
+      text: "The copy trading feature is interesting but could use more transparency about trader risks. Still, it’s a great addition to the platform.",
+      date: "Jun 26, 2024",
+      image: "https://randomuser.me/api/portraits/men/18.jpg",
+    },
+    {
+      name: "Olga Novikova",
+      store: 4.8,
+      text: "I’ve been using this tool for months now, and it’s helped me stay organized and improve my trading results. The support team is amazing too!",
+      date: "Jun 27, 2024",
+      image: "https://randomuser.me/api/portraits/women/33.jpg",
+    },
+  ];
 
+  // Extract initials from the name
   const getInitials = (name) => {
     const initials = name
       .split(" ")
