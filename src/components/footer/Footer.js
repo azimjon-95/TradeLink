@@ -79,9 +79,8 @@ const Footer = () => {
           research and make their own decisions.
         </p>
         <p className="footer-copyright">
-          Copyright © {new Date().getFullYear()} "KYT - KNOW YOUR Trader"
-          TECHNOLOGIES OÜ, A COMPANY INCORPORATED IN ESTONIA, REGISTRY NUMBER
-          16094061. All rights reserved. Version: 1.58.1.3d653a11
+          opyright © 2021 - {new Date().getFullYear()} "KYT - KNOW YOUR TRADER"
+          KYT LLC, BVI COMPANY NUMBER 822 85 193. All rights reserved.
         </p>
       </div>
     </footer>

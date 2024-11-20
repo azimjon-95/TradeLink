@@ -25,7 +25,7 @@ const MyCards = ({ activeTab, id, selectValue }) => {
 
   const renderContent = () => {
     if (activeTab === "main") {
-      return <OutlineCircle data={stats.main_statistic} />;
+      return <OutlineCircle data={stats?.main_statistic} />;
     } else if (activeTab === "investment") {
       return <Investment data={stats.investment_statistic} />;
     } else if (activeTab === "trades") {
