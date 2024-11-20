@@ -152,7 +152,7 @@ function Declaration() {
       <div className="new-declaration-form">
         <div className="form-item">
           <h2>Statistics confirmation</h2>
-          <p>Attach your portfolio from KYT Passport</p>
+          <p>Attach your portfolio from KYT Traders Passport</p>
           <div
             className="select-portfolio"
             onClick={() => setSelectPortfolio(!selectPortfolio)}

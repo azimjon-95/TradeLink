@@ -26,59 +26,57 @@ function CommmantCenter() {
   const swiperData = [
     {
       img: statistic,
-      title: "Performance Analytics:",
-      description: "Track your trading journey with precision.",
+      title: "Track Your Trading Progress:",
+      description: "Gain insights into your trading performance with detailed analysis.",
       lists: [
-        "Comprehensive Trading History: Access your entire trading history from the moment your exchange account was created.",
-        "60+ Statistical Indicators: Leverage over 60 detailed metrics to analyze performance.",
-        "Real-Time Updates: Stay informed with continuously updated data.",
-        "Position Monitor: Track your open positions with ease.",
-        "Flexible Data Visualization: Customize how your data is displayed to suit your needs.",
+        "Complete Trading Log: Access a full history of all your trades since the creation of your account.",
+        "Over 60 Performance Metrics: Utilize a vast array of indicators to evaluate your trading strategies.",
+        "Up-to-the-Minute Data: Keep up with real-time updates on your trading activity.",
+        "Monitor Active Trades: Stay on top of your open positions and their status.",
+        "Customizable Data Views: Choose how you'd like to visualize your trading statistics.",
       ],
     },
     {
       img: trader,
-      title: "Showcase Your Expertise:",
-      description: "Build your trading brand and visualize your trading data.",
+      title: "Build Your Trader Profile:",
+      description: "Showcase your trading expertise and progress with a professional portfolio.",
       lists: [
-        "Make an Impact: Create a portfolio that highlights your performance with a powerful results chart.",
-        "Comprehensive Insights: Access detailed statistics to fully understand your crypto portfolio and strategies.",
-        "Connect Easily: Include your contact details and social media links for seamless networking.",
-        "Showcase Your Success: Display all your strategies and portfolios with a highly customizable system.",
+        "Create a Powerful Portfolio: Build a portfolio that highlights your best trading achievements.",
+        "Deep Market Insights: Gain access to detailed metrics that help you analyze your trading strategies.",
+        "Easy Networking: Include your social media and contact info to connect with other traders.",
+        "Showcase Your Best Work: Display your strategies and portfolios with full customization options.",
       ],
     },
     {
       img: portfolio,
-      title: "Manage All Your Trading Accounts:",
-      description: "Effortlessly connect all of your exchange accounts.",
+      title: "Manage Multiple Trading Accounts:",
+      description: "Easily connect and manage all your exchange accounts in one place.",
       lists: [
-        "Merge Accounts: Combine multiple exchange accounts into a single, unified view.",
-        "Total Overview: View the combined results of all your accounts in one place.",
-        "Cross-Exchange Portfolios: Create and manage portfolios that span across different exchanges.",
+        "Unify Your Accounts: Integrate all your trading accounts into a single platform for easy management.",
+        "Unified Overview: Get a comprehensive view of your performance across all platforms.",
+        "Cross-Exchange Strategies: Manage and diversify your portfolios with trades across different exchanges.",
       ],
     },
     {
       img: swiper_rating,
-      title: "Climb the Global Ranks:",
-      description:
-        "Showcase your portfolio, compete for the top, and display your achievements with pride.",
+      title: "Rise Through the Global Rankings:",
+      description: "Share your portfolio, compete globally, and showcase your achievements.",
       lists: [
-        "Showcase Your Portfolio: Share your portfolio globally, compete for the top, and display your achievements with pride.",
-        "Advanced Filtering: Leverage our flexible filtering system to refine your search.",
-        "Connect with Top Traders: Discover leading traders from around the world.",
-        "Independent Ratings: Benefit from KYT-know your trader's innovative, transparent rating system.",
+        "Display Your Achievements: Share your portfolio with the global community and rise in the ranks.",
+        "Advanced Search Filters: Use powerful filtering options to narrow down top traders.",
+        "Connect with Leading Traders: Discover and follow successful traders from around the world.",
+        "Transparent Rating System: Benefit from an objective and clear rating system for traders.",
       ],
     },
     {
       img: investment_attraction,
-      title: "Attract Capital with Proven Success",
-      description:
-        "Share your strategy, attract investors, and grow your capital together.",
+      title: "Attract Investors with Proven Strategies",
+      description: "Share your trading strategy, attract capital, and grow together.",
       lists: [
-        "Attract Investments: Share your strategy on KYT-know your trader Marketplace, collaborate with investors, and grow your capital together.",
-        "Unmatched Precision: Leverage our exclusive duplication technology for precise strategy replication.",
-        "Custom Algorithmic Indexes: Tailor algorithmic indexes to meet your clients' specific needs with advanced strategies.",
-        "Streamlined Billing: Revolutionize billing and commission calculations with our flexible system.",
+        "Gain Investment Opportunities: Present your strategy on the KYT marketplace and attract potential investors.",
+        "Perfect Replication: Use advanced tools to precisely replicate your trading strategies for investors.",
+        "Customizable Algorithmic Strategies: Develop tailored strategies with custom indexes to meet the needs of investors.",
+        "Flexible Billing and Commission: Streamline how commissions are calculated and billed for investors.",
       ],
     },
   ];
@@ -97,14 +95,13 @@ function CommmantCenter() {
     <div className="commandCenter">
       <div className="commandCenter_container">
         <h1 className="commandCenter_title">
-          Your Ultimate Crypto Trading <br /> Command Center
+          Your All-in-One Crypto Trading Hub.
         </h1>
         <div className="command_center_services">
           {serviceData.map((item, index) => (
             <Link
-              className={`command_center_services_item ${
-                activeIndex === index ? "active" : ""
-              }`}
+              className={`command_center_services_item ${activeIndex === index ? "active" : ""
+                }`}
               key={index}
               onClick={() => setActiveIndex(index)}
             >

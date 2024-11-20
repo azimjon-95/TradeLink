@@ -85,7 +85,7 @@ function InfoModal({ isOpen, onClose, contentType }) {
               style={{ color: "#000", textDecoration: "underline" }}
               to="/passport"
             >
-              <strong>KYT-Know your trader Passport</strong>
+              <strong>Traders Passport</strong>
             </Link>{" "}
           </p>
           <p>2. Add an API Read-Only key from Binance or Bybit.</p>

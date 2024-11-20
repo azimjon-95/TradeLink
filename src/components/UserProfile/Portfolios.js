@@ -125,7 +125,7 @@ const Portfolios = ({
 
   const portfoliosData = public_portfolios?.map((portfolio, index) => ({
     id: generateUniqueId(index),
-    title: "Utopia",
+    title: portfolio?.name,
     returnPercentage: portfolio?.margin_balance?.toFixed(2) || 0,
     drawDown: portfolio?.profit_percent?.toFixed(2) || 0,
     minDeposit: portfolio?.mdd?.toFixed(2) || 0,

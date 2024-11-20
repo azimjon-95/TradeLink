@@ -20,6 +20,7 @@ import SignUpModal from "../../pages/register/Register";
 import { setModalType as setModalType2 } from "../../context/modalType";
 
 import logo from "../../assets/kyt.png";
+import LanguageSwitcher from "../../hooks/LanguageSwitcher";
 
 function Navbar() {
   const dispatch = useDispatch();
@@ -30,10 +31,71 @@ function Navbar() {
   const [isModalSinUp, setIsModalSinUp] = useState(false);
   const [modalType, setModalType] = useState(""); // Use a single state for modal type
   const location = useLocation();
+
   const [activeLink, setActiveLink] = useState("");
   const [isProductDashboard, setIsProductDashboard] = useState(false);
   const navigate = useNavigate();
 
+  // const currentLanguage = useSelector((state) => state.language.currentLanguage);
+  // // Tarjima obyektini aniqlash
+  // const translations = {
+  //   en: {
+  //     kytTitle: "KYT - Know Your Trader",
+  //     kytDescription: "For professional traders and investors within the crypto market.",
+  //     passportTitle: "Traders Passport",
+  //     passportDescription: "Worldwide Independent confirmation of traders' results",
+  //     login: "Log In",
+  //     signup: "Sign Up",
+  //     about: "About",
+  //     products: "Products",
+  //     faq: "FAQ",
+  //     traderCabinet: "Trader's Cabinet",
+  //     rating: "Rating",
+  //   },
+  //   ru: {
+  //     kytTitle: "KYT - Знай своего трейдера",
+  //     kytDescription: "Для профессиональных трейдеров и инвесторов на криптовалютном рынке.",
+  //     passportTitle: "Паспорт трейдера",
+  //     passportDescription: "Международное подтверждение результатов трейдеров",
+  //     login: "Войти",
+  //     signup: "Регистрация",
+  //     about: "О нас",
+  //     products: "Продукты",
+  //     faq: "Вопросы и ответы",
+  //     traderCabinet: "Кабинет трейдера",
+  //     rating: "Рейтинг",
+  //   },
+  //   es: {
+  //     kytTitle: "KYT - Conoce a tu comerciante",
+  //     kytDescription: "Para traders profesionales e inversores en el mercado de criptomonedas.",
+  //     passportTitle: "Pasaporte de Comerciante",
+  //     passportDescription: "Confirmación independiente de resultados de traders a nivel mundial",
+  //     login: "Iniciar sesión",
+  //     signup: "Registrarse",
+  //     about: "Acerca de",
+  //     products: "Productos",
+  //     faq: "Preguntas frecuentes",
+  //     traderCabinet: "Gabinete del Comerciante",
+  //     rating: "Calificación",
+  //   },
+  //   de: {
+  //     kytTitle: "KYT - Kenne deinen Händler",
+  //     kytDescription: "Für professionelle Trader und Investoren auf dem Kryptomarkt.",
+  //     passportTitle: "Trader-Pass",
+  //     passportDescription: "Weltweite unabhängige Bestätigung der Trader-Ergebnisse",
+  //     login: "Einloggen",
+  //     signup: "Anmelden",
+  //     about: "Über uns",
+  //     products: "Produkte",
+  //     faq: "FAQ",
+  //     traderCabinet: "Trader-Kabinett",
+  //     rating: "Bewertung",
+  //   },
+  // };
+  // const { kytTitle, kytDescription, passportTitle, passportDescription, login, signup } =
+  //   translations[currentLanguage] || translations.en;
+
+  // Hozirgi tilni o'qish
   function parseJwt(token) {
     try {
       const base64Url = token?.split(".")[1]; // tokenning ikkinchi qismi - payload
@@ -49,7 +111,6 @@ function Navbar() {
       );
       return JSON.parse(jsonPayload); // JSON formatiga o'girib qaytarish
     } catch (e) {
-      console.error("Tokenni tahlil qilishda xatolik:", e);
       return null;
     }
   }
@@ -139,7 +200,7 @@ function Navbar() {
     ],
     "/": [
       { path: "/#about", label: "About", scrollTo: 0 },
-      { path: "/#products", label: "Passport", scrollTo: 570 },
+      { path: "/#products", label: "Traders Passport", scrollTo: 570 },
       { path: "/faq", label: "FAQ" },
     ],
     default: [{ path: "/", label: "", scrollTo: 0 }],
@@ -204,10 +265,10 @@ function Navbar() {
     const linksToSet = mainPageRoutes.includes(path)
       ? linkOptions["/"]
       : isUserRoute || isPortfolioRoute
-        ? passportLinks
-        : passportOpenRoutes.includes(path)
-          ? passportLinks
-          : linkOptions[path] || linkOptions.default;
+      ? passportLinks
+      : passportOpenRoutes.includes(path)
+      ? passportLinks
+      : linkOptions[path] || linkOptions.default;
 
     setLinks(linksToSet);
   }, [
@@ -270,8 +331,9 @@ function Navbar() {
   );
   return (
     <div
-      className={`navbar_container ${isProductDashboard ? "navbar_static" : "navbar_sticky"
-        }`}
+      className={`navbar_container ${
+        isProductDashboard ? "navbar_static" : "navbar_sticky"
+      }`}
     >
       <div className="nav_links-box">
         <Link to="/" onClick={() => handleClick("/")}>
@@ -313,7 +375,7 @@ function Navbar() {
                     <FaPassport size={32} style={{ color: "#f7b267" }} />
                   </div>
                   <div className="trade-link-header-text">
-                    <h3>Passport</h3>
+                    <h3>Traders Passport</h3>
                     <p>
                       Worldwide Independent confirmation of traders' results
                     </p>
@@ -371,6 +433,9 @@ function Navbar() {
         </Popover>
       ) : (
         <div className="right-btns">
+          {/* <div className=""></div> */}
+          <LanguageSwitcher />
+
           <button
             onClick={() => {
               setModalType("signIn");
@@ -452,7 +517,7 @@ function Navbar() {
           >
             <span>
               <AiOutlineFileText />
-              Passport
+              Traders Passport
             </span>
             {openSections.passport ? (
               <IoChevronDown className="nav-chevron" />
@@ -498,8 +563,9 @@ function Navbar() {
       ></div>
 
       <div
-        className={`close-modal-signup ${isModalSinUp && "close-modal-signup-open"
-          }`}
+        className={`close-modal-signup ${
+          isModalSinUp && "close-modal-signup-open"
+        }`}
       >
         <SignUpModal
           setModalType={setModalType}

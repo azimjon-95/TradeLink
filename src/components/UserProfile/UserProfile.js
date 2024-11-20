@@ -12,9 +12,9 @@ import {
 import { Tooltip } from "antd";
 import axios from "../../api";
 import ed_khan from "../../assets/ed_khan/avatar.png";
-import Overview from "./Overview";
+// import Overview from "./Overview";
 import Portfolios from "./Portfolios";
-import Jet from "./Jet";
+// import Jet from "./Jet";
 import ShareModal from "./ShareModal";
 import "./styles/style.css"; // Import the CSS file
 import "./styles/media.css"; // Import the CSS file
@@ -34,6 +34,8 @@ const UserProfile = () => {
   const portfolio_chartData = profileData?.profits?.profits;
   // user_profile_header_data
   const user_profile_header_data = profileData?.user_profile_header_data || {};
+
+
 
   useEffect(() => {
     // Update the current path in localStorage whenever it changes
@@ -130,35 +132,35 @@ const UserProfile = () => {
         <div className="strategies-layout">
           {true ? (
             <nav className="nav-bar">
-              <Link
+              {/* <Link
                 to={`/user/${id}`}
                 className={currentPath === `/user/${id}` ? "active" : ""}
                 style={{
-                  color: currentPath === `/user/${id}` ? "#4A27A9" : "gray", // Active color
+                  color: currentPath === `/user/${id}` ? "#4A27A9" : "gray",
                   fontWeight: currentPath === `/user/${id}` ? "bold" : "normal", // Bold for active
                 }}
               >
                 Strategies
-              </Link>
+              </Link> */}
               <Link
                 to={`/user/${id}/portfolios`}
                 className={
-                  currentPath === `/user/${id}/portfolios` ? "active" : ""
+                  currentPath === `/user/${id}` ? "active" : ""
                 }
                 style={{
                   color:
-                    currentPath === `/user/${id}/portfolios`
+                    currentPath === `/user/${id}`
                       ? "#4A27A9"
                       : "gray",
                   fontWeight:
-                    currentPath === `/user/${id}/portfolios`
+                    currentPath === `/user/${id}`
                       ? "bold"
                       : "normal",
                 }}
               >
                 Portfolios
               </Link>
-              <Link
+              {/* <Link
                 to={`/user/${id}/jet`}
                 className={currentPath === `/user/${id}/jet` ? "active" : ""}
                 style={{
@@ -168,7 +170,7 @@ const UserProfile = () => {
                 }}
               >
                 Jet
-              </Link>
+              </Link> */}
             </nav>
           ) : (
             <nav className="nav-bar">
@@ -184,9 +186,9 @@ const UserProfile = () => {
 
               <div className="menus-khan-page">
                 <Routes>
-                  <Route path="/" element={<Overview />} />
+                  {/* <Route path="/" element={<Overview />} /> */}
                   <Route
-                    path="portfolios"
+                    path="/"
                     element={
                       <Portfolios
                         portFolioData={portFolioData}
@@ -195,7 +197,7 @@ const UserProfile = () => {
                       />
                     }
                   />
-                  <Route path="jet" element={<Jet />} />
+                  {/* <Route path="jet" element={<Jet />} /> */}
 
                   {/* Redirect any unknown paths under /user/:id to the Overview page */}
                   <Route path="*" element={<Navigate to={`/user/${id}`} />} />

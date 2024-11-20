@@ -22,13 +22,12 @@ function AddKeyModal({ setOpenModal }) {
             <div className="addKeyModal__left__item">
               <span>1</span>
               <div>
-                <h3>Open Binance Futures Account</h3>
+                <h3>Create Your Binance Futures Account.</h3>
                 <p>
-                  Your Binance account must have open futures account to enter
-                  the market.
+                  To access the market, ensure your Binance account has an active futures account.
                 </p>
                 <p>
-                  View <Link to={"/"}>How to Open Binance Futures account</Link>
+                  Check out <Link to={"/"}>this guide on how to open a Binance Futures account</Link>
                 </p>
               </div>
             </div>
@@ -38,22 +37,17 @@ function AddKeyModal({ setOpenModal }) {
               <div>
                 <h3>Create Binance API Keyt</h3>
                 <p>
-                  To view your trading statistics on KYT Passport, add an
-                  API key to your exchange account. The key must have the only
-                  permission "Read-only"
+                  To access your trading statistics on the KYT Traders Passport, you need to add an API key to your exchange account with 'Read-only' permissions only.
                 </p>
               </div>
             </div>
             <p>
-              Also, you can check out the <Link to={"/"}>full guide</Link>
+              Additionally, you can explore the <Link to={"/"}>complete guide</Link> for more details.
             </p>
           </div>
 
           <span className="addKeyModal__left__warning">
-            Please, be aware that after adding the key you might experience
-            emails from Binance, notifying you about using Transaction History
-            Exports. It is a normal procedure, that is required in order for the
-            key to display the right info on our platform.
+            Please note that after adding the key, you may receive emails from Binance regarding the use of Transaction History Exports. This is a standard procedure necessary to ensure that the key displays accurate information on our platform.
           </span>
         </div>
         <form className="addKeyModal__right">
@@ -93,7 +87,7 @@ function AddKeyModal({ setOpenModal }) {
             <a href="/">
               <FaTelegramPlane /> Support
             </a>
-            <p>If you have any issues - please, contact our support tea</p>
+            <p>If you encounter any issues, please don't hesitate to reach out to our support team.</p>
           </div>
         </form>
       </div>

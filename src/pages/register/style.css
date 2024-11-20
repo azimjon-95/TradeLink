@@ -50,7 +50,7 @@
 
 /* Log in link */
 .login-link {
-  color: #6a0dad;
+  color: #142230;
   cursor: pointer;
 }
 
@@ -101,14 +101,14 @@
   width: 100%;
   padding: 10px;
   border-radius: 5px;
-  background-color: #6a0dad;
+  background-color: #142230;
   color: #fff;
   border: none;
   cursor: pointer;
 }
 
 .login-button:hover {
-  background-color: #5a00a3 !important;
+  background-color: #142230 !important;
   color: #fff !important;
 }
 
@@ -122,7 +122,7 @@
 
 /* Signup link */
 .signup-link {
-  color: #6a0dad;
+  color: #142230;
   cursor: pointer;
   font-weight: bold;
 }
