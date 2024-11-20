@@ -20,7 +20,7 @@ import SignUpModal from "../../pages/register/Register";
 import { setModalType as setModalType2 } from "../../context/modalType";
 
 import logo from "../../assets/kyt.png";
-// import LanguageSwitcher from "../../hooks/LanguageSwitcher";
+import LanguageSwitcher from "../../hooks/LanguageSwitcher";
 
 function Navbar() {
   const dispatch = useDispatch();
@@ -440,8 +440,8 @@ function Navbar() {
         </Popover>
       ) : (
         <div className="right-btns">
-          <div className=""></div>
-          {/* <LanguageSwitcher /> */}
+          {/* <div className=""></div> */}
+          <LanguageSwitcher />
 
           <button
             onClick={() => {
