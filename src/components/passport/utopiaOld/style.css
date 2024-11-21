@@ -39,6 +39,12 @@
 
 }
 
+.SubtitleInfo>img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%
+}
+
 .SubtitleInfo p {
     vertical-align: baseline;
     font-size: 12px;

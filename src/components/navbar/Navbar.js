@@ -292,6 +292,25 @@ function Navbar() {
       </Button>
     </div>
   );
+
+  const [visibleMob, setVisibleMob] = useState(false);
+
+  const handleVisibleChangeMob = (newVisible) => {
+    setVisibleMob(newVisible);
+  };
+
+  const popoverContentMobile = (
+    <div className="popoverContent">
+      <Link to={`/user/${payload?.user_id}`}>
+        <Button>
+          <UserOutlined /> {profile}
+        </Button>
+      </Link>
+      <Button onClick={handleLogout} type="danger">
+        <LogoutOutlined /> {signup}
+      </Button>
+    </div>
+  );
   return (
     <div
       className={`navbar_container ${isProductDashboard ? "navbar_static" : "navbar_sticky"
@@ -498,10 +517,10 @@ function Navbar() {
           <div className="userProfileName_left">
             {token &&
               <Popover
-                content={popoverContent}
+                content={popoverContentMobile}
                 trigger="click"
-                open={visible}
-                onOpenChange={handleVisibleChange}
+                open={visibleMob}
+                onOpenChange={handleVisibleChangeMob}
                 overlayClassName="popoverAnimation"
               >
                 <img

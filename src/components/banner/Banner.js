@@ -17,6 +17,7 @@ import { setModalType } from "../../context/modalType";
 import { reviewsData, faqData, translations, blogPosts } from "./Lang";
 
 const Banner = () => {
+
   const dispatch = useDispatch();
   const [selectedReview, setSelectedReview] = useState(null);
   let token = localStorage.getItem("access_token");
@@ -362,8 +363,8 @@ const Banner = () => {
             </div>
           ))}
         </div>
-
       </section>
+
     </>
   );
 };

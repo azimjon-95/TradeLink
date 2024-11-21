@@ -2,7 +2,7 @@ import React from 'react';
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { Tooltip, Skeleton } from 'antd';
 
-const OutlineCircle = ({ data }) => {
+const OutlineCircle = ({ data, currentLanguage, translationsInfo }) => {
     const formatCurrency = (value) => {
         if (typeof value !== 'number' || isNaN(value)) {
             return '$0';
@@ -11,6 +11,8 @@ const OutlineCircle = ({ data }) => {
             ? `$${Math.floor(value / 1000).toLocaleString()}K`
             : `$${Math.floor(value).toLocaleString()}`;
     };
+
+    const t = translationsInfo[currentLanguage]
 
     // Descriptive tooltips for each label
     const tooltipText = {
@@ -47,8 +49,8 @@ const OutlineCircle = ({ data }) => {
         main: [
             {
                 title: (
-                    <Tooltip title="Account-related information" placement="top">
-                        <span>Account Information</span>
+                    <Tooltip title={t?.accountInformation} placement="top">
+                        <span>{t?.accountInformation}</span>
                     </Tooltip>
                 ),
                 items: [
@@ -59,8 +61,8 @@ const OutlineCircle = ({ data }) => {
             },
             {
                 title: (
-                    <Tooltip title="Balance-related analytics and stats" placement="top">
-                        <span>Balance Analytics</span>
+                    <Tooltip title={t?.balanceAnalytics} placement="top">
+                        <span>{t?.balanceAnalytics}</span>
                     </Tooltip>
                 ),
                 items: [
@@ -72,7 +74,7 @@ const OutlineCircle = ({ data }) => {
             {
                 title: (
                     <Tooltip title="Profit and loss details" placement="top">
-                        <span>Profit Net</span>
+                        <span>{t?.profitNet}</span>
                     </Tooltip>
                 ),
                 items: [
@@ -204,4 +206,6 @@ const OutlineCircle = ({ data }) => {
 };
 
 export default OutlineCircle;
+
+
 

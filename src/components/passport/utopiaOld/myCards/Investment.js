@@ -1,16 +1,17 @@
 import React from 'react';
 import './style.css';
 import { Tooltip, Skeleton } from 'antd';
+import { transInvestment } from '../Lang'
 
 
 
-const Investment = ({ data }) => {
+const Investment = ({ data, currentLanguage }) => {
 
     const datas = [
         {
-            title: "Lifetime Experience",
+            title: transInvestment[currentLanguage]?.lifetimeExperience || "Lifetime Experience",
             value: `${data?.alpha?.toFixed(2)}`,
-            description: "Very good",
+            description: transInvestment[currentLanguage]?.lifetimeExperienceDescription || "Very good",
             a: 25,
             y: 25,
             x: 25,
@@ -19,9 +20,9 @@ const Investment = ({ data }) => {
             sliderValue: +data?.alpha,
         },
         {
-            title: "Sharpe Ratio",
+            title: transInvestment[currentLanguage]?.sharpeRatio,
             value: `${data?.sharpe_ratio?.toFixed(2)}`,
-            description: "Excellent risk-adjusted performance",
+            description: transInvestment[currentLanguage]?.sharpeRatioDescription,
             a: 25,
             y: 25,
             x: 25,
@@ -30,9 +31,9 @@ const Investment = ({ data }) => {
             sliderValue: +data?.sharpe_ratio,
         },
         {
-            title: "Calmar Ratio",
+            title: transInvestment[currentLanguage]?.calmarRatio,
             value: `${data?.calmar_ratio?.toFixed(2)}`,
-            description: "High return per drawdown risk",
+            description: transInvestment[currentLanguage]?.calmarRatioDescription,
             a: 25,
             y: 25,
             x: 25,
@@ -41,9 +42,9 @@ const Investment = ({ data }) => {
             sliderValue: +data?.calmar_ratio,
         },
         {
-            title: "Sortino Ratio",
+            title: transInvestment[currentLanguage]?.sortinoRatio,
             value: `${data?.sortino_ratio?.toFixed(2)}`,
-            description: "Excellent downside risk-adjusted performance",
+            description: transInvestment[currentLanguage]?.sortinoRatioDescription,
             a: 25,
             y: 25,
             x: 25,
@@ -52,9 +53,9 @@ const Investment = ({ data }) => {
             sliderValue: +data?.sortino_ratio,
         },
         {
-            title: "IR",
+            title: transInvestment[currentLanguage]?.ir,
             value: `${data?.ir?.toFixed(2)}`,
-            description: "Greatly outperforms benchmark",
+            description: transInvestment[currentLanguage]?.irDescription,
             a: 25,
             y: 25,
             x: 25,
@@ -63,9 +64,9 @@ const Investment = ({ data }) => {
             sliderValue: +data?.ir,
         },
         {
-            title: "Volatility",
+            title: transInvestment[currentLanguage]?.volatility,
             value: `${data?.volatility?.toFixed(2)}`,
-            description: "Some fluctuations, moderate risk",
+            description: transInvestment[currentLanguage]?.volatilityDescription,
             a: 25,
             y: 25,
             x: 25,
@@ -74,9 +75,9 @@ const Investment = ({ data }) => {
             sliderValue: +data?.volatility,
         },
         {
-            title: "α Ratio",
+            title: transInvestment[currentLanguage]?.alphaRatio,
             value: `${data?.treynor_ratio?.toFixed(2)}`,
-            description: "Greatly outperforms benchmark",
+            description: transInvestment[currentLanguage]?.alphaRatioDescription,
             a: 25,
             y: 25,
             x: 25,
@@ -85,9 +86,9 @@ const Investment = ({ data }) => {
             sliderValue: +data?.treynor_ratio,
         },
         {
-            title: "β Ratio",
+            title: transInvestment[currentLanguage]?.betaRatio,
             value: `${data?.beta_ratio?.toFixed(2)}`,
-            description: "Moves with market",
+            description: transInvestment[currentLanguage]?.betaRatioDescription,
             a: 25,
             y: 25,
             x: 25,
@@ -96,9 +97,9 @@ const Investment = ({ data }) => {
             sliderValue: +data?.beta_ratio,
         },
         {
-            title: "Treynor Ratio",
+            title: transInvestment[currentLanguage]?.treynorRatio,
             value: `${data?.treynor_ratio?.toFixed(2)}`,
-            description: "High return per market risk",
+            description: transInvestment[currentLanguage]?.treynorRatioDescription,
             a: 25,
             y: 25,
             x: 25,
@@ -107,9 +108,9 @@ const Investment = ({ data }) => {
             sliderValue: +data?.treynor_ratio,
         },
         {
-            title: "Schwager Ratio",
+            title: transInvestment[currentLanguage]?.schwagerRatio,
             value: `${data?.schwager_ratio?.toFixed(2)}`,
-            description: "Favorable balance of returns",
+            description: transInvestment[currentLanguage]?.schwagerRatioDescriptions,
             a: 25,
             y: 25,
             x: 25,
@@ -118,9 +119,9 @@ const Investment = ({ data }) => {
             sliderValue: +data?.schwager_ratio,
         },
         {
-            title: "R²",
+            title: transInvestment[currentLanguage]?.rSquared,
             value: `${data?.r_sqr?.toFixed(2)}`,
-            description: "Independent from benchmark",
+            description: transInvestment[currentLanguage]?.rSquaredDescription,
             a: 25,
             y: 25,
             x: 25,
@@ -129,9 +130,10 @@ const Investment = ({ data }) => {
             sliderValue: +data?.r_sqr,
         },
         {
-            title: "M²",
+            title: transInvestment[currentLanguage]?.mSquared,
             value: `${data?.m_sqr?.toFixed(2)}`,
-            description: "Significant risk-adjusted outperformance",
+            description: transInvestment[currentLanguage]?.mSquaredDescription,
+
             a: 25,
             y: 25,
             x: 25,
@@ -241,3 +243,4 @@ const Investment = ({ data }) => {
 };
 
 export default Investment;
+

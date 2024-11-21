@@ -4,7 +4,7 @@ import { Checkbox, Select, DatePicker, Space, Switch } from "antd";
 import { CheckSquareTwoTone } from "@ant-design/icons";
 import { RiExpandDiagonalLine } from "react-icons/ri";
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import myAxios from "axios";
 import { setModalType } from "../../../context/modalType";
 import axios from "../../../api";
@@ -14,10 +14,15 @@ import "./style.css";
 import KeyIndicators from "./myCards/KeyIndicators";
 import Charts from "./myCards/Charts";
 import Investment from "./myCards/Investment";
+import { translations, checkboxData, labels, labelsBar, drawDown, translationsInfo } from './Lang'
 
 const { RangePicker } = DatePicker;
 
 const UtopiaOldMultiLine = () => {
+  const currentLanguage = useSelector((state) => state.language.currentLanguage);
+  const t = translations[currentLanguage] || translations.en;
+
+
   const dispatch = useDispatch();
   const [isLite, setIsLite] = useState(false);
   const [activeTab, setActiveTab] = useState("main");
@@ -62,23 +67,8 @@ const UtopiaOldMultiLine = () => {
       .catch((err) => console.log(err));
   }, [baseId, selectValue]);
 
-  // ===============useParams========================
-  // const getQueryParams = () => {
-  //   const params = new URLSearchParams(location.search);
 
-  //   return {
-  //     baseId, // From useParams
-  //     t: params.get("t"),
-  //     startDate: params.get("startDate"),
-  //     endDate: params.get("endDate"),
-  //     step: params.get("step"),
-  //     profit: params.get("profit"),
-  //     marginBalance: params.get("margin-balance"),
-  //     balance: params.get("balance"),
-  //   };
-  // };
-  // const queryData = getQueryParams();
-  // console.log("queryData", queryData);
+
 
   const handleSwitchChange = (checked) => {
     setIsLite(checked);
@@ -107,19 +97,7 @@ const UtopiaOldMultiLine = () => {
     };
   }, [isOverlayVisible]);
 
-  /* ---------------------------8A----------------------------------- */
-  const checkboxData = [
-    { key: "benchmarkBTC", label: "Benchmark BTC", color: "#FFD700" },
-    { key: "return", label: "Return (%)", color: "#FFA500" },
-    { key: "realizedReturn", label: "Realized Return", color: "#1E90FF" },
-    { key: "marginBalance", label: "Margin Balance", color: "#3CB371" },
-    { key: "balance", label: "Balance", color: "#A52A2A" },
-    { key: "plByday", label: "P\\L by day", color: "#20B2AA" },
-    { key: "profit", label: "Profit ($)", color: "#4B0082" },
-    { key: "usedLeverage", label: "Used Leverage", color: "#9370DB" },
-    { key: "drawDown", label: "DrawDown", color: "#4169E1" },
-    { key: "drawDownDuration", label: "DrawDown Duration", color: "#1E90FF" },
-  ];
+
   const allowedKeys = new Set([
     "benchmarkBTC",
     "return",
@@ -155,10 +133,10 @@ const UtopiaOldMultiLine = () => {
           <h2>{data?.portfolio_name || ""}</h2>
         </div>
         <div className="SubtitleInfo">
-          <img width={25} src={data?.user_avatar || bin} alt="" />
+          <img src={data?.user_avatar || bin} alt="" />
           <p>{data?.user_name || ""}</p>
           <p>•</p>
-          <p>{data?.views || 0} views</p>
+          <p>{data?.views || 0} {t.views}</p>
           <p>•</p>
           <p>
             {(data?.stars ?? 0) + stars}{" "}
@@ -184,9 +162,9 @@ const UtopiaOldMultiLine = () => {
               }}
               onChange={(value) => setSelectValue(value)}
               options={[
-                { value: "hour", label: "Hour" },
-                { value: "day", label: "Day" },
-                { value: "week", label: "Week" },
+                { value: "hour", label: t.hour },
+                { value: "day", label: t.day },
+                { value: "week", label: t.week },
               ]}
             />
 
@@ -198,7 +176,7 @@ const UtopiaOldMultiLine = () => {
                 fontSize: "12px",
               }}
             >
-              {isLite ? "Lite" : "A little"}
+              {isLite ? t.lite : t.little}
               &nbsp;&nbsp;
               <Switch
                 checked={isLite}
@@ -210,8 +188,8 @@ const UtopiaOldMultiLine = () => {
         </div>
 
         {/* -----------------------7A------------------------- */}
-        <h2 className="ket-inxTitle">Key indicators</h2>
-        <KeyIndicators topLoader={topLoader} data={data} customKey={isLite} />
+        <h2 className="ket-inxTitle">{t.kIndicators}</h2>
+        <KeyIndicators currentLanguage={currentLanguage} topLoader={topLoader} data={data} customKey={isLite} />
         <div
           className="overlayVisible"
           style={{
@@ -254,7 +232,7 @@ const UtopiaOldMultiLine = () => {
                     fontSize: "12px",
                   }}
                 >
-                  {isLite ? "Lite" : "A little"}
+                  {isLite ? t.lite : t.little}
                   &nbsp;&nbsp;
                   <Switch
                     checked={isLite}
@@ -302,17 +280,19 @@ const UtopiaOldMultiLine = () => {
                     style={{ color }}
                     icon={<CheckSquareTwoTone twoToneColor={color} />}
                   />
-                  <span style={{ color }}>{label}</span>
+                  <span style={{ color }}>{label[currentLanguage]}</span>
                 </div>
               ))}
           </div>
-          <Charts
+          <Charts currentLanguage={currentLanguage} labels={labels}
             selectValue={selectValue}
             id={baseId}
             chartData={chartData}
             customKey={isLite}
             checkedItems={checkedItems}
             isOverlayVisible={isOverlayVisible}
+            labelsBar={labelsBar}
+            drawDown={drawDown}
           />
           {isLite && (
             <div className="single-cards-container">
@@ -327,24 +307,26 @@ const UtopiaOldMultiLine = () => {
                 onClick={() => setActiveTab("main")}
                 className={activeTab === "main" ? "active" : ""}
               >
-                Main
+                {t.main}
               </button>
               <button
                 onClick={() => setActiveTab("investment")}
                 className={activeTab === "investment" ? "active" : ""}
               >
-                Investment
+                {t.investment}
               </button>
               <button
                 onClick={() => setActiveTab("trades")}
                 className={activeTab === "trades" ? "active" : ""}
               >
-                Trades
+                {t.trades}
               </button>
             </nav>
             <br />
             {/* Render the CardList component based on the active tab */}
             <MyCards
+              translationsInfo={translationsInfo}
+              currentLanguage={currentLanguage}
               id={baseId}
               activeTab={activeTab}
               selectValue={selectValue}

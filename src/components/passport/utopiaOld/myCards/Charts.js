@@ -25,7 +25,13 @@ const Charts = ({
   customKey,
   id,
   selectValue,
+  labels,
+  currentLanguage,
+  labelsBar,
+  drawDown
 }) => {
+  const t = labels[currentLanguage];
+
   const dataMain = chartData?.balances?.map((balance, index) => ({
     name: new Date(balance.timestamp).toLocaleDateString(),
     negative0: chartData?.benchmark_btc[index].value,
@@ -77,7 +83,7 @@ const Charts = ({
     };
   });
 
-  const CustomTooltipTwo = ({ active, payload, label }) => {
+  const CustomTooltipTwo = ({ active, payload, label, currentLanguage = "en" }) => {
     if (active && payload && payload.length) {
       return (
         <div className="PLByMonth">
@@ -92,7 +98,7 @@ const Charts = ({
                   border: `2px solid #14C886`,
                 }}
               ></div>
-              Used Leverage:
+              {labelsBar.usedLeverage[currentLanguage]}
               {payload[0]?.value.toFixed(2)}
             </strong>
           </p>
@@ -106,13 +112,12 @@ const Charts = ({
                   border: `2px solid  #EA3941`,
                 }}
               ></div>
-              Long positions:
+              {labelsBar.longPositions[currentLanguage]}
               {payload[1]?.value.toFixed(2)}
             </strong>
           </p>
           <p>
             <strong style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-
               <div
                 style={{
                   display: "inline-block",
@@ -122,7 +127,7 @@ const Charts = ({
                   border: `2px solid  ${payload[2]?.stroke}`,
                 }}
               ></div>
-              Short positions:
+              {labelsBar.shortPositions[currentLanguage]}
               {payload[2]?.value.toFixed(2)}
             </strong>
           </p>
@@ -131,7 +136,6 @@ const Charts = ({
     }
     return null;
   };
-
 
   let dataBottom = chartData?.drawdown_duration?.map((item, index) => {
     let data = new Date(item?.timestamp);
@@ -143,14 +147,13 @@ const Charts = ({
   });
 
 
-  const CustomTooltipBottom = ({ active, payload, label }) => {
+  const CustomTooltipBottom = ({ active, payload, label, currentLanguage = "en" }) => {
     if (active && payload && payload.length) {
       return (
         <div className="PLByMonth">
           <p>{label}</p>
           <p>
             <strong style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-
               <div
                 style={{
                   display: "inline-block",
@@ -160,13 +163,12 @@ const Charts = ({
                   border: `2px solid #85bafe`, // Color based on value
                 }}
               ></div>
-              DrawDown:{" "}
+              {drawDown.drawdown[currentLanguage]}{" "}
               {payload[0]?.payload?.drawdown?.toFixed(2)}%
             </strong>
           </p>
           <p>
             <strong style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-
               <div
                 style={{
                   display: "inline-block",
@@ -176,16 +178,16 @@ const Charts = ({
                   border: `2px solid #4180D2`, // Color based on value
                 }}
               ></div>
-              DrawDown Duration:{" "}
+              {drawDown.drawdownDuration[currentLanguage]}{" "}
               {payload[1]?.payload?.drawdown_duration?.toFixed(2)}%
             </strong>
           </p>
-
         </div>
       );
     }
     return null;
   };
+
   // ---------------------------12A-----------------------------------
 
   const [data, setData] = useState(null); // State for fetched data
@@ -230,7 +232,7 @@ const Charts = ({
                 marginRight: '5px'
               }}
             ></span>
-            P/L by month:
+            {drawDown[currentLanguage]?.plByMonthLabels}
             <strong>{Math.floor(revenue)}%</strong>
           </p>
         </div>
@@ -279,7 +281,7 @@ const Charts = ({
             {checkedItems.benchmarkBTC && (
               <Line
                 yAxisId="left"
-                name="Benchmark BTC"
+                name={t.benchmarkBTC}
                 type="monotone"
                 dataKey="negative0"
                 stroke="#8A2BE2"
@@ -290,7 +292,7 @@ const Charts = ({
             {checkedItems.return && (
               <Area
                 strokeWidth={1.5}
-                name="Return (%)"
+                name={t.return}
                 yAxisId="left"
                 type="linear"
                 dataKey="negative1"
@@ -301,7 +303,7 @@ const Charts = ({
             {checkedItems.realizedReturn && (
               <Line
                 yAxisId="left"
-                name="Realized Return"
+                name={t.realizedReturn}
                 type="monotone"
                 dataKey="negative2"
                 label="ssss"
@@ -314,7 +316,7 @@ const Charts = ({
               <Bar
                 yAxisId="left"
                 z={2}
-                name="P\L by day"
+                name={t.plByDay}
                 dataKey="revenue"
                 barSize={2}
               >
@@ -330,7 +332,7 @@ const Charts = ({
             {checkedItems.marginBalance && (
               <Line
                 yAxisId="left"
-                name="Margin Balance"
+                name={t.marginBalance}
                 type="monotone"
                 dataKey="negative3"
                 stroke="#55516D"
@@ -341,7 +343,7 @@ const Charts = ({
             {checkedItems.balance && (
               <Line
                 yAxisId="left"
-                name="Balance"
+                name={t.balance}
                 type="monotone"
                 dataKey="negative4"
                 stroke="#FF4500"
@@ -352,7 +354,7 @@ const Charts = ({
             {checkedItems.profit && (
               <Line
                 yAxisId="left"
-                name="Profit ($)"
+                name={t.profit}
                 type="monotone"
                 dataKey="negative5"
                 stroke="#32CD32"
@@ -540,7 +542,7 @@ const Charts = ({
       {/* ---------------------------12A----------------------------------- */}
       <div className="revenue-by-month">
         <div></div>
-        <span>Revenue by month (%)</span>{" "}
+        <span>{drawDown[currentLanguage]?.revenueLabels}</span>{" "}
       </div>
       <ResponsiveContainer width="100%" height={isOverlayVisible ? 200 : 240}>
         <BarChart

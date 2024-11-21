@@ -4,50 +4,128 @@ import { Skeleton } from "antd";
 import HandleTooltip from "../HandleTooltip";
 import "./style.css";
 
-const KeyIndicators = ({ data, topLoader }) => {
+
+const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
   console.log("data", data);
 
   const indicators = [
     {
       value: data?.open_story_coefficient?.toFixed(0) || 0,
-      label: "Open History Coefficient",
+      label: {
+        en: "Open History Coefficient",
+        ru: "Коэффициент открытой истории",
+        es: "Coeficiente de historia abierta",
+        de: "Offener Geschichtskoeffizient"
+      },
       isProgress: true,
     },
-    { value: (data?.cagr?.toFixed(2) || 0) + "%", label: "CAGR" },
+    {
+      value: (data?.cagr?.toFixed(2) || 0) + "%",
+      label: {
+        en: "CAGR",
+        ru: "Среднегодовой темп роста",
+        es: "Tasa de crecimiento anual compuesta",
+        de: "Durchschnittliche jährliche Wachstumsrate"
+      }
+    },
     {
       value: (data?.average_monthly_profit?.toFixed(2) || 0) + "%",
-      label: "Avg. Monthly Profit",
+      label: {
+        en: "Avg. Monthly Profit",
+        ru: "Средняя ежемесячная прибыль",
+        es: "Beneficio mensual promedio",
+        de: "Durchschnittlicher monatlicher Gewinn"
+      }
     },
     {
       value: (data?.average_daily_profit?.toFixed(2) || 0) + "%",
-      label: "Avg. Day Profit",
+      label: {
+        en: "Avg. Day Profit",
+        ru: "Средняя ежедневная прибыль",
+        es: "Beneficio diario promedio",
+        de: "Durchschnittlicher Tagesgewinn"
+      }
     },
-    { value: (data?.profit_rate?.toFixed(2) || 0) + "%", label: "Profit" },
+    {
+      value: (data?.profit_rate?.toFixed(2) || 0) + "%",
+      label: {
+        en: "Profit",
+        ru: "Прибыль",
+        es: "Beneficio",
+        de: "Profit"
+      }
+    },
     {
       value: (data?.winrate?.toFixed(2) || 0) + "%",
-      label: "Success Rate",
+      label: {
+        en: "Success Rate",
+        ru: "Коэффициент успеха",
+        es: "Tasa de éxito",
+        de: "Erfolgsquote"
+      },
       highlight: true,
     },
     {
       value: "$" + (data?.margin_balance / 1000).toFixed(1) || 0 + "K",
-      label: "Margin balance",
+      label: {
+        en: "Margin Balance",
+        ru: "Баланс маржи",
+        es: "Saldo de margen",
+        de: "Margebilanz"
+      }
     },
     {
       value: (data?.max_drawdown?.toFixed(2) || 0) + "%",
-      label: "Max drawdown",
+      label: {
+        en: "Max Drawdown",
+        ru: "Максимальное падение",
+        es: "Máxima caída",
+        de: "Maximaler Rückgang"
+      }
     },
     {
       value: (data?.max_drawdown_duration?.toFixed(0) || 0) + "D",
-      label: "Max DrawDown Duration",
+      label: {
+        en: "Max Drawdown Duration",
+        ru: "Длительность максимального падения",
+        es: "Duración máxima de la caída",
+        de: "Maximale Rückgangsdauer"
+      }
     },
-    { value: data?.max_leverage?.toFixed(2) || 0, label: "Max Leverage" },
-    { value: data?.avg_leverage?.toFixed(2) || 0, label: "Av. Leverage" },
+    {
+      value: data?.max_leverage?.toFixed(2) || 0,
+      label: {
+        en: "Max Leverage",
+        ru: "Максимальное кредитное плечо",
+        es: "Máxima palanca",
+        de: "Maximale Hebelwirkung"
+      }
+    },
+    {
+      value: data?.avg_leverage?.toFixed(2) || 0,
+      label: {
+        en: "Avg. Leverage",
+        ru: "Среднее кредитное плечо",
+        es: "Palanca promedio",
+        de: "Durchschnittlicher Hebel"
+      }
+    },
     {
       value: "$" + (data?.net_profit?.toFixed(2) || 0),
-      label: "Income",
+      label: {
+        en: "Income",
+        ru: "Доход",
+        es: "Ingresos",
+        de: "Einkommen"
+      },
       color: "orange",
     },
   ];
+
+  // Function to get the correct language label based on currentLanguage
+  const getLabel = (labelObj) => {
+    return labelObj[currentLanguage] || labelObj.en; // Default to English if the language is not found
+  };
 
   return (
     <>
@@ -56,9 +134,7 @@ const KeyIndicators = ({ data, topLoader }) => {
           {indicators.map((indicator, index) => (
             <div
               key={index}
-              className={`indicator-card ${
-                indicator.highlight ? "highlight" : ""
-              }`}
+              className={`indicator-card ${indicator.highlight ? "highlight" : ""}`}
             >
               <div className="ket-value">
                 {indicator.isProgress ? (
@@ -76,10 +152,12 @@ const KeyIndicators = ({ data, topLoader }) => {
                 )}
               </div>
               {indicator.isProgress ? (
-                <div className="ket-label-none">{indicator.label}</div>
+                <div className="ket-label-none">
+                  {getLabel(indicator.label)}
+                </div>
               ) : (
-                <HandleTooltip value={indicator.value} text={indicator.label}>
-                  <div className="ket-label">{indicator.label}</div>
+                <HandleTooltip value={indicator.value} text={getLabel(indicator.label)}>
+                  <div className="ket-label">{getLabel(indicator.label)}</div>
                 </HandleTooltip>
               )}
             </div>
