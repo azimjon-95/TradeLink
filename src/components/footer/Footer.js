@@ -65,7 +65,9 @@ const translations = {
 
 
 const Footer = () => {
-  const currentLanguage = useSelector((state) => state.language.currentLanguage);
+  const currentLanguage = useSelector(
+    (state) => state.language.currentLanguage
+  );
   const subTitle = translations[currentLanguage];
 
   return (

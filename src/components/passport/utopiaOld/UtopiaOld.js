@@ -222,7 +222,7 @@ const UtopiaOldMultiLine = () => {
               className="oldMultiLine-main-head"
             >
               <Space className="RangePicker" direction="vertical" size={12}>
-                <RangePicker />
+                <RangePicker placeholder={placeholders[currentLanguage]} />
               </Space>
               <div className="oldMultiLine-calendar">
                 <Select
@@ -232,9 +232,9 @@ const UtopiaOldMultiLine = () => {
                   }}
                   onChange={(value) => setSelectValue(value)}
                   options={[
-                    { value: "hour", label: "Hour" },
-                    { value: "day", label: "Day" },
-                    { value: "week", label: "Week" },
+                    { value: "hour", label: t.hour },
+                    { value: "day", label: t.day },
+                    { value: "week", label: t.week },
                   ]}
                 />
                 <div

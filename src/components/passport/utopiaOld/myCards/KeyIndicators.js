@@ -4,10 +4,7 @@ import { Skeleton } from "antd";
 import HandleTooltip from "../HandleTooltip";
 import "./style.css";
 
-
 const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
-  console.log("data", data);
-
   const indicators = [
     {
       value: data?.open_story_coefficient?.toFixed(0) || 0,
@@ -15,7 +12,7 @@ const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
         en: "Open History Coefficient",
         ru: "Коэффициент открытой истории",
         es: "Coeficiente de historia abierta",
-        de: "Offener Geschichtskoeffizient"
+        de: "Offener Geschichtskoeffizient",
       },
       isProgress: true,
     },
@@ -25,8 +22,8 @@ const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
         en: "CAGR",
         ru: "Среднегодовой темп роста",
         es: "Tasa de crecimiento anual compuesta",
-        de: "Durchschnittliche jährliche Wachstumsrate"
-      }
+        de: "Durchschnittliche jährliche Wachstumsrate",
+      },
     },
     {
       value: (data?.average_monthly_profit?.toFixed(2) || 0) + "%",
@@ -34,8 +31,8 @@ const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
         en: "Avg. Monthly Profit",
         ru: "Средняя ежемесячная прибыль",
         es: "Beneficio mensual promedio",
-        de: "Durchschnittlicher monatlicher Gewinn"
-      }
+        de: "Durchschnittlicher monatlicher Gewinn",
+      },
     },
     {
       value: (data?.average_daily_profit?.toFixed(2) || 0) + "%",
@@ -43,8 +40,8 @@ const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
         en: "Avg. Day Profit",
         ru: "Средняя ежедневная прибыль",
         es: "Beneficio diario promedio",
-        de: "Durchschnittlicher Tagesgewinn"
-      }
+        de: "Durchschnittlicher Tagesgewinn",
+      },
     },
     {
       value: (data?.profit_rate?.toFixed(2) || 0) + "%",
@@ -52,8 +49,8 @@ const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
         en: "Profit",
         ru: "Прибыль",
         es: "Beneficio",
-        de: "Profit"
-      }
+        de: "Profit",
+      },
     },
     {
       value: (data?.winrate?.toFixed(2) || 0) + "%",
@@ -61,7 +58,7 @@ const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
         en: "Success Rate",
         ru: "Коэффициент успеха",
         es: "Tasa de éxito",
-        de: "Erfolgsquote"
+        de: "Erfolgsquote",
       },
       highlight: true,
     },
@@ -71,8 +68,8 @@ const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
         en: "Margin Balance",
         ru: "Баланс маржи",
         es: "Saldo de margen",
-        de: "Margebilanz"
-      }
+        de: "Margebilanz",
+      },
     },
     {
       value: (data?.max_drawdown?.toFixed(2) || 0) + "%",
@@ -80,8 +77,8 @@ const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
         en: "Max Drawdown",
         ru: "Максимальное падение",
         es: "Máxima caída",
-        de: "Maximaler Rückgang"
-      }
+        de: "Maximaler Rückgang",
+      },
     },
     {
       value: (data?.max_drawdown_duration?.toFixed(0) || 0) + "D",
@@ -89,8 +86,8 @@ const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
         en: "Max Drawdown Duration",
         ru: "Длительность максимального падения",
         es: "Duración máxima de la caída",
-        de: "Maximale Rückgangsdauer"
-      }
+        de: "Maximale Rückgangsdauer",
+      },
     },
     {
       value: data?.max_leverage?.toFixed(2) || 0,
@@ -98,8 +95,8 @@ const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
         en: "Max Leverage",
         ru: "Максимальное кредитное плечо",
         es: "Máxima palanca",
-        de: "Maximale Hebelwirkung"
-      }
+        de: "Maximale Hebelwirkung",
+      },
     },
     {
       value: data?.avg_leverage?.toFixed(2) || 0,
@@ -107,8 +104,8 @@ const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
         en: "Avg. Leverage",
         ru: "Среднее кредитное плечо",
         es: "Palanca promedio",
-        de: "Durchschnittlicher Hebel"
-      }
+        de: "Durchschnittlicher Hebel",
+      },
     },
     {
       value: "$" + (data?.net_profit?.toFixed(2) || 0),
@@ -116,7 +113,7 @@ const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
         en: "Income",
         ru: "Доход",
         es: "Ingresos",
-        de: "Einkommen"
+        de: "Einkommen",
       },
       color: "orange",
     },
@@ -134,7 +131,9 @@ const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
           {indicators.map((indicator, index) => (
             <div
               key={index}
-              className={`indicator-card ${indicator.highlight ? "highlight" : ""}`}
+              className={`indicator-card ${
+                indicator.highlight ? "highlight" : ""
+              }`}
             >
               <div className="ket-value">
                 {indicator.isProgress ? (
@@ -156,7 +155,10 @@ const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
                   {getLabel(indicator.label)}
                 </div>
               ) : (
-                <HandleTooltip value={indicator.value} text={getLabel(indicator.label)}>
+                <HandleTooltip
+                  value={indicator.value}
+                  text={getLabel(indicator.label)}
+                >
                   <div className="ket-label">{getLabel(indicator.label)}</div>
                 </HandleTooltip>
               )}

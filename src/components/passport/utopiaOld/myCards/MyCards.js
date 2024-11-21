@@ -6,6 +6,13 @@ import Investment from "./Investment";
 import Trades from "./Trades";
 
 const MyCards = ({ activeTab, id, selectValue, currentLanguage, translationsInfo, tooltipTextLab, languagesLab }) => {
+  // const MyCards = ({
+  //   activeTab,
+  //   id,
+  //   selectValue,
+  //   currentLanguage,
+  //   translationsInfo,
+  // }) => {
   const [stats, setStats] = useState([]);
 
   useEffect(() => {
@@ -25,7 +32,7 @@ const MyCards = ({ activeTab, id, selectValue, currentLanguage, translationsInfo
 
   const renderContent = () => {
     if (activeTab === "main") {
-      return <OutlineCircle languagesLab={languagesLab} translationsInfo={translationsInfo} currentLanguage={currentLanguage} data={stats?.main_statistic} />;
+      return <OutlineCircle tooltipTextLab={tooltipTextLab} languagesLab={languagesLab} translationsInfo={translationsInfo} currentLanguage={currentLanguage} data={stats?.main_statistic} />;
     } else if (activeTab === "investment") {
       return <Investment currentLanguage={currentLanguage} data={stats?.investment_statistic} />;
     } else if (activeTab === "trades") {
