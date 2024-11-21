@@ -64,7 +64,9 @@ const translations = {
 };
 
 const Footer = () => {
-  const currentLanguage = useSelector((state) => state.language.currentLanguage);
+  const currentLanguage = useSelector(
+    (state) => state.language.currentLanguage
+  );
   const subTitle = translations[currentLanguage];
 
   return (
@@ -78,41 +80,41 @@ const Footer = () => {
 
       <div className="footer-top">
         <div className="footer-section">
-          <h3 className="footer-title">{subTitle.products}</h3>
+          <h3 className="footer-title">{subTitle?.products}</h3>
           <ul className="footer-list">
             <li>
-              <Link to={"/rating"}>{subTitle.rating}</Link>
+              <Link to={"/rating"}>{subTitle?.rating}</Link>
             </li>
             <li>
-              <Link to={"/passport"}>{subTitle.passport}</Link>
+              <Link to={"/passport"}>{subTitle?.passport}</Link>
             </li>
           </ul>
         </div>
         <div className="footer-section">
-          <h3 className="footer-title">{subTitle.company}</h3>
+          <h3 className="footer-title">{subTitle?.company}</h3>
           <ul className="footer-list">
             <li>
-              <Link to={"/"}>{subTitle.aboutUs}</Link>
+              <Link to={"/"}>{subTitle?.aboutUs}</Link>
             </li>
             <li>
-              <Link to={"/"}>{subTitle.reviews}</Link>
+              <Link to={"/"}>{subTitle?.reviews}</Link>
             </li>
             <li>
-              <Link to={"/faq"}>{subTitle.faq}</Link>
+              <Link to={"/faq"}>{subTitle?.faq}</Link>
             </li>
             <li>
-              <Link to={"/"}>{subTitle.contact}</Link>
+              <Link to={"/"}>{subTitle?.contact}</Link>
             </li>
             <li>
-              <Link to={"/"}>{subTitle.support}</Link>
+              <Link to={"/"}>{subTitle?.support}</Link>
             </li>
           </ul>
         </div>
       </div>
 
       <div className="footer-bottom">
-        <p className="footer-disclaimer">{subTitle.disclaimer}</p>
-        <p className="footer-copyright">{subTitle.copyright}</p>
+        <p className="footer-disclaimer">{subTitle?.disclaimer}</p>
+        <p className="footer-copyright">{subTitle?.copyright}</p>
       </div>
     </footer>
   );
