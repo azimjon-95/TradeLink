@@ -4,7 +4,8 @@ import { GrBottomCorner } from "react-icons/gr";
 import { Select, Skeleton, Switch, Table } from "antd";
 import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 import { FaCheck } from "react-icons/fa6";
-import moment from "moment/moment";
+import { useSelector } from "react-redux";
+// import moment from "moment/moment";
 import InfiniteScroll from "react-infinite-scroll-component";
 import axios from "../../../api";
 import binance from "../../../assets/ed_khan/binance_rounded.svg";
@@ -13,10 +14,13 @@ import ret from "../../../assets/ed_khan/ret.svg";
 import InfoModal from "./InfoModal";
 import "./style.css";
 import scoreChartSvg from "./scoreChart.svg";
+import { translations, transMonth } from './Lang'
 const { Option } = Select;
 
 const Leaderboard = () => {
   const navigate = useNavigate();
+  const currentLanguage = useSelector((state) => state.language.currentLanguage);
+  const subTitle = translations[currentLanguage];
 
   const [isModal, setIsModal] = useState(false);
   const [selectedOption, setSelectedOption] = useState("score");
@@ -54,9 +58,8 @@ const Leaderboard = () => {
   // get LeaderBoard table Data
   useEffect(() => {
     setLoading(true);
-    let API = `/leaderboard/top-traders?page=${page}&show_non_active=${showInactive}&sort_type=${
-      filterOption || selectedOption
-    }`;
+    let API = `/leaderboard/top-traders?page=${page}&show_non_active=${showInactive}&sort_type=${filterOption || selectedOption
+      }`;
 
     axios
       .get(API)
@@ -101,7 +104,7 @@ const Leaderboard = () => {
 
   const columns = [
     {
-      title: "Rank",
+      title: subTitle.rank,
       dataIndex: "rank",
       key: "rank",
       align: "center",
@@ -123,7 +126,7 @@ const Leaderboard = () => {
       },
     },
     {
-      title: "Portfolio",
+      title: subTitle.portfolio,
       dataIndex: "portfolio",
       key: "portfolio",
       render: (_, record) => (
@@ -146,7 +149,7 @@ const Leaderboard = () => {
       ),
     },
     {
-      title: "Return",
+      title: subTitle.return,
       dataIndex: "return",
       key: "return",
       align: "center",
@@ -157,7 +160,7 @@ const Leaderboard = () => {
       ),
     },
     {
-      title: "MDD",
+      title: subTitle.mdd,
       dataIndex: "mdd",
       key: "mdd",
       align: "center",
@@ -166,7 +169,7 @@ const Leaderboard = () => {
       ),
     },
     {
-      title: "Profit ($)",
+      title: `${subTitle.profit} ($)`,
       dataIndex: "profit",
       key: "profit",
       align: "center",
@@ -175,7 +178,7 @@ const Leaderboard = () => {
       ),
     },
     {
-      title: "Av. Monthly Profit",
+      title: subTitle.monthlyProfits,
       dataIndex: "avgMonthlyProfit",
       key: "avgMonthlyProfit",
       align: "center",
@@ -186,7 +189,7 @@ const Leaderboard = () => {
       ),
     },
     {
-      title: "Tracking for",
+      title: subTitle.trackingFor,
       dataIndex: "tracking",
       key: "tracking",
       align: "center",
@@ -264,20 +267,27 @@ const Leaderboard = () => {
   ];
 
   // Oct 10 - Nov 9
-  const today = moment().format("MMM DD");
-  const startMonth = moment().startOf("month").format("MMM DD");
-  const endMonth = moment().endOf("month").format("MMM DD");
-  const oneMonthAgo = moment().subtract(30, "days").format("MMM DD");
-  const fourMonthAgo = moment().subtract(90, "days").format("MMM DD");
-  const oneYearAgo = moment().subtract(365, "days").format("MMM DD");
-  const weeklAgo = moment().subtract(7, "days").format("MMM DD");
-
+  // const today = moment().format("MMM DD");
+  // const startMonth = moment().startOf("month").format("MMM DD");
+  // const endMonth = moment().endOf("month").format("MMM DD");
+  // const oneMonthAgo = moment().subtract(30, "days").format("MMM DD");
+  // const fourMonthAgo = moment().subtract(90, "days").format("MMM DD");
+  // const oneYearAgo = moment().subtract(365, "days").format("MMM DD");
+  // const weeklAgo = moment().subtract(7, "days").format("MMM DD");
+  const month = transMonth[currentLanguage];
+  const today = month.today
+  const startMonth = month.startMonth
+  const endMonth = month.endMonth
+  const oneMonthAgo = month.oneMonthAgo
+  const fourMonthAgo = month.fourMonthAgo
+  const oneYearAgo = month.oneYearAgo
+  const weeklAgo = month.weeklAgo
   return (
     <div className="leaderboard-container-box">
       <div className="leaderboard-container">
         <div className="leaderboard-btnd-text">
           <div className="leaderboard-Link">
-            <h1>Leaderboard by</h1>
+            <h1>{subTitle.leaderboardBy}</h1>
             <h1
               style={{ cursor: "pointer", color: "#FFB700" }}
               onClick={() => setIsModal(!isModal)}
@@ -290,7 +300,7 @@ const Leaderboard = () => {
                     {selectedOption === "score" && <FaCheck />}
                   </button>
                   <button onClick={() => handleOptionClick("profit")}>
-                    Profit {selectedOption === "profit" && <FaCheck />}
+                    {subTitle.profit} {selectedOption === "profit" && <FaCheck />}
                   </button>
                 </div>
               )}
@@ -298,11 +308,11 @@ const Leaderboard = () => {
           </div>
           <div className="leaderboard-btnd">
             <button onClick={() => openModal("portfolio")}>
-              How to add your portfolio to the rating?
+              {subTitle.howToAdd}
             </button>
             {selectedOption === "score" && (
               <button onClick={() => openModal("score")}>
-                <img src={ret} alt="Info" /> How do we measure the Score?
+                <img src={ret} alt="Info" />  {subTitle.measure}
               </button>
             )}
             <InfoModal
@@ -315,17 +325,20 @@ const Leaderboard = () => {
         {selectedOption !== "score" ? (
           <div className="leaderboard-cards">
             <LeaderboardCard
-              title={"Daily Top"}
+              by={subTitle.by}
+              title={subTitle.dailyTop}
               data={leaderboardData?.daily}
               date={today}
             />
             <LeaderboardCard
-              title={"Weekly Top"}
+              by={subTitle.by}
+              title={subTitle.weeklyTop}
               data={leaderboardData?.weekly}
               date={`${weeklAgo} - ${today}`}
             />
             <LeaderboardCard
-              title={"November Top"}
+              by={subTitle.by}
+              title={subTitle.novemberTop}
               data={leaderboardData?.monthly}
               date={`${startMonth} - ${endMonth}`}
             />
@@ -333,20 +346,23 @@ const Leaderboard = () => {
         ) : (
           <div className="leaderboard-cards">
             <LeaderboardCard
+              by={subTitle.by}
               loadingTop={loadingTop}
-              title={"Monthly Top"}
+              title={subTitle.monthlyTop}
               data={leaderboardData?.monthly}
               date={`${oneMonthAgo} - ${today}`}
             />
             <LeaderboardCard
+              by={subTitle.by}
               loadingTop={loadingTop}
-              title={"Quarterly Top"}
+              title={subTitle.quarterlyTop}
               data={leaderboardData?.quarterly}
               date={`${fourMonthAgo} - ${today}`}
             />
             <LeaderboardCard
+              by={subTitle.by}
               loadingTop={loadingTop}
-              title={"Yearly Top"}
+              title={subTitle.yearlyTop}
               data={leaderboardData?.yearly}
               date={`${oneYearAgo} - ${today}`}
             />
@@ -355,7 +371,7 @@ const Leaderboard = () => {
       </div>
 
       <div className="container-rating">
-        <h1>Top Traders Rating</h1>
+        <h1>{subTitle.topTradersRating}</h1>
         <div className="head-rating">
           <label>
             <Switch
@@ -365,7 +381,7 @@ const Leaderboard = () => {
                 showInactive ? "switch-checked-ret" : "switch-unchecked-ret"
               }
             />
-            Show non-active
+            {subTitle.showNonActive}
           </label>
           <Select
             value={filterOption}
@@ -374,19 +390,19 @@ const Leaderboard = () => {
             popupMatchSelectWidth={false} // Adjust dropdown width if needed
           >
             <Option className="custom-option" value="score">
-              Score <AiFillCaretDown />
+              {subTitle.score} <AiFillCaretDown />
             </Option>
             <Option className="custom-option" value="-profit">
-              Return (%) <AiFillCaretDown />
+              {subTitle.return} (%) <AiFillCaretDown />
             </Option>
             <Option className="custom-option" value="profit">
-              Return (%) <AiFillCaretUp />
+              {subTitle.return} (%) <AiFillCaretUp />
             </Option>
             <Option className="custom-option" value="-maxdd">
-              MDD <AiFillCaretDown />
+              {subTitle.mdd} <AiFillCaretDown />
             </Option>
             <Option className="custom-option" value="maxdd">
-              MDD <AiFillCaretUp />
+              {subTitle.mdd} <AiFillCaretUp />
             </Option>
           </Select>
         </div>
@@ -395,12 +411,12 @@ const Leaderboard = () => {
             dataLength={portfolios?.length} // Current number of portfolios
             next={() => setPage((prevPage) => prevPage + 1)} // Load more data
             hasMore={!loading} // Continue loading if not already loading
-            // loader={<h4>Loading...</h4>} // Loading indicator
-            // endMessage={
-            // <p style={{ textAlign: "center" }}>
-            //   <b>Yay! You have seen it all</b>
-            // </p>
-            // }
+          // loader={<h4>Loading...</h4>} // Loading indicator
+          // endMessage={
+          // <p style={{ textAlign: "center" }}>
+          //   <b>Yay! You have seen it all</b>
+          // </p>
+          // }
           >
             {/* O'rab turgan div InfiniteScroll uchun kerak */}
             <div>
@@ -436,17 +452,17 @@ const Leaderboard = () => {
 };
 
 // ====================Boshqa file bu=======================
-const LeaderboardCard = ({ title, data, date, loadingTop }) => {
+const LeaderboardCard = ({ title, data, date, loadingTop, by }) => {
   const getTimestamp = () => Math.floor(Date.now() / 1000); // Get current timestamp in seconds
 
   const getRankColor = (rank) =>
     rank === 1
       ? "#FBAF3D"
       : rank === 2
-      ? "#C0C8E0"
-      : rank === 3
-      ? "#D5B678"
-      : "#fff";
+        ? "#C0C8E0"
+        : rank === 3
+          ? "#D5B678"
+          : "#fff";
 
   return (
     <div className="leaderboard-card">
@@ -491,7 +507,7 @@ const LeaderboardCard = ({ title, data, date, loadingTop }) => {
                         ? `${item?.portfolio_name.substring(0, 19)}...`
                         : item?.portfolio_name}
                     </p>
-                    <p className="leaderboard-creator">by {item?.user_name} </p>
+                    <p className="leaderboard-creator">{by} {item?.user_name} </p>
                   </div>
                   <img src={ret} alt="Ret" />
                   <p className="leaderboard-score">

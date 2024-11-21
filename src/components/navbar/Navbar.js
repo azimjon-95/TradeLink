@@ -21,7 +21,6 @@ import { setModalType as setModalType2 } from "../../context/modalType";
 
 import logo from "../../assets/kyt.png";
 import LanguageSwitcher from "../../hooks/LanguageSwitcher";
-import { translations } from "./Lang";
 
 function Navbar() {
   const dispatch = useDispatch();
@@ -37,9 +36,69 @@ function Navbar() {
   const [isProductDashboard, setIsProductDashboard] = useState(false);
   const navigate = useNavigate();
 
-  const currentLanguage = useSelector((state) => state.language.currentLanguage);
-  const { logoutFailed, logOut, dashboard, rating, products, traderCabinet, faq, throwError, kytDescription, about, passportTitle, passportDescription, login, signup } =
-    translations[currentLanguage] || translations.en;
+
+
+
+
+
+  // const currentLanguage = useSelector((state) => state.language.currentLanguage);
+  // // Tarjima obyektini aniqlash
+  // const translations = {
+  //   en: {
+  //     kytTitle: "KYT - Know Your Trader",
+  //     kytDescription: "For professional traders and investors within the crypto market.",
+  //     passportTitle: "Traders Passport",
+  //     passportDescription: "Worldwide Independent confirmation of traders' results",
+  //     login: "Log In",
+  //     signup: "Sign Up",
+  //     about: "About",
+  //     products: "Products",
+  //     faq: "FAQ",
+  //     traderCabinet: "Trader's Cabinet",
+  //     rating: "Rating",
+  //   },
+  //   ru: {
+  //     kytTitle: "KYT - Знай своего трейдера",
+  //     kytDescription: "Для профессиональных трейдеров и инвесторов на криптовалютном рынке.",
+  //     passportTitle: "Паспорт трейдера",
+  //     passportDescription: "Международное подтверждение результатов трейдеров",
+  //     login: "Войти",
+  //     signup: "Регистрация",
+  //     about: "О нас",
+  //     products: "Продукты",
+  //     faq: "Вопросы и ответы",
+  //     traderCabinet: "Кабинет трейдера",
+  //     rating: "Рейтинг",
+  //   },
+  //   es: {
+  //     kytTitle: "KYT - Conoce a tu comerciante",
+  //     kytDescription: "Para traders profesionales e inversores en el mercado de criptomonedas.",
+  //     passportTitle: "Pasaporte de Comerciante",
+  //     passportDescription: "Confirmación independiente de resultados de traders a nivel mundial",
+  //     login: "Iniciar sesión",
+  //     signup: "Registrarse",
+  //     about: "Acerca de",
+  //     products: "Productos",
+  //     faq: "Preguntas frecuentes",
+  //     traderCabinet: "Gabinete del Comerciante",
+  //     rating: "Calificación",
+  //   },
+  //   de: {
+  //     kytTitle: "KYT - Kenne deinen Händler",
+  //     kytDescription: "Für professionelle Trader und Investoren auf dem Kryptomarkt.",
+  //     passportTitle: "Trader-Pass",
+  //     passportDescription: "Weltweite unabhängige Bestätigung der Trader-Ergebnisse",
+  //     login: "Einloggen",
+  //     signup: "Anmelden",
+  //     about: "Über uns",
+  //     products: "Produkte",
+  //     faq: "FAQ",
+  //     traderCabinet: "Trader-Kabinett",
+  //     rating: "Bewertung",
+  //   },
+  // };
+  // const { kytTitle, kytDescription, passportTitle, passportDescription, login, signup } =
+  //   translations[currentLanguage] || translations.en;
 
   // Hozirgi tilni o'qish
   function parseJwt(token) {
@@ -48,7 +107,7 @@ function Navbar() {
     try {
       const base64Url = token?.split(".")[1]; // tokenning ikkinchi qismi - payload
       if (!base64Url) {
-        throw new Error(throwError);
+        throw new Error("Invalid token format");
       }
       const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
       const jsonPayload = decodeURIComponent(
@@ -59,7 +118,7 @@ function Navbar() {
       );
       return JSON.parse(jsonPayload); // JSON formatiga o'girib qaytarish
     } catch (e) {
-      console.error(e);
+      console.error("Tokenni tahlil qilishda xatolik:", e);
       return null;
     }
   }
@@ -144,13 +203,13 @@ function Navbar() {
   // Link to'plamlarini aniqlash
   const linkOptions = {
     "/passport": [
-      { path: "/rating", label: rating },
+      { path: "/rating", label: "Rating" },
       // { path: '/passport#hub', label: 'Hub' },
     ],
     "/": [
-      { path: "/#about", label: about, scrollTo: 0 },
-      { path: "/#products", label: traderCabinet, scrollTo: 570 },
-      { path: "/faq", label: faq },
+      { path: "/#about", label: "About", scrollTo: 0 },
+      { path: "/#products", label: "Traders Passport", scrollTo: 570 },
+      { path: "/faq", label: "FAQ" },
     ],
     default: [{ path: "/", label: "", scrollTo: 0 }],
   };
@@ -192,18 +251,18 @@ function Navbar() {
       // If token is true, change the path for Trader's Cabinet
       passportLinks.unshift({
         path: "/trader-cabinet/dashboard", // Use the default path when token is false
-        label: traderCabinet, // Use the correct label
+        label: "Trader's Cabinet", // Use the correct label
       });
     } else {
       passportLinks.unshift({
         path: "/traders-cabinet",
-        label: traderCabinet,
+        label: "Trader's Cabinet",
       });
     }
     if (token) {
       passportLinks.unshift({
         path: "/passport/dashboard",
-        label: dashboard,
+        label: "Dashboard",
       });
     }
 
@@ -223,9 +282,7 @@ function Navbar() {
   }, [
     location.pathname,
     token,
-    traderCabinet,
-    dashboard,
-    linkOptions,
+    // linkOptions,
     // mainPageRoutes,
     // passportOpenRoutes,
   ]);
@@ -255,11 +312,11 @@ function Navbar() {
       // const res = await axios.post("/auth/sign-in/logout");
 
       localStorage.removeItem("access_token");
-      message.success(logOut);
+      message.success("Successfully logged out!");
       navigate("/");
     } catch (error) {
       console.error("Logout failed:", error);
-      message.error(logoutFailed);
+      message.error("Logout failed. Please try again.");
     }
   };
 
@@ -312,7 +369,10 @@ function Navbar() {
                   </div>
                   <div className="trade-link-header-text">
                     <h3>KYT - Know Your Trader</h3>
-                    <p>{kytDescription}</p>
+                    <p>
+                      For professional traders and investors within the crypto
+                      market.
+                    </p>
                   </div>
                 </div>
               </Link>
@@ -322,8 +382,10 @@ function Navbar() {
                     <FaPassport size={32} style={{ color: "#f7b267" }} />
                   </div>
                   <div className="trade-link-header-text">
-                    <h3>{passportTitle}</h3>
-                    <p>{passportDescription}</p>
+                    <h3>Traders Passport</h3>
+                    <p>
+                      Worldwide Independent confirmation of traders' results
+                    </p>
                   </div>
                 </div>
               </Link>
@@ -387,7 +449,7 @@ function Navbar() {
               setIsModalSinUp(true);
             }}
           >
-            {login}
+            Log In
           </button>
           <button
             onClick={() => {
@@ -395,7 +457,7 @@ function Navbar() {
               setIsModalSinUp(true);
             }}
           >
-            {signup}
+            Sign Up
           </button>
         </div>
       )}
@@ -416,7 +478,7 @@ function Navbar() {
                 setIsModalSinUp(true);
               }}
             >
-              {login}
+              Log In
             </button>
             <button
               onClick={() => {
@@ -425,7 +487,7 @@ function Navbar() {
                 setModalType("signUp");
               }}
             >
-              {signup}
+              Sign Up
             </button>
           </div>
         )}
@@ -448,9 +510,9 @@ function Navbar() {
           </div>
           {openSections.tradeLink && (
             <div className="media-nav-links">
-              <p>{about}</p>
-              <p>{products}</p>
-              <p>{faq}</p>
+              <p>About</p>
+              <p>Products</p>
+              <p>FAQ</p>
             </div>
           )}
         </div>
@@ -462,7 +524,7 @@ function Navbar() {
           >
             <span>
               <AiOutlineFileText />
-              {passportTitle}
+              Traders Passport
             </span>
             {openSections.passport ? (
               <IoChevronDown className="nav-chevron" />
@@ -472,8 +534,8 @@ function Navbar() {
           </div>
           {openSections.passport && (
             <div className="media-nav-links">
-              <p>{traderCabinet}</p>
-              <p>{rating}</p>
+              <p>Trader's Cabinet</p>
+              <p>Rating</p>
             </div>
           )}
         </div>
