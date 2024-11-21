@@ -1,20 +1,23 @@
 import React from "react";
 import "./Products.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { langText } from "./lang";
 
 function Products() {
+  const lang = useSelector((state) => state.language.currentLanguage);
   return (
     <div className="dashboard-product-container">
       <div className="top-links">
         <Link className="active" to={"/dashboard"}>
-          Products
+          {langText[lang].tabs_1}
         </Link>
-        <Link to={"/dashboard/success-fee"}>Earned Success Fee history</Link>
+        <Link to={"/dashboard/success-fee"}>{langText[lang].tabs_2}</Link>
       </div>
       <div className="products-container">
-        <h2>There's nothing yet</h2>
-        <p>Add your first product to the Marketplace to get started.</p>
-        <Link to={"/dashboard&ctx=product"}>Apply New</Link>
+        <h2>{langText[lang].boldText}</h2>
+        <p>{langText[lang].normalText}</p>
+        <Link to={"/dashboard&ctx=product"}>{langText[lang].btn}</Link>
       </div>
     </div>
   );
