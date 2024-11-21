@@ -97,7 +97,6 @@ export const reviewsData = [
     }
 ];
 
-
 export const faqData = [
     {
         question: {
@@ -157,7 +156,6 @@ export const faqData = [
     },
 ];
 
-
 export const blogPosts = [
     {
         date: "2024-08-02",
@@ -208,10 +206,10 @@ export const blogPosts = [
     {
         date: "2024-04-11",
         kyt: {
-            en: "WHAT IS COPYTRADING?",
-            es: "¿QUÉ ES EL COPYTRADING?",
-            de: "WAS IST COPYTRADING?",
-            ru: "ЧТО ТАКОЕ КОПИ-ТРЕЙДИНГ?"
+            en: "Jet 2.0",
+            es: "Jet 2.0",
+            de: "Jet 2.0",
+            ru: "Jet 2.0",
         },
         tags: ["News"],
         title: {
@@ -230,12 +228,19 @@ export const blogPosts = [
     }
 ];
 
+// Ingliz tili: ""
+// Rus tili: ""
+// Nemis tili: ""
+// Ispan tili: ""
 
 export const translations = {
     en: {
         title: "Global standard for the independent evaluation of traders and investments in the best strategies",
         subtitle: "We support traders in validating their trading performance and securing investments, and provide investors with verified, low-risk trading strategies.",
         signUp: "Sign up",
+        support: "We support",
+        often: "Questions We Get Asked Often",
+        commission: "Get a commission from the profits of your referrals, free from any hidden platform charges.",
         passportSubtitle: "Global standard for trader evaluation.",
         passportTitle: "KYT - Know Your Trader Passport",
         passportDescription: "An objective and unbiased evaluation of traders' skills and performance.",
@@ -245,9 +250,14 @@ export const translations = {
             "Everything you need, from statistics to investment attraction, all in one place."
         ],
         learnMore: "Learn more",
-        missionTitle: "We make the cryptocurrency trading market fair and transparent.",
+        mission: "Our mission",
+        function: "How does it function?",
+        consider: "We consider your input, as it helps us enhance our service.",
+        strategy: { __html: "Share your strategy performance on your <br /> personal website with the help of the widget." },
+        weTake: "We take care of everything else with the investor.",
+        missionTitle: { __html: 'We make the cryptocurrency trading <br /> market fair and transparent.' },
         proTradersTitle: "For PRO-traders",
-        proTradersDescription: "Submit your strategy on the KYT - Know Your Trader to acquire new clients.",
+        proTradersDescription: { __html: 'Submit your strategy on the KYT -<br /> Know Your Trader  to acquire new clients.' },
         widgetTitle: "Integrate the KYT - Know Your Trader widget into your website.",
         referralTitle: "KYT - Know Your Trader Invitation Program",
         faqTitle: "Questions We Get Asked Often",
@@ -260,18 +270,26 @@ export const translations = {
         title: "Глобальный стандарт для независимой оценки трейдеров и инвестиций в лучшие стратегии",
         subtitle: "Мы поддерживаем трейдеров в проверке их торговых показателей и обеспечении инвестиций, а также предоставляем инвесторам проверенные стратегии с низким риском.",
         signUp: "Зарегистрироваться",
+        support: "Мы поддерживаем",
+        function: "Как это работает?",
+        consider: "Мы учитываем ваши отзывы, так как они помогают нам улучшать наш сервис.",
+        often: "Вопросы, которые нам часто задают",
+        commission: "Получайте комиссию с прибыли ваших рефералов без скрытых платформенных сборов.",
         passportSubtitle: "Глобальный стандарт для оценки трейдеров.",
         passportTitle: "KYT - Знай своего трейдера Паспорт",
-        passportDescription: "Объективная и беспристрастная оценка навыков и результатов трейдеров.",
+        proTradersDescription: { __html: 'Объективная и беспристрастная оценка навыков и результатов трейдеров.' },
         passportBenefits: [
             "Для создания большего доверия среди инвесторов.",
             "Безопасно загрузите ваши данные с API-ключом с правами только для чтения.",
             "Все, что вам нужно: статистика, привлечение инвестиций и многое другое."
         ],
         learnMore: "Узнать больше",
-        missionTitle: "Мы делаем рынок криптовалютной торговли справедливым и прозрачным.",
+        mission: "Наша миссия",
+        strategy: { __html: "Поделитесь результатами вашей стратегии на вашем <br /> личном сайте с помощью виджета." },
+        weTake: "Мы заботимся обо всем остальном с инвестором.",
+        missionTitle: { __html: "Мы делаем рынок криптовалютной торговли  <br/> справедливым и прозрачным." },
         proTradersTitle: "Для ПРО-трейдеров",
-        proTradersDescription: "Разместите свою стратегию на KYT - Знай своего трейдера, чтобы привлечь новых клиентов.",
+        proTradersDescription: { __html: 'Разместите свою стратегию на KYT - <br/> Знай своего трейдера, чтобы привлечь новых клиентов.' },
         widgetTitle: "Интегрируйте виджет KYT - Знай своего трейдера на вашем сайте.",
         referralTitle: "Пригласительная программа KYT - Знай своего трейдера",
         faqTitle: "Вопросы, которые нам часто задают",
@@ -284,6 +302,12 @@ export const translations = {
         title: "Estándar global para la evaluación independiente de traders e inversiones en las mejores estrategias",
         subtitle: "Apoyamos a los traders en la validación de su rendimiento comercial y en la obtención de inversiones, y ofrecemos a los inversores estrategias comerciales verificadas y de bajo riesgo.",
         signUp: "Regístrate",
+        support: "Nosotros apoyamos",
+        function: "¿Cómo funciona?",
+        consider: "Tomamos en cuenta tus comentarios, ya que nos ayudan a mejorar nuestro servicio.",
+        often: "Preguntas que nos hacen a menudo",
+        commission: "Obtén una comisión de las ganancias de tus referidos, libre de cargos ocultos de la plataforma.",
+        strategy: { __html: "Comparte el rendimiento de tu estrategia en tu <br /> sitio web personal con la ayuda del widget." },
         passportSubtitle: "Estándar global para la evaluación de traders.",
         passportTitle: "KYT - Conoce a tu Trader Pasaporte",
         passportDescription: "Una evaluación objetiva e imparcial de las habilidades y el rendimiento de los traders.",
@@ -293,9 +317,11 @@ export const translations = {
             "Todo lo que necesitas, desde estadísticas hasta atracción de inversiones, todo en un solo lugar."
         ],
         learnMore: "Aprende más",
-        missionTitle: "Hacemos que el mercado de trading de criptomonedas sea justo y transparente.",
+        mission: "Nuestra misión",
+        weTake: "Wir kümmern uns um alles andere mit dem Investor.",
+        missionTitle: { __html: "Hacemos que el mercado de trading de  <br/> criptomonedas sea justo y transparente." },
         proTradersTitle: "Para traders PRO",
-        proTradersDescription: "Envía tu estrategia en el KYT - Conoce a tu Trader para adquirir nuevos clientes.",
+        proTradersDescription: { __html: 'Envía tu estrategia en el KYT - Conoce a tu Trader <br/> para adquirir nuevos clientes.' },
         widgetTitle: "Integra el widget KYT - Conoce a tu Trader en tu sitio web.",
         referralTitle: "Programa de invitación KYT - Conoce a tu Trader",
         faqTitle: "Preguntas frecuentes",
@@ -308,6 +334,11 @@ export const translations = {
         title: "Globaler Standard für die unabhängige Bewertung von Tradern und Investitionen in die besten Strategien",
         subtitle: "Wir unterstützen Trader bei der Validierung ihrer Handelsleistung und der Sicherung von Investitionen und bieten Investoren verifizierte, risikoarme Handelsstrategien.",
         signUp: "Anmelden",
+        support: "Wir unterstützen",
+        function: "Wie funktioniert es?",
+        consider: "Wir berücksichtigen Ihr Feedback, da es uns hilft, unseren Service zu verbessern.",
+        often: "Fragen, die uns oft gestellt werden",
+        commission: "Erhalten Sie eine Provision aus den Gewinnen Ihrer Empfehlungen, frei von versteckten Plattformgebühren.",
         passportSubtitle: "Globaler Standard für die Bewertung von Tradern.",
         passportTitle: "KYT - Know Your Trader Pass",
         passportDescription: "Eine objektive und unparteiische Bewertung der Fähigkeiten und Leistungen von Tradern.",
@@ -317,9 +348,12 @@ export const translations = {
             "Alles, was du brauchst, von Statistiken bis zur Anwerbung von Investitionen, alles an einem Ort."
         ],
         learnMore: "Mehr erfahren",
-        missionTitle: "Wir machen den Kryptowährungshandelsmarkt fair und transparent.",
+        mission: "Unsere Mission",
+        strategy: { __html: "Teilen Sie die Leistung Ihrer Strategie auf Ihrer <br /> persönlichen Website mit Hilfe des Widgets." },
+        weTake: "Nos encargamos de todo lo demás con el inversor.",
+        missionTitle: { __html: "Wir machen den Kryptowährungshandelsmarkt <br/> fair und transparent." },
         proTradersTitle: "Für PRO-Trader",
-        proTradersDescription: "Reiche deine Strategie auf KYT - Know Your Trader ein, um neue Kunden zu gewinnen.",
+        proTradersDescription: { __html: 'Reiche deine Strategie auf KYT - Know Your Trader <br/> ein, um neue Kunden zu gewinnen.' },
         widgetTitle: "Integriere das KYT - Know Your Trader Widget auf deiner Website.",
         referralTitle: "KYT - Know Your Trader Einladung Programm",
         faqTitle: "Fragen, die uns häufig gestellt werden",

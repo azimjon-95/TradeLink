@@ -2,6 +2,7 @@ import React, { useState } from "react"; // Import React at the top
 import { Input, Tooltip } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import LineChart from "../../hooks/LineChart";
 import ed_khan from "../../assets/ed_khan/Ed_Khan.png";
 import binance_rounded from "../../assets/ed_khan/binance_rounded.svg";
@@ -25,6 +26,7 @@ const OverviewCard = ({
   tooltipAge,
   image,
 }) => {
+  const currentLanguage = useSelector((state) => state.language.currentLanguage);
   return (
     <div className="over-card">
       <div className="over-header">
@@ -253,3 +255,7 @@ const Overview = () => {
 };
 
 export default Overview;
+
+
+
+
