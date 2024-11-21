@@ -290,3 +290,5 @@ const Trades = ({ data }) => {
 export default Trades;
 
 
+
+

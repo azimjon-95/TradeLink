@@ -9,7 +9,7 @@
   width: 100%;
   background-color: #fff;
   border-radius: 40px 40px 0 0;
-  padding: 40px 0;
+  padding: 40px 32px;
 }
 
 .password_dashboard_container {
@@ -23,7 +23,7 @@
   margin-bottom: 40px;
 }
 
-.dashbord_main .my_keys > .my_keys_title {
+.dashbord_main .my_keys>.my_keys_title {
   font-size: 24px;
   display: flex;
   align-items: center;
@@ -33,11 +33,11 @@
   font-weight: 570;
 }
 
-.my_keys_title > svg {
+.my_keys_title>svg {
   transition: all 0.3s ease-in-out;
 }
 
-.my_keys_title > svg.icon_active {
+.my_keys_title>svg.icon_active {
   transform: rotate(180deg);
 }
 
@@ -123,6 +123,36 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: auto;
+}
+
+/* Custom scrollbar styling */
+.addKeyModal__left::-webkit-scrollbar,
+.addKeyModal__right::-webkit-scrollbar {
+  width: 4px;
+  /* Adjust width of the scrollbar */
+}
+
+.addKeyModal__left::-webkit-scrollbar-thumb,
+.addKeyModal__right::-webkit-scrollbar-thumb {
+  background-color: #b1b1b1;
+  /* Thumb color */
+  border-radius: 4px;
+  /* Rounded corners for the thumb */
+}
+
+.addKeyModal__left::-webkit-scrollbar-thumb:hover,
+.addKeyModal__right::-webkit-scrollbar-thumb:hover {
+  background-color: #9d9d9d;
+  /* Thumb color on hover */
+}
+
+.addKeyModal__left::-webkit-scrollbar-track,
+.addKeyModal__right::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  /* Track color */
+  border-radius: 4px;
+  /* Rounded corners for the track */
 }
 
 .addKeyModal__left {
@@ -130,6 +160,7 @@
 
   p {
     font-weight: 300;
+
     a {
       color: #1a2233;
       text-decoration: underline;
@@ -194,6 +225,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
     h2 {
       font-size: 20px;
       margin: 20px 0;
@@ -247,11 +279,13 @@
     justify-content: center;
     flex-direction: column;
     gap: 10px;
+
     a {
       display: flex;
       align-items: center;
       gap: 5px;
     }
+
     p {
       font-size: 12px;
       color: #1a2233b2;

@@ -33,35 +33,36 @@ const translations = {
       "Информация, представленная на этом сайте, предоставляется исключительно в информационных и образовательных целях. Сайт не хранит и не управляет активами пользователей, а также не предоставляет инвестиционные, финансовые, юридические, налоговые или иные консультации. Любой анализ или визуализация финансовых данных предоставляются только в общих информационных целях и не должны рассматриваться как рекомендация для принятия инвестиционных решений. Пользователи должны всегда проводить собственные исследования и принимать собственные решения.",
     copyright: `Copyright © 2021 - ${new Date().getFullYear()} "KYT - KNOW YOUR TRADER" KYT LLC, BVI COMPANY NUMBER 822 85 193. Все права защищены.`,
   },
-  uz: {
-    products: "Mahsulotlar",
-    rating: "KYT - Reyting",
-    passport: "KYT - Treyderlar Pasporti",
-    company: "Kompaniya",
-    aboutUs: "Biz haqimizda",
-    reviews: "Sharhlar",
+  de: {
+    products: "Produkte",
+    rating: "KYT - Bewertung",
+    passport: "KYT - Trader Pass",
+    company: "Firma",
+    aboutUs: "Über uns",
+    reviews: "Bewertungen",
     faq: "FAQ",
-    contact: "Aloqa",
-    support: "Qo‘llab-quvvatlash",
+    contact: "Kontakt",
+    support: "Unterstützung",
     disclaimer:
-      "Ushbu veb-saytda taqdim etilgan ma'lumotlar faqat ma'lumot va ta'limiy maqsadlarda ishlatiladi. Sayt foydalanuvchilarning aktivlarini saqlamaydi yoki boshqarmaydi, shuningdek investitsiya, moliyaviy, yuridik, soliq yoki boshqa maslahatlar bermaydi. Har qanday tahlil yoki moliyaviy ma'lumotlarning vizual tasviri faqat umumiy ma'lumot uchun mo'ljallangan va investitsiya qarorlarini qabul qilishda asos sifatida foydalanilmasligi kerak. Foydalanuvchilar har doim o'z tadqiqotlarini o'tkazishlari va qarorlarini mustaqil qabul qilishlari kerak.",
-    copyright: `Copyright © 2021 - ${new Date().getFullYear()} "KYT - KNOW YOUR TRADER" KYT MChJ, BVI KOMPANIYA RAQAMI 822 85 193. Barcha huquqlar himoyalangan.`,
+      "Die auf dieser Website bereitgestellten Informationen dienen nur zu Informations- und Bildungszwecken. Die Website hält oder verwaltet keine Vermögenswerte der Benutzer und bietet keine Investitions-, Finanz-, Rechts-, Steuer- oder anderen Beratungen an. Alle Analysen oder visuelle Darstellungen von Finanzdaten dienen nur allgemeinen Informationszwecken und sollten nicht als Grundlage für Investitionsentscheidungen herangezogen werden. Benutzer sollten immer ihre eigenen Recherchen durchführen und ihre eigenen Entscheidungen treffen.",
+    copyright: `Copyright © 2021 - ${new Date().getFullYear()} "KYT - KNOW YOUR TRADER" KYT LLC, BVI COMPANY NUMBER 822 85 193. Alle Rechte vorbehalten.`,
   },
-  fr: {
-    products: "Produits",
-    rating: "KYT - Classement",
-    passport: "KYT - Passeport des Traders",
-    company: "Entreprise",
-    aboutUs: "À propos de nous",
-    reviews: "Avis",
+  es: {
+    products: "Productos",
+    rating: "KYT - Clasificación",
+    passport: "KYT - Pasaporte de Traders",
+    company: "Compañía",
+    aboutUs: "Sobre nosotros",
+    reviews: "Reseñas",
     faq: "FAQ",
-    contact: "Contact",
-    support: "Soutien",
+    contact: "Contacto",
+    support: "Soporte",
     disclaimer:
-      "Les informations fournies sur ce site Web sont uniquement à des fins informatives et éducatives. Le site ne conserve ni ne gère aucun actif des utilisateurs et ne fournit aucun conseil en investissement, financier, juridique, fiscal ou autre. Toute analyse ou représentation visuelle de données financières est fournie à titre d'information générale uniquement et ne doit pas être considérée comme une recommandation pour prendre des décisions d'investissement. Les utilisateurs doivent toujours effectuer leurs propres recherches et prendre leurs propres décisions.",
-    copyright: `Copyright © 2021 - ${new Date().getFullYear()} "KYT - KNOW YOUR TRADER" KYT LLC, BVI COMPANY NUMBER 822 85 193. Tous droits réservés.`,
+      "La información proporcionada en este sitio web es solo para fines informativos y educativos. El sitio web no posee ni maneja activos de los usuarios y no proporciona asesoría en inversiones, finanzas, legal, impuestos o de otro tipo. Cualquier análisis o representación visual de datos financieros es solo para fines informativos generales y no debe ser considerado como una recomendación para tomar decisiones de inversión. Los usuarios siempre deben realizar su propia investigación y tomar sus propias decisiones.",
+    copyright: `Copyright © 2021 - ${new Date().getFullYear()} "KYT - KNOW YOUR TRADER" KYT LLC, BVI COMPANY NUMBER 822 85 193. Todos los derechos reservados.`,
   },
 };
+
 
 const Footer = () => {
   const currentLanguage = useSelector((state) => state.language.currentLanguage);
@@ -78,41 +79,41 @@ const Footer = () => {
 
       <div className="footer-top">
         <div className="footer-section">
-          <h3 className="footer-title">{subTitle.products}</h3>
+          <h3 className="footer-title">{subTitle?.products}</h3>
           <ul className="footer-list">
             <li>
-              <Link to={"/rating"}>{subTitle.rating}</Link>
+              <Link to={"/rating"}>{subTitle?.rating}</Link>
             </li>
             <li>
-              <Link to={"/passport"}>{subTitle.passport}</Link>
+              <Link to={"/passport"}>{subTitle?.passport}</Link>
             </li>
           </ul>
         </div>
         <div className="footer-section">
-          <h3 className="footer-title">{subTitle.company}</h3>
+          <h3 className="footer-title">{subTitle?.company}</h3>
           <ul className="footer-list">
             <li>
-              <Link to={"/"}>{subTitle.aboutUs}</Link>
+              <Link to={"/"}>{subTitle?.aboutUs}</Link>
             </li>
             <li>
-              <Link to={"/"}>{subTitle.reviews}</Link>
+              <Link to={"/"}>{subTitle?.reviews}</Link>
             </li>
             <li>
-              <Link to={"/faq"}>{subTitle.faq}</Link>
+              <Link to={"/faq"}>{subTitle?.faq}</Link>
             </li>
             <li>
-              <Link to={"/"}>{subTitle.contact}</Link>
+              <Link to={"/"}>{subTitle?.contact}</Link>
             </li>
             <li>
-              <Link to={"/"}>{subTitle.support}</Link>
+              <Link to={"/"}>{subTitle?.support}</Link>
             </li>
           </ul>
         </div>
       </div>
 
       <div className="footer-bottom">
-        <p className="footer-disclaimer">{subTitle.disclaimer}</p>
-        <p className="footer-copyright">{subTitle.copyright}</p>
+        <p className="footer-disclaimer">{subTitle?.disclaimer}</p>
+        <p className="footer-copyright">{subTitle?.copyright}</p>
       </div>
     </footer>
   );

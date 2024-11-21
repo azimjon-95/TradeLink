@@ -14,7 +14,7 @@ import "./style.css";
 import KeyIndicators from "./myCards/KeyIndicators";
 import Charts from "./myCards/Charts";
 import Investment from "./myCards/Investment";
-import { translations, checkboxData, labels, labelsBar, drawDown, translationsInfo } from './Lang'
+import { translations, checkboxData, labels, tooltipTextLab, labelsBar, languagesLab, drawDown, translationsInfo } from './Lang'
 
 const { RangePicker } = DatePicker;
 
@@ -125,6 +125,19 @@ const UtopiaOldMultiLine = () => {
     document.title = data?.user_name || "KYT-know your trader";
   }, [data?.user_name]);
 
+  const placeholders = {
+    en: ["Start Day", "End Day"],
+    ru: ["Начало", "Конец"], // Russian
+    de: ["Startdatum", "Enddatum"], // German
+    es: ["Día de inicio", "Día final"] // Spanish
+  };
+
+  const translationsCh = {
+    en: "Chart",
+    ru: "График", // Russian
+    de: "Diagramm", // German
+    es: "Gráfico" // Spanish
+  };
   return (
     <div className="oldMultiLine">
       <div className="oldMultiLine-header">
@@ -152,7 +165,7 @@ const UtopiaOldMultiLine = () => {
       <div className="oldMultiLine-main">
         <div className="oldMultiLine-main-head">
           <Space className="RangePicker" direction="vertical" size={12}>
-            <RangePicker />
+            <RangePicker placeholder={placeholders[currentLanguage]} />
           </Space>
           <div className="oldMultiLine-calendar">
             <Select
@@ -255,7 +268,7 @@ const UtopiaOldMultiLine = () => {
             style={{ padding: `${isOverlayVisible && "10px 20px"}` }}
             className="ket-inxBox"
           >
-            <h2>Chart</h2>
+            <h2>{translationsCh[currentLanguage]}</h2>
             {!isOverlayVisible && (
               <button
                 className="isOverlayVisible-btn"
@@ -293,6 +306,7 @@ const UtopiaOldMultiLine = () => {
             isOverlayVisible={isOverlayVisible}
             labelsBar={labelsBar}
             drawDown={drawDown}
+
           />
           {isLite && (
             <div className="single-cards-container">
@@ -330,6 +344,8 @@ const UtopiaOldMultiLine = () => {
               id={baseId}
               activeTab={activeTab}
               selectValue={selectValue}
+              languagesLab={languagesLab}
+              tooltipTextLab={tooltipTextLab}
             />
           </div>
         )}
