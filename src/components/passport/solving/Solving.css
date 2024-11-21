@@ -93,8 +93,9 @@
   padding: 16px;
   border-radius: 1.5rem;
   display: flex;
-  height: 140px;
+  height: 165px;
 }
+
 .solving_answer_item p svg {
   margin-right: 16px;
   height: 40px;
