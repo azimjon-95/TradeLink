@@ -3,9 +3,12 @@ import { EyeOutlined, StarOutlined, SearchOutlined } from "@ant-design/icons"; /
 import { Link } from "react-router-dom";
 // import { v4 as uuidv4 } from "uuid";
 import { Input, Tooltip } from "antd"; // Ant Design components
+import { useSelector } from "react-redux";
 import binance_rounded from "../../assets/ed_khan/binance_rounded.svg"; // Image import
 import LineChart from "../../hooks/LineChart"; // Custom hook or component import
 import "./styles/style.css"; // Import the CSS file
+
+import { portfolioLang } from "./lang";
 
 const PortfolCard = ({
   title,
@@ -90,6 +93,7 @@ const Portfolios = ({
   public_portfolios,
   portfolio_chartData,
 }) => {
+  const lang = useSelector((state) => state.language.currentLanguage);
   // const startDate = new Date(public_portfolios?.started_at)?.toLocaleString({
   //   "uz-UZ": {
   //     month: "nummeric",
@@ -121,7 +125,6 @@ const Portfolios = ({
     // return `${baseId}?t=${tParam}&startDate=${startDate}&endDate=${endDate}&step=${step}&profit=${profit}&margin-balance=${marginBalance}&balance=${balance}`;
     return `${baseId}?t=${tParam}`;
   };
-
 
   const portfoliosData = public_portfolios?.map((portfolio, index) => ({
     id: generateUniqueId(index),
@@ -155,11 +158,11 @@ const Portfolios = ({
   return (
     <>
       <div className="menus-khan-page">
-        <h2>Overview</h2>
+        <h2>{portfolioLang[lang].caption}</h2>
         <div className="overview-container">
           <div className="menus-khan-card">
-            <Tooltip title="This shows the total assets under management">
-              <h3>Total Income</h3>
+            <Tooltip title={portfolioLang[lang].income_tooltip}>
+              <h3>{portfolioLang[lang].income}</h3>
             </Tooltip>
             {/* <p>${(portFolioData?.total_income / 1000)?.toFixed(2) || 0}K</p> */}
             <p>
@@ -169,11 +172,11 @@ const Portfolios = ({
                 : 0) + "K"}
             </p>
 
-            <span>Luck smiled - it's wonderful!</span>
+            <span>{portfolioLang[lang].income_desc}</span>
           </div>
           <div className="menus-khan-card">
-            <Tooltip title="Total number of investors">
-              <h3>Total Balance</h3>
+            <Tooltip title={portfolioLang[lang].balance_tooltip}>
+              <h3>{portfolioLang[lang].balance}</h3>
             </Tooltip>
             {/* <p>${(portFolioData?.total_balance / 1000).toFixed(2) || 0}K</p> */}
             <p>
@@ -182,11 +185,11 @@ const Portfolios = ({
                 ? (portFolioData.total_balance / 1000).toFixed(2)
                 : 0) + "K"}
             </p>
-            <span>Ed Khan gained $14.94K this week</span>
+            <span>{portfolioLang[lang].balance_desc}</span>
           </div>
           <div className="menus-khan-card">
-            <Tooltip title="Average monthly income percentage">
-              <h3>Total Volume</h3>
+            <Tooltip title={portfolioLang[lang].volume_tooltip}>
+              <h3>{portfolioLang[lang].volume}</h3>
             </Tooltip>
             {/* <p>${(portFolioData?.total_volume / 1000000).toFixed(2) || 0}M</p> */}
             <p>
@@ -194,15 +197,15 @@ const Portfolios = ({
                 ? (portFolioData.total_volume / 1000000).toFixed(2)
                 : 0) + "M"}
             </p>
-            <span>Oh wow, this is already a serious number!</span>
+            <span>{portfolioLang[lang].volume_desc}</span>
           </div>
         </div>
 
         <div className="khan-search">
-          <b>Public strategies</b>
+          <b>{portfolioLang[lang].search}</b>
           <Input
             className="menus-khan-search-bar"
-            placeholder="Search by name"
+            placeholder={portfolioLang[lang].searchInput}
             prefix={<SearchOutlined />}
             size="small"
             value={searchQuery}

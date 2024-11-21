@@ -10,6 +10,7 @@ import {
   useLocation,
 } from "react-router-dom"; // Import Outlet
 import { Tooltip } from "antd";
+import { useSelector } from "react-redux";
 import axios from "../../api";
 import ed_khan from "../../assets/ed_khan/avatar.png";
 // import Overview from "./Overview";
@@ -19,7 +20,11 @@ import ShareModal from "./ShareModal";
 import "./styles/style.css"; // Import the CSS file
 import "./styles/media.css"; // Import the CSS file
 
+import { profileLang } from "./lang";
+
 const UserProfile = () => {
+  const lang = useSelector((state) => state.language.currentLanguage);
+
   //   const [telegramHandle, setTelegramHandle] = useState("");
   const location = useLocation();
   const [currentPath, setCurrentPath] = useState("/user");
@@ -34,8 +39,6 @@ const UserProfile = () => {
   const portfolio_chartData = profileData?.profits?.profits;
   // user_profile_header_data
   const user_profile_header_data = profileData?.user_profile_header_data || {};
-
-
 
   useEffect(() => {
     // Update the current path in localStorage whenever it changes
@@ -72,7 +75,7 @@ const UserProfile = () => {
 
   return (
     <div className="ed_khan">
-      <h1>My Profile</h1>
+      <h1>{profileLang[lang].title}</h1>
 
       <div className="user-share-container">
         <div className="user-share">
@@ -91,32 +94,32 @@ const UserProfile = () => {
                 {user_profile_header_data?.name || ""}
               </h1>
               <p>{profileInfo?.days_in_market || 0}</p>
-              <Tooltip title="Days in market">
-                <span>Days in market</span>
+              <Tooltip title={profileLang[lang].market}>
+                <span>{profileLang[lang].market}</span>
               </Tooltip>
             </div>
             <div className="ed-khan-main">
               <p>{profileInfo?.days_investing || 0}</p>
-              <Tooltip title="Days investing">
-                <span>Days investing</span>
+              <Tooltip title={profileLang[lang].investing}>
+                <span>{profileLang[lang].investing}</span>
               </Tooltip>
             </div>
             <div className="ed-khan-main">
               <p>{profileInfo?.active_portfolios || 0}</p>
-              <Tooltip title="Active Portfolios">
-                <span>Active Portfolios</span>
+              <Tooltip title={profileLang[lang].portfolio}>
+                <span>{profileLang[lang].portfolio}</span>
               </Tooltip>
             </div>
             <div className="ed-khan-main">
               <p>{profileInfo?.active_jets || 0}</p>
-              <Tooltip title="Active Jets">
-                <span>Active Jets</span>
+              <Tooltip title={profileLang[lang].jet}>
+                <span>{profileLang[lang].jet}</span>
               </Tooltip>
             </div>
             <div className="ed-khan-main">
               <p>{(profileInfo?.total_views / 1000 || 0)?.toFixed(2)}K</p>
-              <Tooltip title="Total Views">
-                <span>Total Views</span>
+              <Tooltip title={profileLang[lang].views}>
+                <span>{profileLang[lang].views}</span>
               </Tooltip>
             </div>
           </div>
@@ -124,7 +127,7 @@ const UserProfile = () => {
 
         <button onClick={toggleModal}>
           <FaShare style={{ fontSize: "16px" }} />
-          Share
+          {profileLang[lang].share}
         </button>
       </div>
 
@@ -144,21 +147,13 @@ const UserProfile = () => {
               </Link> */}
               <Link
                 to={`/user/${id}/portfolios`}
-                className={
-                  currentPath === `/user/${id}` ? "active" : ""
-                }
+                className={currentPath === `/user/${id}` ? "active" : ""}
                 style={{
-                  color:
-                    currentPath === `/user/${id}`
-                      ? "#4A27A9"
-                      : "gray",
-                  fontWeight:
-                    currentPath === `/user/${id}`
-                      ? "bold"
-                      : "normal",
+                  color: currentPath === `/user/${id}` ? "#4A27A9" : "gray",
+                  fontWeight: currentPath === `/user/${id}` ? "bold" : "normal",
                 }}
               >
-                Portfolios
+                {profileLang[lang].tabs_1}
               </Link>
               {/* <Link
                 to={`/user/${id}/jet`}

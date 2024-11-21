@@ -1,22 +1,26 @@
 import React from "react";
 import "./FeeHistory.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Overall from "../overall/Overall";
+import { langText } from "../products/lang";
 
 function FeeHistory() {
+  const lang = useSelector((state) => state.language.currentLanguage);
+
   return (
     <div className="fee-history">
       <Overall />
       <div className="fee-history-container">
         <div className="top-links">
-          <Link to={"/trader-cabinet/dashboard"}>Products</Link>
+          <Link to={"/trader-cabinet/dashboard"}>{langText[lang].tabs_1}</Link>
           <Link className="active" to={"/dashboard/success-fee"}>
-            Earned Success Fee history
+            {langText[lang].tabs_2}
           </Link>
         </div>
         <div className="success-fee-container">
-          <h2>There's nothing yet</h2>
-          <p>Add your first product to the Marketplace to get started.</p>
+          <h2>{langText[lang].boldText}</h2>
+          <p>{langText[lang].normalText}</p>
         </div>
       </div>
     </div>

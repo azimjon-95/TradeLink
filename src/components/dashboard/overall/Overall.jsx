@@ -1,37 +1,40 @@
 import React from "react";
 import "./Overall.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { langText } from "./lang";
 
 function Overall() {
+  const lang = useSelector((state) => state.language.currentLanguage);
   return (
     <div className="overall">
       <div className="top">
-        <h1>Overall statistics</h1>
+        <h1>{langText[lang].title}</h1>
         <Link to={"/"}>
-          <button>View landing</button>
+          <button>{langText[lang].view_btn}</button>
         </Link>
       </div>
       <div className="overal-statistics-cards">
         <div className="statistics-card">
-          <span>Total pending Success Fee</span>
+          <span>{langText[lang].total_pending_success_fee}</span>
           <div className="statistics">
             <b>${0}</b>
           </div>
         </div>
         <div className="statistics-card">
-          <span>Total earned Success Fee</span>
+          <span>{langText[lang].total_earned_success_fee}</span>
           <div className="statistics">
             <b>${0}</b>
           </div>
         </div>
         <div className="statistics-card">
-          <span>Total AUM</span>
+          <span>{langText[lang].total_aum}</span>
           <div className="statistics">
             <b>${0}</b>
           </div>
         </div>
         <div className="statistics-card">
-          <span>Total Investors</span>
+          <span>{langText[lang].total_investors}</span>
           <div className="statistics">
             <b>{0}</b>
           </div>
