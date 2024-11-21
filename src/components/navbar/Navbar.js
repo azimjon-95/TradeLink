@@ -81,8 +81,6 @@ function Navbar() {
   let token = localStorage.getItem("access_token");
   const payload = parseJwt(token);
 
-  console.log(payload);
-
   useEffect(() => {
     if (modalTypeValue) {
       setModalType(modalTypeValue);

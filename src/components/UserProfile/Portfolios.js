@@ -9,6 +9,7 @@ import LineChart from "../../hooks/LineChart"; // Custom hook or component impor
 import "./styles/style.css"; // Import the CSS file
 
 import { portfolioLang } from "./lang";
+import { translations } from "./trans";
 
 const PortfolCard = ({
   title,
@@ -31,6 +32,8 @@ const PortfolCard = ({
   active_days,
   result,
 }) => {
+  const lang = useSelector((state) => state.language.currentLanguage);
+
   return (
     <div className="over-card">
       <div className="over-header">
@@ -79,7 +82,8 @@ const PortfolCard = ({
           <StarOutlined /> {result}
         </p>
         <p>
-          Started at {started}, (${active_days} days, ${ohr.toFixed(2)} OHR)
+          {translations[lang].startedAt} {started}, (${active_days}{" "}
+          {translations[lang].days}, ${ohr.toFixed(2)} OHR)
         </p>
         {/* <p> starter at {active_days}</p> */}
         {/* <button>More</button> */}
@@ -88,12 +92,9 @@ const PortfolCard = ({
   );
 };
 
-const Portfolios = ({
-  portFolioData,
-  public_portfolios,
-  portfolio_chartData,
-}) => {
+const Portfolios = ({ portFolioData, public_portfolios }) => {
   const lang = useSelector((state) => state.language.currentLanguage);
+
   // const startDate = new Date(public_portfolios?.started_at)?.toLocaleString({
   //   "uz-UZ": {
   //     month: "nummeric",
@@ -132,14 +133,15 @@ const Portfolios = ({
     returnPercentage: portfolio?.margin_balance?.toFixed(2) || 0,
     drawDown: portfolio?.profit_percent?.toFixed(2) || 0,
     minDeposit: portfolio?.mdd?.toFixed(2) || 0,
-    data: portfolio_chartData?.map((i) => i.value) || [], // Correct: 'data' is an array
-    tooltipReturn: "Total return percentage achieved",
-    tooltipDrawDown: "Maximum drawdown percentage",
-    tooltipMinDeposit: "Minimum deposit required",
-    tooltipProfit: "Profit in dollars",
-    labelReturn: "Margin Balance",
-    labelDrawDown: "Profit, All",
-    labelMinDeposit: "MDD",
+    // data: portfolio_chartData?.map((i) => i.value) || [], // Correct: 'data' is an array
+    data: portfolio.profits.map((i) => i.value), // Correct: 'data' is an array
+    tooltipReturn: translations[lang].tooltipReturn,
+    tooltipDrawDown: translations[lang].tooltipDrawDown,
+    tooltipMinDeposit: translations[lang].tooltipMinDeposit,
+    tooltipProfit: translations[lang].tooltipProfit,
+    labelReturn: translations[lang].labelReturn,
+    labelDrawDown: translations[lang].labelDrawDown,
+    labelMinDeposit: translations[lang].labelMinDeposit,
     profit: portfolio?.profit?.toFixed(2) || 0,
     image: binance_rounded, // Correct: 'binance_rounded' is an image
     view: "0",

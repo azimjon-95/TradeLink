@@ -26,8 +26,9 @@ const LineChart = ({ data, height = 60, strokeColor = "#00c086" }) => {
     })
     .join(" ");
 
-  const filledPoints = `0, ${height} ${points} ${chartWidth === "100%" ? 578 : chartWidth
-    }, ${height}`;
+  const filledPoints = `0, ${height} ${points} ${
+    chartWidth === "100%" ? 578 : chartWidth
+  }, ${height}`;
 
   return (
     <svg

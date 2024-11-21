@@ -36,7 +36,7 @@ const UserProfile = () => {
   //   const overviewInfo = profileData?.overview;
   const portFolioData = profileData?.overview;
   const public_portfolios = profileData?.public_portfolios;
-  const portfolio_chartData = profileData?.profits?.profits;
+
   // user_profile_header_data
   const user_profile_header_data = profileData?.user_profile_header_data || {};
 
@@ -60,7 +60,6 @@ const UserProfile = () => {
       .get(API)
       .then((res) => {
         setProfileData(res.data?.data);
-        console.log(">>>", res);
       })
       .catch((err) => console.log(err));
   }, [id]);
@@ -188,7 +187,6 @@ const UserProfile = () => {
                       <Portfolios
                         portFolioData={portFolioData}
                         public_portfolios={public_portfolios}
-                        portfolio_chartData={portfolio_chartData}
                       />
                     }
                   />
