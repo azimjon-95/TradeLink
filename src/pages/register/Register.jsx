@@ -2,9 +2,62 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import "./style.css";
 import { Button } from "antd";
+import { useSelector } from "react-redux";
 import axios from "../../api";
 
 Modal.setAppElement("#root");
+
+// Tarjima ma'lumotlari
+const translations = {
+  en: {
+    loginTitle: "Log in",
+    email: "Email",
+    password: "Password",
+    dontHaveAccount: "Don’t have an account?",
+    signUp: "Sign up",
+    userExistsError: "User with such email already exists",
+    username: "Username",
+    alreadyHaveAccount: "Already have an account?",
+    login: "Log in",
+    signupTitle: "Sign up",
+  },
+  ru: {
+    loginTitle: "Войти",
+    email: "Эл. почта",
+    password: "Пароль",
+    dontHaveAccount: "Нет учетной записи?",
+    signUp: "Зарегистрироваться",
+    userExistsError: "Пользователь с таким email уже существует",
+    username: "Имя пользователя",
+    alreadyHaveAccount: "Уже есть аккаунт?",
+    login: "Войти",
+    signupTitle: "Регистрация",
+  },
+  uz: {
+    loginTitle: "Tizimga kirish",
+    email: "Elektron pochta",
+    password: "Parol",
+    dontHaveAccount: "Hisobingiz yo‘qmi?",
+    signUp: "Ro‘yxatdan o‘tish",
+    userExistsError: "Bunday email bilan foydalanuvchi allaqachon mavjud",
+    username: "Foydalanuvchi nomi",
+    alreadyHaveAccount: "Hisobingiz bormi?",
+    login: "Kirish",
+    signupTitle: "Ro‘yxatdan o‘tish",
+  },
+  es: {
+    loginTitle: "Iniciar sesión",
+    email: "Correo electrónico",
+    password: "Contraseña",
+    dontHaveAccount: "¿No tienes una cuenta?",
+    signUp: "Regístrate",
+    userExistsError: "Ya existe un usuario con ese correo electrónico",
+    username: "Nombre de usuario",
+    alreadyHaveAccount: "¿Ya tienes una cuenta?",
+    login: "Iniciar sesión",
+    signupTitle: "Regístrate",
+  },
+};
 
 const SignUpModal = ({
   isOpen,
@@ -13,6 +66,11 @@ const SignUpModal = ({
   modalType,
   setModalType,
 }) => {
+  const currentLanguage = useSelector(
+    (state) => state.language.currentLanguage
+  );
+  const subTitle = translations[currentLanguage];
+
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -71,33 +129,29 @@ const SignUpModal = ({
         {/* Render Log In Modal */}
         {modalType === "signIn" && (
           <form onSubmit={singIn}>
-            <h2 className="modal-title">Log in</h2>
+            <h2 className="modal-title">{subTitle.loginTitle}</h2>
 
-            <label className="input-label">Email</label>
+            <label className="input-label">{subTitle.email}</label>
             <input name="email" required type="email" className="input-field" />
 
-            <label className="input-label">Password</label>
+            <label className="input-label">{subTitle.password}</label>
             <input name="password" type="text" className="input-field" />
 
-            {/* <button type="submit" className="login-button">
-              Log in
-            </button> */}
-            {/* hover color red */}
             <Button
               loading={isLoading}
               htmlType="submit"
               className="login-button"
             >
-              Log in
+              {subTitle.login}
             </Button>
 
             <p className="footer-text">
-              Don’t have an account?{" "}
+              {subTitle.dontHaveAccount}{" "}
               <span
                 onClick={() => setModalType("signUp")}
                 className="signup-link"
               >
-                Sign up
+                {subTitle.signUp}
               </span>
             </p>
           </form>
@@ -106,22 +160,20 @@ const SignUpModal = ({
         {/* Render Sign Up Modal */}
         {modalType === "signUp" && (
           <form onSubmit={Register}>
-            <h2 className="modal-title">Sign up</h2>
-            <label className="modal-label">Email</label>
+            <h2 className="modal-title">{subTitle.signupTitle}</h2>
+            <label className="modal-label">{subTitle.email}</label>
             <input required name="email" type="email" className="modal-input" />
             {error && (
-              <p className="sing_up_error_text">
-                User with such email already exists
-              </p>
+              <p className="sing_up_error_text">{subTitle.userExistsError}</p>
             )}
-            <label className="modal-label">Username</label>
+            <label className="modal-label">{subTitle.username}</label>
             <input
               type="text"
               className="modal-input"
               required
               name="username"
             />
-            <label className="modal-label">Password</label>
+            <label className="modal-label">{subTitle.password}</label>
             <input
               type="text"
               className="modal-input"
@@ -129,23 +181,20 @@ const SignUpModal = ({
               name="password"
             />
 
-            {/* <button type="submit" className="login-button signup-button">
-              Sign up
-            </button> */}
             <Button
               loading={isLoading}
               htmlType="submit"
               className="login-button signup-button"
             >
-              Sign up
+              {subTitle.signUp}
             </Button>
             <p className="footer-text">
-              Already have an account?{" "}
+              {subTitle.alreadyHaveAccount}{" "}
               <span
                 onClick={() => setModalType("signIn")}
                 className="login-link"
               >
-                Log in
+                {subTitle.login}
               </span>
             </p>
           </form>

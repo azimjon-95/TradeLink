@@ -82,7 +82,8 @@
   border-radius: 25px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  height: 558px;
+  min-height: 558px;
+  height: auto;
   padding: 32px;
   margin: 32px 0;
 }

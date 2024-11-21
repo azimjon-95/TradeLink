@@ -55,7 +55,10 @@ const UserProfile = () => {
     let API = "/user-profile/user/?user_id=" + id;
     axios
       .get(API)
-      .then((res) => setProfileData(res.data?.data))
+      .then((res) => {
+        setProfileData(res.data?.data);
+        console.log(">>>", res);
+      })
       .catch((err) => console.log(err));
   }, [id]);
 

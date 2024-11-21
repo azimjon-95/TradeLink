@@ -2,57 +2,66 @@ import React from "react";
 import "./Strategy.css";
 import { Link } from "react-router-dom";
 import { FaCheck } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 import fileSvg from "../../../assets/file.svg";
 import scamSvg from "../../../assets/scan.svg";
 import gridSvg from "../../../assets/grid.svg";
 import userSvg from "../../../assets/user.svg";
 import safetySvg from "../../../assets/passport/cabinet-safety.png";
+import { langTextStrategy } from "./lang";
 
 function Strategy() {
+  const lang = useSelector((state) => state.language.currentLanguage);
+
   return (
     <div className="strategy">
       <div className="strategy_container">
-        <h1 className="strategy_caption">Advantages of showcasing your strategy.</h1>
-        <p className="strategy_text">
-          Discover several compelling reasons to collaborate with us.
-        </p>
+        <h1 className="strategy_caption">
+          {langTextStrategy[lang].strategy_caption}
+        </h1>
+        <p className="strategy_text">{langTextStrategy[lang].strategy_text}</p>
         <div className="strategy_items">
           <div className="strategy_item">
             <h1 className="strategy_item_order">01</h1>
-            <p className="strategy_item_info">
-              Earn extra income with guaranteed security.
+            <p
+              className={`strategy_item_info ${
+                lang === "ru" ? "strategy_item_info_ru" : ""
+              }`}
+            >
+              {langTextStrategy[lang].strategy_1}
             </p>
           </div>
           <div className="strategy_item">
             <h1 className="strategy_item_order">02</h1>
             <p className="strategy_item_info">
-              We handle all communications with investors.
+              {langTextStrategy[lang].strategy_2}
             </p>
           </div>
           <div className="strategy_item">
             <p className="strategy_item_info">
-              Effortless capital attraction.
+              {langTextStrategy[lang].strategy_3}
             </p>
             <h1 className="strategy_item_order">03</h1>
           </div>
           <div className="strategy_item">
             <p className="strategy_item_info">
-              Complete absence of risks for you
+              {langTextStrategy[lang].strategy_4}
             </p>
             <h1 className="strategy_item_order">04</h1>
           </div>
         </div>
 
         <h1 className="strategy_caption">
-          The most popular KYT-know your trader
+          {langTextStrategy[lang].strategy_caption_2}
         </h1>
         <p className="strategy_text">
-          This is the AUM that traders have successfully accumulated.
+          {langTextStrategy[lang].strategy_text_2}
         </p>
 
         <div className="best_marketplace_traders">
           <h1>
-            Be among <br /> best of the best
+            {/* Be among <br /> best of the best */}
+            {langTextStrategy[lang].table_caption}
           </h1>
           <div className="best_marketplace_traders_items">
             <div className="best_marketplace_traders_item">
@@ -60,7 +69,9 @@ function Strategy() {
                 <b className="traders_item_order">1</b>
                 <div>
                   <p className="traders_item_name">John Doe</p>
-                  <p className="traders_item_info">944 days in KYT-know your trader</p>
+                  <p className="traders_item_info">
+                    944 days in KYT-know your trader
+                  </p>
                 </div>
               </div>
               <div className="traders_item_right">
@@ -76,7 +87,9 @@ function Strategy() {
                 <b className="traders_item_order">1</b>
                 <div>
                   <p className="traders_item_name">John Doe</p>
-                  <p className="traders_item_info">944 days in KYT-know your trader</p>
+                  <p className="traders_item_info">
+                    944 days in KYT-know your trader
+                  </p>
                 </div>
               </div>
               <div className="traders_item_right">
@@ -92,7 +105,9 @@ function Strategy() {
                 <b className="traders_item_order">1</b>
                 <div>
                   <p className="traders_item_name">John Doe</p>
-                  <p className="traders_item_info">944 days in KYT-know your trader</p>
+                  <p className="traders_item_info">
+                    944 days in KYT-know your trader
+                  </p>
                 </div>
               </div>
               <div className="traders_item_right">
@@ -108,7 +123,9 @@ function Strategy() {
                 <b className="traders_item_order">1</b>
                 <div>
                   <p className="traders_item_name">John Doe</p>
-                  <p className="traders_item_info">944 days in KYT-know your trader</p>
+                  <p className="traders_item_info">
+                    944 days in KYT-know your trader
+                  </p>
                 </div>
               </div>
               <div className="traders_item_right">
@@ -124,7 +141,9 @@ function Strategy() {
                 <b className="traders_item_order">1</b>
                 <div>
                   <p className="traders_item_name">John Doe</p>
-                  <p className="traders_item_info">944 days in KYT-know your trader</p>
+                  <p className="traders_item_info">
+                    944 days in KYT-know your trader
+                  </p>
                 </div>
               </div>
               <div className="traders_item_right">
@@ -137,36 +156,40 @@ function Strategy() {
             </div>
           </div>
           <div className="best_marketplace_traders_button">
-            <Link to={"/"}>Apply strategy</Link>
+            <Link to={"/"}>{langTextStrategy[lang].apply_strategy_btn}</Link>
           </div>
         </div>
 
-        <h1 className="strategy_caption">How it works</h1>
+        <h1 className="strategy_caption">
+          {langTextStrategy[lang].strategy_caption_3}
+        </h1>
         <p className="strategy_text">
-          Just a few steps and additional AUM without any risks is yours
+          {langTextStrategy[lang].strategy_text_3}
         </p>
 
         <div className="work_steps">
           <div className="work_step_item">
             <img src={fileSvg} alt="file svg" />
-            <p>Fill out the investment declaration form</p>
+            <p>{langTextStrategy[lang].work_step_item_1}</p>
           </div>
           <div className="work_step_item">
             <img src={scamSvg} alt="file svg" />
-            <p>Fill out the investment declaration form</p>
+            <p>{langTextStrategy[lang].work_step_item_2}</p>
           </div>
           <div className="work_step_item">
             <img src={gridSvg} alt="file svg" />
-            <p>Fill out the investment declaration form</p>
+            <p>{langTextStrategy[lang].work_step_item_3}</p>
           </div>
           <div className="work_step_item">
             <img src={userSvg} alt="file svg" />
-            <p>Fill out the investment declaration form</p>
+            <p>{langTextStrategy[lang].work_step_item_4}</p>
           </div>
         </div>
 
-        <h1 className="strategy_caption">Here is why this is safe</h1>
-        <p className="strategy_text">We value our reputation a lot</p>
+        <h1 className="strategy_caption">
+          {langTextStrategy[lang].safety_caption_4}
+        </h1>
+        <p className="strategy_text">{langTextStrategy[lang].safety_text_4}</p>
 
         <div className="safety_desc">
           <div className="safety_desc_left">
@@ -175,28 +198,24 @@ function Strategy() {
           <div className="safety_desc_right">
             <div className="safety_desc_item">
               <FaCheck />
-              <span>
-                Not a single strategy has been copied without its owner's consent, nor will it be in the future.
-              </span>
+              <span>{langTextStrategy[lang].suggest_1}</span>
             </div>
             <div className="safety_desc_item">
               <FaCheck />
-              <span>
-                The investor does not have access to the trader's contact information unless voluntarily provided by the trader.
-              </span>
+              <span>{langTextStrategy[lang].suggest_2}</span>
             </div>
             <div className="safety_desc_item">
               <FaCheck />
-              <span>
-                The auto-copying process is carried out exclusively using Read-Only API keys.
-              </span>
+              <span>{langTextStrategy[lang].suggest_3}</span>
             </div>
           </div>
         </div>
 
-        <h1 className="strategy_caption">How to get started</h1>
+        <h1 className="strategy_caption">
+          {langTextStrategy[lang].get_started_caption}
+        </h1>
         <p className="strategy_text">
-          Follow these simple steps to start earning more with KYT - Know Your Trader.
+          {langTextStrategy[lang].get_started_text}
         </p>
 
         <div className="work_steps get_started_steps">
@@ -217,7 +236,7 @@ function Strategy() {
               <path d="M46.6397 28.0261C46.4797 28.0261 46.3197 27.9994 46.133 27.9727L33.1997 24.6927C32.133 24.4261 31.493 23.3327 31.7597 22.2661C32.0263 21.1994 33.1197 20.5594 34.1863 20.8261L47.1197 24.1061C48.1863 24.3727 48.8263 25.4661 48.5597 26.5327C48.3463 27.4127 47.5197 28.0261 46.6397 28.0261Z"></path>
               <path d="M38.8257 37.0397C38.6657 37.0397 38.5057 37.013 38.319 36.9864L30.559 35.013C29.4924 34.7464 28.8524 33.6531 29.119 32.5864C29.3857 31.5197 30.479 30.8797 31.5457 31.1464L39.3057 33.1197C40.3724 33.3864 41.0124 34.4797 40.7457 35.5464C40.5324 36.453 39.7324 37.0397 38.8257 37.0397Z"></path>
             </svg>
-            <p>Add your strategy to KYT-know your trader passport</p>
+            <p>{langTextStrategy[lang].start_step_1}</p>
           </div>
           <div className="work_step_item">
             <svg
@@ -242,7 +261,10 @@ function Strategy() {
               ></path>
               <path d="M37.3346 34H18.668C17.5746 34 16.668 33.0933 16.668 32C16.668 30.9067 17.5746 30 18.668 30H37.3346C38.428 30 39.3346 30.9067 39.3346 32C39.3346 33.0933 38.428 34 37.3346 34Z"></path>
             </svg>
-            <p>Make sure it earns money for longer than 6 months</p>
+            <p>
+              {}
+              {langTextStrategy[lang].start_step_2}
+            </p>
           </div>
           <div className="work_step_item">
             <svg
@@ -258,13 +280,11 @@ function Strategy() {
               ></path>
               <path d="M29.5987 21.334H18.3987C9.06536 21.334 5.33203 25.0673 5.33203 34.4007V45.6007C5.33203 54.934 9.06536 58.6673 18.3987 58.6673H29.5987C38.932 58.6673 42.6654 54.934 42.6654 45.6007V34.4007C42.6654 25.0673 38.932 21.334 29.5987 21.334ZM32.772 36.4007L22.8787 46.294C22.5054 46.6673 22.0254 46.854 21.5187 46.854C21.012 46.854 20.532 46.6673 20.1587 46.294L15.1987 41.334C14.452 40.5873 14.452 39.3873 15.1987 38.6407C15.9454 37.894 17.1454 37.894 17.892 38.6407L21.492 42.2407L30.052 33.6807C30.7987 32.934 31.9987 32.934 32.7454 33.6807C33.492 34.4273 33.5187 35.654 32.772 36.4007Z"></path>
             </svg>
-            <p>
-              Submit your strategy for listing through the Trader's Cabinet, or by clicking the button below
-            </p>
+            <p>{langTextStrategy[lang].start_step_3}</p>
           </div>
         </div>
         <div className="work_step_apply">
-          <Link to={"/"}>Apply strategy</Link>
+          <Link to={"/"}>{langTextStrategy[lang].apply_strategy_btn}</Link>
         </div>
       </div>
     </div>

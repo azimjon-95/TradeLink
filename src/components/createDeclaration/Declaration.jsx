@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Progress, Select } from "antd";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import SelectPortfolio from "./selectPortfolio/SelectPortfolio";
 import "./Declaration.css";
+import { translations } from './Lang.js';
 
 function Declaration() {
+
+  const currentLanguage = useSelector(
+    (state) => state.language.currentLanguage
+  );
+  const t = translations[currentLanguage];
+
   const [selectPortfolio, setSelectPortfolio] = useState(false);
   const [openDynamic, setOpenDynamic] = useState(false);
   const [dailyDrowdownLimit, setDailyDrowdownLimit] = useState(false);
@@ -98,7 +106,7 @@ function Declaration() {
               ></path>
             </svg>
           </Link>
-          New declaration
+          {t.newDeclaration}
         </h1>
       </div>
       <div className="progres-padding">
@@ -130,7 +138,7 @@ function Declaration() {
                     d="M256 56v120a32 32 0 0 0 32 32h120m-232 80h160m-160 80h160"
                   ></path>
                 </svg>
-                Investment declaration
+                {t.iDeclaration}
               </h4>
               <span>{`(${Math.floor(progressPercent)}% completed)`}</span>
             </div>
@@ -139,7 +147,7 @@ function Declaration() {
               onClick={handleSubmit}
               disabled={!isComplete}
             >
-              Publish
+              {t.publishs}
             </button>
           </div>
           <Progress
@@ -151,25 +159,23 @@ function Declaration() {
       </div>
       <div className="new-declaration-form">
         <div className="form-item">
-          <h2>Statistics confirmation</h2>
-          <p>Attach your portfolio from KYT Traders Passport</p>
+          <h2>{t.statistics}</h2>
+          <p>{t.KYTtraders}</p>
           <div
             className="select-portfolio"
             onClick={() => setSelectPortfolio(!selectPortfolio)}
           >
-            <span>Select a portfolio</span>
+            <span>{t.selectAportfolio}</span>
             <SelectPortfolio
               selectPortfolio={selectPortfolio}
               setSelectPortfolio={setSelectPortfolio}
+              t={currentLanguage}
             />
           </div>
         </div>
         <div className="form-item">
-          <h2>Start date</h2>
-          <p>
-            The day you started trading by the current rules of your investment
-            declaration
-          </p>
+          <h2>{t.startDate}</h2>
+          <p>{t.started}</p>
           <div className="select-date-cover">
             <button>
               <svg width="1em" height="1em" viewBox="0 0 24 24">
@@ -182,14 +188,14 @@ function Declaration() {
             <input
               type="text"
               className="select-date"
-              placeholder="Select a date"
+              placeholder={t.sDate}
               disabled
             />
           </div>
         </div>
         <div className="form-item">
-          <h2>Name</h2>
-          <p>The name of your declaration</p>
+          <h2>{t.name}</h2>
+          <p>{t.nameOfYour}</p>
           <input
             name="declaration-name"
             className="declaration-name"
@@ -201,11 +207,11 @@ function Declaration() {
           <label htmlFor="declaration-name">{`40`}</label>
         </div>
         <div className="form-item form-textArea">
-          <h2>Description</h2>
-          <p>English</p>
+          <h2>{t.description}</h2>
+          <p>{t.english}</p>
           <textarea
             name="declaration-description"
-            placeholder="Why investors should follow your strategy"
+            placeholder={t.whyInvestors}
             maxLength={500}
             onInput={(e) => {
               e.target.style.height = "auto";
@@ -217,10 +223,10 @@ function Declaration() {
             }
           ></textarea>
           <label htmlFor="declaration-description">{`500`}</label>
-          <p>Русский</p>
+          <p>{t.russian}</p>
           <textarea
             name="declaration-description"
-            placeholder="Why investors should follow your strategy"
+            placeholder={t.whyInvestors}
             maxLength={500}
             onInput={(e) => {
               e.target.style.height = "auto";
@@ -235,7 +241,7 @@ function Declaration() {
         </div>
 
         <div className="form-item form-buttons">
-          <h2>Market Direction</h2>
+          <h2>{t.mDirection}</h2>
           <div className="trading-options-buttons market-direction">
             <button
               onClick={() =>
@@ -245,7 +251,7 @@ function Declaration() {
                 inputs.market_direction === "Counter Trend" ? "active" : ""
               }
             >
-              Counter Trend
+              {t.cTrend}
             </button>
             <button
               onClick={() =>
@@ -255,13 +261,13 @@ function Declaration() {
                 inputs.market_direction === "Market Neutral" ? "active" : ""
               }
             >
-              Market Neutral
+              {t.mNeutral}
             </button>
             <button
               onClick={() => handleInputChange("market_direction", "Trend")}
               className={inputs.market_direction === "Trend" ? "active" : ""}
             >
-              Trend
+              {t.trend}
             </button>
             <button
               onClick={() =>
@@ -271,25 +277,25 @@ function Declaration() {
                 inputs.market_direction === "Any Direction" ? "active" : ""
               }
             >
-              Any Direction
+              {t.aDirection}
             </button>
             <button
               onClick={() => handleInputChange("market_direction", "Other")}
               className={inputs.market_direction === "Other" ? "active" : ""}
             >
-              Other
+              {t.other}
             </button>
           </div>
         </div>
 
         <div className="form-item form-buttons">
-          <h2>Management Type</h2>
+          <h2>{t.mType}</h2>
           <div className="trading-options-buttons manage-type">
             <button
               onClick={() => handleInputChange("management_type", "Algo")}
               className={inputs.management_type === "Algo" ? "active" : ""}
             >
-              Algo
+              {t.algo}
             </button>
             <button
               onClick={() => handleInputChange("management_type", "Mixed Type")}
@@ -297,7 +303,7 @@ function Declaration() {
                 inputs.management_type === "Mixed Type" ? "active" : ""
               }
             >
-              Mixed Type
+              {t.dType}
             </button>
             <button
               onClick={() =>
@@ -307,73 +313,73 @@ function Declaration() {
                 inputs.management_type === "Hand Trading" ? "active" : ""
               }
             >
-              Hand Trading
+              {t.hTrading}
             </button>
             <button
               onClick={() => handleInputChange("management_type", "Other")}
               className={inputs.management_type === "Other" ? "active" : ""}
             >
-              Other
+              {t.other}
             </button>
           </div>
         </div>
 
         <div className="form-item form-buttons">
-          <h2>Trading Speed</h2>
+          <h2>{t.tSpeed}</h2>
           <div className="trading-options-buttons trading-speed">
             <button
               onClick={() => handleInputChange("trading_speed", "HFT")}
               className={inputs.trading_speed === "HFT" ? "active" : ""}
             >
-              HFT
+              {t.HFT}
             </button>
             <button
               onClick={() => handleInputChange("trading_speed", "Scalping")}
               className={inputs.trading_speed === "Scalping" ? "active" : ""}
             >
-              Scalping
+              {t.scalping}
             </button>
             <button
               onClick={() => handleInputChange("trading_speed", "Short Term")}
               className={inputs.trading_speed === "Short Term" ? "active" : ""}
             >
-              Short Term
+              {t.sTerm}
             </button>
             <button
               onClick={() => handleInputChange("trading_speed", "Mid Term")}
               className={inputs.trading_speed === "Mid Term" ? "active" : ""}
             >
-              Mid Term
+              {t.mTerm}
             </button>
             <button
               onClick={() => handleInputChange("trading_speed", "Long Term")}
               className={inputs.trading_speed === "Long Term" ? "active" : ""}
             >
-              Long Term
+              {t.lTerm}
             </button>
             <button
               onClick={() => handleInputChange("trading_speed", "Other")}
               className={inputs.trading_speed === "Other" ? "active" : ""}
             >
-              Other
+              {t.other}
             </button>
           </div>
         </div>
 
         <div className="form-item form-buttons">
-          <h2>Position Type</h2>
+          <h2>{t.pType}</h2>
           <div className="trading-options-buttons">
             <button
               onClick={() => handleInputChange("position_type", "Long")}
               className={inputs.position_type === "Long" ? "active" : ""}
             >
-              Long
+              {t.long}
             </button>
             <button
               onClick={() => handleInputChange("position_type", "Short")}
               className={inputs.position_type === "Short" ? "active" : ""}
             >
-              Short
+              {t.short}
             </button>
             <button
               onClick={() => handleInputChange("position_type", "Long & Short")}
@@ -381,61 +387,61 @@ function Declaration() {
                 inputs.position_type === "Long & Short" ? "active" : ""
               }
             >
-              Long & Short
+              {t.lShort}
             </button>
           </div>
         </div>
 
         <div className="form-item form-buttons">
-          <h2>Risk Type</h2>
+          <h2>{t.rType}</h2>
           <div className="trading-options-buttons">
             <button
               onClick={() => handleInputChange("risk_type", "High Risk")}
               className={inputs.risk_type === "High Risk" ? "active" : ""}
             >
-              High Risk
+              {t.hRisk}
             </button>
             <button
               onClick={() => handleInputChange("risk_type", "Medium Risk")}
               className={inputs.risk_type === "Medium Risk" ? "active" : ""}
             >
-              Medium Risk
+              {t.mRisk}
             </button>
             <button
               onClick={() => handleInputChange("risk_type", "Conservative")}
               className={inputs.risk_type === "Conservative" ? "active" : ""}
             >
-              Conservative
+              {t.conservative}
             </button>
             <button
               onClick={() => handleInputChange("risk_type", "Safe")}
               className={inputs.risk_type === "Safe" ? "active" : ""}
             >
-              Safe
+              {t.safe}
             </button>
           </div>
         </div>
 
         <div className="form-item form-buttons">
-          <h2>Margin Type</h2>
+          <h2>{t.gTypes}</h2>
           <div className="trading-options-buttons">
             <button
               onClick={() => handleInputChange("margin_type", "Cross")}
               className={inputs.margin_type === "Cross" ? "active" : ""}
             >
-              Cross
+              {t.cross}
             </button>
             <button
               onClick={() => handleInputChange("margin_type", "Isolated")}
               className={inputs.margin_type === "Isolated" ? "active" : ""}
             >
-              Isolated
+              {t.isolated}
             </button>
             <button
               onClick={() => handleInputChange("margin_type", "Mixed")}
               className={inputs.margin_type === "Mixed" ? "active" : ""}
             >
-              Mixed
+              {t.mixed}
             </button>
           </div>
         </div>
@@ -443,21 +449,16 @@ function Declaration() {
           <h2>Lot Type</h2>
           <div className="trading-options-buttons trading-speed">
             <button onClick={() => handleInputChange("lot_type", "Static")}>
-              Static
+              {t.static}
             </button>
             <button onClick={() => handleInputChange("lot_type", "Dynamic")}>
-              Dynamic
+              {t.dynamic}
             </button>
           </div>
         </div>
         <div className="form-item">
-          <h2>Minimal Lot</h2>
-          <p>
-            The minimum deposit amount for which the strategy can enter a
-            position. For example, if you have a distributed entry position or
-            grid, then the minimum lot will be the volume of one order in the
-            grid.
-          </p>
+          <h2>{t.mLot}</h2>
+          <p>{t.theMinimum}</p>
           <div className="lot-pleaceholder-container">
             <span>%</span>
             <input
@@ -470,7 +471,7 @@ function Declaration() {
           </div>
         </div>
         <div className="form-item max-deposit">
-          <h2>Max Deposit Load</h2>
+          <h2>{t.mLoad}</h2>
           <div className="lot-pleaceholder-container">
             <span>%</span>
             <input
@@ -485,33 +486,33 @@ function Declaration() {
           </div>
         </div>
         <div className="form-item form-buttons">
-          <h2>Hedge Mode</h2>
+          <h2>{t.hMode}</h2>
           <div className="trading-options-buttons">
             <button onClick={() => handleInputChange("hedge_mode", "Yes")}>
-              Yes
+              {t.yes}
             </button>
             <button onClick={() => handleInputChange("hedge_mode", "No")}>
-              No
+              {t.no}
             </button>
           </div>
         </div>
         <div className="form-item form-buttons">
-          <h2>Margin Mode</h2>
+          <h2>{t.mMode}</h2>
           <div className="trading-options-buttons">
             <button
               onClick={() => handleInputChange("margin_mode", "Single Asset")}
             >
-              Single Asset
+              {t.sAsset}
             </button>
             <button
               onClick={() => handleInputChange("margin_mode", "Multi Asset")}
             >
-              Multi Asset
+              {t.mAsset}
             </button>
           </div>
         </div>
         <div className="form-item max-deposit">
-          <h2>Liquidity Cap</h2>
+          <h2>{t.lCap}</h2>
           <div className="lot-pleaceholder-container">
             <span>$</span>
             <input
@@ -526,11 +527,8 @@ function Declaration() {
           </div>
         </div>
         <div className="form-item">
-          <h2>Minimum deposit</h2>
-          <p>
-            Minimum deposit for the strategy to work correctly at the settings
-            specified in the current declaration
-          </p>
+          <h2>{t.mdeposit}</h2>
+          <p>{t.fDeposit} </p>
           <div className="lot-pleaceholder-container">
             <span>$</span>
             <input
@@ -545,7 +543,7 @@ function Declaration() {
           </div>
         </div>
         <div className="form-item form-buttons">
-          <h2>Used Trading Pairs</h2>
+          <h2>{t.uPairs}</h2>
           <div className="trading-options-buttons">
             <button
               onClick={() => {
@@ -553,7 +551,7 @@ function Declaration() {
                 setOpenDynamic(false);
               }}
             >
-              Static
+              {t.static}
             </button>
             <button
               onClick={() => {
@@ -561,7 +559,7 @@ function Declaration() {
                 setOpenStaticSelect(false);
               }}
             >
-              Dynamic
+              {t.dynamic}
             </button>
           </div>
           <Select
@@ -578,11 +576,11 @@ function Declaration() {
             style={{ display: openDynamic ? "block" : "none" }}
             className="form-item form-textArea"
           >
-            <p>English</p>
+            <p>{t.english}</p>
             <textarea
               name="declaration-description"
               id=""
-              placeholder="Why investors should follow your strategy"
+              placeholder={t.whyInvestors}
               maxLength={500}
               onInput={(e) => {
                 e.target.style.height = "auto";
@@ -594,11 +592,11 @@ function Declaration() {
               }
             ></textarea>
             <label htmlFor="declaration-description">{`500`}</label>
-            <p>Русский</p>
+            <p>{t.russian}</p>
             <textarea
               name="declaration-description"
               id=""
-              placeholder="Why investors should follow your strategy"
+              placeholder={t.whyInvestors}
               maxLength={500}
               onInput={(e) => {
                 e.target.style.height = "auto";
@@ -613,21 +611,21 @@ function Declaration() {
           </div>
         </div>
         <div className="form-item form-buttons">
-          <h2>Is there a limit to the maximum possible drawdown per day?</h2>
+          <h2>{t.isThere}</h2>
           <div className="trading-options-buttons">
             <button
               onClick={() => {
                 setDailyDrowdownLimit(true);
               }}
             >
-              Yes
+              {t.yes}
             </button>
             <button
               onClick={() => {
                 setDailyDrowdownLimit(false);
               }}
             >
-              No
+              {t.no}
             </button>
           </div>
         </div>
@@ -635,7 +633,7 @@ function Declaration() {
           className="form-item max-deposit"
           style={{ display: dailyDrowdownLimit ? "block" : "none" }}
         >
-          <h2>Maximum drawdown limit per day</h2>
+          <h2>{t.mDrawdown}</h2>
           <div className="lot-pleaceholder-container">
             <span>$</span>
             <input
@@ -650,21 +648,21 @@ function Declaration() {
           </div>
         </div>
         <div className="form-item form-buttons">
-          <h2>Is there a maximum drawdown limit?</h2>
+          <h2>{t.aMaximum}</h2>
           <div className="trading-options-buttons">
             <button
               onClick={() => {
                 setMaxDrowLimit(true);
               }}
             >
-              Yes
+              {t.yes}
             </button>
             <button
               onClick={() => {
                 setMaxDrowLimit(false);
               }}
             >
-              No
+              {t.no}
             </button>
           </div>
         </div>
@@ -672,7 +670,7 @@ function Declaration() {
           style={{ display: maxDrowLimit ? "block" : "none" }}
           className="form-item max-deposit"
         >
-          <h2>Maximum drawdown limit</h2>
+          <h2>{t.mLimit}</h2>
           <div className="lot-pleaceholder-container">
             <span>$</span>
             <input
@@ -687,12 +685,12 @@ function Declaration() {
           </div>
         </div>
         <div className="form-item form-textArea">
-          <h2>Strategy Optimization</h2>
-          <p>English</p>
+          <h2>{t.optimization}</h2>
+          <p>{t.english}</p>
           <textarea
             name="declaration-description"
             id=""
-            placeholder="Why investors should follow your strategy"
+            placeholder={t.whyInvestors}
             maxLength={500}
             onInput={(e) => {
               e.target.style.height = "auto";
@@ -702,11 +700,11 @@ function Declaration() {
             onChange={(e) => handleInputChange("strategy_eng", e.target.value)}
           ></textarea>
           <label htmlFor="declaration-description">{`500`}</label>
-          <p>Русский</p>
+          <p>{t.russian}</p>
           <textarea
             name="declaration-description"
             id=""
-            placeholder="Why investors should follow your strategy"
+            placeholder={t.whyInvestors}
             maxLength={500}
             onInput={(e) => {
               e.target.style.height = "auto";
@@ -718,12 +716,12 @@ function Declaration() {
           <label htmlFor="declaration-description">{`500`}</label>
         </div>
         <div className="form-item form-textArea">
-          <h2>Execution Software</h2>
-          <p>English</p>
+          <h2>{t.eSoftware}</h2>
+          <p>{t.english}</p>
           <textarea
             name="declaration-description"
             id=""
-            placeholder="Why investors should follow your strategy"
+            placeholder={t.whyInvestors}
             maxLength={500}
             onInput={(e) => {
               e.target.style.height = "auto";
@@ -733,11 +731,11 @@ function Declaration() {
             onChange={(e) => handleInputChange("execution_eng", e.target.value)}
           ></textarea>
           <label htmlFor="declaration-description">{`500`}</label>
-          <p>Русский</p>
+          <p>{t.russian}</p>
           <textarea
             name="declaration-description"
             id=""
-            placeholder="Why investors should follow your strategy"
+            placeholder={t.whyInvestors}
             maxLength={500}
             onInput={(e) => {
               e.target.style.height = "auto";
@@ -749,12 +747,12 @@ function Declaration() {
           <label htmlFor="declaration-description">{`500`}</label>
         </div>
         <div className="form-item form-textArea">
-          <h2>Optimization Software</h2>
-          <p>English</p>
+          <h2>{t.oSoftware}</h2>
+          <p>{t.english}</p>
           <textarea
             name="declaration-description"
             id=""
-            placeholder="Why investors should follow your strategy"
+            placeholder={t.whyInvestors}
             maxLength={500}
             onInput={(e) => {
               e.target.style.height = "auto";
@@ -766,11 +764,11 @@ function Declaration() {
             }
           ></textarea>
           <label htmlFor="declaration-description">{`500`}</label>
-          <p>Русский</p>
+          <p>{t.russian}</p>
           <textarea
             name="declaration-description"
             id=""
-            placeholder="Why investors should follow your strategy"
+            placeholder={t.whyInvestors}
             maxLength={500}
             onInput={(e) => {
               e.target.style.height = "auto";

@@ -3,13 +3,20 @@ import "./style.css";
 import { useDispatch } from "react-redux";
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import RigthImg from "../../assets/referral/referrals-preview.png";
 import avatar_img1 from "../../assets/banner/fase2.png";
 import avatar_img2 from "../../assets/banner/fase3.png";
 import avatar_img3 from "../../assets/banner/fase1.png";
 import { setModalType } from "../../context/modalType";
+import { translations } from './Lang';
 
 function Referral() {
+  const currentLanguage = useSelector(
+    (state) => state.language.currentLanguage
+  );
+  const t = translations[currentLanguage];
+
   const [activeKey, setActiveKey] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -23,7 +30,7 @@ function Referral() {
 
   const referralLevels = [
     { position: "+8", percentage: 100, avatarUrl: 'https://randomuser.me/api/portraits/men/1.jpg', level: 1 },
-    { position: "+100 new friends", percentage: 30, avatarUrl: 'https://randomuser.me/api/portraits/men/2.jpg', level: 2 },
+    { position: t.plus100NewFriends, percentage: 30, avatarUrl: 'https://randomuser.me/api/portraits/men/2.jpg', level: 2 },
     { position: "AUM $50,000", percentage: 15, avatarUrl: 'https://randomuser.me/api/portraits/men/3.jpg', level: 3 },
     { position: "+44", percentage: 7, avatarUrl: 'https://randomuser.me/api/portraits/men/4.jpg', level: 4 },
     { position: "+$2,400", percentage: 2.5, avatarUrl: 'https://randomuser.me/api/portraits/men/5.jpg', level: 5 }
@@ -35,19 +42,16 @@ function Referral() {
 
   const faqData = [
     {
-      question: "How are payments processed?",
-      answer:
-        "Your monthly commissions and referral profits are calculated and deposited directly into your KYT wallet. These funds are always available for withdrawal at your convenience!",
+      question: t.faqData[0].question,
+      answer: t.faqData[0].answer,
     },
     {
-      question: "Will my friend’s earnings be affected by using my referral link?",
-      answer:
-        "Not at all. The platform’s service fee remains the same regardless of registration method, so your friend’s profits will not be impacted by signing up via your referral link.",
+      question: t.faqData[1].question,
+      answer: t.faqData[1].answer,
     },
     {
-      question: "Where can I get help with additional questions?",
-      answer:
-        "You can reach out to our KYT support team anytime. We’re here to assist you with any queries or concerns you might have.",
+      question: t.faqData[2].question,
+      answer: t.faqData[2].answer,
     },
   ];
 
@@ -56,13 +60,13 @@ function Referral() {
       <div className="referringBanner">
         <div className="referringBanner__container">
           <div >
-            <h1>Invite Friends. <br /> Grow Your Crypto Together.</h1>
-            <p>Get up to 25% commission from your friend's monthly profits on the KYT Marketplace.</p>
+            <h1 dangerouslySetInnerHTML={t.bannerTitle} />
+            <p>{t.bannerSubtitle}</p>
             {
               token ?
-                <Link onClick={() => Effect()}>Log In to invite friends</Link>
+                <Link onClick={() => Effect()}>{t.loginCTA}</Link>
                 :
-                <Link onClick={() => dispatch(setModalType("signUp"))}>Start building your trading Portfolio for free</Link>
+                <Link onClick={() => dispatch(setModalType("signUp"))}>{t.signupCTA}</Link>
             }
           </div>
           <div>
@@ -72,12 +76,12 @@ function Referral() {
       </div>
 
       <div className="referring-container">
-        <h2 className="referring-title">Advantages of Inviting Your Friends.</h2>
-        <p className="referring-subtitle">Clear conditions, 5 referral levels, and mutual earning opportunities!</p>
+        <h2 className="referring-title">{t.advantagesTitle}</h2>
+        <p className="referring-subtitle">{t.advantagesSubtitle}</p>
 
         <div className="referring-grid">
           <div className="referring-card-green">
-            <p>(Coming soon) highlights the top earnings from a single referee last month.</p>
+            <p>{t.greenCard}</p>
             <div className="referral-avatars">
               <div className="referral-avatars_box1">
                 <img src={avatar_img1} alt="" />
@@ -93,16 +97,16 @@ function Referral() {
           </div>
           <div className="referring-main">
             <div className="referring-card-blue">
-              <p>Comprehensive analytics panel with evolving benefits as you progress.</p>
-              <p>5-Tier Referral Program.</p>
+              <p>{t.blueCard}</p>
+              <p>{t.fiveTierReferralProgram}</p>
             </div>
             <div className="referring-box">
               <div className="referring-card-purple">
-                <p>Earn up to 25% commission from your referral’s earnings.</p>
+                <p>{t.purpleCard}</p>
               </div>
 
               <div className="referring-card-yellow">
-                <p>No minimum withdrawal limit.</p>
+                <p>{t.yellowCard}</p>
               </div>
             </div>
           </div>
@@ -110,21 +114,21 @@ function Referral() {
 
 
 
-        <h2 className="rarn-title">How it works</h2>
-        <p className="rarn-subtitle">Generate income while others do the work!</p>
+        <h2 className="rarn-title">{t.howItWorksTitle}</h2>
+        <p className="rarn-subtitle">{t.howItWorksSubtitle}</p>
 
         <div className="rarn-info-grid">
           <div className="rarn-info-card">
             <h3 className="rarn-info-number">01</h3>
-            <p className="rarn-info-text">Invite your friends, watch your network grow, and earn together!</p>
+            <p className="rarn-info-text">{t.step1}</p>
           </div>
           <div className="rarn-info-card">
             <h3 className="rarn-info-number">02</h3>
-            <p className="rarn-info-text">The larger the total AUM of your referrals, the more favorable the terms.</p>
+            <p className="rarn-info-text">{t.step2}</p>
           </div>
           <div className="rarn-info-card">
             <h3 className="rarn-info-number">03</h3>
-            <p className="rarn-info-text">Earn from up to 5 referral levels and analyze detailed results at each level.</p>
+            <p className="rarn-info-text">{t.step3}</p>
           </div>
         </div>
 
@@ -141,7 +145,7 @@ function Referral() {
                 </div>
                 <span className={`rarn-level-badge-${index + 1}`}>{level.position}</span>
                 <p className="rarn-level-percentage">{level.percentage}%</p>
-                <p className="rarn-level-description">Level {level.level} referrals</p>
+                <p className="rarn-level-description">{t.le} {level.level} {t.re}</p>
               </div>
             ))}
           </div>
@@ -151,16 +155,16 @@ function Referral() {
 
         <div className="affiliate-levels-container-box">
           <div className="affiliate-levels">
-            <h1>Affiliate Program (Earn up to 35% commission)</h1>
-            <p>If you have access to significant traffic and wish to receive exclusive cooperation terms, <br /> feel free to apply for our influencer program.</p>
+            <h1>{t.referralProgramTitle}</h1>
+            <p dangerouslySetInnerHTML={t.referralProgramDescription} />
           </div>
           {/* <button>Apply now</button> */}
         </div>
 
 
         <div className="hottest-container">
-          <h1 className="hottest-title">FAQ</h1>
-          <p className="hottest-subtitle">Here are the answers to the most frequently asked questions.</p>
+          <h1 className="hottest-title">{t.faqTitle}</h1>
+          <p className="hottest-subtitle">{t.faqSubtitle}</p>
           {faqData.map((item, index) => (
             <div key={index} className="hottest-card">
               <div className="hottest-header" onClick={() => togglePanel(index)}>

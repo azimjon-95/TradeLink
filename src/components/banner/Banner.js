@@ -4,8 +4,7 @@ import "./media.css";
 import Rating from "react-rating-stars-component";
 import { Link } from "react-router-dom";
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import bt_binance from "../../assets/banner/supporters.png";
 import bt_passport from "../../assets/banner/passport.png";
 import bt_widget from "../../assets/banner/widget.png";
@@ -15,13 +14,15 @@ import avatar_img3 from "../../assets/banner/fase1.png";
 import bt_indexes from "../../assets/banner/indexes.png";
 import bt_jet from "../../assets/banner/Instagram-post.png";
 import { setModalType } from "../../context/modalType";
-import { reviewsData, faqData, translations, blogPosts } from './Lang';
+import { reviewsData, faqData, translations, blogPosts } from "./Lang";
 
 const Banner = () => {
   const dispatch = useDispatch();
   const [selectedReview, setSelectedReview] = useState(null);
   let token = localStorage.getItem("access_token");
-  const currentLanguage = useSelector((state) => state.language.currentLanguage);
+  const currentLanguage = useSelector(
+    (state) => state.language.currentLanguage
+  );
   const subTitle = translations[currentLanguage];
 
   const getInitials = (name) => {
@@ -96,8 +97,6 @@ const Banner = () => {
     );
   };
 
-
-
   const handleCardClick = (review) => {
     setSelectedReview(review);
   };
@@ -112,17 +111,12 @@ const Banner = () => {
     setActiveKey(activeKey === key ? null : key);
   };
 
-
   return (
     <>
       <div className="homePage">
         <header className="homePage__header">
-          <h1 className="homePage__title">
-            {subTitle.title}
-          </h1>
-          <p className="homePage__subtitle">
-            {subTitle.subtitle}
-          </p>
+          <h1 className="homePage__title">{subTitle.title}</h1>
+          <p className="homePage__subtitle">{subTitle.subtitle}</p>
           {token ? (
             <button
               style={{ background: "transparent", color: "transparent" }}
@@ -206,7 +200,6 @@ const Banner = () => {
                   </svg>
                 </span>
                 {subTitle.passportBenefits[2]}
-
               </li>
             </ul>
 
@@ -231,12 +224,15 @@ const Banner = () => {
       <div className="app-container">
         <div className="section marketplace-section">
           <div className="marketplace-header">
-            <span className="badge-pro-traders">{subTitle.proTradersTitle}</span>
+            <span className="badge-pro-traders">
+              {subTitle.proTradersTitle}
+            </span>
             <span>
-              <h2 className="marketplace-title" dangerouslySetInnerHTML={subTitle.proTradersDescription} />
-              <p className="marketplace-subtitle">
-                {subTitle.weTake}
-              </p>
+              <h2
+                className="marketplace-title"
+                dangerouslySetInnerHTML={subTitle.proTradersDescription}
+              />
+              <p className="marketplace-subtitle">{subTitle.weTake}</p>
             </span>
             <Link to="/traders-cabinet">
               <button className="learn-more-btn">{subTitle.learnMore}</button>
@@ -250,10 +246,11 @@ const Banner = () => {
         <div className="marketplace-section-box">
           <div className="section widget-section">
             <div className="statistics">
-              <h2 className="widget-title">
-                {subTitle.widgetTitle}
-              </h2>
-              <p className="widget-subtitle" dangerouslySetInnerHTML={subTitle.strategy} />
+              <h2 className="widget-title">{subTitle.widgetTitle}</h2>
+              <p
+                className="widget-subtitle"
+                dangerouslySetInnerHTML={subTitle.strategy}
+              />
             </div>
             <div className="statistics-bar-chart">
               <img src={bt_widget} alt="" />
@@ -261,12 +258,8 @@ const Banner = () => {
           </div>
 
           <div className="section referral-section">
-            <h2 className="referral-title">
-              {subTitle.referralTitle}
-            </h2>
-            <p className="referral-subtitle">
-              {subTitle.commission}
-            </p>
+            <h2 className="referral-title">{subTitle.referralTitle}</h2>
+            <p className="referral-subtitle">{subTitle.commission}</p>
             <Link to="/referral">
               <button className="btn referral-btn"> {subTitle.function}</button>
             </Link>
@@ -289,34 +282,30 @@ const Banner = () => {
       {/* Frequently Asked Questions */}
       <div className="faq-container">
         <h1 className="faq-title">{subTitle.often}</h1>
-        {
-          faqData.map((item, index) => (
-            <div key={index} className="faq-card">
-              <div className="faq-header" onClick={() => togglePanel(index)}>
-                <h3 className="faq-question">
-                  {item.question[currentLanguage]}
-                </h3>
-                <button className="faq-question-btn">
-                  {activeKey === index ? <MinusOutlined /> : <PlusOutlined />}
-                </button>
-              </div>
-              {activeKey === index && (
-                <div className="faq-content">
-                  <p>{item.answer[currentLanguage]}</p>
-                </div>
-              )}
+        {faqData.map((item, index) => (
+          <div key={index} className="faq-card">
+            <div className="faq-header" onClick={() => togglePanel(index)}>
+              <h3 className="faq-question">{item.question[currentLanguage]}</h3>
+              <button className="faq-question-btn">
+                {activeKey === index ? <MinusOutlined /> : <PlusOutlined />}
+              </button>
             </div>
-          ))
-        }
+            {activeKey === index && (
+              <div className="faq-content">
+                <p>{item.answer[currentLanguage]}</p>
+              </div>
+            )}
+          </div>
+        ))}
         <div className="faq-more-btn-box">
-          {!token && <button className="faq-more-btn">{subTitle.signUp}</button>}
+          {!token && (
+            <button className="faq-more-btn">{subTitle.signUp}</button>
+          )}
         </div>
       </div>
 
       <div className="account-container">
-        <h2 className="account-title">
-          {subTitle.accountTitle}
-        </h2>
+        <h2 className="account-title">{subTitle.accountTitle}</h2>
         <p>{subTitle.consider}</p>
         <div className="reviews-container">
           {reviewsData.map((review, index) => (
@@ -374,11 +363,9 @@ const Banner = () => {
           ))}
         </div>
 
-
       </section>
     </>
   );
 };
 
 export default Banner;
-

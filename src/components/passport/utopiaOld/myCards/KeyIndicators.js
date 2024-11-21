@@ -5,6 +5,8 @@ import HandleTooltip from "../HandleTooltip";
 import "./style.css";
 
 const KeyIndicators = ({ data, topLoader }) => {
+  console.log("data", data);
+
   const indicators = [
     {
       value: data?.open_story_coefficient?.toFixed(0) || 0,
@@ -27,7 +29,7 @@ const KeyIndicators = ({ data, topLoader }) => {
       highlight: true,
     },
     {
-      value: "$" + (data?.max_balance / 1000).toFixed(1) || 0 + "K",
+      value: "$" + (data?.margin_balance / 1000).toFixed(1) || 0 + "K",
       label: "Margin balance",
     },
     {

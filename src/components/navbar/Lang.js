@@ -1,4 +1,6 @@
 // Tarjima obyektini aniqlash
+
+
 export const translations = {
     en: {
         kytDescription: "For professional traders and investors within the crypto market.",
@@ -6,6 +8,7 @@ export const translations = {
         passportDescription: "Worldwide Independent confirmation of traders' results",
         login: "Log In",
         signup: "Sign Up",
+        profile: "Profile",
         about: "About",
         products: "Products",
         faq: "FAQ",
@@ -23,6 +26,7 @@ export const translations = {
         login: "Войти",
         signup: "Регистрация",
         about: "О нас",
+        profile: "Профиль",
         products: "Продукты",
         faq: "Вопросы и ответы",
         traderCabinet: "Кабинет трейдера",
@@ -40,6 +44,7 @@ export const translations = {
         signup: "Registrarse",
         about: "Acerca de",
         products: "Productos",
+        profile: "Perfil",
         faq: "Preguntas frecuentes",
         traderCabinet: "Gabinete del Comerciante",
         rating: "Calificación",
@@ -56,6 +61,7 @@ export const translations = {
         signup: "Anmelden",
         about: "Über uns",
         products: "Produkte",
+        profile: "Profil",
         faq: "FAQ",
         traderCabinet: "Trader-Kabinett",
         rating: "Bewertung",

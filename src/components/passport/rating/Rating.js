@@ -319,6 +319,7 @@ const Leaderboard = () => {
               isOpen={isModalOpen}
               onClose={closeModal}
               contentType={modalContentType}
+              currentLanguage={currentLanguage}
             />
           </div>
         </div>
