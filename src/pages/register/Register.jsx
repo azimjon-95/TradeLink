@@ -129,6 +129,9 @@ const SignUpModal = ({
         {/* Render Log In Modal */}
         {modalType === "signIn" && (
           <form onSubmit={singIn}>
+            <button className="close_modalReg" onClick={handleClose} style={{ border: 'none', background: 'none', cursor: 'pointer' }}>
+              ✖
+            </button>
             <h2 className="modal-title">{subTitle.loginTitle}</h2>
 
             <label className="input-label">{subTitle.email}</label>
@@ -160,6 +163,9 @@ const SignUpModal = ({
         {/* Render Sign Up Modal */}
         {modalType === "signUp" && (
           <form onSubmit={Register}>
+            <button className="close_modalReg" onClick={handleClose} style={{ border: 'none', background: 'none', cursor: 'pointer' }}>
+              ✖
+            </button>
             <h2 className="modal-title">{subTitle.signupTitle}</h2>
             <label className="modal-label">{subTitle.email}</label>
             <input required name="email" type="email" className="modal-input" />

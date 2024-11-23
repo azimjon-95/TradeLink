@@ -1,12 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { GrBottomCorner } from "react-icons/gr";
-import { Select, Skeleton, Switch, Table } from "antd";
+import { Select, Skeleton, Pagination, Switch, Table } from "antd";
 import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 import { FaCheck } from "react-icons/fa6";
 import { useSelector } from "react-redux";
-// import moment from "moment/moment";
-import InfiniteScroll from "react-infinite-scroll-component";
+
 import axios from "../../../api";
 import binance from "../../../assets/ed_khan/binance_rounded.svg";
 import avatar from "../../../assets/ed_khan/avatar.png";
@@ -44,7 +43,7 @@ const Leaderboard = () => {
       .get(API)
       .then((res) => {
         for (const key in res?.data?.data) {
-          let data = res?.data?.data[key].slice(0, 3);
+          let data = res?.data?.data[key].slice(0, 5);
           setLeaderboardData((prevData) => ({
             ...prevData,
             [key]: data,
@@ -58,9 +57,7 @@ const Leaderboard = () => {
   // get LeaderBoard table Data
   useEffect(() => {
     setLoading(true);
-    let API = `/leaderboard/top-traders?page=${page}&show_non_active=${showInactive}&sort_type=${filterOption || selectedOption
-      }`;
-
+    let API = `/leaderboard/top-traders?page=${page}&show_non_active=${showInactive}&sort_type=${filterOption || selectedOption}`;
     axios
       .get(API)
       .then((res) => {
@@ -266,22 +263,16 @@ const Leaderboard = () => {
     },
   ];
 
-  // Oct 10 - Nov 9
-  // const today = moment().format("MMM DD");
-  // const startMonth = moment().startOf("month").format("MMM DD");
-  // const endMonth = moment().endOf("month").format("MMM DD");
-  // const oneMonthAgo = moment().subtract(30, "days").format("MMM DD");
-  // const fourMonthAgo = moment().subtract(90, "days").format("MMM DD");
-  // const oneYearAgo = moment().subtract(365, "days").format("MMM DD");
-  // const weeklAgo = moment().subtract(7, "days").format("MMM DD");
+  const [currentPage, setCurrentPage] = useState(1);
+
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    setPage(page);
+  };
+
+
   const month = transMonth[currentLanguage];
-  const today = month.today
-  const startMonth = month.startMonth
-  const endMonth = month.endMonth
-  const oneMonthAgo = month.oneMonthAgo
-  const fourMonthAgo = month.fourMonthAgo
-  const oneYearAgo = month.oneYearAgo
-  const weeklAgo = month.weeklAgo
   return (
     <div className="leaderboard-container-box">
       <div className="leaderboard-container">
@@ -329,19 +320,19 @@ const Leaderboard = () => {
               by={subTitle.by}
               title={subTitle.dailyTop}
               data={leaderboardData?.daily}
-              date={today}
+              date={month.today}
             />
             <LeaderboardCard
               by={subTitle.by}
               title={subTitle.weeklyTop}
               data={leaderboardData?.weekly}
-              date={`${weeklAgo} - ${today}`}
+              date={`${month.weeklAgo} - ${month.today}`}
             />
             <LeaderboardCard
               by={subTitle.by}
               title={subTitle.novemberTop}
               data={leaderboardData?.monthly}
-              date={`${startMonth} - ${endMonth}`}
+              date={`${month.startMonth} - ${month.endMonth}`}
             />
           </div>
         ) : (
@@ -351,22 +342,22 @@ const Leaderboard = () => {
               loadingTop={loadingTop}
               title={subTitle.monthlyTop}
               data={leaderboardData?.monthly}
-              date={`${oneMonthAgo} - ${today}`}
+              date={`${month.oneMonthAgo} - ${month.today}`}
             />
             <LeaderboardCard
               by={subTitle.by}
               loadingTop={loadingTop}
               title={subTitle.quarterlyTop}
               data={leaderboardData?.quarterly}
-              date={`${fourMonthAgo} - ${today}`}
+              date={`${month.fourMonthAgo} - ${month.today}`}
             />
-            <LeaderboardCard
+            {/* <LeaderboardCard
               by={subTitle.by}
               loadingTop={loadingTop}
               title={subTitle.yearlyTop}
               data={leaderboardData?.yearly}
-              date={`${oneYearAgo} - ${today}`}
-            />
+              date={`${month.oneYearAgo} - ${month.today}`}
+            /> */}
           </div>
         )}
       </div>
@@ -408,44 +399,36 @@ const Leaderboard = () => {
           </Select>
         </div>
         <div className="portfolio-list">
-          <InfiniteScroll
-            dataLength={portfolios?.length} // Current number of portfolios
-            next={() => setPage((prevPage) => prevPage + 1)} // Load more data
-            hasMore={!loading} // Continue loading if not already loading
-          // loader={<h4>Loading...</h4>} // Loading indicator
-          // endMessage={
-          // <p style={{ textAlign: "center" }}>
-          //   <b>Yay! You have seen it all</b>
-          // </p>
-          // }
-          >
-            {/* O'rab turgan div InfiniteScroll uchun kerak */}
-            <div>
-              <Table
-                loading={loading}
-                columns={columns}
-                dataSource={portfolios}
-                rowKey={(record) => record.portfolio_id} //
-                pagination={false}
-                scroll={{ x: "100%" }} // Responsive scrolling
-                size="small"
-                onRow={(record) => ({
-                  onClick: () => {
-                    const timestamp = getTimestamp();
-                    navigate(
-                      `/portfolio/${record.portfolio_id}?t=${timestamp}`
-                    );
-                  },
-                })}
-              />
 
-              <div className="loader_box">
-                {loading && (
-                  <div className="loader" style={{ height: "20px" }}></div>
-                )}
-              </div>
+          <div>
+            <Table
+              loading={loading}
+              columns={columns}
+              dataSource={portfolios}
+              rowKey={(record) => record.portfolio_id} //
+              pagination={false}
+              scroll={{ x: "100%" }} // Responsive scrolling
+              size="small"
+              onRow={(record) => ({
+                onClick: () => {
+                  const timestamp = getTimestamp();
+                  navigate(
+                    `/portfolio/${record.portfolio_id}?t=${timestamp}`
+                  );
+                },
+              })}
+            />
+
+            <div style={{ width: "100%", display: "flex", justifyContent: "center", textAlign: "center" }}>
+              <Pagination
+                current={currentPage} // Hozirgi sahifa
+                total={portfolios?.length} // Umumiy ma'lumotlar soni
+                pageSize={10} // Har bir sahifadagi elementlar soni
+                onChange={handlePageChange} // Sahifa o'zgarganda chaqiriladigan funksiya
+                showSizeChanger={false} // Foydalanuvchiga sahifa o'lchamini o'zgartirish imkoniyatini berishni o'chirish
+              />
             </div>
-          </InfiniteScroll>
+          </div>
         </div>
       </div>
     </div>
@@ -458,13 +441,17 @@ const LeaderboardCard = ({ title, data, date, loadingTop, by }) => {
 
   const getRankColor = (rank) =>
     rank === 1
-      ? "#FBAF3D"
+      ? "#FBAF3D" // 1-bosqich
       : rank === 2
-        ? "#C0C8E0"
+        ? "#C0C8E0" // 2-bosqich
         : rank === 3
-          ? "#D5B678"
-          : "#fff";
-
+          ? "#D5B678" // 3-bosqich
+          : rank === 4
+            ? "#8BC34A" // 4-bosqich
+            : rank === 5
+              ? "#FF5722" // 5-bosqich
+              : "#fff"; // Default rang
+  console.log(data)
   return (
     <div className="leaderboard-card">
       <div className="leaderboard-card-box">
@@ -479,7 +466,10 @@ const LeaderboardCard = ({ title, data, date, loadingTop, by }) => {
             paragraph={{ rows: 5, width: "100%", height: "40px" }}
           />
         ) : (
+
+
           <>
+
             {/* `/portfolio/${record.portfolio_id}?t=${timestamp}` */}
             {data?.map((item, index) => (
               <Link
@@ -510,6 +500,10 @@ const LeaderboardCard = ({ title, data, date, loadingTop, by }) => {
                     </p>
                     <p className="leaderboard-creator">{by} {item?.user_name} </p>
                   </div>
+                  {/* {
+                    chartData &&
+                    <LineChart strokeColor={"gold"} data={chartData} height={30} />
+                  } */}
                   <img src={ret} alt="Ret" />
                   <p className="leaderboard-score">
                     {item?.score?.toFixed(2) ||
@@ -521,7 +515,7 @@ const LeaderboardCard = ({ title, data, date, loadingTop, by }) => {
           </>
         )}
       </ul>
-    </div>
+    </div >
   );
 };
 

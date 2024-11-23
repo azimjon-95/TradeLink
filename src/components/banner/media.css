@@ -3,7 +3,7 @@
     .homePage {
         background-image: none;
         text-align: start;
-        margin-top: 10px;
+        margin-top: 30px;
     }
 
     .homePage__signUpButton {
@@ -62,9 +62,11 @@
 
     }
 
+
     .marketplace-header {
         width: 100%;
         height: 100%;
+
     }
 
     .marketplace-title {
@@ -161,6 +163,11 @@
         .review-card {
             display: none;
         }
+
+        .marketplace-section {
+            padding: 15px 10px;
+        }
+
 
         .review-card:nth-child(-n + 4) {
             display: block;

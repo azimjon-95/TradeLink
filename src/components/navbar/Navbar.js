@@ -173,7 +173,7 @@ function Navbar() {
   linkOptions["/portfolio/:id"] = [...linkOptions["/passport"]];
 
   // Asosiy sahifa linklarini yuklash kerak bo'lgan yo'nalishlar ro'yxati
-  const mainPageRoutes = ["/faq", "/main", "/about", "/contact"]; // Yangi yo'nalishlar qo'shilishi mumkin
+  const mainPageRoutes = ["/faq", "/main", "/reviews", "/about", "/contact"]; // Yangi yo'nalishlar qo'shilishi mumkin
 
   const passportOpenRoutes = [
     "/passport",
@@ -309,8 +309,33 @@ function Navbar() {
       </Button>
     </div>
   );
+
+
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <div
+      style={{
+        position: "fixed",
+        top: 0,
+        width: "100%",
+        zIndex: 100,
+        backgroundColor: isScrolled ? "#d4d4d489" : "#fff",
+        backdropFilter: isScrolled ? "blur(10px)" : "none",
+        transition: "background-color 0.3s ease, backdrop-filter 0.3s ease",
+      }}
       className={`navbar_container ${isProductDashboard ? "navbar_static" : "navbar_sticky"
         }`}
     >
@@ -532,10 +557,6 @@ function Navbar() {
           <LanguageSwitcher />
         </div>
       </div>
-      <div
-        onClick={() => setIsMediaModalOpen(false)}
-        className={`${isMediaModalOpen ? "modal-open" : "close-modal"}`}
-      ></div>
 
       <div
         className={`close-modal-signup ${isModalSinUp && "close-modal-signup-open"

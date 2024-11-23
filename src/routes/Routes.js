@@ -1,5 +1,8 @@
 import { lazy } from "react";
 import NotFoundPage from "../components/PageNotFound";
+import About from "../pages/about/About";
+import Contact from "../pages/Contact/Contact";
+import Reviews from "../pages/reviews/Reviews";
 
 // Lazy-load pages
 const Home = lazy(() => import("../pages/home/Home"));
@@ -33,6 +36,9 @@ const routes = [
   { path: "/user/:id/*", element: <UserProfile />, protected: true },
   { path: "/portfolio/:id", element: <UtopiaOldMultiLine />, protected: false },
   { path: "/faq", element: <Faq />, protected: false },
+  { path: "/about", element: <About />, protected: false },
+  { path: "/contact", element: <Contact />, protected: false },
+  { path: "/reviews", element: <Reviews />, protected: false },
   { path: "/", element: <Home />, protected: false },
   // ====Passport=====
   { path: "/passport", element: <Passport />, protected: false },

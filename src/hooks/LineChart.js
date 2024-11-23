@@ -19,16 +19,15 @@ const LineChart = ({ data, height = 60, strokeColor = "#00c086" }) => {
   const points = data
     .map((value, index) => {
       const x =
-        (index / (data.length - 1)) *
+        (index / (data?.length - 1)) *
         (chartWidth === "100%" ? 578 : chartWidth); // 578 as a reference width for calculations
       const y = height - (value / maxValue) * height;
       return `${x},${y}`;
     })
     .join(" ");
 
-  const filledPoints = `0, ${height} ${points} ${
-    chartWidth === "100%" ? 578 : chartWidth
-  }, ${height}`;
+  const filledPoints = `0, ${height} ${points} ${chartWidth === "100%" ? 578 : chartWidth
+    }, ${height}`;
 
   return (
     <svg

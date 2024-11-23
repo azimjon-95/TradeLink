@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   BarChart,
   Bar,
@@ -19,7 +19,6 @@ import axios from "../../../../api";
 import "./style.css";
 
 const Charts = ({
-  chartData,
   checkedItems,
   isOverlayVisible,
   customKey,
@@ -27,21 +26,58 @@ const Charts = ({
   selectValue,
   labels,
   currentLanguage,
-  labelsBar,
-  drawDown
+  setLoading
 }) => {
   const t = labels[currentLanguage];
 
-  const dataMain = chartData?.balances?.map((balance, index) => ({
-    name: new Date(balance.timestamp).toLocaleDateString(),
-    negative0: chartData?.benchmark_btc[index].value,
-    negative1: chartData?.drawdown_percentage[index].value,
-    negative2: chartData?.drawdown_duration[index].value,
-    revenue: chartData?.long_positions[index].value,
-    negative3: chartData?.margin_balances[index].value,
-    negative4: chartData?.pnl[index].value,
-    negative5: chartData?.long_positions_x[index].value,
-  }));
+  const [chartData, setChartData] = useState(null);
+  const fetchChartData = (id, selectValue) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const API = `/portfolio/chart/?portfolio_id=${id}&time_step=${selectValue}`;
+        const response = await axios.get(API);
+
+        // Ma'lumotlarni filtrlash va optimallashtirish
+        const optimizedData = response?.data?.data?.balances?.slice(-100) || []; // Oxirgi 100 yozuvni olish
+        resolve({
+          ...response?.data?.data,
+          balances: optimizedData,
+        });
+      } catch (error) {
+        reject(error); // Xatolik yuz bersa qaytarish
+      }
+    });
+  };
+
+  useEffect(() => {
+    setLoading(true); // Yuklanishni ko'rsatish
+    fetchChartData(id, selectValue)
+      .then((data) => {
+        setChartData(data); // Ma'lumotlarni saqlash
+      })
+      .catch((error) => {
+        console.error("Error fetching chart data:", error); // Xatoliklarni konsolga chiqarish
+      })
+      .finally(() => {
+        setLoading(false); // Yuklanish tugashi
+      });
+  }, [id, selectValue]);
+
+  // Data mapping optimized with useMemo
+  const dataMain = useMemo(
+    () =>
+      chartData?.balances?.map((balance, index) => ({
+        name: new Date(balance.timestamp).toLocaleDateString(),
+        negative0: chartData?.benchmark_btc[index].value,
+        negative1: chartData?.drawdown_percentage[index].value,
+        negative2: chartData?.drawdown_duration[index].value,
+        revenue: chartData?.long_positions[index].value,
+        negative3: chartData?.margin_balances[index].value,
+        negative4: chartData?.pnl[index].value,
+        negative5: chartData?.long_positions_x[index].value,
+      })),
+    [chartData]
+  );
 
   const CustomTooltipMain = ({ active, payload, label }) => {
     if (!active || !payload || payload.length === 0) return null;
@@ -73,17 +109,42 @@ const Charts = ({
     );
   };
 
-  let dataLine = chartData?.used_lerage?.map((item, index) => {
-    let data = new Date(item?.timestamp);
-    return {
-      day: data?.toLocaleDateString(),
-      leverage: item.value,
-      long_positions: chartData?.long_positions[index].value,
-      short_positions: chartData?.short_positions[index].value,
-    };
-  });
 
-  const CustomTooltipTwo = ({ active, payload, label, currentLanguage = "en" }) => {
+  const dataLine = useMemo(
+    () =>
+      chartData?.used_lerage?.map((item, index) => ({
+        day: new Date(item?.timestamp)?.toLocaleDateString(),
+        leverage: item.value,
+        long_positions: chartData?.long_positions[index].value,
+        short_positions: chartData?.short_positions[index].value,
+      })),
+    [chartData]
+  );
+
+
+
+
+
+
+  const usedLeverage = {
+    en: "Used Leverage:",
+    ru: "Используемое кредитное плечо:",
+    de: "Verwendeter Hebel:",
+    es: "Apalancamiento usado:",
+  }
+  const longPositions = {
+    en: "Long positions:",
+    ru: "Длинные позиции:",
+    de: "Long-Positionen:",
+    es: "Posiciones largas:",
+  }
+  const shortPositions = {
+    en: "Short positions:",
+    ru: "Короткие позиции:",
+    de: "Short-Positionen:",
+    es: "Posiciones cortas:",
+  }
+  const CustomTooltipTwo = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
         <div className="PLByMonth">
@@ -98,7 +159,7 @@ const Charts = ({
                   border: `2px solid #14C886`,
                 }}
               ></div>
-              {labelsBar.usedLeverage[currentLanguage]}
+              {usedLeverage[currentLanguage]}
               {payload[0]?.value.toFixed(2)}
             </strong>
           </p>
@@ -112,7 +173,7 @@ const Charts = ({
                   border: `2px solid  #EA3941`,
                 }}
               ></div>
-              {labelsBar.longPositions[currentLanguage]}
+              {longPositions[currentLanguage]}
               {payload[1]?.value.toFixed(2)}
             </strong>
           </p>
@@ -127,7 +188,7 @@ const Charts = ({
                   border: `2px solid  ${payload[2]?.stroke}`,
                 }}
               ></div>
-              {labelsBar.shortPositions[currentLanguage]}
+              {shortPositions[currentLanguage]}
               {payload[2]?.value.toFixed(2)}
             </strong>
           </p>
@@ -137,17 +198,29 @@ const Charts = ({
     return null;
   };
 
-  let dataBottom = chartData?.drawdown_duration?.map((item, index) => {
-    let data = new Date(item?.timestamp);
-    return {
-      day: data?.toLocaleDateString(),
-      drawdown_duration: item.value,
-      drawdown: chartData?.drawdown_percentage[index].value,
-    };
-  });
+  const dataBottom = useMemo(
+    () =>
+      chartData?.drawdown_duration?.map((item, index) => ({
+        day: new Date(item?.timestamp)?.toLocaleDateString(),
+        drawdown_duration: item.value,
+        drawdown: chartData?.drawdown_percentage[index].value,
+      })),
+    [chartData]
+  );
 
-
-  const CustomTooltipBottom = ({ active, payload, label, currentLanguage = "en" }) => {
+  const drawdown = {
+    en: "DrawDown:",
+    ru: "Максимальная просадка:",
+    de: "Maximaler Rückgang:",
+    es: "Pérdida máxima:",
+  }
+  const drawdownDuration = {
+    en: "DrawDown Duration:",
+    ru: "Длительность просадки:",
+    de: "Dauer des Rückgangs:",
+    es: "Duración de la pérdida:",
+  }
+  const CustomTooltipBottom = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
         <div className="PLByMonth">
@@ -163,7 +236,7 @@ const Charts = ({
                   border: `2px solid #85bafe`, // Color based on value
                 }}
               ></div>
-              {drawDown.drawdown[currentLanguage]}{" "}
+              {drawdown[currentLanguage]}{" "}
               {payload[0]?.payload?.drawdown?.toFixed(2)}%
             </strong>
           </p>
@@ -178,7 +251,7 @@ const Charts = ({
                   border: `2px solid #4180D2`, // Color based on value
                 }}
               ></div>
-              {drawDown.drawdownDuration[currentLanguage]}{" "}
+              {drawdownDuration[currentLanguage]}{" "}
               {payload[1]?.payload?.drawdown_duration?.toFixed(2)}%
             </strong>
           </p>
@@ -187,32 +260,50 @@ const Charts = ({
     }
     return null;
   };
-
+  console.log(currentLanguage);
   // ---------------------------12A-----------------------------------
 
   const [data, setData] = useState(null); // State for fetched data
 
   useEffect(() => {
-    // Function to fetch data with the chosen time_step
-    const fetchRevenueData = async () => {
-      try {
-        // API request with portfolio_id and dynamic time_step
-        const response = await axios.get(
-          `/portfolio/revenue-by-month/?portfolio_id=${id}&time_step=${selectValue}`
-        );
-        setData(response?.data?.data); // Set data after successful fetch
-      } catch (err) {
-        console.log("Error fetching data", err);
-      }
+    // Asinxron ma'lumotlarni olish funksiyasi
+    const fetchRevenueData = () => {
+      return new Promise(async (resolve, reject) => {
+        try {
+          const response = await axios.get(
+            `/portfolio/revenue-by-month/?portfolio_id=${id}&time_step=${selectValue}`
+          );
+          resolve(response?.data?.data); // Ma'lumot muvaffaqiyatli olinsa
+        } catch (err) {
+          reject(err); // Xatolik yuz bersa
+        }
+      });
     };
 
-    fetchRevenueData();
-  }, [id, selectValue]); // Rerun effect when timeStep changes
+    // Ma'lumotlarni olishni chaqirish
+    fetchRevenueData()
+      .then((fetchedData) => {
+        setData(fetchedData); // Ma'lumotlarni konsolga chiqarish
+      })
+      .catch((err) => {
+        console.error("Error fetching data:", err); // Xatoliklarni konsolga chiqarish
+      });
+  }, [id, selectValue]); // id yoki selectValue o'zgarsa, qayta ishga tushadi
+
+
 
   const formattedData = data?.map((item) => ({
     month: moment(item.timestamp).format("MMM YYYY"), // Convert timestamp to "MMM YYYY" format
     revenue: item.value,
   }));
+
+
+  const plByMonthLabels = {
+    en: "P/L by month:",
+    ru: "Прибыль/Убыток за месяц:",
+    de: "Gewinn/Verlust pro Monat:",
+    es: "Ganancias/Pérdidas por mes:",
+  }
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       const revenue = payload[0].value;
@@ -232,7 +323,7 @@ const Charts = ({
                 marginRight: '5px'
               }}
             ></span>
-            {drawDown[currentLanguage]?.plByMonthLabels}
+            {plByMonthLabels[currentLanguage]}
             <strong>{Math.floor(revenue)}%</strong>
           </p>
         </div>
@@ -241,6 +332,13 @@ const Charts = ({
     return null;
   };
 
+
+  const revenueLabels = {
+    en: "Revenue by month (%)",
+    ru: "Доход по месяцам (%)",
+    de: "Umsatz pro Monat (%)",
+    es: "Ingresos por mes (%)",
+  }
   return (
     <>
       <ResponsiveContainer width="100%" height={isOverlayVisible ? 300 : 400}>
@@ -542,7 +640,7 @@ const Charts = ({
       {/* ---------------------------12A----------------------------------- */}
       <div className="revenue-by-month">
         <div></div>
-        <span>{drawDown[currentLanguage]?.revenueLabels}</span>{" "}
+        <span>{revenueLabels[currentLanguage]}</span>{" "}
       </div>
       <ResponsiveContainer width="100%" height={isOverlayVisible ? 200 : 240}>
         <BarChart

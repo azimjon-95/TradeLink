@@ -1,8 +1,9 @@
 import React from 'react';
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { Tooltip, Skeleton } from 'antd';
+import { languagesLab, tooltipTextLab } from '../Lang'
 
-const OutlineCircle = ({ tooltipTextLab, data, currentLanguage, translationsInfo, languagesLab }) => {
+const OutlineCircle = ({ data, currentLanguage }) => {
     const formatCurrency = (value) => {
         if (typeof value !== 'number' || isNaN(value)) {
             return '$0';
@@ -12,7 +13,7 @@ const OutlineCircle = ({ tooltipTextLab, data, currentLanguage, translationsInfo
             : `$${Math.floor(value).toLocaleString()}`;
     };
 
-    const t = translationsInfo[currentLanguage]
+    const t = languagesLab[currentLanguage]
 
     // Descriptive tooltips for each label
     const tooltipText = tooltipTextLab;

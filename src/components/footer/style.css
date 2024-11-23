@@ -8,9 +8,11 @@
 }
 
 .footer-top {
+  width: 100%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: start;
   padding-bottom: 20px;
+
 }
 
 
@@ -104,6 +106,13 @@
   text-align: left;
 }
 
+
+.footer-section {
+  width: 25% !important;
+  min-width: 150px !important;
+  margin: 0 5px;
+}
+
 @media screen and (max-width: 900px) {
   .social-icon {
     font-size: 17px;
@@ -120,12 +129,13 @@
 
   .footer-top {
     display: flex;
-    justify-content: center;
+    /* justify-content: start; */
     flex-wrap: wrap;
     padding-bottom: 10px;
   }
 
   .footer-section {
+    max-width: 220px !important;
     min-width: 150px !important;
   }
 

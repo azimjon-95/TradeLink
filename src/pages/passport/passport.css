@@ -2,6 +2,7 @@
   overflow: hidden;
   background-image: linear-gradient(to bottom, #f0f4f7, #fbf3ed);
   width: 100%;
+  margin-top: 60px;
 }
 
 .passport_dashboard>h1 {

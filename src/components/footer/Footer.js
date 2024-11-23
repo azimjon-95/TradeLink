@@ -1,6 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom"
 import "./style.css";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import logo from "../../assets/kyt.png";
 
@@ -70,6 +70,15 @@ const Footer = () => {
   );
   const subTitle = translations[currentLanguage];
 
+
+
+  const handleScrollToTop = () => {
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" }); // Smooth scroll to top
+    }, 0); // Ensure it runs after route change
+  };
+
+
   return (
     <footer className="footer">
       <div className="footer-head">
@@ -95,20 +104,20 @@ const Footer = () => {
           <h3 className="footer-title">{subTitle?.company}</h3>
           <ul className="footer-list">
             <li>
-              <Link to={"/"}>{subTitle?.aboutUs}</Link>
+              <Link onClick={handleScrollToTop} to={"/about"}>{subTitle?.aboutUs}</Link>
             </li>
             <li>
-              <Link to={"/"}>{subTitle?.reviews}</Link>
+              <Link onClick={handleScrollToTop} to={"/reviews"}>{subTitle?.reviews}</Link>
             </li>
             <li>
-              <Link to={"/faq"}>{subTitle?.faq}</Link>
+              <Link onClick={handleScrollToTop} to={"/faq"}>{subTitle?.faq}</Link>
             </li>
             <li>
-              <Link to={"/"}>{subTitle?.contact}</Link>
+              <Link onClick={handleScrollToTop} to={"/contact"}>{subTitle?.contact}</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to={"/"}>{subTitle?.support}</Link>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>

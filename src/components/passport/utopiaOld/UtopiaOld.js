@@ -7,14 +7,14 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import myAxios from "axios";
 import { setModalType } from "../../../context/modalType";
-import axios from "../../../api";
+// import axios from "../../../api";
 import bin from "../../../assets/ed_khan/binance_rounded.svg";
 import MyCards from "./myCards/MyCards";
 import "./style.css";
 import KeyIndicators from "./myCards/KeyIndicators";
 import Charts from "./myCards/Charts";
 import Investment from "./myCards/Investment";
-import { translations, checkboxData, labels, tooltipTextLab, labelsBar, languagesLab, drawDown, translationsInfo } from './Lang'
+import { translations, checkboxData, labels, labelsBar, drawDown, translationsInfo } from './Lang'
 
 const { RangePicker } = DatePicker;
 
@@ -29,11 +29,12 @@ const UtopiaOldMultiLine = () => {
   const [selectValue, setSelectValue] = useState("hour");
   const [data, setData] = useState([]);
   const [topLoader, setTopLoader] = useState(false);
-  const [chartData, setChartData] = useState({});
   const { id: baseId } = useParams();
   const [stars, setStars] = useState(0);
   const [isClicked, setIsClicked] = useState(false); // Track icon click state
   const token = localStorage.getItem("access_token");
+  const [loading, setLoading] = useState(false);
+
 
   const handleClick = () => {
     if (token) {
@@ -57,16 +58,6 @@ const UtopiaOldMultiLine = () => {
       .catch((err) => console.log(err))
       .finally(() => setTopLoader(false));
   }, [selectValue, baseId]);
-
-  // getData for chart
-  useEffect(() => {
-    let API = `/portfolio/chart/?portfolio_id=${baseId}&time_step=${selectValue}`;
-    axios
-      .get(API)
-      .then((res) => setChartData(res?.data?.data))
-      .catch((err) => console.log(err));
-  }, [baseId, selectValue]);
-
 
 
 
@@ -300,17 +291,17 @@ const UtopiaOldMultiLine = () => {
           <Charts currentLanguage={currentLanguage} labels={labels}
             selectValue={selectValue}
             id={baseId}
-            chartData={chartData}
+            // chartData={chartData}
             customKey={isLite}
             checkedItems={checkedItems}
             isOverlayVisible={isOverlayVisible}
             labelsBar={labelsBar}
             drawDown={drawDown}
-
+            setLoading={setLoading}
           />
-          {isLite && (
+          {loading && (
             <div className="single-cards-container">
-              <Investment key={isLite} />
+              <Investment key={loading} />
             </div>
           )}
         </div>
@@ -344,8 +335,6 @@ const UtopiaOldMultiLine = () => {
               id={baseId}
               activeTab={activeTab}
               selectValue={selectValue}
-              languagesLab={languagesLab}
-              tooltipTextLab={tooltipTextLab}
             />
           </div>
         )}

@@ -1,6 +1,6 @@
 export const reviewsData = [
     {
-        name: "Maria Ivanova",
+        name: "Emily Johnson",
         store: 5,
         text: {
             en: "I absolutely love this service! It provides detailed trading analytics, easy portfolio management, and the support team is always responsive. A must-have for any trader.",
@@ -12,7 +12,7 @@ export const reviewsData = [
         image: "https://randomuser.me/api/portraits/women/13.jpg",
     },
     {
-        name: "Alexey Smirnov",
+        name: "John Carter",
         store: 4,
         text: {
             en: "The platform offers a user-friendly interface for tracking trading results. I’ve been using it for a year, and it has helped me improve my strategies. Highly recommended!",
@@ -24,7 +24,7 @@ export const reviewsData = [
         image: "https://randomuser.me/api/portraits/men/8.jpg",
     },
     {
-        name: "Dmitry Petrov",
+        name: "Michael Peterson",
         store: 3.5,
         text: {
             en: "A good platform for monitoring trades and keeping track of performance. The analytics could be more detailed, but overall, it’s a solid choice.",
@@ -36,7 +36,7 @@ export const reviewsData = [
         image: "https://randomuser.me/api/portraits/men/21.jpg",
     },
     {
-        name: "Svetlana Kuznetsova",
+        name: "Sophia Anderson",
         store: 4.5,
         text: {
             en: "Great experience so far. The charts and performance metrics are clear and helpful. This service has become a key part of my trading routine.",
@@ -48,7 +48,7 @@ export const reviewsData = [
         image: "https://randomuser.me/api/portraits/women/14.jpg",
     },
     {
-        name: "Igor Sokolov",
+        name: "James Miller",
         store: 2.5,
         text: {
             en: "The platform is decent but needs improvements in some areas, like loading times and UI design. It’s useful, but not perfect.",
@@ -60,7 +60,7 @@ export const reviewsData = [
         image: "https://randomuser.me/api/portraits/men/17.jpg",
     },
     {
-        name: "Elena Morozova",
+        name: "Isabella Wilson",
         store: 5,
         text: {
             en: "This is a fantastic service for showcasing my trading skills to investors. The detailed reports and verification system make it very reliable.",
@@ -72,7 +72,7 @@ export const reviewsData = [
         image: "https://randomuser.me/api/portraits/women/15.jpg",
     },
     {
-        name: "Vladimir Pavlov",
+        name: "Christopher Brown",
         store: 3,
         text: {
             en: "The copy trading feature is interesting but could use more transparency about trader risks. Still, it’s a great addition to the platform.",
@@ -84,7 +84,7 @@ export const reviewsData = [
         image: "https://randomuser.me/api/portraits/men/18.jpg",
     },
     {
-        name: "Olga Novikova",
+        name: "Olivia Davis",
         store: 4.8,
         text: {
             en: "I’ve been using this tool for months now, and it’s helped me stay organized and improve my trading results. The support team is amazing too!",
@@ -96,6 +96,8 @@ export const reviewsData = [
         image: "https://randomuser.me/api/portraits/women/33.jpg",
     }
 ];
+
+
 
 export const faqData = [
     {

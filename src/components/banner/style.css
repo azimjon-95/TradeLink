@@ -1,5 +1,5 @@
 .homePage {
-  height: 100vh;
+  /* height: 100vh; */
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -8,12 +8,12 @@
   text-align: center;
   padding: 20px;
   background-color: #fff2e33e;
-  /* margin-top: 50px; */
+  margin-top: 30px;
   /* Responsive background image */
-  background-image: url("../../assets/banner/hero.png");
-  background-size: cover;
+  background-image: url("../../assets/banner/banner.png");
+  background-size: 150% 150%;
   background-position: center;
-  background-repeat: no-repeat;
+  /* background-repeat: no-repeat; */
 }
 
 .homePage__header {
@@ -36,6 +36,19 @@
   font-weight: 300 !important;
   z-index: 1;
   margin-top: 20px !important;
+}
+
+.homePage__support-img {
+  width: 155px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.homePage__support-img img {
+  width: 100%;
+  height: 100%;
 }
 
 .homePage__subtitle-bottom {
@@ -72,6 +85,18 @@
   max-width: 472px;
   max-height: 64px;
   width: 100%;
+
+}
+
+.homePage__supportLogos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  object-fit: cover;
+  max-height: 64px;
+  width: 100%;
+
 }
 
 .homePage__support>img {
@@ -126,7 +151,7 @@
 
 .marketplace-home {
   width: 97%;
-  background-color: #f6effc;
+  background-color: #03AAC1;
   display: flex;
   border-radius: 15px;
   align-items: center;
@@ -250,7 +275,7 @@
 .marketplace-passporte {
   width: 97%;
   padding: 10px 0;
-  background-color: #fff7e7;
+  background: linear-gradient(to top, #00e1ffa4, #00e1ff00);
   display: flex;
   border-radius: 15px;
   align-items: center;
@@ -357,10 +382,12 @@
 
 /* Marketplace Section */
 .marketplace-section {
-  background-color: #f3e8ff;
+  background: linear-gradient(to top, #dab8ff, #00e1ff00);
+
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-left: 60px;
   width: 97%;
 }
 
@@ -458,7 +485,7 @@
 
 /* Widget Section */
 .widget-section {
-  background-color: #fff4cc;
+  background: linear-gradient(to top, #fff4cc, #00e1ff00);
   width: 60%;
   height: 100%;
   display: flex;
@@ -487,6 +514,8 @@
 /* Referral Section */
 .referral-section {
   background-color: #d8f3d8;
+  background: linear-gradient(to top, #d8f3d8, #00e1ff00);
+
   width: 40%;
   height: 100%;
   display: flex;

@@ -7,6 +7,9 @@ import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import bt_binance from "../../assets/banner/supporters.png";
 import bt_passport from "../../assets/banner/passport.png";
+import bigX from "../../assets/banner/bigX.png";
+import BitGet from "../../assets/banner/BitGet.png";
+import htx from "../../assets/banner/htx.png";
 import bt_widget from "../../assets/banner/widget.png";
 import avatar_img1 from "../../assets/banner/fase2.png";
 import avatar_img2 from "../../assets/banner/fase3.png";
@@ -136,14 +139,24 @@ const Banner = () => {
         <div className="homePage__support">
           <img src={bt_binance} alt="" />
         </div>
+        <div className="homePage__supportLogos">
+
+          <div className="homePage__support-img">
+            <img src={bigX} alt="" />
+          </div>
+          <div style={{ margin: "0 20px" }} className="homePage__support-img">
+            <img src={BitGet} alt="" />
+          </div>
+          <div className="homePage__support-img">
+            <img src={htx} alt="" />
+          </div>
+        </div>
       </div>
 
       {/* passport */}
       <div className="marketplace">
         <div className="marketplace-passporte">
-          <div className="marketplace-home_img">
-            <img src={bt_passport} alt="" />
-          </div>
+
           <div className="marketplace-container">
             <p className="marketplace-subtitle_pass ">
               {subTitle.passportSubtitle}
@@ -210,14 +223,9 @@ const Banner = () => {
               </button>
             </Link>
           </div>
-        </div>
-      </div>
-
-      {/* Our mission */}
-      <div className="mission-container">
-        <div className="mission-content">
-          <h4>{subTitle.mission}</h4>
-          <h2 dangerouslySetInnerHTML={subTitle.missionTitle} />
+          <div className="marketplace-home_img">
+            <img src={bt_passport} alt="" />
+          </div>
         </div>
       </div>
 
@@ -252,6 +260,10 @@ const Banner = () => {
                 className="widget-subtitle"
                 dangerouslySetInnerHTML={subTitle.strategy}
               />
+              <br />
+              {!token && (
+                <button style={{ marginTop: "6px" }} onClick={() => dispatch(setModalType("signUp"))} className="btn referral-btn">{subTitle.signUp}</button>
+              )}
             </div>
             <div className="statistics-bar-chart">
               <img src={bt_widget} alt="" />

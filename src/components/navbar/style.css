@@ -11,6 +11,7 @@
 }
 
 .navbar_sticky {
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
   left: 0;
@@ -86,7 +87,7 @@
   padding-left: 8px;
   padding-right: 8px;
   list-style: outside none none;
-  background-color: rgb(255, 255, 255);
+  background-color: transparent;
 }
 
 .nav_links-main>a>button.active-button::after {
@@ -343,30 +344,8 @@
   color: #1a2233;
 }
 
-.close-modal-signup,
-.close-modal {
+.close-modal-signup {
   display: none;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-
-.close-modal-signup-open {
-  display: block;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  /* right: 0; */
-  z-index: 2;
-}
-
-.modal-open {
-  display: block;
   position: fixed;
   width: 100%;
   height: 100%;
@@ -375,6 +354,30 @@
   right: 0;
   z-index: -1;
 }
+
+/* .close-modal-signup-open {
+  display: block;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  /* right: 0; */
+/* z-index: 2;
+} */
+
+/* .modal-open {
+  display: block;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+} */
+
+
 
 /* --------------------- */
 .navbar_modal {
