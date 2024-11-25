@@ -1,9 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { Tooltip, Skeleton } from 'antd';
+import axios from "../../../../api";
 import { languagesLab, tooltipTextLab } from '../Lang'
 
-const OutlineCircle = ({ data, currentLanguage }) => {
+const OutlineCircle = ({ id, currentLanguage, selectValue }) => {
+    const [data, setStats] = useState([]);
+
+    useEffect(() => {
+        const controller = new AbortController();
+        const signal = controller.signal;
+
+        const fetchStats = async () => {
+            if (!id || !selectValue) return;
+
+            try {
+                const response = await axios.get(
+                    `/portfolio/stats/?portfolio_id=${id}&time_step=${selectValue}`,
+                    { signal }
+                );
+                setStats(response?.data?.data?.main_statistic);
+            } catch (error) {
+                if (!axios.isCancel(error)) {
+                    console.error("Error fetching stats:", error);
+                }
+            }
+        };
+
+        const debounceFetch = setTimeout(fetchStats, 300);
+
+        return () => {
+            clearTimeout(debounceFetch);
+            controller.abort();
+        };
+    }, [id, selectValue]);
+
+
     const formatCurrency = (value) => {
         if (typeof value !== 'number' || isNaN(value)) {
             return '$0';

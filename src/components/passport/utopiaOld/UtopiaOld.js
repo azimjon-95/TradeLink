@@ -3,7 +3,7 @@ import { ImStarEmpty, ImStarFull } from "react-icons/im";
 import { Checkbox, Select, DatePicker, Space, Switch } from "antd";
 import { CheckSquareTwoTone } from "@ant-design/icons";
 import { RiExpandDiagonalLine } from "react-icons/ri";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import myAxios from "axios";
 import { setModalType } from "../../../context/modalType";
@@ -13,8 +13,15 @@ import MyCards from "./myCards/MyCards";
 import "./style.css";
 import KeyIndicators from "./myCards/KeyIndicators";
 import Charts from "./myCards/Charts";
-import Investment from "./myCards/Investment";
-import { translations, checkboxData, labels, labelsBar, drawDown, translationsInfo } from './Lang'
+// import Investment from "./myCards/Investment";
+import {
+  translations,
+  checkboxData,
+  labels,
+  labelsBar,
+  drawDown,
+  translationsInfo
+} from './Lang'
 
 const { RangePicker } = DatePicker;
 
@@ -25,7 +32,6 @@ const UtopiaOldMultiLine = () => {
 
   const dispatch = useDispatch();
   const [isLite, setIsLite] = useState(false);
-  const [activeTab, setActiveTab] = useState("main");
   const [selectValue, setSelectValue] = useState("hour");
   const [data, setData] = useState([]);
   const [topLoader, setTopLoader] = useState(false);
@@ -33,7 +39,9 @@ const UtopiaOldMultiLine = () => {
   const [stars, setStars] = useState(0);
   const [isClicked, setIsClicked] = useState(false); // Track icon click state
   const token = localStorage.getItem("access_token");
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  const [isSticky, setIsSticky] = useState(true);
+  const location = useLocation();
 
 
   const handleClick = () => {
@@ -129,6 +137,14 @@ const UtopiaOldMultiLine = () => {
     de: "Diagramm", // German
     es: "Gráfico" // Spanish
   };
+
+  useEffect(() => {
+    if (location.pathname.startsWith("/portfolio/")) {
+      setIsSticky(false); // Static qilish
+    } else {
+      setIsSticky(true); // Sticky qilish
+    }
+  }, [location.pathname]);
   return (
     <div className="oldMultiLine">
       <div className="oldMultiLine-header">
@@ -154,7 +170,14 @@ const UtopiaOldMultiLine = () => {
         {/* <p>My copy trading: <a href={currentUrl} target="_blank" rel="noopener noreferrer">{currentUrl}</a> https://example.com</p> */}
       </div>
       <div className="oldMultiLine-main">
-        <div className="oldMultiLine-main-head">
+        <div
+          style={{
+            position: isSticky ? "static" : "sticky",
+            top: 0,
+            left: 0,
+          }}
+          className="oldMultiLine-main-head"
+        >
           <Space className="RangePicker" direction="vertical" size={12}>
             <RangePicker placeholder={placeholders[currentLanguage]} />
           </Space>
@@ -297,50 +320,29 @@ const UtopiaOldMultiLine = () => {
             isOverlayVisible={isOverlayVisible}
             labelsBar={labelsBar}
             drawDown={drawDown}
-            setLoading={setLoading}
+          // setLoading={setLoading}
           />
-          {loading && (
+          {/* {loading && (
             <div className="single-cards-container">
               <Investment key={loading} />
             </div>
-          )}
+          )} */}
         </div>
-        {!isLite && (
-          <div className="single-container-main">
-            <nav className="single-tabs">
-              <button
-                onClick={() => setActiveTab("main")}
-                className={activeTab === "main" ? "active" : ""}
-              >
-                {t.main}
-              </button>
-              <button
-                onClick={() => setActiveTab("investment")}
-                className={activeTab === "investment" ? "active" : ""}
-              >
-                {t.investment}
-              </button>
-              <button
-                onClick={() => setActiveTab("trades")}
-                className={activeTab === "trades" ? "active" : ""}
-              >
-                {t.trades}
-              </button>
-            </nav>
-            <br />
-            {/* Render the CardList component based on the active tab */}
-            <MyCards
-              translationsInfo={translationsInfo}
-              currentLanguage={currentLanguage}
-              id={baseId}
-              activeTab={activeTab}
-              selectValue={selectValue}
-            />
-          </div>
-        )}
+        <MyCards
+          translationsInfo={translationsInfo}
+          currentLanguage={currentLanguage}
+          id={baseId}
+          selectValue={selectValue}
+          t={t}
+        />
+        {/* )} */}
       </div>
     </div>
   );
 };
 
 export default UtopiaOldMultiLine;
+
+
+
+

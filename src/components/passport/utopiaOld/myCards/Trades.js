@@ -1,11 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import ReactApexChart from "react-apexcharts";
 import { Tooltip, Skeleton } from "antd";
 import "./style.css";
+import axios from "../../../../api";
 import Distribution from "./Distribution";
 
-const Trades = ({ currentLanguage, data }) => {
+const Trades = ({ id, selectValue, currentLanguage }) => {
+
+  const [data, setStats] = useState([]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    const fetchStats = async () => {
+      if (!id || !selectValue) return;
+
+      try {
+        const response = await axios.get(
+          `/portfolio/stats/?portfolio_id=${id}&time_step=${selectValue}`,
+          { signal }
+        );
+        setStats(response?.data?.data?.trades_statistic);
+      } catch (error) {
+        if (!axios.isCancel(error)) {
+          console.error("Error fetching stats:", error);
+        }
+      }
+    };
+
+    const debounceFetch = setTimeout(fetchStats, 300);
+
+    return () => {
+      clearTimeout(debounceFetch);
+      controller.abort();
+    };
+  }, [id, selectValue]);
   const trades = {
     en: [
       {

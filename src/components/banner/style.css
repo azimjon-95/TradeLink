@@ -146,7 +146,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin-top: 25px;
+  margin-top: 80px;
 }
 
 .marketplace-home {
@@ -178,8 +178,10 @@
 .marketplace-container {
   padding: 2rem;
   border-radius: 12px;
-  width: 600px;
+  width: 54%;
+  min-width: 510px;
   text-align: left;
+  margin: 15px 0;
 }
 
 .marketplace-subtitle {
@@ -251,11 +253,58 @@
 }
 
 .marketplace-home_img {
-  width: 500px;
-  height: 320px;
+  width: 530px;
+  height: 360px;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 15px 0 0 15px;
+  box-shadow: -10px 0 15px rgba(0, 0, 0, 0.053);
+  /* O'ng tomondan ichkariga soya */
+  overflow: hidden;
+  position: relative;
+}
+
+.marketplace-home_img_text {
+  position: absolute;
+  left: 4px;
+  top: 15px;
+  background: #fff;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: flex-end;
+  padding-left: 30px;
+  padding-top: 5px;
+  color: #180549;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.marketplace-home_img_text>h3 {
+  opacity: 70%;
+}
+
+.marketplace-home_img_text::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: .3px;
+
+  background: linear-gradient(to right, #57575748, rgba(0, 128, 0, 0), rgba(0, 0, 255, 0));
+}
+
+.marketplace-home_img_text::before {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 27px;
+  height: 60px;
+  z-index: 3;
+  background: #fff;
 }
 
 .marketplace-home_img img {
@@ -274,23 +323,23 @@
 
 .marketplace-passporte {
   width: 97%;
-  padding: 10px 0;
-  background: linear-gradient(to top, #00e1ffa4, #00e1ff00);
+  padding: 10px 0 0 30px;
+  background: linear-gradient(to top, #6DD3C5, #00e1ff00);
   display: flex;
   border-radius: 15px;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .learn-more-button-passporte {
-  background-color: #ffb600;
-  color: #fff;
-  padding: 0.4rem 1rem;
+  background-color: #142230;
+  margin-top: 10px;
+  color: white;
+  padding: 16px 24px;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
+  font-size: 16px;
   cursor: pointer;
-  font-size: 1rem;
-  margin-top: 1rem;
 }
 
 .learn-more-button-passporte:hover {
@@ -308,11 +357,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to bottom left, #ffffff, #ffb600);
+  background: linear-gradient(to bottom left, dodgerblue, #fff);
 }
 
 .marketplace-subtitle_pass {
-  color: #ffb700cb;
+  /* color: #6DD3C5; */
   font-size: 13px;
   text-transform: uppercase;
   margin-bottom: 1rem;
@@ -373,6 +422,8 @@
   align-items: center;
   flex-direction: column;
   gap: 20px;
+  margin-top: 90px;
+  overflow: hidden;
 }
 
 .section {
@@ -382,7 +433,7 @@
 
 /* Marketplace Section */
 .marketplace-section {
-  background: linear-gradient(to top, #dab8ff, #00e1ff00);
+  background: linear-gradient(to top, #ff90466a, #ffffff00);
 
   display: flex;
   justify-content: space-between;
@@ -419,13 +470,14 @@
 }
 
 .statistics-bar-chart {
-  width: 300px;
-  height: 380px;
+  width: 400px;
+  height: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: -20px;
-  margin-bottom: -20px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 .statistics-bar-chart>img {
@@ -449,8 +501,8 @@
   justify-content: center;
   align-items: center;
   margin-right: -20px;
-  height: 350px;
-  width: 400px;
+  height: 360px;
+  width: 470px;
 }
 
 .index-cards>img {
@@ -491,6 +543,7 @@
   display: flex;
   justify-content: space-between;
   overflow: hidden;
+  position: relative;
 }
 
 .widget-title {

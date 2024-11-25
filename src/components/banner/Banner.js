@@ -1,23 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
 import "./media.css";
 import Rating from "react-rating-stars-component";
+import AOS from "aos";
 import { Link } from "react-router-dom";
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import bt_binance from "../../assets/banner/supporters.png";
-import bt_passport from "../../assets/banner/passport.png";
+import bt_passport from "../../assets/banner/my_img1.png";
 import bigX from "../../assets/banner/bigX.png";
 import BitGet from "../../assets/banner/BitGet.png";
 import htx from "../../assets/banner/htx.png";
-import bt_widget from "../../assets/banner/widget.png";
+import bt_widget from "../../assets/banner/my_img2.png";
 import avatar_img1 from "../../assets/banner/fase2.png";
 import avatar_img2 from "../../assets/banner/fase3.png";
 import avatar_img3 from "../../assets/banner/fase1.png";
-import bt_indexes from "../../assets/banner/indexes.png";
+import bt_indexes from "../../assets/banner/my_img3.png";
 import bt_jet from "../../assets/banner/Instagram-post.png";
 import { setModalType } from "../../context/modalType";
 import { reviewsData, faqData, translations, blogPosts } from "./Lang";
+import "aos/dist/aos.css"; // AOS uslublarini import qilish
 
 const Banner = () => {
 
@@ -115,6 +117,14 @@ const Banner = () => {
     setActiveKey(activeKey === key ? null : key);
   };
 
+
+  useEffect(() => {
+    AOS.init({
+      duration: 900, // Animatsiya davomiyligi (ms)
+      easing: "ease-in-out", // Animatsiya harakati
+      once: true, // Faqat bir marta animatsiya ishlashi
+    });
+  }, []);
   return (
     <>
       <div className="homePage">
@@ -154,11 +164,11 @@ const Banner = () => {
       </div>
 
       {/* passport */}
-      <div className="marketplace">
+      <div data-aos="zoom-in-up" className="marketplace">
         <div className="marketplace-passporte">
 
           <div className="marketplace-container">
-            <p className="marketplace-subtitle_pass ">
+            <p className="marketplace-subtitle_pass">
               {subTitle.passportSubtitle}
             </p>
             <h1 className="marketplace-title">
@@ -225,13 +235,16 @@ const Banner = () => {
           </div>
           <div className="marketplace-home_img">
             <img src={bt_passport} alt="" />
+            <div className="marketplace-home_img_text">
+              <h3>Traders Passport</h3>
+            </div>
           </div>
         </div>
       </div>
 
       {/* For PRO-traders */}
       <div className="app-container">
-        <div className="section marketplace-section">
+        <div data-aos="zoom-in-right" className="section marketplace-section">
           <div className="marketplace-header">
             <span className="badge-pro-traders">
               {subTitle.proTradersTitle}
@@ -252,7 +265,7 @@ const Banner = () => {
           </div>
         </div>
 
-        <div className="marketplace-section-box">
+        <div data-aos="flip-up" className="marketplace-section-box">
           <div className="section widget-section">
             <div className="statistics">
               <h2 className="widget-title">{subTitle.widgetTitle}</h2>

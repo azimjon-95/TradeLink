@@ -3,7 +3,6 @@ import "./style.css";
 import { CgMenuGridO } from "react-icons/cg";
 import { Popover, Button, message } from "antd";
 import {
-  // SettingOutlined,
   LogoutOutlined,
   UserOutlined,
 } from "@ant-design/icons";
@@ -11,11 +10,9 @@ import { IoMenu } from "react-icons/io5";
 import { IoChevronDown, IoChevronUpOutline } from "react-icons/io5";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiFillHome, AiOutlineFileText } from "react-icons/ai";
-// import { BsThreeDots } from "react-icons/bs";
 import { FiX } from "react-icons/fi";
 import { FaPassport, FaStoreAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-// import axios from "../../api";
 import SignUpModal from "../../pages/register/Register";
 import { setModalType as setModalType2 } from "../../context/modalType";
 
@@ -40,6 +37,15 @@ function Navbar() {
   const currentLanguage = useSelector(
     (state) => state.language.currentLanguage
   );
+  const [isSticky, setIsSticky] = useState(true);
+  useEffect(() => {
+    if (location.pathname.startsWith("/portfolio/")) {
+      setIsSticky(false); // Static qilish
+    } else {
+      setIsSticky(true); // Sticky qilish
+    }
+  }, [location.pathname]);
+
   const {
     logoutFailed,
     logOut,
@@ -163,7 +169,7 @@ function Navbar() {
     ],
     "/": [
       { path: "/#about", label: about, scrollTo: 0 },
-      { path: "/#products", label: traderCabinet, scrollTo: 570 },
+      { path: "/#products", label: passportTitle, scrollTo: 570 },
       { path: "/faq", label: faq },
     ],
     default: [{ path: "/", label: "", scrollTo: 0 }],
@@ -328,13 +334,14 @@ function Navbar() {
   return (
     <div
       style={{
-        position: "fixed",
+        position: isSticky ? "fixed" : "static",
         top: 0,
         width: "100%",
         zIndex: 100,
         backgroundColor: isScrolled ? "#d4d4d489" : "#fff",
         backdropFilter: isScrolled ? "blur(10px)" : "none",
         transition: "background-color 0.3s ease, backdrop-filter 0.3s ease",
+        overflow: isSticky ? "start" : "hidden"
       }}
       className={`navbar_container ${isProductDashboard ? "navbar_static" : "navbar_sticky"
         }`}

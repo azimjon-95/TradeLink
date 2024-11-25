@@ -16,6 +16,11 @@ import {
 } from "recharts";
 import moment from "moment";
 import axios from "../../../../api";
+
+// import "moment/locale/en"; //  uchun
+import "moment/locale/ru"; // Ruscha uchun
+import "moment/locale/es"; // Ispancha uchun
+import "moment/locale/de"; // Ispancha uchun
 import "./style.css";
 
 const Charts = ({
@@ -26,7 +31,6 @@ const Charts = ({
   selectValue,
   labels,
   currentLanguage,
-  setLoading
 }) => {
   const t = labels[currentLanguage];
 
@@ -50,7 +54,7 @@ const Charts = ({
   };
 
   useEffect(() => {
-    setLoading(true); // Yuklanishni ko'rsatish
+
     fetchChartData(id, selectValue)
       .then((data) => {
         setChartData(data); // Ma'lumotlarni saqlash
@@ -58,9 +62,7 @@ const Charts = ({
       .catch((error) => {
         console.error("Error fetching chart data:", error); // Xatoliklarni konsolga chiqarish
       })
-      .finally(() => {
-        setLoading(false); // Yuklanish tugashi
-      });
+
   }, [id, selectValue]);
 
   // Data mapping optimized with useMemo
@@ -84,7 +86,7 @@ const Charts = ({
     return (
       <div className="PLByMonth" style={{ color: "#fff", fontSize: "12px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-          {label}
+          <b>{moment(payload[0]?.payload?.name).format("MMM D YYYY")}</b>
         </div>
         {payload.map(
           (item, index) =>
@@ -122,10 +124,6 @@ const Charts = ({
   );
 
 
-
-
-
-
   const usedLeverage = {
     en: "Used Leverage:",
     ru: "Используемое кредитное плечо:",
@@ -148,7 +146,9 @@ const Charts = ({
     if (active && payload && payload.length) {
       return (
         <div className="PLByMonth">
-          <p>{label}</p>
+          <b style={{ color: "#fff", fontSize: "14px" }}>
+            {moment(payload[0]?.payload?.day).format("MMM D YYYY")}
+          </b>
           <p>
             <strong style={{ display: "flex", alignItems: "center", gap: "4px" }}>
               <div
@@ -224,7 +224,9 @@ const Charts = ({
     if (active && payload && payload.length) {
       return (
         <div className="PLByMonth">
-          <p>{label}</p>
+          <b style={{ color: "#fff", fontSize: "14px" }}>
+            {moment(payload[0]?.payload?.day).format("MMM D YYYY")}
+          </b>
           <p>
             <strong style={{ display: "flex", alignItems: "center", gap: "4px" }}>
               <div
@@ -263,7 +265,7 @@ const Charts = ({
   console.log(currentLanguage);
   // ---------------------------12A-----------------------------------
 
-  const [data, setData] = useState(null); // State for fetched data
+  const [data, setData] = useState([]); // State for fetched data
 
   useEffect(() => {
     // Asinxron ma'lumotlarni olish funksiyasi
@@ -335,10 +337,26 @@ const Charts = ({
 
   const revenueLabels = {
     en: "Revenue by month (%)",
-    ru: "Доход по месяцам (%)",
+    ru: "Доходность: в месяц (%)",
     de: "Umsatz pro Monat (%)",
     es: "Ingresos por mes (%)",
   }
+
+
+  // const monthTranslations = {
+  //   en: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  //   uz: ["Yan", "Fev", "Mar", "Apr", "May", "Iyun", "Iyul", "Avg", "Sen", "Okt", "Noy", "Dek"],
+  //   ru: ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"],
+  //   es: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+  // };
+  // const monthsInLanguage = monthTranslations[currentLanguage];
+  // Funksiya
+  // const formatMonthYear = (dateString, language) => {
+  //   moment.locale(language); // Tilni o'rnatish
+  //   const date = moment(dateString, "MMM YYYY"); // "Sep 2023" formatini momentga aylantirish
+  //   return date.format("MMMM YYYY"); // To'liq oy nomi va yil
+  // };
+
   return (
     <>
       <ResponsiveContainer width="100%" height={isOverlayVisible ? 300 : 400}>
@@ -662,6 +680,7 @@ const Charts = ({
             tick={{ fontSize: 10 }} /* Smaller font size for month labels */
             axisLine={false}
             tickLine={false}
+          // tickFormatter={(monthIndex) => formatMonthYear(monthIndex, currentLanguage)}
           />
 
           <Bar dataKey="revenue" barSize={formattedData?.length <= 5 ? 40 : formattedData?.length <= 10 ? 30 : 20}>

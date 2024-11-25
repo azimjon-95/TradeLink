@@ -1,11 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import './style.css';
 import { Tooltip, Skeleton } from 'antd';
+import axios from "../../../../api";
 import { transInvestment } from '../Lang'
 
+const Investment = ({ id, selectValue, currentLanguage }) => {
+    const [data, setStats] = useState([]); // Stores the fetched data
+    const [isDataFetched, setIsDataFetched] = useState(false); // Tracks if data has already been fetched
 
+    useEffect(() => {
+        const controller = new AbortController();
+        const signal = controller.signal;
 
-const Investment = ({ data, currentLanguage }) => {
+        const fetchStats = async () => {
+            if (!id || !selectValue || isDataFetched) return; // Prevent fetch if data is already fetched
+
+            try {
+                const response = await axios.get(
+                    `/portfolio/stats/?portfolio_id=${id}&time_step=${selectValue}`,
+                    { signal }
+                );
+                setStats(response?.data?.data?.investment_statistic);
+                setIsDataFetched(true); // Mark the data as fetched
+            } catch (error) {
+                console.error("Error fetching stats:", error);
+            }
+        };
+
+        const debounceFetch = setTimeout(fetchStats, 300);
+
+        return () => {
+            clearTimeout(debounceFetch);
+            controller.abort();
+        };
+    }, [id, selectValue, isDataFetched]); // Add isDataFetched to the dependency array to control re-fetching
 
     const datas = [
         {
@@ -133,7 +161,6 @@ const Investment = ({ data, currentLanguage }) => {
             title: transInvestment[currentLanguage]?.mSquared,
             value: `${data?.m_sqr?.toFixed(2)}`,
             description: transInvestment[currentLanguage]?.mSquaredDescription,
-
             a: 25,
             y: 25,
             x: 25,
@@ -188,7 +215,13 @@ const Investment = ({ data, currentLanguage }) => {
                             <div
                                 style={{
                                     position: 'absolute',
-                                    left: `${sliderValue <= 3 ? sliderValue * (5 / 3) : Math.min(sliderValue, 100)}%`,
+                                    left: sliderValue > 100
+                                        ? "100%"
+                                        : sliderValue < 3 && sliderValue >= 0
+                                            ? `${sliderValue}%`
+                                            : sliderValue < 0
+                                                ? "0%"
+                                                : `${sliderValue}%`,
                                     transform: 'translateX(-50%)', // Markazdan ko'rsatish
                                     width: '12px', // Sliderning kengligi
                                     height: '12px', // Sliderning balandligi
@@ -205,7 +238,6 @@ const Investment = ({ data, currentLanguage }) => {
             </>
         );
     };
-
 
     return (
         <>
@@ -242,5 +274,5 @@ const Investment = ({ data, currentLanguage }) => {
     );
 };
 
-export default Investment;
 
+export default Investment;
