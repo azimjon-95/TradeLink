@@ -1,9 +1,9 @@
 import React from "react";
 import ApexCharts from "react-apexcharts";
 import { Link } from "react-router-dom";
+import { FiX } from "react-icons/fi";
 import beta_formula from "../../../assets/passport/beta-formula.svg";
 import growth_rate_formula from "../../../assets/passport/growth-rate-formula.svg";
-
 
 const translations = {
   en: {
@@ -25,10 +25,12 @@ const translations = {
     formulaTitle: "The general formula is:",
     indicatorsTitle:
       "The following indicators are used to calculate the KYT Score:",
-    growthRate: "Growth Rate: The growth indicator over time periods, calculated as follows:",
+    growthRate:
+      "Growth Rate: The growth indicator over time periods, calculated as follows:",
     recoveryFactor:
       "Recovery Factor: An indicator showing how many times the profit exceeds the maximum drawdown.",
-    trackTime: "Track Time: An indicator showing how many days the strategy has existed.",
+    trackTime:
+      "Track Time: An indicator showing how many days the strategy has existed.",
     avgIcp:
       "Avg. ICP: The average deposit load (actual leverage) over the strategy's existence.",
   },
@@ -49,11 +51,14 @@ const translations = {
     kytDetails:
       "Чем выше балл KYT-трейдера, тем более сбалансирована стратегия с точки зрения риска, прибыли и истории торговли.",
     formulaTitle: "Общая формула:",
-    indicatorsTitle: "Следующие показатели используются для расчета балла KYT-трейдера:",
-    growthRate: "Темпы роста: Индикатор роста за определенные периоды времени, рассчитывается следующим образом:",
+    indicatorsTitle:
+      "Следующие показатели используются для расчета балла KYT-трейдера:",
+    growthRate:
+      "Темпы роста: Индикатор роста за определенные периоды времени, рассчитывается следующим образом:",
     recoveryFactor:
       "Фактор восстановления: Показатель того, во сколько раз прибыль превышает максимальную просадку.",
-    trackTime: "Время отслеживания: Показатель того, сколько дней существует стратегия.",
+    trackTime:
+      "Время отслеживания: Показатель того, сколько дней существует стратегия.",
     avgIcp:
       "Средний ICP: Средняя загрузка депозита (фактическое плечо) за время существования стратегии.",
   },
@@ -74,11 +79,14 @@ const translations = {
     kytDetails:
       "Cuanto mayor sea el puntaje KYT, más equilibrada será la estrategia en términos de riesgo frente a la ganancia y el historial comercial.",
     formulaTitle: "La fórmula general es:",
-    indicatorsTitle: "Los siguientes indicadores se utilizan para calcular el puntaje KYT:",
-    growthRate: "Tasa de crecimiento: El indicador de crecimiento en períodos de tiempo, calculado de la siguiente manera:",
+    indicatorsTitle:
+      "Los siguientes indicadores se utilizan para calcular el puntaje KYT:",
+    growthRate:
+      "Tasa de crecimiento: El indicador de crecimiento en períodos de tiempo, calculado de la siguiente manera:",
     recoveryFactor:
       "Factor de recuperación: Un indicador que muestra cuántas veces la ganancia excede la máxima caída.",
-    trackTime: "Tiempo de seguimiento: Un indicador que muestra cuántos días ha existido la estrategia.",
+    trackTime:
+      "Tiempo de seguimiento: Un indicador que muestra cuántos días ha existido la estrategia.",
     avgIcp:
       "Prom. ICP: La carga promedio del depósito (apalancamiento real) durante la existencia de la estrategia.",
   },
@@ -99,11 +107,14 @@ const translations = {
     kytDetails:
       "Je höher der KYT - Punktwert, desto ausgewogener ist die Strategie in Bezug auf Risiko und Gewinn sowie Handelsgeschichte.",
     formulaTitle: "Die allgemeine Formel ist:",
-    indicatorsTitle: "Die folgenden Indikatoren werden zur Berechnung des KYT - Punktwerts verwendet:",
-    growthRate: "Wachstumsrate: Der Wachstumsindikator über Zeiträume, berechnet wie folgt:",
+    indicatorsTitle:
+      "Die folgenden Indikatoren werden zur Berechnung des KYT - Punktwerts verwendet:",
+    growthRate:
+      "Wachstumsrate: Der Wachstumsindikator über Zeiträume, berechnet wie folgt:",
     recoveryFactor:
       "Erholungsfaktor: Ein Indikator, der zeigt, wie oft der Gewinn den maximalen Verlust übersteigt.",
-    trackTime: "Verfolgungszeit: Ein Indikator, der zeigt, wie viele Tage die Strategie existiert hat.",
+    trackTime:
+      "Verfolgungszeit: Ein Indikator, der zeigt, wie viele Tage die Strategie existiert hat.",
     avgIcp:
       "Durchschn. ICP: Die durchschnittliche Belastung des Einsatzes (tatsächlicher Hebel) während der Existenz der Strategie.",
   },
@@ -181,9 +192,7 @@ function InfoModal({ isOpen, onClose, contentType, currentLanguage }) {
     if (contentType === "portfolio") {
       return (
         <div className="info-modal-main">
-          <p>
-            {t.portfolioSteps[0]}
-          </p>
+          <p>{t.portfolioSteps[0]}</p>
           <br />
           <p>
             {t.portfolioSteps[1]}{" "}
@@ -195,9 +204,7 @@ function InfoModal({ isOpen, onClose, contentType, currentLanguage }) {
             </Link>{" "}
           </p>
           <p>{t.portfolioSteps[3]}</p>
-          <p>
-            {t.portfolioSteps[4]}
-          </p>
+          <p>{t.portfolioSteps[4]}</p>
           <p>{t.portfolioSteps[5]}</p>
         </div>
       );
@@ -250,8 +257,12 @@ function InfoModal({ isOpen, onClose, contentType, currentLanguage }) {
         className="info-modal-content"
         onClick={(e) => e.stopPropagation()}
       >
-        <button className="info-close-btn" onClick={onClose}>
-          X
+        <button
+          className="info-close-btn"
+          onClick={onClose}
+          style={{ zIndex: "1000" }}
+        >
+          <FiX />
         </button>
         <div className="info-res-box">
           <h3>

@@ -13,12 +13,14 @@ import ret from "../../../assets/ed_khan/ret.svg";
 import InfoModal from "./InfoModal";
 import "./style.css";
 import scoreChartSvg from "./scoreChart.svg";
-import { translations, transMonth } from './Lang'
+import { translations, transMonth } from "./Lang";
 const { Option } = Select;
 
 const Leaderboard = () => {
   const navigate = useNavigate();
-  const currentLanguage = useSelector((state) => state.language.currentLanguage);
+  const currentLanguage = useSelector(
+    (state) => state.language.currentLanguage
+  );
   const subTitle = translations[currentLanguage];
 
   const [isModal, setIsModal] = useState(false);
@@ -57,7 +59,9 @@ const Leaderboard = () => {
   // get LeaderBoard table Data
   useEffect(() => {
     setLoading(true);
-    let API = `/leaderboard/top-traders?page=${page}&show_non_active=${showInactive}&sort_type=${filterOption || selectedOption}`;
+    let API = `/leaderboard/top-traders?page=${page}&show_non_active=${showInactive}&sort_type=${
+      filterOption || selectedOption
+    }`;
     axios
       .get(API)
       .then((res) => {
@@ -97,7 +101,9 @@ const Leaderboard = () => {
     setIsModalOpen(true);
   };
 
-  const closeModal = () => setIsModalOpen(false);
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const columns = [
     {
@@ -265,12 +271,10 @@ const Leaderboard = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-
   const handlePageChange = (page) => {
     setCurrentPage(page);
     setPage(page);
   };
-
 
   const month = transMonth[currentLanguage];
   return (
@@ -291,7 +295,8 @@ const Leaderboard = () => {
                     {selectedOption === "score" && <FaCheck />}
                   </button>
                   <button onClick={() => handleOptionClick("profit")}>
-                    {subTitle.profit} {selectedOption === "profit" && <FaCheck />}
+                    {subTitle.profit}{" "}
+                    {selectedOption === "profit" && <FaCheck />}
                   </button>
                 </div>
               )}
@@ -303,7 +308,7 @@ const Leaderboard = () => {
             </button>
             {selectedOption === "score" && (
               <button onClick={() => openModal("score")}>
-                <img src={ret} alt="Info" />  {subTitle.measure}
+                <img src={ret} alt="Info" /> {subTitle.measure}
               </button>
             )}
             <InfoModal
@@ -399,7 +404,6 @@ const Leaderboard = () => {
           </Select>
         </div>
         <div className="portfolio-list">
-
           <div>
             <Table
               loading={loading}
@@ -412,14 +416,19 @@ const Leaderboard = () => {
               onRow={(record) => ({
                 onClick: () => {
                   const timestamp = getTimestamp();
-                  navigate(
-                    `/portfolio/${record.portfolio_id}?t=${timestamp}`
-                  );
+                  navigate(`/portfolio/${record.portfolio_id}?t=${timestamp}`);
                 },
               })}
             />
 
-            <div style={{ width: "100%", display: "flex", justifyContent: "center", textAlign: "center" }}>
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+                textAlign: "center",
+              }}
+            >
               <Pagination
                 current={currentPage} // Hozirgi sahifa
                 total={portfolios?.length} // Umumiy ma'lumotlar soni
@@ -443,15 +452,14 @@ const LeaderboardCard = ({ title, data, date, loadingTop, by }) => {
     rank === 1
       ? "#FBAF3D" // 1-bosqich
       : rank === 2
-        ? "#C0C8E0" // 2-bosqich
-        : rank === 3
-          ? "#D5B678" // 3-bosqich
-          : rank === 4
-            ? "#8BC34A" // 4-bosqich
-            : rank === 5
-              ? "#FF5722" // 5-bosqich
-              : "#fff"; // Default rang
-  console.log(data)
+      ? "#C0C8E0" // 2-bosqich
+      : rank === 3
+      ? "#D5B678" // 3-bosqich
+      : rank === 4
+      ? "#8BC34A" // 4-bosqich
+      : rank === 5
+      ? "#FF5722" // 5-bosqich
+      : "#fff"; // Default rang
   return (
     <div className="leaderboard-card">
       <div className="leaderboard-card-box">
@@ -466,10 +474,7 @@ const LeaderboardCard = ({ title, data, date, loadingTop, by }) => {
             paragraph={{ rows: 5, width: "100%", height: "40px" }}
           />
         ) : (
-
-
           <>
-
             {/* `/portfolio/${record.portfolio_id}?t=${timestamp}` */}
             {data?.map((item, index) => (
               <Link
@@ -498,7 +503,9 @@ const LeaderboardCard = ({ title, data, date, loadingTop, by }) => {
                         ? `${item?.portfolio_name.substring(0, 19)}...`
                         : item?.portfolio_name}
                     </p>
-                    <p className="leaderboard-creator">{by} {item?.user_name} </p>
+                    <p className="leaderboard-creator">
+                      {by} {item?.user_name}{" "}
+                    </p>
                   </div>
                   {/* {
                     chartData &&
@@ -515,7 +522,7 @@ const LeaderboardCard = ({ title, data, date, loadingTop, by }) => {
           </>
         )}
       </ul>
-    </div >
+    </div>
   );
 };
 
