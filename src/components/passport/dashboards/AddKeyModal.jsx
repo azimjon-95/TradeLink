@@ -29,11 +29,13 @@ function AddKeyModal({ setOpenModal, currentLanguage }) {
       support: "Support",
       helpText:
         "If you encounter any issues, please don't hesitate to reach out to our support team.",
-      guide: "this guide on how to open a Binance Futures account",
+      guide: "Check out this guide on how to open a Binance Futures account",
       completeGuide: "complete guide",
+      forMore: "for more details",
+      additionally: "Additionally, you can explore the"
     },
     ru: {
-      step1: "Создайте свою учетную запись Binance Futures.",
+      step1: "Создайте свою учетную запись Binance Фьючерсы.",
       step2: "Создайте API-ключ Binance",
       description1:
         "Чтобы получить доступ к рынку, убедитесь, что ваша учетная запись Binance имеет активную учетную запись фьючерсов.",
@@ -49,8 +51,10 @@ function AddKeyModal({ setOpenModal, currentLanguage }) {
       support: "Поддержка",
       helpText:
         "Если у вас возникнут проблемы, не стесняйтесь обращаться в нашу службу поддержки.",
-      guide: "это руководство о том, как открыть учетную запись Binance Futures",
+      guide: "Посмотрите это руководство о том, как открыть учетную запись Binance Фьючерсы",
       completeGuide: "полное руководство",
+      forMore: "для получения дополнительной информации",
+      additionally: "Дополнительно вы можете изучить"
     },
     de: {
       step1: "Erstellen Sie Ihr Binance Futures-Konto.",
@@ -69,8 +73,10 @@ function AddKeyModal({ setOpenModal, currentLanguage }) {
       support: "Unterstützung",
       helpText:
         "Wenn Sie auf Probleme stoßen, zögern Sie bitte nicht, sich an unser Support-Team zu wenden.",
-      guide: "diese Anleitung, wie man ein Binance Futures-Konto eröffnet",
+      guide: "Schauen Sie sich an diese Anleitung, wie man ein Binance Futures-Konto eröffnet",
       completeGuide: "komplette Anleitung",
+      forMore: "für weitere Details",
+      additionally: "Zusätzlich können Sie erkunden"
     },
     es: {
       step1: "Crea tu cuenta de Binance Futures.",
@@ -89,8 +95,10 @@ function AddKeyModal({ setOpenModal, currentLanguage }) {
       support: "Soporte",
       helpText:
         "Si encuentras algún problema, no dudes en ponerte en contacto con nuestro equipo de soporte.",
-      guide: "esta guía sobre cómo abrir una cuenta de Binance Futures",
+      guide: "Consulta esta guía sobre cómo abrir una cuenta de Binance Futures",
       completeGuide: "guía completa",
+      forMore: "para más detalles",
+      additionally: "Además, puedes explorar"
     },
   };
 
@@ -111,7 +119,6 @@ function AddKeyModal({ setOpenModal, currentLanguage }) {
                 <h3>{currentText.step1}</h3>
                 <p>{currentText.description1}</p>
                 <p>
-                  Check out{" "}
                   <Link to={"/"}>{currentText.guide}</Link>
                 </p>
               </div>
@@ -125,8 +132,8 @@ function AddKeyModal({ setOpenModal, currentLanguage }) {
               </div>
             </div>
             <p>
-              Additionally, you can explore the{" "}
-              <Link to={"/"}>{currentText.completeGuide}</Link> for more details.
+              {currentText.additionally}{" "}
+              <Link to={"/"}>{currentText.completeGuide}</Link>{" "} {currentText.forMore}
             </p>
           </div>
 
