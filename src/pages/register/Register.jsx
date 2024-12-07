@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import "./style.css";
 import { Button } from "antd";
 import { useSelector } from "react-redux";
+import { FcGoogle } from "react-icons/fc";
 import axios from "../../api";
 
 Modal.setAppElement("#root");
@@ -118,6 +119,9 @@ const SignUpModal = ({
     }
   };
 
+  const singInWithGoogle = async () =>
+    (window.location.href = "https://api.kyt.systems/auth/sign-in/glogin");
+
   return (
     <>
       <Modal
@@ -129,7 +133,11 @@ const SignUpModal = ({
         {/* Render Log In Modal */}
         {modalType === "signIn" && (
           <form onSubmit={singIn}>
-            <button className="close_modalReg" onClick={handleClose} style={{ border: 'none', background: 'none', cursor: 'pointer' }}>
+            <button
+              className="close_modalReg"
+              onClick={handleClose}
+              style={{ border: "none", background: "none", cursor: "pointer" }}
+            >
               ✖
             </button>
             <h2 className="modal-title">{subTitle.loginTitle}</h2>
@@ -148,6 +156,15 @@ const SignUpModal = ({
               {subTitle.login}
             </Button>
 
+            <p>Sign in with</p>
+            <Button
+              onClick={singInWithGoogle}
+              htmlType="button"
+              className="login-button signup-button"
+            >
+              <FcGoogle /> Google
+            </Button>
+
             <p className="footer-text">
               {subTitle.dontHaveAccount}{" "}
               <span
@@ -163,7 +180,11 @@ const SignUpModal = ({
         {/* Render Sign Up Modal */}
         {modalType === "signUp" && (
           <form onSubmit={Register}>
-            <button className="close_modalReg" onClick={handleClose} style={{ border: 'none', background: 'none', cursor: 'pointer' }}>
+            <button
+              className="close_modalReg"
+              onClick={handleClose}
+              style={{ border: "none", background: "none", cursor: "pointer" }}
+            >
               ✖
             </button>
             <h2 className="modal-title">{subTitle.signupTitle}</h2>
@@ -194,6 +215,7 @@ const SignUpModal = ({
             >
               {subTitle.signUp}
             </Button>
+
             <p className="footer-text">
               {subTitle.alreadyHaveAccount}{" "}
               <span

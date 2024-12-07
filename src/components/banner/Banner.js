@@ -6,6 +6,8 @@ import AOS from "aos";
 import { Link } from "react-router-dom";
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
+
 import bt_binance from "../../assets/banner/supporters.png";
 import bt_passport from "../../assets/banner/my_img1.png";
 import bigX from "../../assets/banner/bigX.png";
@@ -22,6 +24,14 @@ import { reviewsData, faqData, translations, blogPosts } from "./Lang";
 import "aos/dist/aos.css"; // AOS uslublarini import qilish
 
 const Banner = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    const new_token = new URLSearchParams(location.search).get("token");
+    if (new_token) {
+      localStorage.setItem("access_token", new_token);
+    }
+  }, [location]);
 
   const dispatch = useDispatch();
   const [selectedReview, setSelectedReview] = useState(null);
@@ -117,7 +127,6 @@ const Banner = () => {
     setActiveKey(activeKey === key ? null : key);
   };
 
-
   useEffect(() => {
     AOS.init({
       duration: 900, // Animatsiya davomiyligi (ms)
@@ -150,7 +159,6 @@ const Banner = () => {
           <img src={bt_binance} alt="" />
         </div>
         <div className="homePage__supportLogos">
-
           <div className="homePage__support-img">
             <img src={bigX} alt="" />
           </div>
@@ -166,7 +174,6 @@ const Banner = () => {
       {/* passport */}
       <div data-aos="zoom-in-up" className="marketplace">
         <div className="marketplace-passporte">
-
           <div className="marketplace-container">
             <p className="marketplace-subtitle_pass">
               {subTitle.passportSubtitle}
@@ -275,7 +282,13 @@ const Banner = () => {
               />
               <br />
               {!token && (
-                <button style={{ marginTop: "6px" }} onClick={() => dispatch(setModalType("signUp"))} className="btn referral-btn">{subTitle.signUp}</button>
+                <button
+                  style={{ marginTop: "6px" }}
+                  onClick={() => dispatch(setModalType("signUp"))}
+                  className="btn referral-btn"
+                >
+                  {subTitle.signUp}
+                </button>
               )}
             </div>
             <div className="statistics-bar-chart">
@@ -389,7 +402,6 @@ const Banner = () => {
           ))}
         </div>
       </section>
-
     </>
   );
 };
