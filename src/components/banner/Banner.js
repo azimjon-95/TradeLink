@@ -1,28 +1,98 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./style.css";
 import "./media.css";
-import Rating from "react-rating-stars-component";
 import AOS from "aos";
-import { Link } from "react-router-dom";
-import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { BsQuestionCircle } from "react-icons/bs";
+import Frame1 from "../../assets/newBanners/Frame1.png";
+import Frame2 from "../../assets/newBanners/Frame2.png";
+import Frame3 from "../../assets/newBanners/Frame3.png";
+import Frame4 from "../../assets/newBanners/Frame4.png";
+import Frame5 from "../../assets/newBanners/Frame5.png";
 
+import okx from "../../assets/newBanners/okx.png";
+import binance from "../../assets/newBanners/binance.png";
+import byb from "../../assets/newBanners/byb.png";
+import bing from "../../assets/newBanners/bing.png";
+import bitget from "../../assets/newBanners/bitget.png";
+import htx from "../../assets/newBanners/htx.png";
+
+import ret from "../../assets/newBanners/Frame6.png";
 import bt_binance from "../../assets/banner/supporters.png";
-import bt_passport from "../../assets/banner/my_img1.png";
 import bigX from "../../assets/banner/bigX.png";
 import BitGet from "../../assets/banner/BitGet.png";
-import htx from "../../assets/banner/htx.png";
-import bt_widget from "../../assets/banner/my_img2.png";
-import avatar_img1 from "../../assets/banner/fase2.png";
-import avatar_img2 from "../../assets/banner/fase3.png";
-import avatar_img3 from "../../assets/banner/fase1.png";
-import Ellipse from "../../assets/newBanners/banner_img.png";
-import bt_indexes from "../../assets/banner/my_img3.png";
-import bt_jet from "../../assets/banner/Instagram-post.png";
-import { setModalType } from "../../context/modalType";
-import { reviewsData, faqData, translations, blogPosts } from "./Lang";
+import Ellipse from "./image2.png";
+
+import { translations } from "./Lang";
 import "aos/dist/aos.css"; // AOS uslublarini import qilish
+
+
+
+
+
+
+
+
+
+
+const translate = {
+  en: {
+    registration: "Registration",
+    weSupport: "We support",
+    addMod1: "How to add your portfolio to the rating?",
+    addMod2: "How do we measure the rating?",
+    kytreat: "Rating by",
+    monthlyTop: "Monthly Top",
+    quarterlyTop: "Quarterly Top",
+    howToAdd: "How to add your portfolio to the ranking?",
+    howWeCalculate: "How do we calculate the ranking?",
+    rank: "Rank",
+    by: "by",
+  },
+  ru: {
+    registration: "Регистрация",
+    weSupport: "Мы поддерживаем",
+    addMod1: "Как добавить свой портфель в рейтинг?",
+    addMod2: "Как мы измеряем рейтинг?",
+    addModal: 'Как добавить свой портфель в рейтинг?',
+    kytreat: "Рейтинг по",
+    monthlyTop: "Ежемесячный топ",
+    quarterlyTop: "Квартальный топ",
+    howToAdd: "Как добавить свой портфель в рейтинг?",
+    howWeCalculate: "Как мы измеряем рейтинг?",
+    rank: "Рейтинг",
+    by: "по",
+
+  },
+  es: {
+    registration: "Registro",
+    weSupport: "Apoyamos",
+    addMod1: "¿Cómo agregar su portafolio al ranking?",
+    addMod2: "¿Cómo medimos el ranking?",
+    kytreat: "Clasificación por",
+    monthlyTop: "Top Mensual",
+    quarterlyTop: "Top Trimestral",
+    howToAdd: "¿Cómo agregar tu portafolio al ranking?",
+    howWeCalculate: "¿Cómo calculamos el ranking?",
+    rank: "Clasificación",
+    by: "por",
+  },
+  de: {
+    registration: "Registrierung",
+    weSupport: "Wir unterstützen",
+    addMod1: "Wie füge ich mein Portfolio zum Ranking hinzu?",
+    addMod2: "Wie messen wir das Ranking?",
+    kytreat: "Bewertung nach",
+    monthlyTop: "Monatliches Top",
+    quarterlyTop: "Vierteljährliches Top",
+    howToAdd: "Wie füge ich mein Portfolio dem Ranking hinzu?",
+    howWeCalculate: "Wie berechnen wir das Ranking?",
+    rank: "Rang",
+    by: "von",
+  },
+};
+
 
 const Banner = () => {
   const location = useLocation();
@@ -34,99 +104,13 @@ const Banner = () => {
     }
   }, [location]);
 
-  const dispatch = useDispatch();
-  const [selectedReview, setSelectedReview] = useState(null);
-  let token = localStorage.getItem("access_token");
+
   const currentLanguage = useSelector(
     (state) => state.language.currentLanguage
   );
   const subTitle = translations[currentLanguage];
+  const t = translate[currentLanguage];
 
-  const getInitials = (name) => {
-    return name
-      .split(" ")
-      .map((word) => word[0])
-      .join("")
-      .toUpperCase();
-  };
-
-  const ReviewCard = ({ review, language, onClick }) => {
-    return (
-      <div className="review-card" onClick={() => onClick(review)}>
-        <div className="img-stor">
-          <div className="avatar-mod-image">
-            {review.image ? (
-              <img
-                src={review.image}
-                alt={`${review.name}'s avatar`}
-                className="review-avatar"
-              />
-            ) : (
-              <div className="initials-avatar">{getInitials(review.name)}</div>
-            )}
-          </div>
-          <div className="store-box">
-            <Rating
-              count={5}
-              value={review.store}
-              edit={false}
-              size={20}
-              isHalf={true}
-              activeColor="gold"
-              color="gray"
-            />
-          </div>
-        </div>
-        <h4 className="review-name">{review.name}</h4>
-        <p className="review-summary">
-          {review.text[language]?.substring(0, 100)}...
-        </p>
-      </div>
-    );
-  };
-
-  const ReviewModal = ({ review, language, onClose }) => {
-    if (!review) return null;
-
-    return (
-      <div className="modal-overlay-review" onClick={onClose}>
-        <div
-          className="modal-content-review"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <button className="close-button-review" onClick={onClose}>
-            X
-          </button>
-          <div className="modal-overlay-head">
-            <div className="modal-overlay-head-box">
-              <img
-                src={review.image}
-                alt={review.name}
-                className="review-avatar-large"
-              />
-              <h4 className="review-name-modal">{review.name}</h4>
-            </div>
-            <p className="review-date">{review.date}</p>
-          </div>
-          <p className="review-full-text">{review.text[language]}</p>
-        </div>
-      </div>
-    );
-  };
-
-  const handleCardClick = (review) => {
-    setSelectedReview(review);
-  };
-
-  const closeModal = () => {
-    setSelectedReview(null);
-  };
-
-  const [activeKey, setActiveKey] = useState(null);
-
-  const togglePanel = (key) => {
-    setActiveKey(activeKey === key ? null : key);
-  };
 
   useEffect(() => {
     AOS.init({
@@ -135,6 +119,25 @@ const Banner = () => {
       once: true, // Faqat bir marta animatsiya ishlashi
     });
   }, []);
+
+
+
+  const data = {
+    monthly: [
+      { rank: 1, name: "A", icons: Frame1, reting: ret, org: "Kazier", score: 52.05 },
+      { rank: 2, name: "T1", icons: Frame2, reting: ret, org: "Kazier", score: 51.92 },
+      { rank: 3, name: "B7", icons: Frame3, reting: ret, org: "Kazier", score: 51.20 },
+      { rank: 4, name: "M", icons: Frame4, reting: ret, org: "Kazier", score: 40.98 },
+      { rank: 5, name: "AINATA", icons: Frame5, reting: ret, org: "MACROSMATIC", score: 39.88 },
+    ],
+    quarterly: [
+      { rank: 1, name: "A", icons: Frame1, reting: ret, org: "Kazier", score: 53.02 },
+      { rank: 2, name: "T1", icons: Frame2, reting: ret, org: "Kazier", score: 52.88 },
+      { rank: 3, name: "B7", icons: Frame3, reting: ret, org: "Kazier", score: 52.27 },
+      { rank: 4, name: "M", icons: Frame4, reting: ret, org: "Kazier", score: 41.94 },
+      { rank: 5, name: "AINATA", icons: Frame5, reting: ret, org: "MACROSMATIC", score: 38.81 },
+    ],
+  };
   return (
     <>
       <div className="homePage">
@@ -184,243 +187,92 @@ const Banner = () => {
           <div style={{ margin: "0 20px" }} className="homePage__support-img">
             <img src={BitGet} alt="" />
           </div>
-          <div className="homePage__support-img">
+          {/* <div className="homePage__support-img">
             <img src={htx} alt="" />
-          </div>
+          </div> */}
         </div>
       </div>
 
       {/* passport */}
-      <div data-aos="zoom-in-up" className="marketplace">
-        <div className="marketplace-passporte">
-          <div className="marketplace-container">
-            <p className="marketplace-subtitle_pass">
-              {subTitle.passportSubtitle}
-            </p>
-            <h1 className="marketplace-title">
-              <span role="img" aria-label="logo">
-                📊
-              </span>{" "}
-              {subTitle.passportTitle}
-            </h1>
-            <p className="marketplace-description">
-              {subTitle.passportDescription}
-            </p>
+      <div className="marketplace">
+        <h1 className="marketplace-subtitle_pass">
+          {t.kytreat} <p>KYT</p>
+        </h1>
 
-            <ul className="marketplace-benefits">
-              <li>
-                <span className="check-icon-pass">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="#333"
-                  >
-                    <path d="M20.285 2.586l-11.949 11.95-4.95-4.95-1.416 1.415 6.365 6.364 13.364-13.364z" />
-                  </svg>
-                </span>
-                {subTitle.passportBenefits[0]}
-                {/* To build greater confidence among investors. */}
-              </li>
-              <li>
-                <span className="check-icon-pass">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="#333"
-                  >
-                    <path d="M20.285 2.586l-11.949 11.95-4.95-4.95-1.416 1.415 6.365 6.364 13.364-13.364z" />
-                  </svg>
-                </span>
-                {subTitle.passportBenefits[1]}
-              </li>
-              <li>
-                <span className="check-icon-pass">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="#333"
-                  >
-                    <path d="M20.285 2.586l-11.949 11.95-4.95-4.95-1.416 1.415 6.365 6.364 13.364-13.364z" />
-                  </svg>
-                </span>
-                {subTitle.passportBenefits[2]}
-              </li>
-            </ul>
-
-            <Link to="/passport">
-              <button className="learn-more-button-passporte">
-                {subTitle.learnMore}
-              </button>
-            </Link>
-          </div>
-          <div className="marketplace-home_img">
-            <img src={bt_passport} alt="" />
-            <div className="marketplace-home_img_text">
-              <h3>Traders Passport</h3>
-            </div>
-          </div>
+        <div className="reting_btns-banner">
+          <button>< BsQuestionCircle /> {t.addMod1}</button>
+          <button><BsQuestionCircle /> {t.addMod2}</button>
         </div>
-      </div>
 
-      {/* For PRO-traders */}
-      <div className="app-container">
-        <div data-aos="zoom-in-right" className="section marketplace-section">
-          <div className="marketplace-header">
-            <span className="badge-pro-traders">
-              {subTitle.proTradersTitle}
-            </span>
+        <div className="reating_banner_conts">
+          <div className="reating_banner_box">
             <span>
-              <h2
-                className="marketplace-title"
-                dangerouslySetInnerHTML={subTitle.proTradersDescription}
-              />
-              <p className="marketplace-subtitle">{subTitle.weTake}</p>
+              <strong className="reating_banner_box_title">{t.monthlyTop}</strong>
+              <p>NOV 05 - DEC 05</p>
             </span>
-            <Link to="/traders-cabinet">
-              <button className="learn-more-btn">{subTitle.learnMore}</button>
-            </Link>
-          </div>
-          <div className="index-cards">
-            <img src={bt_indexes} alt="" />
-          </div>
-        </div>
+            <div className="reting_banner_cards">
+              {data.monthly.map((item) => (
+                <div className="card_ret-bann" key={item.rank} >
+                  <span>
+                    <p className={`${item.rank === 1 ? "item-rank" : "item-rank-circle"}`}>{item.rank}</p>
+                    <img width={28} src={item.icons} alt="" />
+                    <div className="name_reting_user">{item.name} <br /> <p>{t.by} {item.org}</p></div>
+                  </span>
 
-        <div data-aos="flip-up" className="marketplace-section-box">
-          <div className="section widget-section">
-            <div className="statistics">
-              <h2 className="widget-title">{subTitle.widgetTitle}</h2>
-              <p
-                className="widget-subtitle"
-                dangerouslySetInnerHTML={subTitle.strategy}
-              />
-              <br />
-              {!token && (
-                <button
-                  style={{ marginTop: "6px" }}
-                  onClick={() => dispatch(setModalType("signUp"))}
-                  className="btn referral-btn"
-                >
-                  {subTitle.signUp}
-                </button>
-              )}
-            </div>
-            <div className="statistics-bar-chart">
-              <img src={bt_widget} alt="" />
-            </div>
-          </div>
-
-          <div className="section referral-section">
-            <h2 className="referral-title">{subTitle.referralTitle}</h2>
-            <p className="referral-subtitle">{subTitle.commission}</p>
-            <Link to="/referral">
-              <button className="btn referral-btn"> {subTitle.function}</button>
-            </Link>
-            <div className="referral-avatars">
-              <div className="referral-avatars_box1">
-                <img src={avatar_img1} alt="" />
-              </div>
-              <div className="referral-avatars_box2">
-                <img src={avatar_img2} alt="" />
-              </div>
-              <div className="referral-avatars_box3">
-                <img src={avatar_img3} alt="" />
-              </div>
-              <div className="referral-avatars_box4">+</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Frequently Asked Questions */}
-      <div className="faq-container">
-        <h1 className="faq-title">{subTitle.often}</h1>
-        {faqData.map((item, index) => (
-          <div key={index} className="faq-card">
-            <div className="faq-header" onClick={() => togglePanel(index)}>
-              <h3 className="faq-question">{item.question[currentLanguage]}</h3>
-              <button className="faq-question-btn">
-                {activeKey === index ? <MinusOutlined /> : <PlusOutlined />}
-              </button>
-            </div>
-            {activeKey === index && (
-              <div className="faq-content">
-                <p>{item.answer[currentLanguage]}</p>
-              </div>
-            )}
-          </div>
-        ))}
-        <div className="faq-more-btn-box">
-          {!token && (
-            <button className="faq-more-btn">{subTitle.signUp}</button>
-          )}
-        </div>
-      </div>
-
-      <div className="account-container">
-        <h2 className="account-title">{subTitle.accountTitle}</h2>
-        <p>{subTitle.consider}</p>
-        <div className="reviews-container">
-          {reviewsData.map((review, index) => (
-            <ReviewCard
-              key={index}
-              review={review}
-              language={currentLanguage}
-              onClick={handleCardClick}
-            />
-          ))}
-        </div>
-        <ReviewModal
-          review={selectedReview}
-          language={currentLanguage}
-          onClose={closeModal}
-        />
-      </div>
-
-      {/* Blog */}
-      <section className="blog-section__container">
-        <h2 className="blog-section__title">{subTitle.blogTitle}</h2>
-        <p className="blog-section__subtitle">{subTitle.blogSubtitle}</p>
-        <div className="blog-section__grid">
-          {blogPosts.map((post, index) => (
-            <div key={index} className="blog-section__card">
-              <div className="blog-section__card-imageBar">
-                {!post.kyt ? (
-                  <img src={bt_jet} alt="" />
-                ) : (
-                  <div className="blog-section__section">
-                    <div className="blog-section-min">KYT</div>
-                    <h2>{post.kyt[currentLanguage]}</h2>
-                  </div>
-                )}
-              </div>
-              <div className="blog-section__card-content">
-                <div className="blog-section__card-bottom">
-                  <span className="blog-section__card-date">{post.date}</span>
-                  <div className="blog-section__card-tags">
-                    {post.tags.map((tag, i) => (
-                      <span key={i} className="blog-section__card-tag">
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
+                  <span className="name_reting_res" >
+                    <img width={28} src={item.reting} alt="" />
+                    <p> {item.score}</p>
+                  </span>
                 </div>
-                <h3 className="blog-section__card-title">
-                  {post.title[currentLanguage]}
-                </h3>
-                <p className="blog-section__card-description">
-                  {post.description[currentLanguage]}
-                </p>
-              </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          <div className="reating_banner_box">
+            <span>
+              <strong className="reating_banner_box_title">{t.quarterlyTop}</strong>
+              <p>NOV 05 - DEC 05</p>
+            </span>
+            <div className="reting_banner_cards">
+              {data.quarterly.map((item) => (
+                <div className="card_ret-bann" key={item.rank} >
+                  <span>
+                    <p className={`${item.rank === 1 ? "item-rank" : "item-rank-circle"}`}>{item.rank}</p>
+                    <img width={28} src={item.icons} alt="" />
+                    <div className="name_reting_user">{item.name} <br /> <p>{t.by} {item.org}</p></div>
+                  </span>
+
+                  <span className="name_reting_res" >
+                    <img width={28} src={item.reting} alt="" />
+                    <p> {item.score}</p>
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-      </section>
+      </div >
+
+
+      {/* Как начать */}
+      <div className=""></div>
+
+
+      {/* Мы поддерживаем */}
+      <div className="weSupport_container">
+        <h1>{t.weSupport}</h1>
+
+        <div>
+          <img width={50} src={okx} alt="" />
+          <img width={50} src={binance} alt="" />
+          <img width={50} src={byb} alt="" />
+          <img width={50} src={bing} alt="" />
+          <img width={50} src={bitget} alt="" />
+          <img width={50} src={htx} alt="" />
+        </div>
+
+        <button>{t.registration}</button>
+      </div>
     </>
   );
 };
