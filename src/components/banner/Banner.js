@@ -25,6 +25,7 @@ import bitget from "../../assets/newBanners/bitget.png";
 import htx from "../../assets/newBanners/htx.png";
 import ret from "../../assets/newBanners/Frame6.png";
 import Ellipse from "../../assets/newBanners/image2.png";
+import ForTrader from '../../components/forTrader/ForTrader'
 import "aos/dist/aos.css";
 
 import 'swiper/css';
@@ -377,7 +378,7 @@ const Banner = () => {
 
 
       {/* Как начать */}
-      <div className=""></div>
+      <ForTrader />
 
 
       {/* Мы поддерживаем */}
