@@ -4,6 +4,7 @@ import routes from "./routes/Routes";
 import AuthRoute from "./authentication/AuthRoute";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
+import ForTrader from "./components/forTrader/ForTrader";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             />
           ))}
         </Routes>
+        <ForTrader />
         <Footer />
       </div>
     </Suspense>
