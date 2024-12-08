@@ -1,13 +1,12 @@
 .homePage {
   width: 100%;
-  min-height: 100vh;
-  /* Ekranning to'liq balandligini egallaydi */
+  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 30px;
+  /* padding: 30px; */
   background: linear-gradient(to bottom, #2c1d52, #0b0b0e 20% 100%),
     url("../../assets/newBanners/bgBanner.svg") !important;
   background-size: cover;
@@ -22,6 +21,7 @@
   width: 100%;
   margin-top: 70px !important;
   display: flex;
+  padding: 30px 30px 0 30px;
   gap: 5px;
 }
 
@@ -39,18 +39,16 @@
 
 .homePage__texts {
   width: 55%;
-  height: 340px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-
 }
 
-
-
+.homePage__title_x {
+  text-wrap: nowrap;
+}
 
 .homePage__title {
-
   font-size: 55px;
   text-align: start;
   font-weight: 600 !important;
@@ -65,11 +63,206 @@
   margin-bottom: 30px;
   font-weight: 300 !important;
   z-index: 1;
-  margin-top: 20px !important;
+  margin-top: 30px !important;
+  text-align: start;
+}
+
+/* ==============Banner slider================= */
+.slider-container {
+  width: 100%;
+  padding-bottom: 30px;
+  background: #0B0B0E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+  color: rgba(255, 255, 255, 1);
+  position: relative;
+}
+
+.mySwiper {
+  width: 93%;
+  height: 300px;
+  padding: 0 40px;
+}
+
+.swiper-slide {
+  width: 90%;
+  height: 350px;
+  border-radius: 20px;
+  background: rgba(114, 65, 211, 1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px;
+
+}
+
+.swiper-slide_cert {
+  width: 90%;
+  height: 100%;
+  border-radius: 20px;
+  background: rgba(114, 65, 211, 1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px !important;
 }
 
 
+.swiper-slide-main_img {
+  background: #000203;
+  width: 100%;
+  height: 100%;
+  background-image: url("../../assets/newBanners//slide2.png");
+  background-position: center -65px;
+  background-repeat: no-repeat;
+  background-size: 59%;
+  border-radius: 20px;
+}
 
+.swiper-slide-main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.simple-btn {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  z-index: 3;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.simple-btn>p {
+  margin-right: 10px;
+  font-size: 13px;
+  color: #fae2ff;
+}
+
+.prev-btn {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: none;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 0.79px solid rgba(255, 255, 255, 0.4);
+  font-size: 20px;
+}
+
+.next-btn {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: none;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 0.79px solid rgba(255, 255, 255, 0.4);
+  font-size: 20px;
+}
+
+.swiper-pagination {
+  display: none !important;
+}
+
+.prev-btn:hover {
+  background-color: white;
+  color: black;
+}
+
+.next-btn:hover {
+  color: black;
+}
+
+.homeslide__left {
+  width: 35%;
+  height: 100%;
+  /* background: #000; */
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: start;
+}
+
+.homeslide__left>div>h1 {
+  text-align: start;
+  font-weight: 500;
+  font-size: 35px;
+  margin-top: 10px;
+}
+
+.homeslide__left>div>p {
+  text-align: start;
+  font-weight: 500;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #b0a3cb;
+}
+
+.homeslide__left>a>button {
+  padding: 9px 18px;
+  border-radius: 50px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.homeslide__right {
+  width: 58%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.homeslide__right>img {
+  width: 280px;
+  height: 210px;
+  border-radius: 10px;
+}
+
+.homeslide__right_box {
+  width: 55%;
+  height: 210px;
+  padding-right: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 35px;
+}
+
+.homeslide__right_box>div {
+  width: 100%;
+  display: flex;
+}
+
+.homeslide__right_box>div>div {
+  margin: 0 5px;
+}
+
+.homeslide__right_box>div>div>svg {
+  height: 22px;
+  width: 22px;
+}
+
+.homeslide__right_box>div>p {
+  text-align: start;
+  font-size: 14px;
+}
 
 /* =============Old===================== */
 
@@ -388,9 +581,50 @@
 /* ===================== */
 .weSupport_container {
   width: 100%;
+  height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 20px;
+  gap: 50px;
+  margin-top: 50px;
+}
+
+.weSupport_container>div {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.weSupport_container>button {
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-size: 17px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(90deg, #35009E 0%, #8F41D3 51.9%, #CD11EE 100%);
+}
+
+.weSupport_container>button:hover {
+  background: linear-gradient(90deg, #8F41D3 0%, #CD11EE 51.9%, #35009E 100%);
+}
+
+/* ========Our tariffs======= */
+
+.ourTariffs {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 40px;
+
+  background: linear-gradient(to bottom, #0b0b0e, #0b0b0e 20% 100%),
+    url("../../assets/newBanners/bgBanner.svg") !important;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-blend-mode: overlay;
 }
