@@ -1,11 +1,12 @@
 .forTrader {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background: linear-gradient(to bottom, #2c1d52, #0b0b0e 50% 100%),
     url("../../assets/newBanners/bgBanner.svg") !important;
   background-size: cover;
   background-position: center;
   padding: 0 3%;
+  padding-bottom: 6%;
   overflow: hidden;
 }
 
@@ -183,7 +184,7 @@
 
 /* Tugma */
 .create-account-button {
-  margin-top: 20px;
+  margin-top: 50px;
   padding: 16px 32px;
   background: linear-gradient(90deg, #35009e 0%, #8f41d3 51.9%, #cd11ee 100%);
   color: white;

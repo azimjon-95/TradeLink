@@ -7,7 +7,7 @@ import { FaCheck } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 
 import axios from "../../../api";
-import binance from "../../../assets/ed_khan/binance_rounded.svg";
+// import binance from "../../../assets/ed_khan/binance_rounded.svg";
 import avatar from "../../../assets/ed_khan/avatar.png";
 import ret from "../../../assets/ed_khan/ret.svg";
 import InfoModal from "./InfoModal";
@@ -38,13 +38,11 @@ const Leaderboard = () => {
     ),
   });
 
-
   const [showInactive, setShowInactive] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loadingTop, setLoadingTop] = useState(true);
   const [portfolios, setPortfolios] = useState([]);
   const [leaderboardData, setLeaderboardData] = useState(null);
-
 
   const [page, setPage] = useState(0);
 
@@ -115,7 +113,6 @@ const Leaderboard = () => {
     setIsModalOpen(false);
   };
 
-
   const columns = [
     {
       title: subTitle.rank,
@@ -150,7 +147,7 @@ const Leaderboard = () => {
       render: (_, record) => (
         <div className="row-rating-box">
           <div className="row-rating-image">
-            <img width={30} src={binance} alt="" preview={"0"} />
+            {/* <img width={30} src={binance} alt="" preview={"0"} /> */}
             <img
               width={30}
               className="row-rating-image-avatar"
@@ -284,16 +281,12 @@ const Leaderboard = () => {
     },
   ];
 
-
-
   const handlePageChange = (page) => {
     setCurrentPage(page);
     setPage(page);
   };
 
   const month = transMonth[currentLanguage];
-
-
 
   const options = [
     {
@@ -538,7 +531,7 @@ const LeaderboardCard = ({ title, data, date, loadingTop, by }) => {
                     >
                       {index + 1}
                     </span>
-                    <img width={30} src={binance} alt="logo" />
+                    {/* <img width={30} src={binance} alt="logo" /> */}
                     <img
                       className="leaderboard-user-avatar"
                       width={30}

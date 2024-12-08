@@ -6,8 +6,8 @@ import { Collapse } from 'antd';
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
 import { BsQuestionCircle } from "react-icons/bs";
 import { BsArrowLeftShort } from "react-icons/bs";
 import { BsArrowUpRight } from "react-icons/bs";
@@ -32,7 +32,7 @@ import bitget from "../../assets/newBanners/bitget.png";
 import htx from "../../assets/newBanners/htx.png";
 import ret from "../../assets/newBanners/Frame6.png";
 import Ellipse from "../../assets/newBanners/image2.png";
-import ForTrader from '../../components/forTrader/ForTrader'
+import ForTrader from "../../components/forTrader/ForTrader";
 import "aos/dist/aos.css";
 import { translate } from './Lang';
 import 'swiper/css';
@@ -65,12 +65,10 @@ const Banner = () => {
     }
   }, [location]);
 
-
   const currentLanguage = useSelector(
     (state) => state.language.currentLanguage
   );
   const t = translate[currentLanguage];
-
 
   useEffect(() => {
     AOS.init({
@@ -80,42 +78,106 @@ const Banner = () => {
     });
   }, []);
 
-
-
   const data = {
     monthly: [
-      { rank: 1, name: "A", icons: Frame1, reting: ret, org: "Kazier", score: 52.05 },
-      { rank: 2, name: "T1", icons: Frame2, reting: ret, org: "Kazier", score: 51.92 },
-      { rank: 3, name: "B7", icons: Frame3, reting: ret, org: "Kazier", score: 51.20 },
-      { rank: 4, name: "M", icons: Frame4, reting: ret, org: "Kazier", score: 40.98 },
-      { rank: 5, name: "AINATA", icons: Frame5, reting: ret, org: "MACROSMATIC", score: 39.88 },
+      {
+        rank: 1,
+        name: "A",
+        icons: Frame1,
+        reting: ret,
+        org: "Kazier",
+        score: 52.05,
+      },
+      {
+        rank: 2,
+        name: "T1",
+        icons: Frame2,
+        reting: ret,
+        org: "Kazier",
+        score: 51.92,
+      },
+      {
+        rank: 3,
+        name: "B7",
+        icons: Frame3,
+        reting: ret,
+        org: "Kazier",
+        score: 51.2,
+      },
+      {
+        rank: 4,
+        name: "M",
+        icons: Frame4,
+        reting: ret,
+        org: "Kazier",
+        score: 40.98,
+      },
+      {
+        rank: 5,
+        name: "AINATA",
+        icons: Frame5,
+        reting: ret,
+        org: "MACROSMATIC",
+        score: 39.88,
+      },
     ],
     quarterly: [
-      { rank: 1, name: "A", icons: Frame1, reting: ret, org: "Kazier", score: 53.02 },
-      { rank: 2, name: "T1", icons: Frame2, reting: ret, org: "Kazier", score: 52.88 },
-      { rank: 3, name: "B7", icons: Frame3, reting: ret, org: "Kazier", score: 52.27 },
-      { rank: 4, name: "M", icons: Frame4, reting: ret, org: "Kazier", score: 41.94 },
-      { rank: 5, name: "AINATA", icons: Frame5, reting: ret, org: "MACROSMATIC", score: 38.81 },
+      {
+        rank: 1,
+        name: "A",
+        icons: Frame1,
+        reting: ret,
+        org: "Kazier",
+        score: 53.02,
+      },
+      {
+        rank: 2,
+        name: "T1",
+        icons: Frame2,
+        reting: ret,
+        org: "Kazier",
+        score: 52.88,
+      },
+      {
+        rank: 3,
+        name: "B7",
+        icons: Frame3,
+        reting: ret,
+        org: "Kazier",
+        score: 52.27,
+      },
+      {
+        rank: 4,
+        name: "M",
+        icons: Frame4,
+        reting: ret,
+        org: "Kazier",
+        score: 41.94,
+      },
+      {
+        rank: 5,
+        name: "AINATA",
+        icons: Frame5,
+        reting: ret,
+        org: "MACROSMATIC",
+        score: 38.81,
+      },
     ],
   };
-
-
 
   return (
     <>
       <div className="homePage">
         <header className="homePage__header">
-
           <div className="homePage__texts">
-            <h1 className="homePage__title">
-              {t.theMost}
-            </h1>
-            <h1 style={{ color: "#7241d3" }} className="homePage__title homePage__title_x">
+            <h1 className="homePage__title">{t.theMost}</h1>
+            <h1
+              style={{ color: "#7241d3" }}
+              className="homePage__title homePage__title_x"
+            >
               {t.monitoring}
             </h1>
-            <p className="homePage__subtitle">
-              {t.global}
-            </p>
+            <p className="homePage__subtitle">{t.global}</p>
           </div>
 
           <div className="homePage__images">
@@ -124,7 +186,6 @@ const Banner = () => {
         </header>
 
         <div className="slider-container">
-
           <Swiper
             slidesPerView={1}
             spaceBetween={30}
@@ -155,7 +216,6 @@ const Banner = () => {
               </button>
             </div>
 
-
             <SwiperSlide className="swiper-slide">
               <div className="swiper-slide-main">
                 <div className="homeslide__left">
@@ -171,18 +231,31 @@ const Banner = () => {
                 <div className="homeslide__right">
                   <img src={my_img1} alt="" />
                   <div className="homeslide__right_box">
-                    <div><div><BsCheck2 /></div> <p>{t.passportBenefits[0]}</p></div>
-                    <div><div><BsCheck2 /></div> <p>{t.passportBenefits[1]}</p></div>
-                    <div><div><BsCheck2 /></div> <p>{t.passportBenefits[2]}</p></div>
+                    <div>
+                      <div>
+                        <BsCheck2 />
+                      </div>{" "}
+                      <p>{t.passportBenefits[0]}</p>
+                    </div>
+                    <div>
+                      <div>
+                        <BsCheck2 />
+                      </div>{" "}
+                      <p>{t.passportBenefits[1]}</p>
+                    </div>
+                    <div>
+                      <div>
+                        <BsCheck2 />
+                      </div>{" "}
+                      <p>{t.passportBenefits[2]}</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </SwiperSlide>
 
             <SwiperSlide className="swiper-slide_cert">
-              <div className="swiper-slide-main_img">
-
-              </div>
+              <div className="swiper-slide-main_img"></div>
             </SwiperSlide>
 
             <SwiperSlide className="swiper-slide">
@@ -200,9 +273,24 @@ const Banner = () => {
                 <div className="homeslide__right">
                   <img src={my_img1} alt="" />
                   <div className="homeslide__right_box">
-                    <div><div><BsCheck2 /></div> <p>{t.passportBenefits[0]}</p></div>
-                    <div><div><BsCheck2 /></div> <p>{t.passportBenefits[1]}</p></div>
-                    <div><div><BsCheck2 /></div> <p>{t.passportBenefits[2]}</p></div>
+                    <div>
+                      <div>
+                        <BsCheck2 />
+                      </div>{" "}
+                      <p>{t.passportBenefits[0]}</p>
+                    </div>
+                    <div>
+                      <div>
+                        <BsCheck2 />
+                      </div>{" "}
+                      <p>{t.passportBenefits[1]}</p>
+                    </div>
+                    <div>
+                      <div>
+                        <BsCheck2 />
+                      </div>{" "}
+                      <p>{t.passportBenefits[2]}</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -231,19 +319,31 @@ const Banner = () => {
         <div className="reating_banner_conts">
           <div className="reating_banner_box">
             <span>
-              <strong className="reating_banner_box_title">{t.monthlyTop}</strong>
+              <strong className="reating_banner_box_title">
+                {t.monthlyTop}
+              </strong>
               <p>NOV 05 - DEC 05</p>
             </span>
             <div className="reting_banner_cards">
               {data.monthly.map((item) => (
-                <div className="card_ret-bann" key={item.rank} >
+                <div className="card_ret-bann" key={item.rank}>
                   <span>
-                    <p className={`${item.rank === 1 ? "item-rank" : "item-rank-circle"}`}>{item.rank}</p>
+                    <p
+                      className={`${item.rank === 1 ? "item-rank" : "item-rank-circle"
+                        }`}
+                    >
+                      {item.rank}
+                    </p>
                     <img width={28} src={item.icons} alt="" />
-                    <div className="name_reting_user">{item.name} <br /> <p>{t.by} {item.org}</p></div>
+                    <div className="name_reting_user">
+                      {item.name} <br />{" "}
+                      <p>
+                        {t.by} {item.org}
+                      </p>
+                    </div>
                   </span>
 
-                  <span className="name_reting_res" >
+                  <span className="name_reting_res">
                     <img width={28} src={item.reting} alt="" />
                     <p> {item.score}</p>
                   </span>
@@ -254,19 +354,31 @@ const Banner = () => {
 
           <div className="reating_banner_box">
             <span>
-              <strong className="reating_banner_box_title">{t.quarterlyTop}</strong>
+              <strong className="reating_banner_box_title">
+                {t.quarterlyTop}
+              </strong>
               <p>NOV 05 - DEC 05</p>
             </span>
             <div className="reting_banner_cards">
               {data.quarterly.map((item) => (
-                <div className="card_ret-bann" key={item.rank} >
+                <div className="card_ret-bann" key={item.rank}>
                   <span>
-                    <p className={`${item.rank === 1 ? "item-rank" : "item-rank-circle"}`}>{item.rank}</p>
+                    <p
+                      className={`${item.rank === 1 ? "item-rank" : "item-rank-circle"
+                        }`}
+                    >
+                      {item.rank}
+                    </p>
                     <img width={28} src={item.icons} alt="" />
-                    <div className="name_reting_user">{item.name} <br /> <p>{t.by} {item.org}</p></div>
+                    <div className="name_reting_user">
+                      {item.name} <br />{" "}
+                      <p>
+                        {t.by} {item.org}
+                      </p>
+                    </div>
                   </span>
 
-                  <span className="name_reting_res" >
+                  <span className="name_reting_res">
                     <img width={28} src={item.reting} alt="" />
                     <p> {item.score}</p>
                   </span>
@@ -275,12 +387,10 @@ const Banner = () => {
             </div>
           </div>
         </div>
-      </div >
-
+      </div>
 
       {/* Как начать */}
       <ForTrader />
-
 
       {/* Мы поддерживаем */}
       <div className="weSupport_container">
@@ -297,7 +407,6 @@ const Banner = () => {
 
         <button>{t.registration}</button>
       </div>
-
 
       {/* Наши тарифы */}
       <div className="ourTariffs">

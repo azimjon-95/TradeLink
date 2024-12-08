@@ -1,19 +1,20 @@
 import React from "react";
 import "./ForTrader.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import rightImg from "./image.png";
+import { langText } from "./lang";
 
 function ForTrader() {
+  const lang = useSelector((state) => state.language.currentLanguage);
   return (
     <div className="forTrader">
       <div className="forTrader_top">
         <div className="forTrader_top_left">
-          <p>Для ПРО-трейдеров</p>
-          <h1>
-            Разместите свою стратегию на KYT чтобы привлечь новых клиентов
-          </h1>
-          <p>Мы заботимся обо всем остальном с инвестором.</p>
-          <Link to={"/"}>Узнать больше</Link>
+          <p>{langText[lang].subtitle}</p>
+          <h1>{langText[lang].title}</h1>
+          <p>{langText[lang].text}</p>
+          <Link to={"/"}>{langText[lang].button}</Link>
         </div>
         <div className="forTrader_top_rigth">
           <img src={rightImg} alt="photo" />
@@ -21,7 +22,7 @@ function ForTrader() {
       </div>
 
       <div className="forTrader_bottom">
-        <h2 className="forTrader_bottom_caption">Как начать</h2>
+        <h2 className="forTrader_bottom_caption">{langText[lang].caption}</h2>
         <div className="forTrader_bottom_steps">
           <div className="forTrader_bottom_step">
             <div className="forTrader_bottom_step-icon">
@@ -78,7 +79,7 @@ function ForTrader() {
                 </defs>
               </svg>
             </div>
-            <p className="step-description">Создать аккаунт на KYT</p>
+            <p className="step-description">{langText[lang].step_1}</p>
           </div>
           <div className="forTrader_bottom_step">
             <div className="forTrader_bottom_step-icon">
@@ -173,7 +174,7 @@ function ForTrader() {
                 </defs>
               </svg>
             </div>
-            <p className="step-description">Оплатить подписку</p>
+            <p className="step-description">{langText[lang].step_2}</p>
           </div>
           <div className="forTrader_bottom_step">
             <div className="forTrader_bottom_step-icon">
@@ -230,12 +231,12 @@ function ForTrader() {
                 </defs>
               </svg>
             </div>
-            <p className="step-description">
-              Подключить API от торгового счёта
-            </p>
+            <p className="step-description">{langText[lang].step_3}</p>
           </div>
         </div>
-        <button className="create-account-button">Создать аккаунт</button>
+        <button className="create-account-button">
+          {langText[lang].createAccBTn}
+        </button>
       </div>
     </div>
   );
