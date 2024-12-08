@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./style.css";
 import { CgMenuGridO } from "react-icons/cg";
 import { Popover, Button, message } from "antd";
-import {
-  LogoutOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { IoMenu } from "react-icons/io5";
 import { IoChevronDown, IoChevronUpOutline } from "react-icons/io5";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -61,7 +58,8 @@ function Navbar() {
     passportDescription,
     login,
     signup,
-    profile
+    profile,
+    logoutBtn,
   } = translations[currentLanguage] || translations.en;
 
   // Hozirgi tilni o'qish
@@ -234,10 +232,10 @@ function Navbar() {
     const linksToSet = mainPageRoutes.includes(path)
       ? linkOptions["/"]
       : isUserRoute || isPortfolioRoute
-        ? passportLinks
-        : passportOpenRoutes.includes(path)
-          ? passportLinks
-          : linkOptions[path] || linkOptions.default;
+      ? passportLinks
+      : passportOpenRoutes.includes(path)
+      ? passportLinks
+      : linkOptions[path] || linkOptions.default;
 
     setLinks(linksToSet);
   }, [
@@ -283,7 +281,6 @@ function Navbar() {
     }
   };
 
-
   const popoverContent = (
     <div className="popoverContent">
       <Link to={`/user/${payload?.user_id}`}>
@@ -292,7 +289,7 @@ function Navbar() {
         </Button>
       </Link>
       <Button onClick={handleLogout} type="danger">
-        <LogoutOutlined /> {signup}
+        <LogoutOutlined /> {logoutBtn}
       </Button>
     </div>
   );
@@ -315,7 +312,6 @@ function Navbar() {
       </Button>
     </div>
   );
-
 
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -341,10 +337,11 @@ function Navbar() {
         backgroundColor: isScrolled ? "#d4d4d489" : "#fff",
         backdropFilter: isScrolled ? "blur(10px)" : "none",
         transition: "background-color 0.3s ease, backdrop-filter 0.3s ease",
-        overflow: isSticky ? "start" : "hidden"
+        overflow: isSticky ? "start" : "hidden",
       }}
-      className={`navbar_container ${isProductDashboard ? "navbar_static" : "navbar_sticky"
-        }`}
+      className={`navbar_container ${
+        isProductDashboard ? "navbar_static" : "navbar_sticky"
+      }`}
     >
       <div className="nav_links-box">
         <Link to="/" onClick={() => handleClick("/")}>
@@ -463,12 +460,10 @@ function Navbar() {
         </div>
       )}
 
-
       {/* Media modal */}
       <div
         className={`media_modal-container ${isMediaModalOpen ? "open" : ""}`}
       >
-
         <div style={{ marginBottom: "10px" }} className="media_modal-lang">
           <FiX onClick={() => setIsMediaModalOpen(false)} />
         </div>
@@ -542,10 +537,9 @@ function Navbar() {
           )}
         </div>
 
-
         <div className="userProfileName media_modal_userInfo">
           <div className="userProfileName_left">
-            {token &&
+            {token && (
               <Popover
                 content={popoverContentMobile}
                 trigger="click"
@@ -559,15 +553,16 @@ function Navbar() {
                 />
                 <b>{payload?.user}</b>
               </Popover>
-            }
+            )}
           </div>
           <LanguageSwitcher />
         </div>
       </div>
 
       <div
-        className={`close-modal-signup ${isModalSinUp && "close-modal-signup-open"
-          }`}
+        className={`close-modal-signup ${
+          isModalSinUp && "close-modal-signup-open"
+        }`}
       >
         <SignUpModal
           setModalType={setModalType}
@@ -582,4 +577,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
