@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { FiX } from "react-icons/fi";
 import beta_formula from "../../../assets/passport/beta-formula.svg";
 import growth_rate_formula from "../../../assets/passport/growth-rate-formula.svg";
+import "./style.css";
 
 const translations = {
   en: {

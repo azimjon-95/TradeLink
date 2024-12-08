@@ -2,7 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom"
 import "./style.css";
 import { useSelector } from "react-redux";
-import logo from "../../assets/kyt.png";
+import { BsArrowUpShort } from "react-icons/bs";
+import logo from "../../assets/newBanners/mainLogo.svg";
+import footer_shadow from "../../assets/footer_shadow.png";
 
 const translations = {
   en: {
@@ -81,14 +83,13 @@ const Footer = () => {
 
   return (
     <footer className="footer">
-      <div className="footer-head">
-        <div className="footer-head-logo">
-          <img src={logo} alt="LOGO" />
-        </div>
-        <div className="footer-icons"></div>
-      </div>
-
       <div className="footer-top">
+        <div className="footer-section">
+          <div className="footer-head-logo">
+            <img src={logo} alt="LOGO" />
+          </div>
+        </div>
+
         <div className="footer-section">
           <h3 className="footer-title">{subTitle?.products}</h3>
           <ul className="footer-list">
@@ -100,6 +101,7 @@ const Footer = () => {
             </li>
           </ul>
         </div>
+
         <div className="footer-section">
           <h3 className="footer-title">{subTitle?.company}</h3>
           <ul className="footer-list">
@@ -120,12 +122,16 @@ const Footer = () => {
             </li> */}
           </ul>
         </div>
+
+        <button onClick={handleScrollToTop}><BsArrowUpShort /></button>
       </div>
 
       <div className="footer-bottom">
-        <p className="footer-disclaimer">{subTitle?.disclaimer}</p>
         <p className="footer-copyright">{subTitle?.copyright}</p>
+        <p className="footer-disclaimer">{subTitle?.disclaimer}</p>
       </div>
+
+      <img src={footer_shadow} alt="" />
     </footer>
   );
 };

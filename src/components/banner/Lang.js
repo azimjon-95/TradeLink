@@ -1,3 +1,277 @@
+export const translate = {
+    en: {
+        what_information: "What information does KYT collect?",
+        how_connect: "How to connect to KYT?",
+        what_benefits: "What benefits does KYT provide to investors?",
+        KYT_passport: "What is the KYT passport and how does it work?",
+        WhatIsKYT: "What is KYT – Know Your Trader?",
+        open_info: [
+            "KYT helps traders and investors analyze trading activity by providing key insights into market behavior.",
+            "KYT provides traders with comprehensive statistics on exchange accounts and tools for analyzing their efficiency, optimizing  strategies, and increasing investor trust.",
+            "KYT allows investors to make more informed decisions based on  data, providing transparency and trader activity statistics.",
+            "Connecting to KYT is done through integration with your exchange account. It is simple and takes just a few minutes.",
+            "KYT collects data on transactions, trading history, and profitability statistics to provide a full picture of the  trader’s activities.",
+        ],
+        faq_title: "Frequently Asked Questions (FAQ)",
+        entrepreneur: "Entrepreneur",
+        review_texts: [
+            "I found this platform incredibly useful for managing my finances. Thanks to it, I can monitor the market in real-time and make better decisions.",
+            "I am a beginner investor, and this platform has been a lifesaver for me. It provides all the necessary information to confidently take the first steps in investing.",
+            "This platform helps me save time and resources. It is perfect for business people who want to achieve maximum efficiency."
+        ],
+        leaving: "Thank you for leaving your reviews. Your feedback helps us grow.",
+        reviews: "Reviews",
+        forStart: [
+            "To build greater trust among investors",
+            "Safely upload your data with a read-only API key.",
+            "Everything you need: statistics, attracting investments, and much more."
+        ],
+        forProfi: [
+            "Connects up to 10 accounts",
+            "Participation in the public ranking",
+            "Data updates in up to 1 minute",
+            "Technical support"
+        ],
+        forTarif: [
+            "Unlimited number of accounts",
+            "Participation in the public ranking",
+            "Customized statistics page setup",
+            "Dedicated 24/7 technical support"
+        ],
+        profi: "Profi",
+        start: "Start",
+        yer: "year",
+        ourTariffs: "Our tariffs",
+        global: "A global standard for independent evaluation of traders and investments in the best strategies.",
+        theMost: "The most powerful international platform for",
+        monitoring: "crypto-monitoring",
+        registration: "Registration",
+        weSupport: "We support",
+        addMod1: "How to add your portfolio to the rating?",
+        addMod2: "How do we measure the rating?",
+        kytreat: "Rating by",
+        monthlyTop: "Monthly Top",
+        quarterlyTop: "Quarterly Top",
+        howToAdd: "How to add your portfolio to the ranking?",
+        howWeCalculate: "How do we calculate the ranking?",
+        rank: "Rank",
+        by: "by",
+        passportBenefits: [
+            "To build greater confidence among investors.",
+            "Securely upload your data with an API key that has read-only permissions.",
+            "Everything you need, from statistics to investment attraction, all in one place."
+        ],
+        passportTitle: "KYT - Know your trader's passport",
+        passportSubtitle: "Global standard for trader evaluation.",
+        learnMore: "Learn more",
+    },
+    ru: {
+        what_information: "Какую информацию KYT собирает?",
+        how_connect: "Как подключиться к KYT?",
+        what_benefits: "Какие преимущества KYT предоставляет инвесторам?",
+        KYT_passport: "Что такое паспорт KYT и как он работает?",
+        WhatIsKYT: "Что такое KYT — Знай своего трейдера?",
+        open_info: [
+            "KYT помогает трейдерам и инвесторам анализировать торговую   деятельность, предоставляя ключевую информацию о поведении на  рынке.",
+            "KYT предоставляет трейдерам всестороннюю статистику по аккаунтам  на биржах и инструменты для анализа их эффективности, оптимизации  стратегий и повышения доверия инвесторов.",
+            "KYT позволяет инвесторам принимать более обоснованные решения на основе данных, предоставляя прозрачность и статистику  деятельности трейдера.",
+            "Подключение к KYT происходит через интеграцию с вашим аккаунтом на  бирже. Это просто и занимает всего несколько минут.",
+            "KYT собирает данные о транзакциях, истории торговли и статистике доходности, чтобы предоставить полную картину деятельности  трейдера.",
+        ],
+        faq_title: "Вопросы, которые нам часто задают",
+        entrepreneur: "Предприниматель",
+        review_texts: [
+            "Я нашел эту платформу невероятно полезной для управления своими финансами. Благодаря ей я могу следить за рынком в реальном времени и принимать лучшие решения.",
+            "Я начинающий инвестор, и эта платформа стала для меня спасением. Она предоставляет всю нужную информацию, чтобы уверенно делать первые шаги в инвестировании.",
+            "Эта платформа помогает мне экономить время и ресурсы. Она идеально подходит для деловых людей, которые хотят добиться максимальной эффективности.",
+        ],
+
+        leaving: "Спасибо за оставленные отзывы. Ваша обратная связь помогает нам развиваться",
+        reviews: "Отзывы",
+        forStart: [
+            "Для создания большего доверия среди инвесторов",
+            "Безопасно загрузите ваши данные с API-ключом с правами только для чтения.",
+            "Все, что вам нужно: статистика, привлечение инвестиций и многое другое."
+        ],
+        forProfi: [
+            "Подключается до 10 счётов",
+            "Участие в публичном рейтинге",
+            "Обновление данных до 1 минуты",
+            "Тех. поддержка"
+        ],
+        forTarif: [
+            "Неограниченное количество счетов",
+            "Участие в публичном рейтинге",
+            "Индивидуальная настройка страницы статистик",
+            "Выделенная Тех поддержка 24/7"
+        ],
+        profi: "Профессионал",
+        start: "Начать",
+        yer: "год",
+        ourTariffs: "Наши тарифы",
+        global: "Глобальный стандарт независимой оценки трейдеров и инвестиций в лучшие стратегии.",
+        theMost: "Самая мощная международная платформа по",
+        monitoring: "крипто-мониторингу",
+        registration: "Регистрация",
+        weSupport: "Мы поддерживаем",
+        addMod1: "Как добавить свой портфель в рейтинг?",
+        addMod2: "Как мы измеряем рейтинг?",
+        addModal: 'Как добавить свой портфель в рейтинг?',
+        kytreat: "Рейтинг по",
+        monthlyTop: "Ежемесячный топ",
+        quarterlyTop: "Квартальный топ",
+        howToAdd: "Как добавить свой портфель в рейтинг?",
+        howWeCalculate: "Как мы измеряем рейтинг?",
+        rank: "Рейтинг",
+        by: "по",
+        passportBenefits: [
+            "Для создания большего доверия среди инвесторов.",
+            "Безопасно загрузите ваши данные с API-ключом с правами только для чтения.",
+            "Все, что вам нужно: статистика, привлечение инвестиций и многое другое."
+        ],
+        passportTitle: "KYT - Знай паспорт своего трейдера",
+        passportSubtitle: "Глобальный стандарт для оценки трейдеров.",
+        learnMore: "Узнать больше",
+    },
+    es: {
+        what_information: "¿Qué información recoge KYT?",
+        how_connect: "¿Cómo conectarse a KYT?",
+        what_benefits: "¿Qué ventajas ofrece KYT a los inversores?",
+        KYT_passport: "¿Qué es el pasaporte KYT y cómo funciona?",
+        WhatIsKYT: "¿Qué es KYT? – Conozca a su comerciante.",
+        open_info: [
+            "KYT ayuda a los comerciantes e inversores a analizar actividades comerciales proporcionando información clave sobre el  comportamiento en el mercado.",
+            "KYT ofrece a los comerciantes estadísticas completas sobre cuentas en intercambios y herramientas para analizar su eficiencia,  optimizar estrategias y aumentar la confianza de los inversores.",
+            "KYT permite a los inversores tomar decisiones más informadas basándose en datos, proporcionando transparencia y estadísticas   sobre la actividad de los comerciantes.",
+            "La conexión a KYT se realiza a través de la integración con su  cuenta de intercambio. Es simple y lleva solo unos minutos.",
+            "KYT recopila datos sobre transacciones, historial comercial y estadísticas de rentabilidad para proporcionar una imagen completa  de las actividades del comerciante.",
+        ],
+        faq_title: " Preguntas frecuentes",
+        entrepreneur: "Empresario",
+        review_texts: [
+            "Ich habe diese Plattform als unglaublich nützlich für die Verwaltung meiner Finanzen empfunden. Dank ihr kann ich den Markt in Echtzeit beobachten und bessere Entscheidungen treffen.",
+            "Ich bin ein angehender Investor, und diese Plattform war ein Rettungsanker für mich. Sie bietet alle notwendigen Informationen, um die ersten Schritte im Investieren sicher zu gehen.",
+            "Diese Plattform hilft mir, Zeit und Ressourcen zu sparen. Sie ist ideal für Geschäftsleute, die maximale Effizienz erreichen möchten.",
+        ],
+        leaving: "Gracias por tus comentarios. Tu retroalimentación nos ayuda a mejorar",
+        reviews: "Reseñas",
+        forStart: [
+            "Para generar mayor confianza entre los inversores",
+            "Carga tus datos de forma segura con una clave API de solo lectura.",
+            "Todo lo que necesitas: estadísticas, atracción de inversiones y mucho más."
+        ],
+        forProfi: [
+            "Conecta hasta 10 cuentas",
+            "Participación en el ranking público",
+            "Actualización de datos en hasta 1 minuto",
+            "Soporte técnico"
+        ],
+        forTarif: [
+            "Número ilimitado de cuentas",
+            "Participación en el ranking público",
+            "Configuración personalizada de la página de estadísticas",
+            "Soporte técnico dedicado 24/7"
+        ],
+        profi: "Profesional",
+        start: "Comenzar",
+        yer: "año",
+        ourTariffs: "Nuestros precios",
+        global: "Un estándar global para la evaluación independiente de traders e inversiones en las mejores estrategias.",
+        theMost: "La plataforma internacional más poderosa para",
+        monitoring: "monitoreo de criptomonedas",
+        registration: "Registro",
+        weSupport: "Apoyamos",
+        addMod1: "¿Cómo agregar su portafolio al ranking?",
+        addMod2: "¿Cómo medimos el ranking?",
+        kytreat: "Clasificación por",
+        monthlyTop: "Top Mensual",
+        quarterlyTop: "Top Trimestral",
+        howToAdd: "¿Cómo agregar tu portafolio al ranking?",
+        howWeCalculate: "¿Cómo calculamos el ranking?",
+        rank: "Clasificación",
+        by: "por",
+        passportBenefits: [
+            "Para generar mayor confianza entre los inversores.",
+            "Sube tus datos de forma segura con una clave API con permisos solo de lectura.",
+            "Todo lo que necesitas, desde estadísticas hasta atracción de inversiones, todo en un solo lugar."
+        ],
+        passportTitle: "KYT - Conozca el pasaporte de su trader",
+        passportSubtitle: "Estándar global para la evaluación de traders.",
+        learnMore: "Aprende más",
+    },
+    de: {
+        what_information: "Welche Informationen sammelt KYT?",
+        how_connect: "Wie verbindet man sich mit KYT?",
+        what_benefits: "Welche Vorteile bietet KYT den Investoren?",
+        KYT_passport: "Was ist der KYT-Pass und wie funktioniert er?",
+        WhatIsKYT: "Was ist KYT – Kennen Sie Ihren Händler?",
+        open_info: [
+            "KYT hilft Händlern und Investoren, Handelsaktivitäten zu  analysieren, indem sie wichtige Informationen über Marktverhalten  bereitstellen.",
+            "KYT bietet Händlern umfassende Statistiken über Börsenkonten und Tools zur Analyse ihrer Effizienz, Optimierung von Strategien und Steigerung des Vertrauens der Anlege",
+            "KYT ermöglicht es Investoren, fundiertere Entscheidungen auf der  Grundlage von Daten zu treffen, indem es Transparenz und  Statistiken über die Aktivitäten von Händlern bietet.",
+            "Die Verbindung mit KYT erfolgt über die Integration mit Ihrem  Börsenkonto. Es ist einfach und dauert nur wenige Minuten.",
+            "KYT sammelt Daten zu Transaktionen, Handelsgeschichte und Rentabilitätsstatistiken, um ein vollständiges Bild der  Handelsaktivitäten zu liefern.",
+        ],
+        faq_title: "Häufig gestellte Fragen",
+        entrepreneur: "Unternehmer",
+        review_texts: [
+            "He encontrado esta plataforma increíblemente útil para gestionar mis finanzas. Gracias a ella puedo seguir el mercado en tiempo real y tomar mejores decisiones.",
+            "Soy un inversor principiante, y esta plataforma ha sido un salvavidas para mí. Proporciona toda la información necesaria para dar los primeros pasos en la inversión con confianza.",
+            "Esta plataforma me ayuda a ahorrar tiempo y recursos. Es ideal para personas de negocios que desean lograr la máxima eficiencia.",
+        ],
+        leaving: "Vielen Dank für Ihre Bewertungen. Ihr Feedback hilft uns, uns weiterzuentwickeln.",
+        reviews: "Bewertungen",
+        forStart: [
+            "Um größeres Vertrauen bei Investoren aufzubauen",
+            "Laden Sie Ihre Daten sicher mit einem schreibgeschützten API-Schlüssel hoch.",
+            "Alles, was Sie brauchen: Statistiken, Investitionen anziehen und vieles mehr."
+        ],
+        forProfi: [
+            "Verbindung mit bis zu 10 Konten",
+            "Teilnahme an der öffentlichen Rangliste",
+            "Datenaktualisierungen innerhalb von 1 Minute",
+            "Technischer Support"
+        ],
+        forTarif: [
+            "Unbegrenzte Anzahl von Konten",
+            "Teilnahme an der öffentlichen Rangliste",
+            "Individuelle Anpassung der Statistikseite",
+            "Dedizierter 24/7 technischer Support"
+        ],
+        profi: "Professionell",
+        start: "Starten",
+        yer: "jahr",
+        ourTariffs: "Unser Tarifplan",
+        global: "Ein globaler Standard für die unabhängige Bewertung von Händlern und Investitionen in die besten Strategien.",
+        theMost: "Die stärkste internationale Plattform für",
+        monitoring: "Kryptowährungsmarktüberwachung",
+        registration: "Registrierung",
+        weSupport: "Wir unterstützen",
+        addMod1: "Wie füge ich mein Portfolio zum Ranking hinzu?",
+        addMod2: "Wie messen wir das Ranking?",
+        kytreat: "Bewertung nach",
+        monthlyTop: "Monatliches Top",
+        quarterlyTop: "Vierteljährliches Top",
+        howToAdd: "Wie füge ich mein Portfolio dem Ranking hinzu?",
+        howWeCalculate: "Wie berechnen wir das Ranking?",
+        rank: "Rang",
+        by: "von",
+        passportBenefits: [
+            "Um das Vertrauen der Investoren zu stärken.",
+            "Lade deine Daten sicher mit einem API-Schlüssel mit nur Lesezugriff hoch.",
+            "Alles, was du brauchst, von Statistiken bis zur Anwerbung von Investitionen, alles an einem Ort."
+        ],
+        passportTitle: "KYT - Kennen Sie den Pass Ihres Traders",
+        passportSubtitle: "Globaler Standard für die Bewertung von Tradern.",
+        learnMore: "Mehr erfahren",
+    },
+};
+
+
+
+
+// =============Old==============
+
 export const reviewsData = [
     {
         name: "Emily Johnson",
@@ -230,10 +504,6 @@ export const blogPosts = [
     }
 ];
 
-// Ingliz tili: ""
-// Rus tili: ""
-// Nemis tili: ""
-// Ispan tili: ""
 
 export const translations = {
     en: {

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import "./style.css";
 import "./media.css";
 import AOS from "aos";
+import { Collapse } from 'antd';
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
@@ -9,8 +10,14 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { BsQuestionCircle } from "react-icons/bs";
 import { BsArrowLeftShort } from "react-icons/bs";
+import { BsArrowUpRight } from "react-icons/bs";
 import { BsArrowRightShort } from "react-icons/bs";
 import { BsCheck2 } from "react-icons/bs";
+import InfoModal from "../passport/rating/InfoModal";
+import shadow_1 from "../../assets/banner/shadow_1.png";
+import shadow_2 from "../../assets/banner/shadow_2.png";
+import corner_1 from "../../assets/banner/corner1.png";
+import corner_2 from "../../assets/banner/corner2.png";
 import Frame1 from "../../assets/newBanners/Frame1.png";
 import Frame2 from "../../assets/newBanners/Frame2.png";
 import Frame3 from "../../assets/newBanners/Frame3.png";
@@ -27,133 +34,9 @@ import ret from "../../assets/newBanners/Frame6.png";
 import Ellipse from "../../assets/newBanners/image2.png";
 import ForTrader from '../../components/forTrader/ForTrader'
 import "aos/dist/aos.css";
-
+import { translate } from './Lang';
 import 'swiper/css';
 import 'swiper/css/pagination';
-
-
-
-// Rus:
-// Наши тарифы
-
-// Ingliz (English):
-// Our tariffs
-
-// Nemis (Deutsch):
-// Unsere Tarife
-
-// Ispan (Español):
-// Nuestras tarifas
-
-
-
-
-
-
-
-const translate = {
-  en: {
-    ourTariffs: "Our tariffs",
-    global: "A global standard for independent evaluation of traders and investments in the best strategies.",
-    theMost: "The most powerful international platform for",
-    monitoring: "crypto-monitoring",
-    registration: "Registration",
-    weSupport: "We support",
-    addMod1: "How to add your portfolio to the rating?",
-    addMod2: "How do we measure the rating?",
-    kytreat: "Rating by",
-    monthlyTop: "Monthly Top",
-    quarterlyTop: "Quarterly Top",
-    howToAdd: "How to add your portfolio to the ranking?",
-    howWeCalculate: "How do we calculate the ranking?",
-    rank: "Rank",
-    by: "by",
-    passportBenefits: [
-      "To build greater confidence among investors.",
-      "Securely upload your data with an API key that has read-only permissions.",
-      "Everything you need, from statistics to investment attraction, all in one place."
-    ],
-    passportTitle: "KYT - Know your trader's passport",
-    passportSubtitle: "Global standard for trader evaluation.",
-    learnMore: "Learn more",
-  },
-  ru: {
-    ourTariffs: "Наши тарифы",
-    global: "Глобальный стандарт независимой оценки трейдеров и инвестиций в лучшие стратегии.",
-    theMost: "Самая мощная международная платформа по",
-    monitoring: "крипто-мониторингу",
-    registration: "Регистрация",
-    weSupport: "Мы поддерживаем",
-    addMod1: "Как добавить свой портфель в рейтинг?",
-    addMod2: "Как мы измеряем рейтинг?",
-    addModal: 'Как добавить свой портфель в рейтинг?',
-    kytreat: "Рейтинг по",
-    monthlyTop: "Ежемесячный топ",
-    quarterlyTop: "Квартальный топ",
-    howToAdd: "Как добавить свой портфель в рейтинг?",
-    howWeCalculate: "Как мы измеряем рейтинг?",
-    rank: "Рейтинг",
-    by: "по",
-    passportBenefits: [
-      "Для создания большего доверия среди инвесторов.",
-      "Безопасно загрузите ваши данные с API-ключом с правами только для чтения.",
-      "Все, что вам нужно: статистика, привлечение инвестиций и многое другое."
-    ],
-    passportTitle: "KYT - Знай паспорт своего трейдера",
-    passportSubtitle: "Глобальный стандарт для оценки трейдеров.",
-    learnMore: "Узнать больше",
-  },
-  es: {
-    ourTariffs: "Nuestros precios",
-    global: "Un estándar global para la evaluación independiente de traders e inversiones en las mejores estrategias.",
-    theMost: "La plataforma internacional más poderosa para",
-    monitoring: "monitoreo de criptomonedas",
-    registration: "Registro",
-    weSupport: "Apoyamos",
-    addMod1: "¿Cómo agregar su portafolio al ranking?",
-    addMod2: "¿Cómo medimos el ranking?",
-    kytreat: "Clasificación por",
-    monthlyTop: "Top Mensual",
-    quarterlyTop: "Top Trimestral",
-    howToAdd: "¿Cómo agregar tu portafolio al ranking?",
-    howWeCalculate: "¿Cómo calculamos el ranking?",
-    rank: "Clasificación",
-    by: "por",
-    passportBenefits: [
-      "Para generar mayor confianza entre los inversores.",
-      "Sube tus datos de forma segura con una clave API con permisos solo de lectura.",
-      "Todo lo que necesitas, desde estadísticas hasta atracción de inversiones, todo en un solo lugar."
-    ],
-    passportTitle: "KYT - Conozca el pasaporte de su trader",
-    passportSubtitle: "Estándar global para la evaluación de traders.",
-    learnMore: "Aprende más",
-  },
-  de: {
-    ourTariffs: "Unser Tarifplan",
-    global: "Ein globaler Standard für die unabhängige Bewertung von Händlern und Investitionen in die besten Strategien.",
-    theMost: "Die stärkste internationale Plattform für",
-    monitoring: "Kryptowährungsmarktüberwachung",
-    registration: "Registrierung",
-    weSupport: "Wir unterstützen",
-    addMod1: "Wie füge ich mein Portfolio zum Ranking hinzu?",
-    addMod2: "Wie messen wir das Ranking?",
-    kytreat: "Bewertung nach",
-    monthlyTop: "Monatliches Top",
-    quarterlyTop: "Vierteljährliches Top",
-    howToAdd: "Wie füge ich mein Portfolio dem Ranking hinzu?",
-    howWeCalculate: "Wie berechnen wir das Ranking?",
-    rank: "Rang",
-    by: "von",
-    passportBenefits: [
-      "Um das Vertrauen der Investoren zu stärken.",
-      "Lade deine Daten sicher mit einem API-Schlüssel mit nur Lesezugriff hoch.",
-      "Alles, was du brauchst, von Statistiken bis zur Anwerbung von Investitionen, alles an einem Ort."
-    ],
-    passportTitle: "KYT - Kennen Sie den Pass Ihres Traders",
-    passportSubtitle: "Globaler Standard für die Bewertung von Tradern.",
-    learnMore: "Mehr erfahren",
-  },
-};
 
 
 const Banner = () => {
@@ -161,7 +44,19 @@ const Banner = () => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const [slider, setSlider] = useState(1); // Faol slayd raqami (1 dan boshlanadi)
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContentType, setModalContentType] = useState("");
+  const current = useSelector(
+    (state) => state.language.currentLanguage
+  );
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+  const openModal = (contentType) => {
+    setModalContentType(contentType);
+    setIsModalOpen(true);
+  };
 
   useEffect(() => {
     const new_token = new URLSearchParams(location.search).get("token");
@@ -323,9 +218,15 @@ const Banner = () => {
         </h1>
 
         <div className="reting_btns-banner">
-          <button>< BsQuestionCircle /> {t.addMod1}</button>
-          <button><BsQuestionCircle /> {t.addMod2}</button>
+          <button onClick={() => openModal("portfolio")}>< BsQuestionCircle /> {t.addMod1}</button>
+          <button onClick={() => openModal("score")}><BsQuestionCircle /> {t.addMod2}</button>
         </div>
+        <InfoModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          contentType={modalContentType}
+          currentLanguage={current}
+        />
 
         <div className="reating_banner_conts">
           <div className="reating_banner_box">
@@ -400,26 +301,199 @@ const Banner = () => {
 
       {/* Наши тарифы */}
       <div className="ourTariffs">
-        <h1>{t.ourTariffs}</h1>
+        <div className="ourTariffs_img_box">
+          <h1>{t.ourTariffs}</h1>
 
+          <div className="ourTariffs-box">
+            <div className="ourTariffs-card">
+              <div className="ourTariffs-main">
+                <h2>{t.start}</h2>
+                <p>300 USDT / {t.yer}</p>
+                <button><BsArrowUpRight /></button>
+              </div>
+              <div className="ourTariffs__right_box">
+                <div><div><BsCheck2 /></div> <p>{t.forStart[0]}</p></div>
+                <div><div><BsCheck2 /></div> <p>{t.forStart[1]}</p></div>
+                <div><div><BsCheck2 /></div> <p>{t.forStart[2]}</p></div>
+              </div>
+            </div>
+            <div className="ourTariffs-card">
+              <div className="ourTariffs-main">
+                <h2>{t.profi}</h2>
+                <p>1 500 USDT / {t.yer}</p>
+                <button><BsArrowUpRight /></button>
+              </div>
 
-        <div>
-          <img src="" alt="" />
-          <img src="" alt="" />
+              <div className="ourTariffs__right_box">
+                <div><div><BsCheck2 /></div> <p>{t.forProfi[0]}</p></div>
+                <div><div><BsCheck2 /></div> <p>{t.forProfi[1]}</p></div>
+                <div><div><BsCheck2 /></div> <p>{t.forProfi[2]}</p></div>
+                <div><div><BsCheck2 /></div> <p>{t.forProfi[3]}</p></div>
+              </div>
+            </div>
+            <div className="ourTariffs-card">
+              <div className="ourTariffs-main">
+                <h2>{t.profi}</h2>
+                <p>5 000 USDT / {t.yer}</p>
+                <button><BsArrowUpRight /></button>
+              </div>
+              <div className="ourTariffs__right_box">
+                <div><div><BsCheck2 /></div> <p>{t.forTarif[0]}</p></div>
+                <div><div><BsCheck2 /></div> <p>{t.forTarif[1]}</p></div>
+                <div><div><BsCheck2 /></div> <p>{t.forTarif[2]}</p></div>
+                <div><div><BsCheck2 /></div> <p>{t.forTarif[3]}</p></div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <img className="corner_1" src={corner_1} alt="" />
+            <img className="corner_2" src={corner_2} alt="" />
+          </div>
         </div>
+        <div>
+          <img className="shadow_1" src={shadow_1} alt="" />
+          <img className="shadow_2" src={shadow_2} alt="" />
+        </div>
+      </div>
+
+      {/* Отзывы */}
+      <div className="reviews_container">
+        <h1>{t.reviews}</h1>
+        <p>{t.leaving}</p>
+        <div className="reviews_box">
+          <div className="reviews_card">
+            <div className="review_userImage">
+              <div className="review_userImage_img">
+                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User 1" />
+              </div>
+              <div className="review_userImage_info">
+                <div>
+                  <p>{t.entrepreneur}</p>
+                  <h2>Emma</h2>
+                </div>
+                <i>@emma_business</i>
+              </div>
+            </div>
+            <p>{t.review_texts[0]}</p>
+          </div>
+
+          <div className="reviews_card">
+            <div className="review_userImage">
+              <div className="review_userImage_img">
+                <img src="https://randomuser.me/api/portraits/men/72.jpg" alt="User 2" />
+              </div>
+              <div className="review_userImage_info">
+                <div>
+                  <p>{t.entrepreneur}</p>
+                  <h2>James</h2>
+                </div>
+                <i>@james_analyst</i>
+              </div>
+            </div>
+            <p>{t.review_texts[1]}</p>
+          </div>
+
+          <div className="reviews_card">
+            <div className="review_userImage">
+              <div className="review_userImage_img">
+                <img src="https://randomuser.me/api/portraits/women/52.jpg" alt="User 3" />
+              </div>
+              <div className="review_userImage_info">
+                <div>
+                  <p>{t.entrepreneur}</p>
+                  <h2>Sophia</h2>
+                </div>
+                <i>@sophia_trader</i>
+              </div>
+            </div>
+            <p>{t.review_texts[2]}</p>
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      {/* FAQ */}
+      <div className="FAQ_container">
+        <h1>{t.faq_title}</h1>
+
+        <Collapse
+          size="middle"
+          items={[
+            {
+              key: "1",
+              label: t.WhatIsKYT,
+              children: (
+                <div className="open_info">
+                  <p>{t.open_info[0]}</p>
+                </div>
+              ),
+            },
+          ]}
+        />
+        <Collapse
+          size="middle"
+          items={[
+            {
+              key: "2",
+              label: t.KYT_passport,
+              children: (
+                <div className="open_info">
+                  <p>{t.open_info[1]}</p>
+                </div>
+              ),
+            },
+          ]}
+        />
+        <Collapse
+          size="middle"
+          items={[
+            {
+              key: "3",
+              label: t.what_benefits,
+              children: (
+                <div className="open_info">
+                  <p>{t.open_info[2]}</p>
+                </div>
+              ),
+            },
+          ]}
+        />
+        <Collapse
+          size="middle"
+          items={[
+            {
+              key: "4",
+              label: t.how_connect,
+              children: (
+                <div className="open_info">
+                  <p>{t.open_info[3]}</p>
+                </div>
+              ),
+            },
+          ]}
+        />
+        <Collapse
+          size="middle"
+          items={[
+            {
+              key: "5",
+              label: t.what_information,
+              children: (
+                <div className="open_info">
+                  <p>{t.open_info[4]}</p>
+                </div>
+              ),
+            },
+          ]}
+        />
+
       </div>
     </>
   );
 };
 
 export default Banner;
-
-
-
-
-
-
-
-
-
-
