@@ -19,12 +19,8 @@ import bitget from "../../assets/newBanners/bitget.png";
 import htx from "../../assets/newBanners/htx.png";
 
 import ret from "../../assets/newBanners/Frame6.png";
-import bt_binance from "../../assets/banner/supporters.png";
-import bigX from "../../assets/banner/bigX.png";
-import BitGet from "../../assets/banner/BitGet.png";
 import Ellipse from "./image2.png";
 
-import { translations } from "./Lang";
 import "aos/dist/aos.css"; // AOS uslublarini import qilish
 
 
@@ -108,7 +104,6 @@ const Banner = () => {
   const currentLanguage = useSelector(
     (state) => state.language.currentLanguage
   );
-  const subTitle = translations[currentLanguage];
   const t = translate[currentLanguage];
 
 
@@ -142,55 +137,23 @@ const Banner = () => {
     <>
       <div className="homePage">
         <header className="homePage__header">
-
-
-
           <div className="homePage__texts">
-            <h1 className="homePage__title">Самая мощная международная платформа по</h1>
-            <h1 style={{ color: "#7241d3" }} className="homePage__title">крипто-мониторингу</h1>
-            <p className="homePage__subtitle">Глобальный стандарт для независимой оценки трейдеров и инвестиций в лучшие стратегии.</p>
+            <h1 className="homePage__title">
+              Самая мощная международная платформа по
+            </h1>
+            <h1 style={{ color: "#7241d3" }} className="homePage__title">
+              крипто-мониторингу
+            </h1>
+            <p className="homePage__subtitle">
+              Глобальный стандарт для независимой оценки трейдеров и инвестиций
+              в лучшие стратегии.
+            </p>
           </div>
           <div className="homePage__images">
             <img src={Ellipse} alt="" />
           </div>
-
-
-
-
-          {/* <h1 className="homePage__title">{subTitle.title}</h1>
-          <p className="homePage__subtitle">{subTitle.subtitle}</p>
-          {token ? (
-            <button
-              style={{ background: "transparent", color: "transparent" }}
-              className="homePage__signUpButton"
-            ></button>
-          ) : (
-            <button
-              onClick={() => dispatch(setModalType("signUp"))}
-              className="homePage__signUpButton"
-            >
-              {subTitle.signUp}
-            </button>
-          )} */}
-
-
         </header>
-        <p className="homePage__subtitle-bottom">{subTitle.support}</p>
-        <div className="homePage__support">
-          <img src={bt_binance} alt="" />
-        </div>
 
-        <div className="homePage__supportLogos">
-          <div className="homePage__support-img">
-            <img src={bigX} alt="" />
-          </div>
-          <div style={{ margin: "0 20px" }} className="homePage__support-img">
-            <img src={BitGet} alt="" />
-          </div>
-          {/* <div className="homePage__support-img">
-            <img src={htx} alt="" />
-          </div> */}
-        </div>
       </div>
 
       {/* passport */}

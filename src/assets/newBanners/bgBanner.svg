@@ -1,36 +1,36 @@
 <svg width="1920" height="921" viewBox="0 0 1920 921" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
 <g opacity="0.4">
-<path d="M81 0L81.0001 900" stroke="#252832"/>
-<path d="M196 0L196 900" stroke="#252832"/>
-<path d="M311 0L311 900" stroke="#252832"/>
-<path d="M426 0L426 900" stroke="#252832"/>
-<path d="M541 0L541 900" stroke="#252832"/>
-<path d="M656 0L656 900" stroke="#252832"/>
-<path d="M771 0L771 900" stroke="#252832"/>
-<path d="M886 0L886 900" stroke="#252832"/>
-<path d="M1001 0L1001 900" stroke="#252832"/>
-<path d="M1116 0L1116 900" stroke="#252832"/>
-<path d="M1231 0L1231 900" stroke="#252832"/>
-<path d="M1346 0L1346 900" stroke="#252832"/>
-<path d="M1461 0L1461 900" stroke="#252832"/>
-<path d="M1576 0L1576 900" stroke="#252832"/>
-<path d="M1691 0L1691 900" stroke="#252832"/>
-<path d="M1806 0L1806 900" stroke="#252832"/>
-<path d="M-34 115L1904 115" stroke="#252832"/>
-<path d="M-34 230L1904 230" stroke="#252832"/>
-<path d="M-34 345L1904 345" stroke="#252832"/>
-<path d="M-34 460L1904 460.001" stroke="#252832"/>
-<path d="M-34 575.001L1904 575.001" stroke="#252832"/>
-<path d="M-34 690.001L1904 690.001" stroke="#252832"/>
-<path d="M-34 805.001L1904 805.001" stroke="#252832"/>
-<path d="M-34 920.001L1904 920.001" stroke="#252832"/>
+<path d="M81 0L81.0001 900" stroke="#889" />
+<path d="M196 0L196 900" stroke="#889" />
+<path d="M311 0L311 900" stroke="#889" />
+<path d="M426 0L426 900" stroke="#889" />
+<path d="M541 0L541 900" stroke="#889" />
+<path d="M656 0L656 900" stroke="#889" />
+<path d="M771 0L771 900" stroke="#889" />
+<path d="M886 0L886 900" stroke="#889" />
+<path d="M1001 0L1001 900" stroke="#889" />
+<path d="M1116 0L1116 900" stroke="#889" />
+<path d="M1231 0L1231 900" stroke="#889" />
+<path d="M1346 0L1346 900" stroke="#889" />
+<path d="M1461 0L1461 900" stroke="#889" />
+<path d="M1576 0L1576 900" stroke="#889" />
+<path d="M1691 0L1691 900" stroke="#889" />
+<path d="M1806 0L1806 900" stroke="#889" />
+<path d="M-34 115L1904 115" stroke="#889" />
+<path d="M-34 230L1904 230" stroke="#889" />
+<path d="M-34 345L1904 345" stroke="#889" />
+<path d="M-34 460L1904 460.001" stroke="#889" />
+<path d="M-34 575.001L1904 575.001" stroke="#889" />
+<path d="M-34 690.001L1904 690.001" stroke="#889" />
+<path d="M-34 805.001L1904 805.001" stroke="#889" />
+<path d="M-34 920.001L1904 920.001" stroke="#889" />
 <path d="M186 862.5H1769" stroke="black"/>
 </g>
 <rect x="-34" y="602" width="1938" height="318" fill="#ffffff"/>
 <defs>
 <linearGradient id="paint0_linear_22_686" x1="935" y1="602" x2="935"  fill="#ffffff" y2="920" gradientUnits="userSpaceOnUse">
-<stop stop-color="#0A0A0D" stop-opacity="0"/>
-<stop offset="1" stop-color="#0A0A0D"/>
+<stop stop-color="#fff" /> 
+<stop offset="1" stop-color="#fff" />
 </linearGradient>
 </defs>
 </svg>
