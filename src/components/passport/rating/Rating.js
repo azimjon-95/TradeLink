@@ -38,13 +38,11 @@ const Leaderboard = () => {
     ),
   });
 
-
   const [showInactive, setShowInactive] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loadingTop, setLoadingTop] = useState(true);
   const [portfolios, setPortfolios] = useState([]);
   const [leaderboardData, setLeaderboardData] = useState(null);
-
 
   const [page, setPage] = useState(0);
 
@@ -70,8 +68,9 @@ const Leaderboard = () => {
   // get LeaderBoard table Data
   useEffect(() => {
     setLoading(true);
-    let API = `/leaderboard/top-traders?page=${page}&show_non_active=${showInactive}&sort_type=${filterOption.value || selectedOption
-      }`;
+    let API = `/leaderboard/top-traders?page=${page}&show_non_active=${showInactive}&sort_type=${
+      filterOption.value || selectedOption
+    }`;
     axios
       .get(API)
       .then((res) => {
@@ -115,7 +114,6 @@ const Leaderboard = () => {
     setIsModalOpen(false);
   };
 
-
   const columns = [
     {
       title: subTitle.rank,
@@ -150,7 +148,7 @@ const Leaderboard = () => {
       render: (_, record) => (
         <div className="row-rating-box">
           <div className="row-rating-image">
-            <img width={30} src={binance} alt="" preview={"0"} />
+            {/* <img width={30} src={binance} alt="" preview={"0"} /> */}
             <img
               width={30}
               className="row-rating-image-avatar"
@@ -284,16 +282,12 @@ const Leaderboard = () => {
     },
   ];
 
-
-
   const handlePageChange = (page) => {
     setCurrentPage(page);
     setPage(page);
   };
 
   const month = transMonth[currentLanguage];
-
-
 
   const options = [
     {
@@ -501,14 +495,14 @@ const LeaderboardCard = ({ title, data, date, loadingTop, by }) => {
     rank === 1
       ? "#FBAF3D" // 1-bosqich
       : rank === 2
-        ? "#C0C8E0" // 2-bosqich
-        : rank === 3
-          ? "#D5B678" // 3-bosqich
-          : rank === 4
-            ? "#8BC34A" // 4-bosqich
-            : rank === 5
-              ? "#FF5722" // 5-bosqich
-              : "#fff"; // Default rang
+      ? "#C0C8E0" // 2-bosqich
+      : rank === 3
+      ? "#D5B678" // 3-bosqich
+      : rank === 4
+      ? "#8BC34A" // 4-bosqich
+      : rank === 5
+      ? "#FF5722" // 5-bosqich
+      : "#fff"; // Default rang
   return (
     <div className="leaderboard-card">
       <div className="leaderboard-card-box">
@@ -538,7 +532,7 @@ const LeaderboardCard = ({ title, data, date, loadingTop, by }) => {
                     >
                       {index + 1}
                     </span>
-                    <img width={30} src={binance} alt="logo" />
+                    {/* <img width={30} src={binance} alt="logo" /> */}
                     <img
                       className="leaderboard-user-avatar"
                       width={30}

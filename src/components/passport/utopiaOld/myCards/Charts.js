@@ -54,15 +54,13 @@ const Charts = ({
   };
 
   useEffect(() => {
-
     fetchChartData(id, selectValue)
       .then((data) => {
         setChartData(data); // Ma'lumotlarni saqlash
       })
       .catch((error) => {
         console.error("Error fetching chart data:", error); // Xatoliklarni konsolga chiqarish
-      })
-
+      });
   }, [id, selectValue]);
 
   // Data mapping optimized with useMemo
@@ -111,7 +109,6 @@ const Charts = ({
     );
   };
 
-
   const dataLine = useMemo(
     () =>
       chartData?.used_lerage?.map((item, index) => ({
@@ -123,25 +120,24 @@ const Charts = ({
     [chartData]
   );
 
-
   const usedLeverage = {
     en: "Used Leverage:",
     ru: "Используемое кредитное плечо:",
     de: "Verwendeter Hebel:",
     es: "Apalancamiento usado:",
-  }
+  };
   const longPositions = {
     en: "Long positions:",
     ru: "Длинные позиции:",
     de: "Long-Positionen:",
     es: "Posiciones largas:",
-  }
+  };
   const shortPositions = {
     en: "Short positions:",
     ru: "Короткие позиции:",
     de: "Short-Positionen:",
     es: "Posiciones cortas:",
-  }
+  };
   const CustomTooltipTwo = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
@@ -150,7 +146,9 @@ const Charts = ({
             {moment(payload[0]?.payload?.day).format("MMM D YYYY")}
           </b>
           <p>
-            <strong style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+            <strong
+              style={{ display: "flex", alignItems: "center", gap: "4px" }}
+            >
               <div
                 style={{
                   width: "8px",
@@ -164,7 +162,9 @@ const Charts = ({
             </strong>
           </p>
           <p>
-            <strong style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+            <strong
+              style={{ display: "flex", alignItems: "center", gap: "4px" }}
+            >
               <div
                 style={{
                   width: "8px",
@@ -178,7 +178,9 @@ const Charts = ({
             </strong>
           </p>
           <p>
-            <strong style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+            <strong
+              style={{ display: "flex", alignItems: "center", gap: "4px" }}
+            >
               <div
                 style={{
                   display: "inline-block",
@@ -213,13 +215,13 @@ const Charts = ({
     ru: "Максимальная просадка:",
     de: "Maximaler Rückgang:",
     es: "Pérdida máxima:",
-  }
+  };
   const drawdownDuration = {
     en: "DrawDown Duration:",
     ru: "Длительность просадки:",
     de: "Dauer des Rückgangs:",
     es: "Duración de la pérdida:",
-  }
+  };
   const CustomTooltipBottom = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
@@ -228,7 +230,9 @@ const Charts = ({
             {moment(payload[0]?.payload?.day).format("MMM D YYYY")}
           </b>
           <p>
-            <strong style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+            <strong
+              style={{ display: "flex", alignItems: "center", gap: "4px" }}
+            >
               <div
                 style={{
                   display: "inline-block",
@@ -243,7 +247,9 @@ const Charts = ({
             </strong>
           </p>
           <p>
-            <strong style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+            <strong
+              style={{ display: "flex", alignItems: "center", gap: "4px" }}
+            >
               <div
                 style={{
                   display: "inline-block",
@@ -262,7 +268,6 @@ const Charts = ({
     }
     return null;
   };
-  console.log(currentLanguage);
   // ---------------------------12A-----------------------------------
 
   const [data, setData] = useState([]); // State for fetched data
@@ -292,20 +297,17 @@ const Charts = ({
       });
   }, [id, selectValue]); // id yoki selectValue o'zgarsa, qayta ishga tushadi
 
-
-
   const formattedData = data?.map((item) => ({
     month: moment(item.timestamp).format("MMM YYYY"), // Convert timestamp to "MMM YYYY" format
     revenue: item.value,
   }));
-
 
   const plByMonthLabels = {
     en: "P/L by month:",
     ru: "Прибыль/Убыток за месяц:",
     de: "Gewinn/Verlust pro Monat:",
     es: "Ganancias/Pérdidas por mes:",
-  }
+  };
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       const revenue = payload[0].value;
@@ -317,12 +319,12 @@ const Charts = ({
           <p>
             <span
               style={{
-                display: 'inline-block',
-                width: '8px',
-                height: '8px',
-                borderRadius: '50%',
-                backgroundColor: isPositive ? 'green' : 'red',
-                marginRight: '5px'
+                display: "inline-block",
+                width: "8px",
+                height: "8px",
+                borderRadius: "50%",
+                backgroundColor: isPositive ? "green" : "red",
+                marginRight: "5px",
               }}
             ></span>
             {plByMonthLabels[currentLanguage]}
@@ -334,14 +336,12 @@ const Charts = ({
     return null;
   };
 
-
   const revenueLabels = {
     en: "Revenue by month (%)",
     ru: "Доходность: в месяц (%)",
     de: "Umsatz pro Monat (%)",
     es: "Ingresos por mes (%)",
-  }
-
+  };
 
   // const monthTranslations = {
   //   en: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
@@ -680,10 +680,19 @@ const Charts = ({
             tick={{ fontSize: 10 }} /* Smaller font size for month labels */
             axisLine={false}
             tickLine={false}
-          // tickFormatter={(monthIndex) => formatMonthYear(monthIndex, currentLanguage)}
+            // tickFormatter={(monthIndex) => formatMonthYear(monthIndex, currentLanguage)}
           />
 
-          <Bar dataKey="revenue" barSize={formattedData?.length <= 5 ? 40 : formattedData?.length <= 10 ? 30 : 20}>
+          <Bar
+            dataKey="revenue"
+            barSize={
+              formattedData?.length <= 5
+                ? 40
+                : formattedData?.length <= 10
+                ? 30
+                : 20
+            }
+          >
             {formattedData?.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
