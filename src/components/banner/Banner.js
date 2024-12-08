@@ -309,6 +309,7 @@ const Banner = () => {
           <button onClick={() => openModal("portfolio")}>< BsQuestionCircle /> {t.addMod1}</button>
           <button onClick={() => openModal("score")}><BsQuestionCircle /> {t.addMod2}</button>
         </div>
+
         <InfoModal
           isOpen={isModalOpen}
           onClose={closeModal}

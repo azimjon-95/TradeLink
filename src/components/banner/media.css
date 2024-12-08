@@ -1,346 +1,235 @@
 /* Media query uchun */
 @media screen and (max-width: 900px) {
-    .homePage {
-        background-image: none;
-        text-align: start;
-        margin-top: 30px;
+    .homePage__header {
+        flex-direction: column-reverse;
+        background: #000;
+        overflow: hidden;
     }
 
-    .homePage__signUpButton {
-        padding: 10px 24px;
+    .homePage__texts {
         width: 100%;
     }
 
-    .marketplace-home {
-        width: 97%;
-        align-items: start;
-        flex-direction: column;
-        padding: 15px;
+    .homePage__title {
+        font-size: 35px;
     }
 
-    .marketplace-home_img {
+    .slider-container {
         width: 100%;
-        height: 280px;
-        border-radius: 15px;
-    }
-
-    .marketplace-container {
-        padding: 1rem;
-        border-radius: 12px;
-        width: 100%;
-        min-width: 100%;
-    }
-
-    .marketplace-subtitle {
-        font-size: 15px;
-    }
-
-    .learn-more-button {
-        width: 100%;
-    }
-
-    .marketplace-passporte {
-        width: 97%;
-        align-items: start;
-        flex-direction: column;
-        padding: 15px;
-    }
-
-    .learn-more-button-passporte {
-        width: 100%;
-    }
-
-    .mission-container {
-        padding: 10px 0;
-    }
-
-    .marketplace-header>a {
-        width: 100%;
-    }
-
-    .learn-more-btn {
-        width: 100%;
-        padding: 10px 24px;
-    }
-
-
-    .marketplace-header {
-        width: 100%;
-        height: 100%;
-
-    }
-
-    .marketplace-title {
-        line-height: 1.333;
-    }
-
-    .badge-pro-traders {
-        margin-bottom: 15px;
-    }
-
-    .marketplace-section-box {
-        flex-direction: column;
-        height: 100%;
-        gap: 20px;
-    }
-
-    .statistics-bar-chart {
-        position: static;
-
-        width: 100%;
-        height: 230px;
+        padding-bottom: 30px;
+        background: #0B0B0E;
         display: flex;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
+        margin-top: 0px;
+        color: rgba(255, 255, 255, 1);
+        position: relative;
+    }
+
+
+
+    .swiper-slide {
+        width: 90%;
+        height: 100%;
+        border-radius: 20px;
+        background: rgba(114, 65, 211, 1);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 30px;
 
     }
 
-    .widget-section {
-        background-color: #fff4cc;
+    .swiper-slide-main {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+    }
+
+    .mySwiper {
+        width: 93%;
+        height: 100%;
+        padding: 0 40px;
+    }
+
+    .homeslide__left {
+        width: 100%;
+        margin-top: 50px;
+    }
+
+    .homeslide__left>a {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .homeslide__left>a>button {
+        width: 100%;
+        padding: 9px 18px;
+        border-radius: 50px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .homeslide__right {
         width: 100%;
         height: 100%;
         display: flex;
         justify-content: space-between;
-        overflow: hidden;
-        flex-direction: column;
+        align-items: flex-end;
+        flex-direction: column-reverse;
     }
 
-    .widget-title {
-        font-size: 1.25rem;
-    }
-
-    .referral-section {
+    .homeslide__right_box {
         width: 100%;
-    }
-
-    .referral-avatars {
-        display: flex;
-        align-items: center;
-        margin-top: 20px;
-        width: 145px;
-        height: 60px;
-    }
-
-    .faq-container {
-        width: 100%;
-    }
-
-    .faq-title {
-        font-size: 24px;
-    }
-
-    .faq-question {
-        font-size: 19px;
-    }
-
-    .faq-more-btn {
-        padding: 10px 24px;
-        width: 100%;
-    }
-
-    .account-title {
-        font-size: 1.2rem;
-        width: 100%;
-    }
-
-    .account-container {
-        padding: 10px;
-    }
-
-    .account-container>p {
-        color: #4E5562;
-        font-size: 18px;
-        margin: 25px 0;
-    }
-
-    .referral-btnAsked {
-        width: 100%;
-        padding: 9px 24px !important;
-    }
-}
-
-@media screen and (max-width: 615px) {
-    .reviews-container {
-        width: 100%;
-        display: flex;
-        /* Flex modeli qo'llash */
-        flex-wrap: wrap;
-    }
-
-    .marketplace-container {
-        width: 100%;
-
-    }
-
-    .marketplace-section {
-        flex-direction: column;
-        padding: 7px 10px;
-    }
-
-    .index-cards {
+        height: 210px;
+        padding-right: 15px;
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-right: none;
-        height: 280px;
-        width: 90%;
+        flex-direction: column;
+        gap: 35px;
+    }
+
+    .swiper-slide-main_img {
+        background: #000203;
+        width: 100%;
+        height: 200px;
+        background-image: url("../../assets/newBanners//slide2.png");
+        background-position: center 0px;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        border-radius: 20px;
+    }
+
+
+    .reting_btns-banner {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        gap: 30px;
+    }
+
+    /* Asosiy tugma uslubi */
+    .marketplace-subtitle_pass {
+        font-size: 45px;
+        font-weight: 550;
+        line-height: 84px;
+        display: flex;
+        align-items: center;
+        gap: 13px;
+    }
+
+    .reating_banner_box {
+        width: 100%;
+        min-width: 350px;
+        margin-top: 15px;
+    }
+
+
+    .reating_banner_conts {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 40px;
+    }
+
+    .marketplace {
+        padding-bottom: 30px;
+    }
+
+    .weSupport_container {
+        width: 100%;
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 50px;
+        margin-top: 50px;
+    }
+
+    .weSupport_container>div {
+        width: 80%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .ourTariffs-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .ourTariffs {
+        width: 100%;
+        height: 100%;
+        padding: 40px 0;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+        margin-top: 40px;
+        background: #000 !important;
+    }
+
+    .reviews_box {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-top: 40px;
+        flex-direction: column;
+    }
+
+    .reviews_card {
+        width: 97%;
+        height: 300px;
+        border-radius: 12px;
+        border: 1px solid #dbdbdb;
+        padding: 20px 10px;
+    }
+
+    .reviews_container>p {
+        font-size: 15px;
+        color: #0b0b0e;
+        max-width: 80%;
+        text-align: center;
+        margin-top: 14px;
     }
 }
 
-@media (max-width: 450px) {
-    .review-card {
-        display: none;
-    }
+@media screen and (max-width: 615px) {}
 
-    .marketplace-section {
-        padding: 15px 10px;
-    }
-
-
-    .review-card:nth-child(-n + 4) {
-        display: block;
-        flex: 1 1 100%;
-    }
-
-    .blog-section__card {
-        background-color: #fff;
-        border-radius: 1rem;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        width: 360px;
-        overflow: hidden;
-        transition: transform 0.3s ease;
-    }
-}
-
-.review-card {
-    flex: 0 0 auto;
-    /* Kartalar o'lchamlarini avtomatik qo'llash */
-    width: 80%;
-    /* Har bir kartaning kengligi */
-    scroll-snap-align: start;
-    /* Skrolldir boshlanishiga qarab sozlanadi */
-    transition: transform 0.3s ease-in-out;
-    /* O'zgarishlar aniq ko'rinishi */
-    margin-right: 1rem;
-    /* Kartalar orasidagi masofa */
-}
 
 
 /* Media query uchun */
 @media screen and (max-width: 450px) {
-    .homePage__header {
-        max-width: 1000px;
-        margin-top: 40px !important;
+    .homePage__images {
+        width: 320px;
+        height: 300px;
     }
 
     .homePage__title {
-        width: 100%;
-        font-size: 28px;
-        font-weight: 550 !important;
-        line-height: 35px;
-        letter-spacing: 2px;
-        margin-bottom: 15px;
-    }
-
-    .homePage__subtitle {
-        font-size: 18px;
+        font-size: 30px;
         text-align: start;
-        margin: 40px 0;
-    }
-
-
-    .homePage {
-        height: 100%;
-    }
-
-    .homePage__subtitle-bottom {
-        font-size: 1.4rem;
-    }
-
-    .homePage__support {
-        max-width: 380px;
-    }
-
-    .product-header h2 {
-        font-size: 1.7rem;
-    }
-
-    .product-header p {
-        font-size: 16px;
-    }
-
-    .marketplace-home_img {
-        width: 100%;
-        height: 270px;
-    }
-
-    .marketplace-container {
-        padding: 5px;
-    }
-
-    .marketplace-title {
-        gap: 0.5rem;
-        font-size: 1.2rem !important;
-    }
-
-    .check-icon {
-        width: 30px;
-        height: 30px
-    }
-
-    .mission-container {
-        padding: 5px 0;
-    }
-
-    .mission-content {
-        width: 90%;
-    }
-
-    .mission-content h2 {
-        color: #333;
-        font-size: 1.175rem;
-    }
-
-    .referral-title {
-        font-size: 19px;
-    }
-
-    .referral-subtitle {
-        font-size: 17px;
-        margin-top: 12px;
-    }
-
-    .referral-btn {
-        padding: 10px 24px !important;
-        width: 100%;
-        margin-top: 18px;
-    }
-
-    .faq-question {
-        font-size: 16px;
-    }
-
-    .faq-header {
-        padding: 15px;
-    }
-
-
-    .faq-content {
-        font-size: 14px;
-    }
-
-    .account-title {
-        font-size: 1.7rem;
-
-    }
-
-    .blog-section__container {
-        padding: .5rem;
+        font-weight: 600 !important;
+        line-height: 35px;
+        color: rgba(255, 255, 255, 1);
     }
 }
 
-@media screen and (max-width: 390px) {
-    .marketplace-home_img {
-        height: 240px;
-    }
-}
+@media screen and (max-width: 390px) {}

@@ -469,21 +469,6 @@
   margin-top: 20px;
 }
 
-@media screen and (max-width: 500px) {
-  .reating_banner_conts {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 10px;
-
-  }
-
-  .reating_banner_box {
-    width: 100%;
-    min-width: 200px;
-  }
-}
 
 .reating_banner_box {
   width: 40%;
