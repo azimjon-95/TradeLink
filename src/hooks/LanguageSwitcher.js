@@ -1,13 +1,13 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Popover } from "antd";
+import { Dropdown, Menu } from "antd";
+import { GrLanguage } from "react-icons/gr";
 import { setLanguage } from "../context/languageSlice";
-import Translate from "../assets/flags/translate.png";
 import RussianFlag from "../assets/flags/Flag_of_Russia.svg"; // Rossiya bayrog'i rasmi
 import EnglishFlag from "../assets/flags/Flag_of_the_United_Kingdom.svg"; // Ingliz bayrog'i rasmi
 import GermanFlag from "../assets/flags/Flag_of_Germany.svg"; // Nemis bayrog'i rasmi
 import SpanishFlag from "../assets/flags/Flag_of_Spain.svg"; // Ispan bayrog'i rasmi
-import '../index.css';
+import "../index.css";
 
 const LanguageSwitcher = () => {
     const currentLanguage = useSelector((state) => state.language.currentLanguage);
@@ -17,53 +17,56 @@ const LanguageSwitcher = () => {
         dispatch(setLanguage(lang));
     };
 
-    const languageOptions = (
-        <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            <button
-                className={currentLanguage === "ru" ? "active-language" : "active-language-nan"}
-                onClick={() => handleLanguageChange("ru")}
-                style={{ display: "flex", alignItems: "center", gap: "10px" }}
-            >
-                <img src={RussianFlag} alt="Русский" width={20} />
-                Русский
-            </button>
-            <button
-                className={currentLanguage === "en" ? "active-language" : "active-language-nan"}
-                onClick={() => handleLanguageChange("en")}
-                style={{ display: "flex", alignItems: "center", gap: "10px" }}
-            >
-                <img src={EnglishFlag} alt="English" width={20} />
-                English
-            </button>
-            <button
-                className={currentLanguage === "de" ? "active-language" : "active-language-nan"}
-                onClick={() => handleLanguageChange("de")}
-                style={{ display: "flex", alignItems: "center", gap: "10px" }}
-            >
-                <img src={GermanFlag} alt="Deutsch" width={20} />
-                Deutsch
-            </button>
-            <button
-                className={currentLanguage === "es" ? "active-language" : "active-language-nan"}
-                onClick={() => handleLanguageChange("es")}
-                style={{ display: "flex", alignItems: "center", gap: "10px" }}
-            >
-                <img src={SpanishFlag} alt="Español" width={20} />
-                Español
-            </button>
-        </div>
+    const languages = {
+        ru: { label: "Русский", flag: RussianFlag, langRes: "РУС" },
+        en: { label: "English", flag: EnglishFlag, langRes: "ENG" },
+        de: { label: "Deutsch", flag: GermanFlag, langRes: "GER" },
+        es: { label: "Español", flag: SpanishFlag, langRes: "ESP" },
+    };
+
+    const menu = (
+        <Menu>
+            {Object.entries(languages).map(([langCode, { label, flag }]) => (
+                <button
+                    key={langCode}
+                    onClick={() => handleLanguageChange(langCode)}
+                    style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
+                        padding: "10px 15px",
+                    }}
+                    className="btn_flg"
+                >
+                    <img src={flag} alt={label} width={20} />
+                    {label}
+                </button>
+            ))}
+        </Menu>
     );
 
     return (
-        <Popover content={languageOptions} trigger="hover">
-            <img
-                style={{ margin: "0 10px", cursor: "pointer" }}
-                width={28}
-                src={Translate}
-                alt="Translate"
-            />
-        </Popover>
+        <Dropdown overlayStyle={{
+            boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+            backgroundColor: "#000000",
+            borderRadius: "10px",
+        }} overlay={menu} trigger={['click']}>
+            <div
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "3px",
+                    cursor: "pointer",
+                    color: "#fff",
+                }}
+                className="GrLanguage"
+            >
+                <GrLanguage size={18} />
+                <span style={{ fontSize: "14px" }}>{languages[currentLanguage].langRes}</span>
+            </div>
+        </Dropdown>
     );
 };
 
 export default LanguageSwitcher;
+

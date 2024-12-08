@@ -14,7 +14,7 @@ import InfoModal from "./InfoModal";
 import "./style.css";
 import scoreChartSvg from "./scoreChart.svg";
 import { translations, transMonth } from "./Lang";
-const { Option } = Select;
+// const { Option } = Select;
 
 const Leaderboard = () => {
   const navigate = useNavigate();
@@ -22,19 +22,29 @@ const Leaderboard = () => {
     (state) => state.language.currentLanguage
   );
   const subTitle = translations[currentLanguage];
-
+  const [currentPage, setCurrentPage] = useState(0);
   const [isModal, setIsModal] = useState(false);
   const [selectedOption, setSelectedOption] = useState("score");
   const modalRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContentType, setModalContentType] = useState("");
 
-  const [filterOption, setFilterOption] = useState("");
+  const [filterOption, setFilterOption] = useState({
+    value: "score",
+    label: (
+      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+        {subTitle.score} <AiFillCaretDown />
+      </div>
+    ),
+  });
+
+
   const [showInactive, setShowInactive] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loadingTop, setLoadingTop] = useState(true);
   const [portfolios, setPortfolios] = useState([]);
   const [leaderboardData, setLeaderboardData] = useState(null);
+
 
   const [page, setPage] = useState(0);
 
@@ -44,6 +54,7 @@ const Leaderboard = () => {
     axios
       .get(API)
       .then((res) => {
+        console.log(res);
         for (const key in res?.data?.data) {
           let data = res?.data?.data[key].slice(0, 5);
           setLeaderboardData((prevData) => ({
@@ -59,9 +70,8 @@ const Leaderboard = () => {
   // get LeaderBoard table Data
   useEffect(() => {
     setLoading(true);
-    let API = `/leaderboard/top-traders?page=${page}&show_non_active=${showInactive}&sort_type=${
-      filterOption || selectedOption
-    }`;
+    let API = `/leaderboard/top-traders?page=${page}&show_non_active=${showInactive}&sort_type=${filterOption.value || selectedOption
+      }`;
     axios
       .get(API)
       .then((res) => {
@@ -105,6 +115,7 @@ const Leaderboard = () => {
     setIsModalOpen(false);
   };
 
+
   const columns = [
     {
       title: subTitle.rank,
@@ -112,18 +123,22 @@ const Leaderboard = () => {
       key: "rank",
       align: "center",
       render: (text, record, index) => {
+        const currentPage = page || 1; // Joriy sahifa
+        const pageSize = portfolios?.length || 25; // Har bir sahifadagi yozuvlar soni
+        const calculatedIndex = (currentPage - 1) * pageSize + index + 1; // Indexni qayta hisoblash
+
         let rankStyle = {};
-        if (index === 0) {
+        if (calculatedIndex === 1) {
           rankStyle = { backgroundColor: "#FBAF3D" };
-        } else if (index === 1) {
+        } else if (calculatedIndex === 2) {
           rankStyle = { backgroundColor: "#C0C8E0" };
-        } else if (index === 2) {
+        } else if (calculatedIndex === 3) {
           rankStyle = { backgroundColor: "#D5B678" };
         }
 
         return (
           <div style={rankStyle} className="rank-gold">
-            {index + 1}
+            {calculatedIndex}
           </div>
         );
       },
@@ -269,7 +284,7 @@ const Leaderboard = () => {
     },
   ];
 
-  const [currentPage, setCurrentPage] = useState(1);
+
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -277,6 +292,52 @@ const Leaderboard = () => {
   };
 
   const month = transMonth[currentLanguage];
+
+
+
+  const options = [
+    {
+      value: "score",
+      label: (
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          {subTitle.score} <AiFillCaretDown />
+        </div>
+      ),
+    },
+    {
+      value: "-profit",
+      label: (
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          {subTitle.return} (%) <AiFillCaretDown />
+        </div>
+      ),
+    },
+    {
+      value: "profit",
+      label: (
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          {subTitle.return} (%) <AiFillCaretUp />
+        </div>
+      ),
+    },
+    {
+      value: "-maxdd",
+      label: (
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          {subTitle.mdd} <AiFillCaretDown />
+        </div>
+      ),
+    },
+    {
+      value: "maxdd",
+      label: (
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          {subTitle.mdd} <AiFillCaretUp />
+        </div>
+      ),
+    },
+  ];
+
   return (
     <div className="leaderboard-container-box">
       <div className="leaderboard-container">
@@ -380,28 +441,16 @@ const Leaderboard = () => {
             />
             {subTitle.showNonActive}
           </label>
+
           <Select
             value={filterOption}
+            labelInValue
             onChange={(value) => setFilterOption(value)}
             style={{ width: 150 }}
-            popupMatchSelectWidth={false} // Adjust dropdown width if needed
-          >
-            <Option className="custom-option" value="score">
-              {subTitle.score} <AiFillCaretDown />
-            </Option>
-            <Option className="custom-option" value="-profit">
-              {subTitle.return} (%) <AiFillCaretDown />
-            </Option>
-            <Option className="custom-option" value="profit">
-              {subTitle.return} (%) <AiFillCaretUp />
-            </Option>
-            <Option className="custom-option" value="-maxdd">
-              {subTitle.mdd} <AiFillCaretDown />
-            </Option>
-            <Option className="custom-option" value="maxdd">
-              {subTitle.mdd} <AiFillCaretUp />
-            </Option>
-          </Select>
+            defaultValue={options[0]} // Birinchi opsiya avtomatik tanlanadi
+            popupMatchSelectWidth={false}
+            options={options} // Statik o'rniga dinamik opsiyalar ishlatiladi
+          />
         </div>
         <div className="portfolio-list">
           <div>
@@ -432,7 +481,7 @@ const Leaderboard = () => {
               <Pagination
                 current={currentPage} // Hozirgi sahifa
                 total={portfolios?.length} // Umumiy ma'lumotlar soni
-                pageSize={10} // Har bir sahifadagi elementlar soni
+                pageSize={1} // Har bir sahifadagi elementlar soni
                 onChange={handlePageChange} // Sahifa o'zgarganda chaqiriladigan funksiya
                 showSizeChanger={false} // Foydalanuvchiga sahifa o'lchamini o'zgartirish imkoniyatini berishni o'chirish
               />
@@ -452,14 +501,14 @@ const LeaderboardCard = ({ title, data, date, loadingTop, by }) => {
     rank === 1
       ? "#FBAF3D" // 1-bosqich
       : rank === 2
-      ? "#C0C8E0" // 2-bosqich
-      : rank === 3
-      ? "#D5B678" // 3-bosqich
-      : rank === 4
-      ? "#8BC34A" // 4-bosqich
-      : rank === 5
-      ? "#FF5722" // 5-bosqich
-      : "#fff"; // Default rang
+        ? "#C0C8E0" // 2-bosqich
+        : rank === 3
+          ? "#D5B678" // 3-bosqich
+          : rank === 4
+            ? "#8BC34A" // 4-bosqich
+            : rank === 5
+              ? "#FF5722" // 5-bosqich
+              : "#fff"; // Default rang
   return (
     <div className="leaderboard-card">
       <div className="leaderboard-card-box">

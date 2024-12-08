@@ -8,6 +8,7 @@ const currentMonthDe = new Date().toLocaleString('de', { month: 'long' });
 // Tarjimalar ob'ekti
 export const translations = {
     en: {
+        monthlyProfits: "Av. Monthly Profit",
         rank: "Rank",
         portfolio: "Portfolio",
         return: "Return",
@@ -30,6 +31,7 @@ export const translations = {
         by: "by",
     },
     ru: {
+        monthlyProfits: "Среднемесячная прибыль",
         rank: "Ранг",
         portfolio: "Портфель",
         return: "Доходность",
@@ -52,6 +54,7 @@ export const translations = {
         by: "по",
     },
     es: {
+        monthlyProfits: "Beneficio mensual promedio",
         rank: "Rango",
         portfolio: "Portafolio",
         return: "Retorno",
@@ -74,6 +77,7 @@ export const translations = {
         by: "por",
     },
     de: {
+        monthlyProfits: "Monatliche Durchschnittsrendite",
         rank: "Rang",
         portfolio: "Portfolio",
         return: "Rendite",
@@ -148,48 +152,4 @@ export const transMonth = {
 };
 
 console.log(transMonth);
-
-
-// import moment from "moment/moment";
-// // Tarjimalar ob'ekti
-// export const transMonth = {
-//     en: {
-//         today: moment().format("MMM DD"),
-//         startMonth: moment().startOf("month").format("MMM DD"),
-//         endMonth: moment().endOf("month").format("MMM DD"),
-//         oneMonthAgo: moment().subtract(30, "days").format("MMM DD"),
-//         fourMonthAgo: moment().subtract(90, "days").format("MMM DD"),
-//         oneYearAgo: moment().subtract(365, "days").format("MMM DD"),
-//         weeklAgo: moment().subtract(7, "days").format("MMM DD"),
-//     },
-//     ru: {
-//         today: moment().locale('ru').format("MMM DD"),
-//         startMonth: moment().startOf("month").locale('ru').format("MMM DD"),
-//         endMonth: moment().endOf("month").locale('ru').format("MMM DD"),
-//         oneMonthAgo: moment().subtract(30, "days").locale('ru').format("MMM DD"),
-//         fourMonthAgo: moment().subtract(90, "days").locale('ru').format("MMM DD"),
-//         oneYearAgo: moment().subtract(365, "days").locale('ru').format("MMM DD"),
-//         weeklAgo: moment().subtract(7, "days").locale('ru').format("MMM DD"),
-//     },
-//     es: {
-//         today: moment().locale('es').format("MMM DD"),
-//         startMonth: moment().startOf("month").locale('es').format("MMM DD"),
-//         endMonth: moment().endOf("month").locale('es').locale('es').format("MMM DD"),
-//         oneMonthAgo: moment().subtract(30, "days").locale('es').format("MMM DD"),
-//         fourMonthAgo: moment().subtract(90, "days").locale('es').format("MMM DD"),
-//         oneYearAgo: moment().subtract(365, "days").locale('es').format("MMM DD"),
-//         weeklAgo: moment().subtract(7, "days").locale('es').format("MMM DD"),
-//     },
-//     de: {
-//         today: moment().locale('de').format("MMM DD"),
-//         startMonth: moment().startOf("month").locale('de').format("MMM DD"),
-//         endMonth: moment().endOf("month").locale('de').format("MMM DD"),
-//         oneMonthAgo: moment().subtract(30, "days").locale('de').format("MMM DD"),
-//         fourMonthAgo: moment().subtract(90, "days").locale('de').format("MMM DD"),
-//         oneYearAgo: moment().subtract(365, "days").locale('de').format("MMM DD"),
-//         weeklAgo: moment().subtract(7, "days").locale('de').format("MMM DD"),
-//     },
-// };
-
-// console.log(transMonth);
 

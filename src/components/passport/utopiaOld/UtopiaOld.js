@@ -32,7 +32,7 @@ const UtopiaOldMultiLine = () => {
 
   const dispatch = useDispatch();
   const [isLite, setIsLite] = useState(false);
-  const [selectValue, setSelectValue] = useState("hour");
+  const [selectValue, setSelectValue] = useState("day");
   const [data, setData] = useState([]);
   const [topLoader, setTopLoader] = useState(false);
   const { id: baseId } = useParams();
@@ -183,7 +183,7 @@ const UtopiaOldMultiLine = () => {
           </Space>
           <div className="oldMultiLine-calendar">
             <Select
-              defaultValue="hour"
+              defaultValue="day"
               style={{
                 width: 100,
               }}

@@ -17,6 +17,7 @@ import bt_widget from "../../assets/banner/my_img2.png";
 import avatar_img1 from "../../assets/banner/fase2.png";
 import avatar_img2 from "../../assets/banner/fase3.png";
 import avatar_img3 from "../../assets/banner/fase1.png";
+import Ellipse from "../../assets/newBanners/banner_img.png";
 import bt_indexes from "../../assets/banner/my_img3.png";
 import bt_jet from "../../assets/banner/Instagram-post.png";
 import { setModalType } from "../../context/modalType";
@@ -138,7 +139,22 @@ const Banner = () => {
     <>
       <div className="homePage">
         <header className="homePage__header">
-          <h1 className="homePage__title">{subTitle.title}</h1>
+
+
+
+          <div className="homePage__texts">
+            <h1 className="homePage__title">Самая мощная международная платформа по</h1>
+            <h1 style={{ color: "#7241d3" }} className="homePage__title">крипто-мониторингу</h1>
+            <p className="homePage__subtitle">Глобальный стандарт для независимой оценки трейдеров и инвестиций в лучшие стратегии.</p>
+          </div>
+          <div className="homePage__images">
+            <img src={Ellipse} alt="" />
+          </div>
+
+
+
+
+          {/* <h1 className="homePage__title">{subTitle.title}</h1>
           <p className="homePage__subtitle">{subTitle.subtitle}</p>
           {token ? (
             <button
@@ -152,12 +168,15 @@ const Banner = () => {
             >
               {subTitle.signUp}
             </button>
-          )}
+          )} */}
+
+
         </header>
         <p className="homePage__subtitle-bottom">{subTitle.support}</p>
         <div className="homePage__support">
           <img src={bt_binance} alt="" />
         </div>
+
         <div className="homePage__supportLogos">
           <div className="homePage__support-img">
             <img src={bigX} alt="" />

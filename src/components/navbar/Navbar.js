@@ -2,21 +2,16 @@ import React, { useState, useEffect } from "react";
 import "./style.css";
 import { CgMenuGridO } from "react-icons/cg";
 import { Popover, Button, message } from "antd";
-import {
-  LogoutOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { IoMenu } from "react-icons/io5";
 import { IoChevronDown, IoChevronUpOutline } from "react-icons/io5";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiFillHome, AiOutlineFileText } from "react-icons/ai";
 import { FiX } from "react-icons/fi";
-import { FaPassport, FaStoreAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import SignUpModal from "../../pages/register/Register";
 import { setModalType as setModalType2 } from "../../context/modalType";
-
-import logo from "../../assets/kyt.png";
+import logo from "../../assets/newBanners/mainLogo.svg";
 import LanguageSwitcher from "../../hooks/LanguageSwitcher";
 import { translations } from "./Lang";
 
@@ -338,7 +333,6 @@ function Navbar() {
         top: 0,
         width: "100%",
         zIndex: 100,
-        backgroundColor: isScrolled ? "#d4d4d489" : "#fff",
         backdropFilter: isScrolled ? "blur(10px)" : "none",
         transition: "background-color 0.3s ease, backdrop-filter 0.3s ease",
         overflow: isSticky ? "start" : "hidden"
@@ -368,9 +362,6 @@ function Navbar() {
             >
               <Link to="/">
                 <div className="trade-link-header">
-                  <div className="trade-link-header-icon">
-                    <FaStoreAlt size={32} style={{ color: "#6e44ff" }} />
-                  </div>
                   <div className="trade-link-header-text">
                     <h3>KYT - Know Your Trader</h3>
                     <p>{kytDescription}</p>
@@ -379,9 +370,6 @@ function Navbar() {
               </Link>
               <Link to="/passport">
                 <div className="trade-link-header">
-                  <div className="trade-link-header-icon">
-                    <FaPassport size={32} style={{ color: "#f7b267" }} />
-                  </div>
                   <div className="trade-link-header-text">
                     <h3>{passportTitle}</h3>
                     <p>{passportDescription}</p>
