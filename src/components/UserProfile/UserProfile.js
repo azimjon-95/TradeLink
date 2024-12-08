@@ -55,9 +55,9 @@ const UserProfile = () => {
   }, []);
 
   useEffect(() => {
-    let token = localStorage.getItem("access_token");
-    // let API = "/user-profile/user/?user_id=" + id;
-    let API = "/user-profile/user/?user_id=" + token;
+    // let token = localStorage.getItem("access_token");
+    let API = "/user-profile/user/?user_id=" + id;
+    // let API = "/user-profile/user/?user_id=" + token;
     axios
       .get(API)
       .then((res) => {

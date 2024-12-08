@@ -4,6 +4,7 @@ import "./style.css";
 import { Button } from "antd";
 import { useSelector } from "react-redux";
 import { FcGoogle } from "react-icons/fc";
+import { FiX } from "react-icons/fi";
 import axios from "../../api";
 
 Modal.setAppElement("#root");
@@ -11,6 +12,9 @@ Modal.setAppElement("#root");
 // Tarjima ma'lumotlari
 const translations = {
   en: {
+    aboutPaymentWarning:
+      "Note: To register, you need to make a payment first. Please make the payment by following this link:",
+    forPayLink: "Payment",
     loginTitle: "Log in",
     email: "Email",
     password: "Password",
@@ -23,6 +27,9 @@ const translations = {
     signupTitle: "Sign up",
   },
   ru: {
+    aboutPaymentWarning:
+      "Примечание: Для регистрации вам необходимо сначала совершить оплату. Совершите оплату по следующей ссылке:",
+    forPayLink: "Оплата",
     loginTitle: "Войти",
     email: "Эл. почта",
     password: "Пароль",
@@ -35,6 +42,9 @@ const translations = {
     signupTitle: "Регистрация",
   },
   uz: {
+    aboutPaymentWarning:
+      "Eslatma: Ro‘yxatdan o‘tish uchun avval to‘lovni amalga oshiring. Quyidagi havolani bosing:",
+    forPayLink: "To‘lov",
     loginTitle: "Tizimga kirish",
     email: "Elektron pochta",
     password: "Parol",
@@ -47,6 +57,9 @@ const translations = {
     signupTitle: "Ro‘yxatdan o‘tish",
   },
   es: {
+    aboutPaymentWarning:
+      "Nota: Para registrarse, primero debe realizar un pago. Realice el pago siguiendo este enlace:",
+    forPayLink: "Pago",
     loginTitle: "Iniciar sesión",
     email: "Correo electrónico",
     password: "Contraseña",
@@ -122,6 +135,16 @@ const SignUpModal = ({
   const singInWithGoogle = async () =>
     (window.location.href = "https://api.kyt.systems/auth/sign-in/glogin");
 
+  const paymentFunction = () => {
+    axios
+      .get("/payment/pay-link")
+      .then((res) => {
+        window.open(res.data.pay_link, "_blank");
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
       <Modal
@@ -185,8 +208,16 @@ const SignUpModal = ({
               onClick={handleClose}
               style={{ border: "none", background: "none", cursor: "pointer" }}
             >
-              ✖
+              <FiX />
             </button>
+
+            <p className="about_payment_warning">
+              {subTitle.aboutPaymentWarning}{" "}
+              <button type="button" onClick={() => paymentFunction()}>
+                Payment
+              </button>
+            </p>
+
             <h2 className="modal-title">{subTitle.signupTitle}</h2>
             <label className="modal-label">{subTitle.email}</label>
             <input required name="email" type="email" className="modal-input" />
