@@ -49,7 +49,6 @@ const Leaderboard = () => {
     axios
       .get(API)
       .then((res) => {
-        console.log(res);
         for (const key in res?.data?.data) {
           let data = res?.data?.data[key].slice(0, 5);
           setLeaderboardData((prevData) => ({

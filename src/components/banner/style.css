@@ -378,7 +378,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin-top: 80px;
+  margin: 80px 0;
 }
 
 .marketplace-subtitle_pass {
@@ -789,7 +789,7 @@
 
 .reviews_card {
   width: 350px;
-  height: 300px;
+  height: 330px;
   border-radius: 12px;
   border: 1px solid #dbdbdb;
   padding: 20px 10px;
@@ -817,7 +817,8 @@
   justify-content: center;
   overflow: hidden;
   border-radius: 20px;
-  background: gray;
+  background: #ebebeb;
+
 }
 
 .review_userImage_img>img {
@@ -845,11 +846,12 @@
   color: #7241d3;
   text-align: start;
   margin-bottom: 6px;
+  text-transform: uppercase;
 }
 
-.review_userImage_info>i {
+.review_userImage_info>p {
   text-align: start;
-  font-size: 14px;
+  font-size: 13px;
   width: 100%;
   padding-left: 10px;
 }
