@@ -7,7 +7,8 @@
   background-position: center;
   padding: 0 3%;
   padding-bottom: 6%;
-  overflow: hidden;
+  overflow: hidden !important;
+  margin-top: 7vw;
 }
 
 .forTrader_top {
@@ -57,6 +58,7 @@
   justify-content: center;
   align-items: center;
   padding-top: 60px;
+  margin-top: 50px;
   img {
     width: 100%;
     height: 100%;
@@ -197,4 +199,142 @@
 
 .create-account-button:hover {
   background-color: #8e24aa;
+}
+
+.center_dot {
+  display: none;
+}
+
+/* media */
+
+@media screen and (max-width: 888px) {
+  .forTrader_top_left h1 {
+    font-size: 35px;
+  }
+
+  .forTrader_top_left {
+    padding-top: 80px;
+    a {
+      padding: 16px 15vw;
+    }
+  }
+}
+
+@media screen and (max-width: 766px) {
+  .forTrader_top {
+    flex-direction: column-reverse;
+    align-items: center;
+    padding-bottom: 50px;
+  }
+
+  .forTrader_top_left {
+    width: 100%;
+    padding-top: 0;
+    margin-top: 0;
+
+    p:first-child {
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 30px;
+    }
+
+    p:nth-child(3) {
+      margin-bottom: 50px;
+    }
+  }
+
+  .forTrader_top_rigth {
+    width: 100%;
+    margin-top: 0;
+    /* overflow: hidden; */
+    padding-top: 0;
+  }
+
+  .forTrader_bottom_caption {
+    font-size: 40px;
+  }
+  .forTrader_bottom_steps {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 4%;
+    gap: 5vw;
+    border-left: 2px solid #6a1b9a;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -5px;
+      height: 7px;
+      width: 7px;
+      z-index: 2;
+      border-radius: 50%;
+      background: #7241d3;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 99%;
+      left: -5px;
+      height: 7px;
+      width: 7px;
+      z-index: 2;
+      border-radius: 50%;
+      background: #7241d3;
+    }
+
+    .center_dot {
+      display: block;
+      position: absolute;
+      top: 46%;
+      left: -5px;
+      height: 7px;
+      width: 7px;
+      z-index: 2;
+      border-radius: 50%;
+      background: #7241d3;
+    }
+  }
+  .forTrader_bottom_step:nth-child(2),
+  .forTrader_bottom_step:nth-child(3) {
+    align-items: flex-start;
+    margin-left: 0;
+  }
+
+  .forTrader_bottom_step:nth-child(3)::before,
+  .forTrader_bottom_step:nth-child(3)::after,
+  .forTrader_bottom_step:nth-child(2)::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 0px;
+    width: 0;
+    z-index: 0;
+  }
+
+  .forTrader_bottom_step-icon {
+    margin-bottom: 0;
+  }
+
+  .create-account-button {
+    padding: 16px 15vw;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .forTrader_top img {
+    transform: scale(1.2);
+  }
+  .create-account-button,
+  .forTrader a {
+    width: 100% !important;
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    padding: 11px 0;
+  }
 }
