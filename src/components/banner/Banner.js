@@ -150,96 +150,9 @@ const Banner = () => {
         </header>
 
         <div className="slider-container">
-          {/* <Swiper
-            slidesPerView={1}
-            spaceBetween={30}
-            pagination={{
-              clickable: true,
-            }}
-            navigation={{
-              prevEl: prevRef.current,
-              nextEl: nextRef.current,
-            }}
-            onSwiper={(swiper) => {
-              swiper.params.navigation.prevEl = prevRef.current;
-              swiper.params.navigation.nextEl = nextRef.current;
-              swiper.navigation.init();
-              swiper.navigation.update();
-            }}
-            onSlideChange={(swiper) => setSlider(swiper.activeIndex + 1)}
-            modules={[Pagination, Navigation]}
-            className="mySwiper"
-          >
-            <div className="simple-btn">
-              <p>0{slider}</p>
-              <button ref={prevRef} className="prev-btn">
-                <BsArrowLeftShort />
-              </button>
-              <button ref={nextRef} className="next-btn">
-                <BsArrowRightShort />
-              </button>
-            </div>
-
-            <SwiperSlide className="swiper-slide">
-              <div className="swiper-slide-main">
-                <div className="homeslide__left">
-                  <div>
-                    <p>{t.passportSubtitle}</p>
-                    <h1>{t.passportTitle}</h1>
-                  </div>
-
-                  <Link to="/passport">
-                    <button>{t.learnMore}</button>
-                  </Link>
-                </div>
-                <div className="homeslide__right">
-                  <img src={my_img1} alt="" />
-                  <div className="homeslide__right_box">
-                    <div>
-                      <div>
-                        <BsCheck2 />
-                      </div>{" "}
-                      <p>{t.passportBenefits[0]}</p>
-                    </div>
-                    <div>
-                      <div>
-                        <BsCheck2 />
-                      </div>{" "}
-                      <p>{t.passportBenefits[1]}</p>
-                    </div>
-                    <div>
-                      <div>
-                        <BsCheck2 />
-                      </div>{" "}
-                      <p>{t.passportBenefits[2]}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </SwiperSlide>
-
-            <SwiperSlide className="swiper-slide_cert">
-              <div className="swiper-slide-main_img"></div>
-            </SwiperSlide>
-
-            <SwiperSlide className="swiper-slide_cert_slide_3">
-              <div className="swiper-slide-main_slide_3">
-                <div className="swiper-slide-main_slide_3_info"></div>
-                <div className="swiper-slide-main_slide_3_info">
-                  <h1>{t.analyzing_trader}</h1>
-                  <span>
-                    <p>{t.track_trader}</p>
-                    <Link to="/rating">
-                      <button className="homeslide__left_btn">{t.learnMore}</button>
-                    </Link>
-                  </span>
-                </div>
-              </div>
-            </SwiperSlide>
-          </Swiper > */}
 
           <Swiper
-            slidesPerView={1.2}  // Displays parts of both previous and next slides
+            slidesPerView={1.1}  // Displays parts of both previous and next slides
             spaceBetween={30}    // Space between slides
             centeredSlides={true} // Center the active slide
             pagination={{
@@ -249,6 +162,7 @@ const Banner = () => {
               prevEl: prevRef.current,
               nextEl: nextRef.current,
             }}
+            initialSlide={1}
             onSwiper={(swiper) => {
               swiper.params.navigation.prevEl = prevRef.current;
               swiper.params.navigation.nextEl = nextRef.current;
@@ -270,6 +184,11 @@ const Banner = () => {
             </div>
 
             {/* Slide 1 (Previous slide) */}
+            <SwiperSlide className="swiper-slide_cert">
+              <div className="swiper-slide-main_img"></div>
+            </SwiperSlide>
+
+            {/* Slide 2 (Main slide - Central slide) */}
             <SwiperSlide className="swiper-slide">
               <div className="swiper-slide-main">
                 <div className="homeslide__left">
@@ -305,11 +224,6 @@ const Banner = () => {
                   </div>
                 </div>
               </div>
-            </SwiperSlide>
-
-            {/* Slide 2 (Main slide - Central slide) */}
-            <SwiperSlide className="swiper-slide_cert">
-              <div className="swiper-slide-main_img"></div>
             </SwiperSlide>
 
             {/* Slide 3 (Next slide) */}
@@ -334,7 +248,7 @@ const Banner = () => {
       </div >
 
       {/* passport */}
-      <div div className="marketplace" >
+      <div className="marketplace" >
         <h1 className="marketplace-subtitle_pass">
           {t.kytreat} <p>KYT</p>
         </h1>
@@ -448,7 +362,7 @@ const Banner = () => {
       < ForTrader />
 
       {/* Мы поддерживаем */}
-      <div div className="weSupport_container" >
+      <div className="weSupport_container" >
         <h1>{t.weSupport}</h1>
 
         <div>
@@ -464,7 +378,7 @@ const Banner = () => {
       </div >
 
       {/* Наши тарифы */}
-      <div div className="ourTariffs" >
+      <div className="ourTariffs" >
         <div className="ourTariffs_img_box">
           <h1>{t.ourTariffs}</h1>
 
@@ -522,7 +436,7 @@ const Banner = () => {
       </div >
 
       {/* Отзывы */}
-      <div div className="reviews_container" >
+      <div className="reviews_container" >
         <h1>{t.reviews}</h1>
         <p>{t.leaving}</p>
         <div className="reviews_box">
@@ -579,7 +493,7 @@ const Banner = () => {
 
 
       {/* FAQ */}
-      <div div className="FAQ_container" >
+      <div className="FAQ_container" >
         <h1>{t.faq_title}</h1>
         <Collapse
           size="middle"
