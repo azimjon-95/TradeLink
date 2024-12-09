@@ -11,7 +11,7 @@ import { FiX } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import SignUpModal from "../../pages/register/Register";
 import { setModalType as setModalType2 } from "../../context/modalType";
-import logo from "../../assets/newBanners/mainLogo.svg";
+import logo from "../../assets/logo_main.svg";
 import LanguageSwitcher from "../../hooks/LanguageSwitcher";
 import { translations } from "./Lang";
 
@@ -230,10 +230,10 @@ function Navbar() {
     const linksToSet = mainPageRoutes.includes(path)
       ? linkOptions["/"]
       : isUserRoute || isPortfolioRoute
-      ? passportLinks
-      : passportOpenRoutes.includes(path)
-      ? passportLinks
-      : linkOptions[path] || linkOptions.default;
+        ? passportLinks
+        : passportOpenRoutes.includes(path)
+          ? passportLinks
+          : linkOptions[path] || linkOptions.default;
 
     setLinks(linksToSet);
   }, [
@@ -338,9 +338,8 @@ function Navbar() {
         background: isScrolled ? "#1B1531" : "",
         backdropFilter: isScrolled ? "blur(50px)" : "",
       }}
-      className={`navbar_container ${
-        isProductDashboard ? "navbar_static" : "navbar_sticky"
-      }`}
+      className={`navbar_container ${isProductDashboard ? "navbar_static" : "navbar_sticky"
+        }`}
     >
       <div className="nav_links-box">
         <Link to="/" onClick={() => handleClick("/")}>
@@ -558,9 +557,8 @@ function Navbar() {
       </div>
 
       <div
-        className={`close-modal-signup ${
-          isModalSinUp && "close-modal-signup-open"
-        }`}
+        className={`close-modal-signup ${isModalSinUp && "close-modal-signup-open"
+          }`}
       >
         <SignUpModal
           setModalType={setModalType}

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import "./style.css";
 import { useSelector } from "react-redux";
 import { BsArrowUpShort } from "react-icons/bs";
-import logo from "../../assets/newBanners/mainLogo.svg";
+import logo from "../../assets/logo_main.svg";
 import footer_shadow from "../../assets/footer_shadow.png";
 
 const translations = {

@@ -26,12 +26,6 @@ import Frame3 from "../../assets/newBanners/Frame3.png";
 import Frame4 from "../../assets/newBanners/Frame4.png";
 import Frame5 from "../../assets/newBanners/Frame5.png";
 import my_img1 from "../../assets/banner/my_img1.png";
-import okx from "../../assets/newBanners/okx.png";
-import binance from "../../assets/newBanners/binance.png";
-import byb from "../../assets/newBanners/byb.png";
-import bing from "../../assets/newBanners/bing.png";
-import bitget from "../../assets/newBanners/bitget.png";
-import htx from "../../assets/newBanners/htx.png";
 import ret from "../../assets/newBanners/Frame6.png";
 import Ellipse from "../../assets/newBanners/image2.png";
 import ForTrader from "../../components/forTrader/ForTrader";
@@ -40,6 +34,7 @@ import { transMonth } from "../passport/rating/Lang";
 import { translate } from './Lang';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import Support from "./Support";
 // import { IoRadioButtonOn } from "react-icons/io5";
 
 
@@ -243,7 +238,6 @@ const Banner = () => {
             </SwiperSlide>
           </Swiper>
 
-
         </div >
       </div >
 
@@ -362,20 +356,7 @@ const Banner = () => {
       < ForTrader />
 
       {/* Мы поддерживаем */}
-      <div className="weSupport_container" >
-        <h1>{t.weSupport}</h1>
-
-        <div>
-          <img width={70} src={okx} alt="" />
-          <img width={120} src={binance} alt="" />
-          <img width={70} src={byb} alt="" />
-          <img width={70} src={bing} alt="" />
-          <img width={70} src={bitget} alt="" />
-          <img width={70} src={htx} alt="" />
-        </div>
-
-        <button>{t.registration}</button>
-      </div >
+      <Support />
 
       {/* Наши тарифы */}
       <div className="ourTariffs" >
