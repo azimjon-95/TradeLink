@@ -230,10 +230,10 @@ function Navbar() {
     const linksToSet = mainPageRoutes.includes(path)
       ? linkOptions["/"]
       : isUserRoute || isPortfolioRoute
-      ? passportLinks
-      : passportOpenRoutes.includes(path)
-      ? passportLinks
-      : linkOptions[path] || linkOptions.default;
+        ? passportLinks
+        : passportOpenRoutes.includes(path)
+          ? passportLinks
+          : linkOptions[path] || linkOptions.default;
 
     setLinks(linksToSet);
   }, [
@@ -332,13 +332,12 @@ function Navbar() {
         top: 0,
         width: "100%",
         zIndex: 100,
-        backdropFilter: isScrolled ? "blur(10px)" : "none",
+        backdropFilter: isScrolled ? "blur(50px)" : "none",
+        background: isScrolled ? "#311F5A" : "",
         transition: "background-color 0.3s ease, backdrop-filter 0.3s ease",
-        overflow: isSticky ? "start" : "hidden",
       }}
-      className={`navbar_container ${
-        isProductDashboard ? "navbar_static" : "navbar_sticky"
-      }`}
+      className={`navbar_container ${isProductDashboard ? "navbar_static" : "navbar_sticky"
+        }`}
     >
       <div className="nav_links-box">
         <Link to="/" onClick={() => handleClick("/")}>
@@ -380,9 +379,14 @@ function Navbar() {
           )}
         </button>
 
-        <button className="menu_button-media" onClick={toggleMediaModal}>
-          <IoMenu />
-        </button>
+        <span>
+          <div className="menu_button-lang">
+            <LanguageSwitcher />
+          </div>
+          <button className="menu_button-media" onClick={toggleMediaModal}>
+            <IoMenu />
+          </button>
+        </span>
       </div>
 
       <div className="nav_links-main">
@@ -455,9 +459,11 @@ function Navbar() {
       <div
         className={`media_modal-container ${isMediaModalOpen ? "open" : ""}`}
       >
+
         <div style={{ marginBottom: "10px" }} className="media_modal-lang">
           <FiX onClick={() => setIsMediaModalOpen(false)} />
         </div>
+
         {!token && (
           <div className="media_modal-btns">
             <button
@@ -546,14 +552,12 @@ function Navbar() {
               </Popover>
             )}
           </div>
-          <LanguageSwitcher />
         </div>
       </div>
 
       <div
-        className={`close-modal-signup ${
-          isModalSinUp && "close-modal-signup-open"
-        }`}
+        className={`close-modal-signup ${isModalSinUp && "close-modal-signup-open"
+          }`}
       >
         <SignUpModal
           setModalType={setModalType}

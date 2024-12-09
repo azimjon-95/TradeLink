@@ -54,7 +54,7 @@
   height: 45px;
   width: 45px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.06);
+  background: #ffffff0f;
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -63,7 +63,32 @@
   color: #000 !important;
 }
 
+.nav_links-box>span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
+.nav_links-box>span>button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  color: #fff;
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  background: #ffffff0f;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav_links-box>span>button:hover {
+  background: #fff;
+  color: #000 !important;
+}
 
 .nav_links-main {
   padding: 13px 20px;
@@ -252,6 +277,9 @@
   display: none !important;
 }
 
+.menu_button-lang {
+  display: none !important;
+}
 
 .media_modal-container {
   position: fixed;
@@ -528,8 +556,19 @@
   }
 
   .menu_button-media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     display: block !important;
     font-size: 30px !important;
+  }
+
+  .menu_button-media>svg {
+    margin-top: 5px;
+  }
+
+  .menu_button-lang {
+    display: block !important;
   }
 
   .userProfileName,

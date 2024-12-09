@@ -5,16 +5,13 @@ import { Select, Skeleton, Pagination, Switch, Table } from "antd";
 import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 import { FaCheck } from "react-icons/fa6";
 import { useSelector } from "react-redux";
-
 import axios from "../../../api";
-// import binance from "../../../assets/ed_khan/binance_rounded.svg";
 import avatar from "../../../assets/ed_khan/avatar.png";
 import ret from "../../../assets/ed_khan/ret.svg";
 import InfoModal from "./InfoModal";
 import "./style.css";
 import scoreChartSvg from "./scoreChart.svg";
 import { translations, transMonth } from "./Lang";
-// const { Option } = Select;
 
 const Leaderboard = () => {
   const navigate = useNavigate();
@@ -52,7 +49,6 @@ const Leaderboard = () => {
     axios
       .get(API)
       .then((res) => {
-        console.log(res);
         for (const key in res?.data?.data) {
           let data = res?.data?.data[key].slice(0, 5);
           setLeaderboardData((prevData) => ({

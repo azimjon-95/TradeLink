@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import "./style.css";
 import "./media.css";
 import AOS from "aos";
-import { Collapse } from 'antd';
+import { Collapse, Skeleton } from 'antd';
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
@@ -13,6 +13,7 @@ import { BsArrowLeftShort } from "react-icons/bs";
 import { BsArrowUpRight } from "react-icons/bs";
 import { BsArrowRightShort } from "react-icons/bs";
 import { BsCheck2 } from "react-icons/bs";
+import axios from "../../api";
 import InfoModal from "../passport/rating/InfoModal";
 import shadow_1 from "../../assets/banner/shadow_1.png";
 import shadow_2 from "../../assets/banner/shadow_2.png";
@@ -34,6 +35,7 @@ import ret from "../../assets/newBanners/Frame6.png";
 import Ellipse from "../../assets/newBanners/image2.png";
 import ForTrader from "../../components/forTrader/ForTrader";
 import "aos/dist/aos.css";
+import { transMonth } from "../passport/rating/Lang";
 import { translate } from './Lang';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -46,9 +48,14 @@ const Banner = () => {
   const [slider, setSlider] = useState(1); // Faol slayd raqami (1 dan boshlanadi)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContentType, setModalContentType] = useState("");
+  const [loadingTop, setLoadingTop] = useState(true);
+  const [leaderboardData, setLeaderboardData] = useState(null);
+  const [selectedOption] = useState("score");
   const current = useSelector(
     (state) => state.language.currentLanguage
   );
+  const month = transMonth[current];
+
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -78,91 +85,130 @@ const Banner = () => {
     });
   }, []);
 
+
+
+
+  useEffect(() => {
+    setLoadingTop(true);
+    let API = `leaderboard/three-top-units?sort_type=${selectedOption}`;
+    axios
+      .get(API)
+      .then((res) => {
+        for (const key in res?.data?.data) {
+          let data = res?.data?.data[key].slice(0, 5);
+          setLeaderboardData((prevData) => ({
+            ...prevData,
+            [key]: data,
+          }));
+        }
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setLoadingTop(false));
+  }, [selectedOption]);
+
+
+  // const data = {
+  //   monthly: [
+  //     {
+  //       rank: 1,
+  //       name: leaderboardData?.monthly[0]?.user_name,
+  //       icons: Frame1,
+  //       reting: ret,
+  //       org: leaderboardData?.monthly[0]?.portfolio_name,
+  //       score: leaderboardData?.monthly[0]?.score.toFixed(2),
+  //     },
+  //     {
+  //       rank: 2,
+  //       name: leaderboardData?.monthly[1]?.user_name,
+  //       icons: Frame2,
+  //       reting: ret,
+  //       org: leaderboardData?.monthly[1]?.portfolio_name,
+  //       score: leaderboardData?.monthly[1]?.score.toFixed(2),
+  //     },
+  //     {
+  //       rank: 3,
+  //       name: leaderboardData?.monthly[2]?.user_name,
+  //       icons: Frame3,
+  //       reting: ret,
+  //       org: leaderboardData?.monthly[2]?.portfolio_name,
+  //       score: leaderboardData?.monthly[2]?.score.toFixed(2),
+  //     },
+  //     {
+  //       rank: 4,
+  //       name: leaderboardData?.monthly[3]?.user_name,
+  //       icons: Frame4,
+  //       reting: ret,
+  //       org: leaderboardData?.monthly[3]?.portfolio_name,
+  //       score: leaderboardData?.monthly[3]?.score.toFixed(2),
+  //     },
+  //     {
+  //       rank: 5,
+  //       name: leaderboardData?.monthly[4]?.user_name,
+  //       icons: Frame5,
+  //       reting: ret,
+  //       org: leaderboardData?.monthly[4]?.portfolio_name,
+  //       score: leaderboardData?.monthly[4]?.score.toFixed(2),
+  //     },
+  //   ],
+  //   quarterly: [
+  //     {
+  //       rank: 1,
+  //       name: leaderboardData?.quarterly[0]?.user_name,
+  //       icons: Frame1,
+  //       reting: ret,
+  //       org: leaderboardData?.quarterly[0]?.portfolio_name,
+  //       score: leaderboardData?.quarterly[0]?.score.toFixed(2),
+  //     },
+  //     {
+  //       rank: 2,
+  //       name: leaderboardData?.quarterly[1]?.user_name,
+  //       icons: Frame2,
+  //       reting: ret,
+  //       org: leaderboardData?.quarterly[1]?.portfolio_name,
+  //       score: leaderboardData?.quarterly[1]?.score.toFixed(2),
+  //     },
+  //     {
+  //       rank: 3,
+  //       name: leaderboardData?.quarterly[2]?.user_name,
+  //       icons: Frame3,
+  //       reting: ret,
+  //       org: leaderboardData?.quarterly[2]?.portfolio_name,
+  //       score: leaderboardData?.quarterly[2]?.score.toFixed(2),
+  //     },
+  //     {
+  //       rank: 4,
+  //       name: leaderboardData?.quarterly[3]?.user_name,
+  //       icons: Frame4,
+  //       reting: ret,
+  //       org: leaderboardData?.quarterly[3]?.portfolio_name,
+  //       score: leaderboardData?.quarterly[3]?.score.toFixed(2),
+  //     },
+  //     {
+  //       rank: 5,
+  //       name: leaderboardData?.quarterly[4]?.user_name,
+  //       icons: Frame5,
+  //       reting: ret,
+  //       org: leaderboardData?.quarterly[4]?.portfolio_name,
+  //       score: leaderboardData?.quarterly[4]?.score.toFixed(2),
+  //     },
+  //   ],
+  // };
+
+  const createData = (data, frames) =>
+    data?.map((item, index) => ({
+      rank: index + 1,
+      name: item?.user_name || "N/A",
+      icons: frames[index],
+      reting: ret,
+      org: item?.portfolio_name || "N/A",
+      score: typeof item?.score === "number" ? item.score.toFixed(2) : "0.00",
+    })) || [];
+
+  const frames = [Frame1, Frame2, Frame3, Frame4, Frame5];
+
   const data = {
-    monthly: [
-      {
-        rank: 1,
-        name: "A",
-        icons: Frame1,
-        reting: ret,
-        org: "Kazier",
-        score: 52.05,
-      },
-      {
-        rank: 2,
-        name: "T1",
-        icons: Frame2,
-        reting: ret,
-        org: "Kazier",
-        score: 51.92,
-      },
-      {
-        rank: 3,
-        name: "B7",
-        icons: Frame3,
-        reting: ret,
-        org: "Kazier",
-        score: 51.2,
-      },
-      {
-        rank: 4,
-        name: "M",
-        icons: Frame4,
-        reting: ret,
-        org: "Kazier",
-        score: 40.98,
-      },
-      {
-        rank: 5,
-        name: "AINATA",
-        icons: Frame5,
-        reting: ret,
-        org: "MACROSMATIC",
-        score: 39.88,
-      },
-    ],
-    quarterly: [
-      {
-        rank: 1,
-        name: "A",
-        icons: Frame1,
-        reting: ret,
-        org: "Kazier",
-        score: 53.02,
-      },
-      {
-        rank: 2,
-        name: "T1",
-        icons: Frame2,
-        reting: ret,
-        org: "Kazier",
-        score: 52.88,
-      },
-      {
-        rank: 3,
-        name: "B7",
-        icons: Frame3,
-        reting: ret,
-        org: "Kazier",
-        score: 52.27,
-      },
-      {
-        rank: 4,
-        name: "M",
-        icons: Frame4,
-        reting: ret,
-        org: "Kazier",
-        score: 41.94,
-      },
-      {
-        rank: 5,
-        name: "AINATA",
-        icons: Frame5,
-        reting: ret,
-        org: "MACROSMATIC",
-        score: 38.81,
-      },
-    ],
+    monthly: createData(leaderboardData?.monthly, frames),
+    quarterly: createData(leaderboardData?.quarterly, frames),
   };
 
   return (
@@ -309,6 +355,7 @@ const Banner = () => {
           <button onClick={() => openModal("portfolio")}>< BsQuestionCircle /> {t.addMod1}</button>
           <button onClick={() => openModal("score")}><BsQuestionCircle /> {t.addMod2}</button>
         </div>
+
         <InfoModal
           isOpen={isModalOpen}
           onClose={closeModal}
@@ -322,33 +369,43 @@ const Banner = () => {
               <strong className="reating_banner_box_title">
                 {t.monthlyTop}
               </strong>
-              <p>NOV 05 - DEC 05</p>
+              <p>{`${month.oneMonthAgo} - ${month.today}`}</p>
             </span>
             <div className="reting_banner_cards">
-              {data.monthly.map((item) => (
-                <div className="card_ret-bann" key={item.rank}>
-                  <span>
-                    <p
-                      className={`${item.rank === 1 ? "item-rank" : "item-rank-circle"
-                        }`}
-                    >
-                      {item.rank}
-                    </p>
-                    <img width={28} src={item.icons} alt="" />
-                    <div className="name_reting_user">
-                      {item.name} <br />{" "}
-                      <p>
-                        {t.by} {item.org}
-                      </p>
-                    </div>
-                  </span>
+              {loadingTop ? (
+                <Skeleton
+                  title={false}
+                  active
+                  paragraph={{ rows: 5, width: "100%", height: "45px" }}
+                />
+              ) : (
+                <>
+                  {data.monthly.map((item) => (
+                    <div className="card_ret-bann" key={item.rank}>
+                      <span>
+                        <p
+                          className={`${item.rank === 1 ? "item-rank" : "item-rank-circle"
+                            }`}
+                        >
+                          {item.rank}
+                        </p>
+                        <img width={28} src={item.icons} alt="" />
+                        <div className="name_reting_user">
+                          {item.name} <br />{" "}
+                          <p>
+                            {t.by} {item.org}
+                          </p>
+                        </div>
+                      </span>
 
-                  <span className="name_reting_res">
-                    <img width={28} src={item.reting} alt="" />
-                    <p> {item.score}</p>
-                  </span>
-                </div>
-              ))}
+                      <span className="name_reting_res">
+                        <img width={28} src={item.reting} alt="" />
+                        <p> {item.score}</p>
+                      </span>
+                    </div>
+                  ))}
+                </>
+              )}
             </div>
           </div>
 
@@ -357,33 +414,43 @@ const Banner = () => {
               <strong className="reating_banner_box_title">
                 {t.quarterlyTop}
               </strong>
-              <p>NOV 05 - DEC 05</p>
+              <p>{`${month.oneMonthAgo} - ${month.today}`}</p>
             </span>
             <div className="reting_banner_cards">
-              {data.quarterly.map((item) => (
-                <div className="card_ret-bann" key={item.rank}>
-                  <span>
-                    <p
-                      className={`${item.rank === 1 ? "item-rank" : "item-rank-circle"
-                        }`}
-                    >
-                      {item.rank}
-                    </p>
-                    <img width={28} src={item.icons} alt="" />
-                    <div className="name_reting_user">
-                      {item.name} <br />{" "}
-                      <p>
-                        {t.by} {item.org}
-                      </p>
-                    </div>
-                  </span>
+              {loadingTop ? (
+                <Skeleton
+                  title={false}
+                  active
+                  paragraph={{ rows: 5, width: "100%", height: "45px" }}
+                />
+              ) : (
+                <>
+                  {data.quarterly.map((item) => (
+                    <div className="card_ret-bann" key={item.rank}>
+                      <span>
+                        <p
+                          className={`${item.rank === 1 ? "item-rank" : "item-rank-circle"
+                            }`}
+                        >
+                          {item.rank}
+                        </p>
+                        <img width={28} src={item.icons} alt="" />
+                        <div className="name_reting_user">
+                          {item.name} <br />{" "}
+                          <p>
+                            {t.by} {item.org}
+                          </p>
+                        </div>
+                      </span>
 
-                  <span className="name_reting_res">
-                    <img width={28} src={item.reting} alt="" />
-                    <p> {item.score}</p>
-                  </span>
-                </div>
-              ))}
+                      <span className="name_reting_res">
+                        <img width={28} src={item.reting} alt="" />
+                        <p> {item.score}</p>
+                      </span>
+                    </div>
+                  ))}
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -481,7 +548,7 @@ const Banner = () => {
                   <p>{t.entrepreneur}</p>
                   <h2>Emma</h2>
                 </div>
-                <i>@emma_business</i>
+                <p>@emma_business</p>
               </div>
             </div>
             <p>{t.review_texts[0]}</p>
@@ -497,7 +564,7 @@ const Banner = () => {
                   <p>{t.entrepreneur}</p>
                   <h2>James</h2>
                 </div>
-                <i>@james_analyst</i>
+                <p>@james_analyst</p>
               </div>
             </div>
             <p>{t.review_texts[1]}</p>
@@ -513,13 +580,11 @@ const Banner = () => {
                   <p>{t.entrepreneur}</p>
                   <h2>Sophia</h2>
                 </div>
-                <i>@sophia_trader</i>
+                <p>@sophia_trader</p>
               </div>
             </div>
             <p>{t.review_texts[2]}</p>
           </div>
-
-
         </div>
 
       </div>
