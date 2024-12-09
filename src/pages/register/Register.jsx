@@ -163,7 +163,7 @@ const SignUpModal = ({
             >
               ✖
             </button>
-            <h2 className="modal-title">{subTitle.loginTitle}</h2>
+            <h2 className="modal-title">{subTitle?.loginTitle}</h2>
 
             <label className="input-label">{subTitle.email}</label>
             <input name="email" required type="email" className="input-field" />

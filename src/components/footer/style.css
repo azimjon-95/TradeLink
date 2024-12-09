@@ -116,6 +116,7 @@
   margin: 10px 0;
   text-align: left;
   max-width: 55%;
+  z-index: 5;
 }
 
 .footer-copyright {
@@ -123,6 +124,7 @@
   font-size: 12px;
   color: #fff;
   text-align: left;
+  z-index: 5;
   max-width: 27%;
 }
 
@@ -155,7 +157,7 @@
 
   .footer {
     padding: 40px 10px 10px 10px;
-    color: #333;
+    color: #fff;
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
@@ -171,10 +173,56 @@
   .footer-section {
     max-width: 220px !important;
     min-width: 150px !important;
+    margin-bottom: 25px;
   }
 
   .footer-icons {
     display: flex;
     gap: 5px;
+  }
+
+
+  .footer-top>button {
+    position: absolute;
+    right: 15px;
+    top: 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 25px;
+    font-size: 22px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.05)
+  }
+
+  .footer-bottom {
+    width: 100%;
+    margin-top: 20px;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .footer-disclaimer {
+    margin: 10px 0;
+    text-align: left;
+    max-width: 90%;
+  }
+
+  .footer-copyright {
+    margin: 20px 0;
+    font-size: 12px;
+    color: #fff;
+    text-align: left;
+    max-width: 90%;
   }
 }

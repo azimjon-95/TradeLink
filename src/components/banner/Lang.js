@@ -1,5 +1,9 @@
+
+
 export const translate = {
     en: {
+        track_trader: "Track the trader's performance in real-time and manage risks through the simple and user-friendly interface of the KҮT system.",
+        analyzing_trader: "Convenient statistics for analyzing and tracking the trader",
         what_information: "What information does KYT collect?",
         how_connect: "How to connect to KYT?",
         what_benefits: "What benefits does KYT provide to investors?",
@@ -66,6 +70,8 @@ export const translate = {
         learnMore: "Learn more",
     },
     ru: {
+        track_trader: "Отслеживайте эффективность трейдера в реальном времени и управляйте рисками через простой и удобный интерфейс системы КҮТ.",
+        analyzing_trader: "Удобная статистика для анализа и слежения за трейдером",
         what_information: "Какую информацию KYT собирает?",
         how_connect: "Как подключиться к KYT?",
         what_benefits: "Какие преимущества KYT предоставляет инвесторам?",
@@ -134,6 +140,8 @@ export const translate = {
         learnMore: "Узнать больше",
     },
     es: {
+        track_trader: "Supervise el rendimiento del trader en tiempo real y gestione los riesgos a través de una interfaz simple y fácil de usar del sistema КҮТ.",
+        analyzing_trader: "Estadísticas convenientes para el análisis y seguimiento del trader",
         what_information: "¿Qué información recoge KYT?",
         how_connect: "¿Cómo conectarse a KYT?",
         what_benefits: "¿Qué ventajas ofrece KYT a los inversores?",
@@ -200,6 +208,8 @@ export const translate = {
         learnMore: "Aprende más",
     },
     de: {
+        track_trader: "Verfolgen Sie die Leistung des Traders in Echtzeit und verwalten Sie Risiken über eine einfache und benutzerfreundliche Schnittstelle des KҮT-Systems.",
+        analyzing_trader: "Bequeme Statistik zur Analyse und Überwachung des Traders",
         what_information: "Welche Informationen sammelt KYT?",
         how_connect: "Wie verbindet man sich mit KYT?",
         what_benefits: "Welche Vorteile bietet KYT den Investoren?",

@@ -13,6 +13,7 @@ import { BsArrowLeftShort } from "react-icons/bs";
 import { BsArrowUpRight } from "react-icons/bs";
 import { BsArrowRightShort } from "react-icons/bs";
 import { BsCheck2 } from "react-icons/bs";
+import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
 import axios from "../../api";
 import InfoModal from "../passport/rating/InfoModal";
 import shadow_1 from "../../assets/banner/shadow_1.png";
@@ -39,6 +40,7 @@ import { transMonth } from "../passport/rating/Lang";
 import { translate } from './Lang';
 import 'swiper/css';
 import 'swiper/css/pagination';
+// import { IoRadioButtonOn } from "react-icons/io5";
 
 
 const Banner = () => {
@@ -107,93 +109,6 @@ const Banner = () => {
   }, [selectedOption]);
 
 
-  // const data = {
-  //   monthly: [
-  //     {
-  //       rank: 1,
-  //       name: leaderboardData?.monthly[0]?.user_name,
-  //       icons: Frame1,
-  //       reting: ret,
-  //       org: leaderboardData?.monthly[0]?.portfolio_name,
-  //       score: leaderboardData?.monthly[0]?.score.toFixed(2),
-  //     },
-  //     {
-  //       rank: 2,
-  //       name: leaderboardData?.monthly[1]?.user_name,
-  //       icons: Frame2,
-  //       reting: ret,
-  //       org: leaderboardData?.monthly[1]?.portfolio_name,
-  //       score: leaderboardData?.monthly[1]?.score.toFixed(2),
-  //     },
-  //     {
-  //       rank: 3,
-  //       name: leaderboardData?.monthly[2]?.user_name,
-  //       icons: Frame3,
-  //       reting: ret,
-  //       org: leaderboardData?.monthly[2]?.portfolio_name,
-  //       score: leaderboardData?.monthly[2]?.score.toFixed(2),
-  //     },
-  //     {
-  //       rank: 4,
-  //       name: leaderboardData?.monthly[3]?.user_name,
-  //       icons: Frame4,
-  //       reting: ret,
-  //       org: leaderboardData?.monthly[3]?.portfolio_name,
-  //       score: leaderboardData?.monthly[3]?.score.toFixed(2),
-  //     },
-  //     {
-  //       rank: 5,
-  //       name: leaderboardData?.monthly[4]?.user_name,
-  //       icons: Frame5,
-  //       reting: ret,
-  //       org: leaderboardData?.monthly[4]?.portfolio_name,
-  //       score: leaderboardData?.monthly[4]?.score.toFixed(2),
-  //     },
-  //   ],
-  //   quarterly: [
-  //     {
-  //       rank: 1,
-  //       name: leaderboardData?.quarterly[0]?.user_name,
-  //       icons: Frame1,
-  //       reting: ret,
-  //       org: leaderboardData?.quarterly[0]?.portfolio_name,
-  //       score: leaderboardData?.quarterly[0]?.score.toFixed(2),
-  //     },
-  //     {
-  //       rank: 2,
-  //       name: leaderboardData?.quarterly[1]?.user_name,
-  //       icons: Frame2,
-  //       reting: ret,
-  //       org: leaderboardData?.quarterly[1]?.portfolio_name,
-  //       score: leaderboardData?.quarterly[1]?.score.toFixed(2),
-  //     },
-  //     {
-  //       rank: 3,
-  //       name: leaderboardData?.quarterly[2]?.user_name,
-  //       icons: Frame3,
-  //       reting: ret,
-  //       org: leaderboardData?.quarterly[2]?.portfolio_name,
-  //       score: leaderboardData?.quarterly[2]?.score.toFixed(2),
-  //     },
-  //     {
-  //       rank: 4,
-  //       name: leaderboardData?.quarterly[3]?.user_name,
-  //       icons: Frame4,
-  //       reting: ret,
-  //       org: leaderboardData?.quarterly[3]?.portfolio_name,
-  //       score: leaderboardData?.quarterly[3]?.score.toFixed(2),
-  //     },
-  //     {
-  //       rank: 5,
-  //       name: leaderboardData?.quarterly[4]?.user_name,
-  //       icons: Frame5,
-  //       reting: ret,
-  //       org: leaderboardData?.quarterly[4]?.portfolio_name,
-  //       score: leaderboardData?.quarterly[4]?.score.toFixed(2),
-  //     },
-  //   ],
-  // };
-
   const createData = (data, frames) =>
     data?.map((item, index) => ({
       rank: index + 1,
@@ -211,6 +126,9 @@ const Banner = () => {
     quarterly: createData(leaderboardData?.quarterly, frames),
   };
 
+
+  const customIcons = ({ isActive }) =>
+    isActive ? <MinusOutlined style={{ fontSize: "22px" }} /> : <PlusOutlined style={{ fontSize: "22px" }} />;
   return (
     <>
       <div className="homePage">
@@ -232,7 +150,7 @@ const Banner = () => {
         </header>
 
         <div className="slider-container">
-          <Swiper
+          {/* <Swiper
             slidesPerView={1}
             spaceBetween={30}
             pagination={{
@@ -304,6 +222,54 @@ const Banner = () => {
               <div className="swiper-slide-main_img"></div>
             </SwiperSlide>
 
+            <SwiperSlide className="swiper-slide_cert_slide_3">
+              <div className="swiper-slide-main_slide_3">
+                <div className="swiper-slide-main_slide_3_info"></div>
+                <div className="swiper-slide-main_slide_3_info">
+                  <h1>{t.analyzing_trader}</h1>
+                  <span>
+                    <p>{t.track_trader}</p>
+                    <Link to="/rating">
+                      <button className="homeslide__left_btn">{t.learnMore}</button>
+                    </Link>
+                  </span>
+                </div>
+              </div>
+            </SwiperSlide>
+          </Swiper > */}
+
+          <Swiper
+            slidesPerView={1.2}  // Displays parts of both previous and next slides
+            spaceBetween={30}    // Space between slides
+            centeredSlides={true} // Center the active slide
+            pagination={{
+              clickable: true,
+            }}
+            navigation={{
+              prevEl: prevRef.current,
+              nextEl: nextRef.current,
+            }}
+            onSwiper={(swiper) => {
+              swiper.params.navigation.prevEl = prevRef.current;
+              swiper.params.navigation.nextEl = nextRef.current;
+              swiper.navigation.init();
+              swiper.navigation.update();
+            }}
+            onSlideChange={(swiper) => setSlider(swiper.activeIndex + 1)}
+            modules={[Pagination, Navigation]}
+            className="mySwiper"
+          >
+            <div className="simple-btn">
+              <p>0{slider}</p>
+              <button ref={prevRef} className="prev-btn">
+                <BsArrowLeftShort />
+              </button>
+              <button ref={nextRef} className="next-btn">
+                <BsArrowRightShort />
+              </button>
+            </div>
+
+            {/* Slide 1 (Previous slide) */}
             <SwiperSlide className="swiper-slide">
               <div className="swiper-slide-main">
                 <div className="homeslide__left">
@@ -311,7 +277,6 @@ const Banner = () => {
                     <p>{t.passportSubtitle}</p>
                     <h1>{t.passportTitle}</h1>
                   </div>
-
                   <Link to="/passport">
                     <button>{t.learnMore}</button>
                   </Link>
@@ -322,31 +287,54 @@ const Banner = () => {
                     <div>
                       <div>
                         <BsCheck2 />
-                      </div>{" "}
+                      </div>
                       <p>{t.passportBenefits[0]}</p>
                     </div>
                     <div>
                       <div>
                         <BsCheck2 />
-                      </div>{" "}
+                      </div>
                       <p>{t.passportBenefits[1]}</p>
                     </div>
                     <div>
                       <div>
                         <BsCheck2 />
-                      </div>{" "}
+                      </div>
                       <p>{t.passportBenefits[2]}</p>
                     </div>
                   </div>
                 </div>
               </div>
             </SwiperSlide>
+
+            {/* Slide 2 (Main slide - Central slide) */}
+            <SwiperSlide className="swiper-slide_cert">
+              <div className="swiper-slide-main_img"></div>
+            </SwiperSlide>
+
+            {/* Slide 3 (Next slide) */}
+            <SwiperSlide className="swiper-slide_cert_slide_3">
+              <div className="swiper-slide-main_slide_3">
+                <div className="swiper-slide-main_slide_3_info"></div>
+                <div className="swiper-slide-main_slide_3_info">
+                  <h1>{t.analyzing_trader}</h1>
+                  <span>
+                    <p>{t.track_trader}</p>
+                    <Link to="/rating">
+                      <button className="homeslide__left_btn">{t.learnMore}</button>
+                    </Link>
+                  </span>
+                </div>
+              </div>
+            </SwiperSlide>
           </Swiper>
-        </div>
-      </div>
+
+
+        </div >
+      </div >
 
       {/* passport */}
-      <div className="marketplace">
+      <div div className="marketplace" >
         <h1 className="marketplace-subtitle_pass">
           {t.kytreat} <p>KYT</p>
         </h1>
@@ -454,13 +442,13 @@ const Banner = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div >
 
       {/* Как начать */}
-      <ForTrader />
+      < ForTrader />
 
       {/* Мы поддерживаем */}
-      <div className="weSupport_container">
+      <div div className="weSupport_container" >
         <h1>{t.weSupport}</h1>
 
         <div>
@@ -473,10 +461,10 @@ const Banner = () => {
         </div>
 
         <button>{t.registration}</button>
-      </div>
+      </div >
 
       {/* Наши тарифы */}
-      <div className="ourTariffs">
+      <div div className="ourTariffs" >
         <div className="ourTariffs_img_box">
           <h1>{t.ourTariffs}</h1>
 
@@ -531,10 +519,10 @@ const Banner = () => {
           <img className="shadow_1" src={shadow_1} alt="" />
           <img className="shadow_2" src={shadow_2} alt="" />
         </div>
-      </div>
+      </div >
 
       {/* Отзывы */}
-      <div className="reviews_container">
+      <div div className="reviews_container" >
         <h1>{t.reviews}</h1>
         <p>{t.leaving}</p>
         <div className="reviews_box">
@@ -587,85 +575,33 @@ const Banner = () => {
           </div>
         </div>
 
-      </div>
+      </div >
 
 
       {/* FAQ */}
-      <div className="FAQ_container">
+      <div div className="FAQ_container" >
         <h1>{t.faq_title}</h1>
-
         <Collapse
           size="middle"
-          items={[
-            {
-              key: "1",
-              label: t.WhatIsKYT,
-              children: (
-                <div className="open_info">
-                  <p>{t.open_info[0]}</p>
-                </div>
-              ),
-            },
-          ]}
+          expandIcon={customIcons}
+          expandIconPosition="end"
+          items={t.open_info.map((info, index) => ({
+            key: `${index + 1}`,
+            label: [
+              t.WhatIsKYT,
+              t.KYT_passport,
+              t.what_benefits,
+              t.how_connect,
+              t.what_information,
+            ][index],
+            children: (
+              <div className="open_info">
+                <p style={{ fontSize: "14px" }}>{info}</p>
+              </div>
+            ),
+          }))}
         />
-        <Collapse
-          size="middle"
-          items={[
-            {
-              key: "2",
-              label: t.KYT_passport,
-              children: (
-                <div className="open_info">
-                  <p>{t.open_info[1]}</p>
-                </div>
-              ),
-            },
-          ]}
-        />
-        <Collapse
-          size="middle"
-          items={[
-            {
-              key: "3",
-              label: t.what_benefits,
-              children: (
-                <div className="open_info">
-                  <p>{t.open_info[2]}</p>
-                </div>
-              ),
-            },
-          ]}
-        />
-        <Collapse
-          size="middle"
-          items={[
-            {
-              key: "4",
-              label: t.how_connect,
-              children: (
-                <div className="open_info">
-                  <p>{t.open_info[3]}</p>
-                </div>
-              ),
-            },
-          ]}
-        />
-        <Collapse
-          size="middle"
-          items={[
-            {
-              key: "5",
-              label: t.what_information,
-              children: (
-                <div className="open_info">
-                  <p>{t.open_info[4]}</p>
-                </div>
-              ),
-            },
-          ]}
-        />
-
-      </div>
+      </div >
     </>
   );
 };

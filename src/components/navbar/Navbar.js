@@ -567,6 +567,7 @@ function Navbar() {
           onRequestClose={() => setIsModalSinUp(false)}
         />
       </div>
+
     </div>
   );
 }
