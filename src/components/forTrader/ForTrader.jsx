@@ -1,20 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ForTrader.css";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import rightImg from "./image.png";
 import { langText } from "./lang";
+import SignUpModal from "../../pages/register/Register";
 
 function ForTrader() {
+  const [isModalSinUp, setIsModalSinUp] = useState(false);
   const lang = useSelector((state) => state.language.currentLanguage);
+  let token = localStorage.getItem("access_token");
+
   return (
     <div className="forTrader">
+      <SignUpModal
+        onRequestClose={() => setIsModalSinUp(false)}
+        isOpen={isModalSinUp}
+        modalType={"signUp"}
+        setIsMediaModalOpen={() => {}}
+      />
       <div className="forTrader_top">
         <div className="forTrader_top_left">
           <p>{langText[lang].subtitle}</p>
           <h1>{langText[lang].title}</h1>
           <p>{langText[lang].text}</p>
-          <Link to={"/"}>{langText[lang].button}</Link>
+          <Link to={"/rating"}>{langText[lang].button}</Link>
         </div>
         <div className="forTrader_top_rigth">
           <img src={rightImg} alt="photo" />
@@ -24,6 +34,7 @@ function ForTrader() {
       <div className="forTrader_bottom">
         <h2 className="forTrader_bottom_caption">{langText[lang].caption}</h2>
         <div className="forTrader_bottom_steps">
+          <div className="center_dot"></div>
           <div className="forTrader_bottom_step">
             <div className="forTrader_bottom_step-icon">
               <svg
@@ -79,7 +90,7 @@ function ForTrader() {
                 </defs>
               </svg>
             </div>
-            <p className="step-description">{langText[lang].step_1}</p>
+            <p className="step-description">{langText[lang].step1}</p>
           </div>
           <div className="forTrader_bottom_step">
             <div className="forTrader_bottom_step-icon">
@@ -174,7 +185,7 @@ function ForTrader() {
                 </defs>
               </svg>
             </div>
-            <p className="step-description">{langText[lang].step_2}</p>
+            <p className="step-description">{langText[lang].step2}</p>
           </div>
           <div className="forTrader_bottom_step">
             <div className="forTrader_bottom_step-icon">
@@ -231,12 +242,19 @@ function ForTrader() {
                 </defs>
               </svg>
             </div>
-            <p className="step-description">{langText[lang].step_3}</p>
+            <p className="step-description">{langText[lang].step3}</p>
           </div>
         </div>
-        <button className="create-account-button">
-          {langText[lang].createAccBTn}
-        </button>
+        {!token ? (
+          <button
+            onClick={() => setIsModalSinUp(true)}
+            className="create-account-button"
+          >
+            {langText[lang].createAccBTn}
+          </button>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

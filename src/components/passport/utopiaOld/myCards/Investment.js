@@ -35,14 +35,12 @@ const Investment = ({ id, selectValue, currentLanguage }) => {
     };
   }, [id, selectValue, isDataFetched]); // Add isDataFetched to the dependency array to control re-fetching
 
-  console.log(data);
-
   const datas = [
     {
       title:
         transInvestment[currentLanguage]?.lifetimeExperience ||
         "Lifetime Experience",
-      value: `${data?.alpha?.toFixed(2)}`,
+      value: `${data?.lifetime_experience?.toFixed(2)}`,
       description:
         transInvestment[currentLanguage]?.lifetimeExperienceDescription ||
         "Very good",
@@ -51,7 +49,7 @@ const Investment = ({ id, selectValue, currentLanguage }) => {
       x: 25,
       m: 25,
       p: 25,
-      sliderValue: +data?.alpha,
+      sliderValue: +data?.lifetime_experience,
     },
     {
       title: transInvestment[currentLanguage]?.sharpeRatio,
