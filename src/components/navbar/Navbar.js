@@ -230,10 +230,10 @@ function Navbar() {
     const linksToSet = mainPageRoutes.includes(path)
       ? linkOptions["/"]
       : isUserRoute || isPortfolioRoute
-        ? passportLinks
-        : passportOpenRoutes.includes(path)
-          ? passportLinks
-          : linkOptions[path] || linkOptions.default;
+      ? passportLinks
+      : passportOpenRoutes.includes(path)
+      ? passportLinks
+      : linkOptions[path] || linkOptions.default;
 
     setLinks(linksToSet);
   }, [
@@ -315,7 +315,9 @@ function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(
+        window.scrollY > 20 || location.pathname !== "/" ? true : false
+      );
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -323,21 +325,22 @@ function Navbar() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    setIsScrolled(location.pathname !== "/" ? true : false);
+  }, [location.pathname]);
 
   return (
     <div
       style={{
         position: isSticky ? "fixed" : "static",
-        top: 0,
-        width: "100%",
-        zIndex: 100,
-        backdropFilter: isScrolled ? "blur(50px)" : "none",
-        background: isScrolled ? "#311F5A" : "",
-        transition: "background-color 0.3s ease, backdrop-filter 0.3s ease",
+        background: isScrolled ? "#1B1531" : "",
+        backdropFilter: isScrolled ? "blur(50px)" : "",
       }}
-      className={`navbar_container ${isProductDashboard ? "navbar_static" : "navbar_sticky"
-        }`}
+      className={`navbar_container ${
+        isProductDashboard ? "navbar_static" : "navbar_sticky"
+      }`}
     >
       <div className="nav_links-box">
         <Link to="/" onClick={() => handleClick("/")}>
@@ -459,7 +462,6 @@ function Navbar() {
       <div
         className={`media_modal-container ${isMediaModalOpen ? "open" : ""}`}
       >
-
         <div style={{ marginBottom: "10px" }} className="media_modal-lang">
           <FiX onClick={() => setIsMediaModalOpen(false)} />
         </div>
@@ -556,8 +558,9 @@ function Navbar() {
       </div>
 
       <div
-        className={`close-modal-signup ${isModalSinUp && "close-modal-signup-open"
-          }`}
+        className={`close-modal-signup ${
+          isModalSinUp && "close-modal-signup-open"
+        }`}
       >
         <SignUpModal
           setModalType={setModalType}
@@ -567,7 +570,6 @@ function Navbar() {
           onRequestClose={() => setIsModalSinUp(false)}
         />
       </div>
-
     </div>
   );
 }

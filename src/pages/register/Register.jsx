@@ -25,6 +25,7 @@ const translations = {
     alreadyHaveAccount: "Already have an account?",
     login: "Log in",
     signupTitle: "Sign up",
+    loginWith: "Log in with",
   },
   ru: {
     aboutPaymentWarning:
@@ -40,21 +41,23 @@ const translations = {
     alreadyHaveAccount: "Уже есть аккаунт?",
     login: "Войти",
     signupTitle: "Регистрация",
+    loginWith: "Войти через",
   },
-  uz: {
+  de: {
     aboutPaymentWarning:
-      "Eslatma: Ro‘yxatdan o‘tish uchun avval to‘lovni amalga oshiring. Quyidagi havolani bosing:",
-    forPayLink: "To‘lov",
-    loginTitle: "Tizimga kirish",
-    email: "Elektron pochta",
-    password: "Parol",
-    dontHaveAccount: "Hisobingiz yo‘qmi?",
-    signUp: "Ro‘yxatdan o‘tish",
-    userExistsError: "Bunday email bilan foydalanuvchi allaqachon mavjud",
-    username: "Foydalanuvchi nomi",
-    alreadyHaveAccount: "Hisobingiz bormi?",
-    login: "Kirish",
-    signupTitle: "Ro‘yxatdan o‘tish",
+      "Hinweis: Zur Registrierung muss zuerst eine Zahlung erfolgen. Bitte machen Sie die Zahlung folgender Link:",
+    forPayLink: "Zahlung",
+    loginTitle: "Anmelden",
+    email: "E-Mail",
+    password: "Passwort",
+    dontHaveAccount: "Hast du keine Account?",
+    signUp: "Registrieren",
+    userExistsError: "Ein Benutzer mit dieser E-Mail existiert bereits",
+    username: "Benutzername",
+    alreadyHaveAccount: "Bereits ein Konto?",
+    login: "Anmelden",
+    signupTitle: "Registrieren",
+    loginWith: "Anmelden mit",
   },
   es: {
     aboutPaymentWarning:
@@ -70,6 +73,7 @@ const translations = {
     alreadyHaveAccount: "¿Ya tienes una cuenta?",
     login: "Iniciar sesión",
     signupTitle: "Regístrate",
+    loginWith: "Iniciar sesión con",
   },
 };
 
@@ -156,12 +160,19 @@ const SignUpModal = ({
         {/* Render Log In Modal */}
         {modalType === "signIn" && (
           <form onSubmit={singIn}>
-            <button
+            {/* <button
               className="close_modalReg"
               onClick={handleClose}
               style={{ border: "none", background: "none", cursor: "pointer" }}
             >
               ✖
+            </button> */}
+            <button
+              className="close_modalReg"
+              onClick={handleClose}
+              style={{ border: "none", background: "none", cursor: "pointer" }}
+            >
+              <FiX />
             </button>
             <h2 className="modal-title">{subTitle?.loginTitle}</h2>
 
@@ -179,11 +190,11 @@ const SignUpModal = ({
               {subTitle.login}
             </Button>
 
-            <p>Sign in with</p>
+            <p className="login-with">{subTitle.loginWith}</p>
             <Button
               onClick={singInWithGoogle}
               htmlType="button"
-              className="login-button signup-button"
+              className="loginWithGoogle"
             >
               <FcGoogle /> Google
             </Button>

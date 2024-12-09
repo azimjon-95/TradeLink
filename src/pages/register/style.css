@@ -147,9 +147,21 @@
 
 /* Signup link */
 .signup-link {
-  color: #142230;
+  /* color: #142230; */
+  color: dodgerblue;
   cursor: pointer;
   font-weight: bold;
+}
+
+.login-with {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.loginWithGoogle {
+  width: 100%;
+  background-color: transparent;
+  border: 2px solid #142230;
 }
 
 @media screen and (max-width: 400px) {
