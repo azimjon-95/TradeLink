@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import "./ForTrader.css";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import SignUpModal from "../../pages/register/Register";
 import rightImg from "./image.png";
 import { langText } from "./lang";
-import SignUpModal from "../../pages/register/Register";
 
 function ForTrader() {
   const [isModalSinUp, setIsModalSinUp] = useState(false);
@@ -17,7 +17,7 @@ function ForTrader() {
         onRequestClose={() => setIsModalSinUp(false)}
         isOpen={isModalSinUp}
         modalType={"signUp"}
-        setIsMediaModalOpen={() => {}}
+        setIsMediaModalOpen={() => { }}
       />
       <div className="forTrader_top">
         <div className="forTrader_top_left">
