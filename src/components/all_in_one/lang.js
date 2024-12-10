@@ -71,7 +71,7 @@ export const langText = {
     ],
     content: [
       {
-        img: <CiUser style={{ fontSize: "19px" }} />,
+        img: frame_136,
         title: "Track Trading Activity",
         description: "Gain valuable insights into your trading performance with detailed analytics.",
         features: [
@@ -123,7 +123,7 @@ export const langText = {
     ],
     content: [
       {
-        img: <CiUser style={{ fontSize: "19px" }} />,
+        img: frame_136,
         title: "Handelsaktivitäten verfolgen",
         description: "Gewinnen Sie wertvolle Einblicke in Ihre Handelsleistung mit detaillierten Analysen.",
         features: [
@@ -175,7 +175,7 @@ export const langText = {
     ],
     content: [
       {
-        img: <CiUser style={{ fontSize: "19px" }} />,
+        img: frame_136,
         title: "Rastrea la Actividad Comercial",
         description: "Obtén valiosos conocimientos sobre tu rendimiento comercial con análisis detallados.",
         features: [
