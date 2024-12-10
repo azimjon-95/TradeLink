@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import "./ForPassprt.css";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import SignUpModal from "../../pages/register/Register";
-import rightImg from "./image.png";
 import { langText } from "./lang";
 
 function ForPassprt() {
   const [isModalSinUp, setIsModalSinUp] = useState(false);
   const lang = useSelector((state) => state.language.currentLanguage);
   let token = localStorage.getItem("access_token");
-
+  const t = langText[lang];
 
   const [activeCard, setActiveCard] = useState(0);
 
@@ -19,77 +17,84 @@ function ForPassprt() {
   };
 
 
+
   const cardData = [
     {
       id: 1,
       title: '01',
-      description: 'Сложности в доказательстве точности и надежности вашей торговой истории',
+      description: t.cardData[0],
     },
     {
       id: 2,
       title: '02',
-      description: 'Трата времени на подготовку отчетов для инвесторов и заинтересованных сторон',
+      description: t.cardData[1],
     },
     {
       id: 3,
       title: '03',
-      description: 'Проблемы с привлечением инвесторов к вашим торговым стратегиям',
+      description: t.cardData[2],
     },
     {
       id: 4,
       title: '04',
-      description: 'Отсутствие профессионального онлайн-присутствия для демонстрации вашего успеха в торговле',
+      description: t.cardData[3],
+
     },
     {
       id: 5,
       title: '05',
-      description: 'Ощущение отсутствия связи и поиск сети единомышленников трейдеров',
+      description: t.cardData[4],
+
     },
     {
       id: 6,
       title: '06',
-      description: 'Сложности и затраты, связанные с управлением несколькими счетами клиентов',
+      description: t.cardData[5],
+
     },
   ];
   const cardOnes = [
     {
       id: 1,
       title: '01',
-      description: 'Сложности в поиске надежных трейдеров с проверенной историей',
+      description: t.cardOnes[0],
     },
     {
       id: 2,
       title: '02',
-      description: 'Слишком много времени уходит на анализ данных трейдеров',
+      description: t.cardOnes[1],
     },
     {
       id: 3,
       title: '03',
-      description: 'Опасения насчет прозрачности и справедливости распределения прибыли',
+      description: t.cardOnes[2],
     },
     {
       id: 4,
       title: '04',
-      description: 'Недостаток доступа к различным стратегиям для диверсификации портфеля',
+      description: t.cardOnes[3],
+
     },
     {
       id: 5,
       title: '05',
-      description: 'Поиск сообщества инвесторов для обмена опытом',
+      description: t.cardOnes[4],
+
     },
     {
       id: 6,
       title: '06',
-      description: 'Сложности в отслеживании нескольких инвестиций и их результатов',
+      description: t.cardOnes[5],
+
     },
   ];
   const buttons = [
-    { id: 0, label: "Для трейдера" },
-    { id: 1, label: "Для инвестора" },
+    { id: 0, label: t.label1 },
+    { id: 1, label: t.label2 },
   ];
 
   return (
-    <div className="forTrader">
+    <div className="forPaspport">
       <SignUpModal
         onRequestClose={() => setIsModalSinUp(false)}
         isOpen={isModalSinUp}
@@ -98,8 +103,15 @@ function ForPassprt() {
       />
       <div className="forPaspport_top">
         <div className="forPaspport_top_left">
-          {/* <p>{langText[lang].subtitle}</p> */}
-          <h1>{langText[lang].title}</h1>
+
+          <span>
+            <p>{langText[lang].subtitle}</p>
+            <div>
+              <h1>{t.mainProblems}</h1>
+              <h1 className="forPaspport_top_text">{t.investors}</h1>
+            </div>
+          </span>
+
           <div className="ps_btns">
             {buttons.map((button) => (
               <button
@@ -145,7 +157,6 @@ function ForPassprt() {
       <div className="forTrader_bottom">
         <h2 className="forTrader_bottom_caption">{langText[lang].caption}</h2>
         <div className="forTrader_bottom_steps">
-          <div className="center_dot"></div>
           <div className="forTrader_bottom_step">
             <div className="forTrader_bottom_step-icon">
               <svg

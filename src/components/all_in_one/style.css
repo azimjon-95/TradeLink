@@ -1,0 +1,144 @@
+.forPaspport_All {
+  width: 100%;
+  min-height: 500px;
+  background: #fff;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.forBtn_all_box {
+  padding: 10px;
+  width: 75%;
+  border-radius: 50px;
+  background: #ffffff0f;
+  border: 1px solid #ebebeb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 40px 0;
+}
+
+.forBtn_all_btn_active {
+  padding: 9px 18px;
+  border-radius: 50px;
+  border: 1px solid #ebebeb;
+  font-size: 15px;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 23.4px;
+  background: linear-gradient(90deg, #35009E 0%, #8F41D3 51.9%, #CD11EE 100%);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.forBtn_all_btn {
+  padding: 9px 18px;
+  border-radius: 50px;
+  border: 1px solid #ebebeb;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(10, 10, 13, 1);
+  line-height: 23.4px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.allInOne_contents_box {
+  width: 100%;
+}
+
+.contents_box_ones {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.contents_box_ones_img {
+  width: 520px;
+  height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contents_box_ones_img>img {
+  width: 100%;
+  height: 100%;
+}
+
+.contents_box_ones {
+  border: 1px solid #ebebeb;
+  border-radius: 30px;
+}
+
+.contents_box_ones_text {
+  width: 60%;
+}
+
+.contents_box_ones_text h1 {
+  font-size: 37px;
+  font-weight: 550;
+  width: 65%;
+  line-height: 40px;
+  letter-spacing: -0.02em;
+  text-align: left;
+
+}
+
+.contents_box_ones_text>span {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  margin-top: 10px;
+}
+
+.contents_box_ones_text>p {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.01em;
+  text-align: left;
+  margin-top: 15px;
+  width: 65%;
+  color: #0a0a0dda;
+
+}
+
+.all___right_box {
+  width: 65%;
+  height: 210px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.all___right_box>div {
+  width: 100%;
+  display: flex;
+}
+
+.all___right_box>div>div {
+  margin: 0 5px;
+}
+
+.all___right_box>div>div>svg {
+  height: 22px;
+  width: 22px;
+  color: #d000ff;
+}
+
+.all___right_box>div>p {
+  text-align: start;
+  font-size: 14px;
+  color: #000000;
+}

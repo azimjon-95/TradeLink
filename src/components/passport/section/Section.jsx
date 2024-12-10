@@ -1,27 +1,33 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import "./Section.css";
 import "../../banner/style.css";
 import { useNavigate } from "react-router-dom";
-import section_img from "../../../assets/banner/passport.png";
+import { Collapse } from 'antd';
 import Support from "../../banner/Support";
 import supporters from "../../../assets/passport/macbook.png";
-import { setModalType } from "../../../context/modalType";
-import { langText } from "./lang";
+import { langText, translate } from "./lang";
 import ForPassprt from "../../forPassprt/ForPassprt";
+import AllInOne from "../../all_in_one/AllInOne";
+import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
 
 function Section() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const lang = useSelector((state) => state.language.currentLanguage);
   let token = localStorage.getItem("access_token");
-
+  const currentLanguage = useSelector(
+    (state) => state.language.currentLanguage
+  );
+  const t = translate[currentLanguage];
   useEffect(() => {
     if (token) {
       navigate("/trader-cabinet/dashboard");
     }
   }, [token, navigate]);
 
+
+  const customIcons = ({ isActive }) =>
+    isActive ? <MinusOutlined style={{ fontSize: "22px" }} /> : <PlusOutlined style={{ fontSize: "22px" }} />;
   return (
     <section>
       <div className="homePage">
@@ -46,38 +52,32 @@ function Section() {
       {/* Support */}
       <Support />
 
-
-
-
       <ForPassprt />
 
+      <AllInOne />
 
-
-
-
-
-
-
-
-
-
-
-
-      <div className="section_container">
-        <h1 className="section_title">{langText[lang].title}</h1>
-        <h3>{langText[lang].subtitle}</h3>
-        {!token && (
-          <button onClick={() => dispatch(setModalType("signUp"))}>
-            {langText[lang].buttonText}
-          </button>
-        )}
-        <img src={section_img} alt="passport page img" />
-
-        <div className="section_support">
-          <h2>{langText[lang].supportTitle}</h2>
-          <img src={supporters} alt="supporters" />
-        </div>
-      </div>
+      {/* FAQ */}
+      <div className="FAQ_containerPs" >
+        <h1>{t.faq_title}</h1>
+        <Collapse
+          size="middle"
+          expandIcon={customIcons}
+          expandIconPosition="end"
+          items={t.open_info.map((info, index) => ({
+            key: `${index + 1}`,
+            label: [
+              t.WhatIsKYT,
+              t.KYT_passport,
+              t.what_benefits,
+            ][index],
+            children: (
+              <div className="open_info">
+                <p style={{ fontSize: "14px" }}>{info}</p>
+              </div>
+            ),
+          }))}
+        />
+      </div >
     </section>
   );
 }
