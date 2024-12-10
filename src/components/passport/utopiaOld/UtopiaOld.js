@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ImStarEmpty, ImStarFull } from "react-icons/im";
-import { Checkbox, Select, DatePicker, Space, Switch } from "antd";
+import { Checkbox, Select, DatePicker, Space } from "antd";
 import { CheckSquareTwoTone } from "@ant-design/icons";
 import { RiExpandDiagonalLine } from "react-icons/ri";
 import { useLocation, useParams } from "react-router-dom";
@@ -31,7 +31,7 @@ const UtopiaOldMultiLine = () => {
 
 
   const dispatch = useDispatch();
-  const [isLite, setIsLite] = useState(true);
+  const [isLite] = useState(true);
   const [selectValue, setSelectValue] = useState("day");
   const [data, setData] = useState([]);
   const [topLoader, setTopLoader] = useState(false);
@@ -69,9 +69,9 @@ const UtopiaOldMultiLine = () => {
 
 
 
-  const handleSwitchChange = (checked) => {
-    setIsLite(checked);
-  };
+  // const handleSwitchChange = (checked) => {
+  //   setIsLite(checked);
+  // };
 
   const handleCheckboxChange = (key) => {
     setCheckedItems((prev) => ({

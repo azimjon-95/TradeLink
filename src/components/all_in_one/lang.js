@@ -3,7 +3,7 @@ import frame_136 from "../../assets/icons/frame_136.png";
 import frame_137 from "../../assets/icons/Frame_137.png";
 import frame_138 from "../../assets/icons/Frame_138.png";
 import frame_139 from "../../assets/icons/Frame_139.png";
-import { BsCheck2, BsGraphUp } from "react-icons/bs";
+import { BsGraphUp } from "react-icons/bs";
 import { CiUser } from "react-icons/ci";
 import { BsTextareaResize } from "react-icons/bs";
 import { CgInsights } from "react-icons/cg";
