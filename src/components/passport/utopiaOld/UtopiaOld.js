@@ -31,7 +31,7 @@ const UtopiaOldMultiLine = () => {
 
 
   const dispatch = useDispatch();
-  const [isLite, setIsLite] = useState(false);
+  const [isLite, setIsLite] = useState(true);
   const [selectValue, setSelectValue] = useState("day");
   const [data, setData] = useState([]);
   const [topLoader, setTopLoader] = useState(false);
@@ -170,50 +170,52 @@ const UtopiaOldMultiLine = () => {
         {/* <p>My copy trading: <a href={currentUrl} target="_blank" rel="noopener noreferrer">{currentUrl}</a> https://example.com</p> */}
       </div>
       <div className="oldMultiLine-main">
-        <div
-          style={{
-            position: isSticky ? "static" : "sticky",
-            top: 0,
-            left: 0,
-          }}
-          className="oldMultiLine-main-head"
-        >
-          <Space className="RangePicker" direction="vertical" size={12}>
-            <RangePicker placeholder={placeholders[currentLanguage]} />
-          </Space>
-          <div className="oldMultiLine-calendar">
-            <Select
-              defaultValue="day"
-              style={{
-                width: 100,
-              }}
-              onChange={(value) => setSelectValue(value)}
-              options={[
-                { value: "hour", label: t.hour },
-                { value: "day", label: t.day },
-                { value: "week", label: t.week },
-              ]}
-            />
+        {
+          !isOverlayVisible &&
+          <div
+            style={{
+              position: isSticky ? "static" : "sticky",
+              top: 0,
+              left: 0,
+            }}
+            className="oldMultiLine-main-head"
+          >
+            <Space className="RangePicker" direction="vertical" size={12}>
+              <RangePicker placeholder={placeholders[currentLanguage]} />
+            </Space>
+            <div className="oldMultiLine-calendar">
+              <Select
+                defaultValue="day"
+                style={{
+                  width: 100,
+                }}
+                onChange={(value) => setSelectValue(value)}
+                options={[
+                  { value: "hour", label: t.hour },
+                  { value: "day", label: t.day },
+                  { value: "week", label: t.week },
+                ]}
+              />
 
-            <div
-              style={{
-                color: "#591d87",
-                display: "flex",
-                alignItems: "center",
-                fontSize: "12px",
-              }}
-            >
-              {isLite ? t.lite : t.little}
+              <div
+                style={{
+                  color: "#591d87",
+                  display: "flex",
+                  alignItems: "center",
+                  fontSize: "12px",
+                }}
+              >
+                {/* {isLite ? t.lite : t.little}
               &nbsp;&nbsp;
               <Switch
                 checked={isLite}
                 onChange={handleSwitchChange}
                 className={isLite ? "switch-checked" : "switch-unchecked"}
-              />
+              /> */}
+              </div>
             </div>
           </div>
-        </div>
-
+        }
         {/* -----------------------7A------------------------- */}
         <h2 className="ket-inxTitle">{t.kIndicators}</h2>
         <KeyIndicators currentLanguage={currentLanguage} topLoader={topLoader} data={data} customKey={isLite} />
@@ -221,7 +223,7 @@ const UtopiaOldMultiLine = () => {
           className="overlayVisible"
           style={{
             position: isOverlayVisible ? "fixed" : "static",
-            top: 0,
+            top: "65px",
             left: 0,
             width: "100%",
             height: isOverlayVisible ? "100vh" : "auto",
@@ -259,13 +261,13 @@ const UtopiaOldMultiLine = () => {
                     fontSize: "12px",
                   }}
                 >
-                  {isLite ? t.lite : t.little}
-                  &nbsp;&nbsp;
-                  <Switch
+                  {/* {isLite ? t.lite : t.little}
+                  &nbsp;&nbsp; */}
+                  {/* <Switch
                     checked={isLite}
                     onChange={handleSwitchChange}
                     className={isLite ? "switch-checked" : "switch-unchecked"}
-                  />
+                  /> */}
                   &nbsp;&nbsp; &nbsp;&nbsp;
                   <button
                     className="isOverlayVisible-btn"
