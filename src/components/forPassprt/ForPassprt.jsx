@@ -123,34 +123,36 @@ function ForPassprt() {
               </button>
             ))}
           </div>
-        </div>
 
 
-        <div className="ps_card_container">
-          <div className={`ps_card ${activeCard === 0 ? "active" : ""}`} >
-            {
-              cardData.map((card) => (
-                <div key={card.id} className="ps_card_main">
-                  <p>{card.title}</p>
-                  <div>
-                    <span>{card.description}</span>
+
+          <div className="ps_card_container">
+            <div className={`ps_card ${activeCard === 0 ? "active" : ""}`} >
+              {
+                cardData.map((card) => (
+                  <div key={card.id} className="ps_card_main">
+                    <p>{card.title}</p>
+                    <div>
+                      <span>{card.description}</span>
+                    </div>
                   </div>
-                </div>
-              ))
-            }
-          </div>
-          <div className={`ps_card ${activeCard === 1 ? "active" : ""}`}  >
-            {
-              cardOnes.map((card) => (
-                <div key={card.id} className="ps_card_main">
-                  <p>{card.title}</p>
-                  <div>
-                    <span>{card.description}</span>
+                ))
+              }
+            </div>
+            <div className={`ps_card ${activeCard === 1 ? "active" : ""}`}  >
+              {
+                cardOnes.map((card) => (
+                  <div key={card.id} className="ps_card_main">
+                    <p>{card.title}</p>
+                    <div>
+                      <span>{card.description}</span>
+                    </div>
                   </div>
-                </div>
-              ))
-            }
+                ))
+              }
+            </div>
           </div>
+
         </div>
       </div>
 

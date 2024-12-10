@@ -32,15 +32,15 @@ function Section() {
     <section>
       <div className="homePage">
         <header className="PassportPage__header">
-          <div className="homePage__texts">
-            <h1 className="homePage__title">{langText[lang].title}</h1>
+          <div className="PaspportPage__texts">
+            <h1 className="PaspportPage__title">{langText[lang].title}</h1>
             <h1
               style={{ color: "#7241d3" }}
-              className="homePage__title homePage__title_x"
+              className="PaspportPage__title PaspportPage__title_x"
             >
               {langText[lang].crypto}
             </h1>
-            <p className="homePage__subtitle">{langText[lang].subtitle}</p>
+            <p className="PaspportPage__subtitle">{langText[lang].subtitle}</p>
           </div>
 
           <div className="PassportPage__images">

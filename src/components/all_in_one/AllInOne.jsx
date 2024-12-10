@@ -8,7 +8,7 @@ function AllInOne() {
   const [activeTab, setActiveTab] = useState(0);
   const lang = useSelector((state) => state.language.currentLanguage);
   const t = langText[lang];
-  console.log(activeTab);
+
   return (
     <div className="forPaspport_All">
       <h1>{t.title}</h1>
@@ -23,6 +23,7 @@ function AllInOne() {
           </button>
         ))}
       </div>
+
       <div className="allInOne_contents_box">
         <div className="contents_box_ones">
           <div className="contents_box_ones_img">

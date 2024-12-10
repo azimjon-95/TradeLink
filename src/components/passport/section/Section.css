@@ -66,3 +66,66 @@ section {
 .FAQ_containerPs div>p {
   width: 50%;
 }
+
+
+/* media */
+@media screen and (max-width:900px) {
+  .PassportPage__header {
+    width: 100%;
+    margin-top: 70px !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column-reverse;
+    padding: 50px 30px;
+    gap: 5px;
+  }
+
+
+
+  .PassportPage__images>img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1);
+  }
+
+  .FAQ_containerPs {
+    width: 94%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 40px 0;
+    padding: 20px 0;
+    background: #fff;
+  }
+
+  .FAQ_containerPs>h1 {
+    text-align: center;
+    font-size: 40px;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+
+
+  .FAQ_containerPs div>p {
+    width: 70%;
+  }
+
+}
+
+@media screen and (max-width:450px) {
+  .PassportPage__images {
+    width: 370px;
+    height: 220px;
+  }
+
+  .PassportPage__images>img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1);
+    margin-right: -40px;
+  }
+}
