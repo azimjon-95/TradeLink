@@ -7,7 +7,8 @@ import bitget from "../../assets/newBanners/bitget.png";
 import htx from "../../assets/newBanners/htx.png";
 import { useSelector } from "react-redux";
 import { translate } from './Lang';
-import './style.css';
+import "./media.css";
+import "./style.css";
 
 const Support = () => {
     const currentLanguage = useSelector(
@@ -18,7 +19,7 @@ const Support = () => {
         <div className="weSupport_container" >
             <h1>{t.weSupport}</h1>
 
-            <div>
+            <div >
                 <img width={70} src={okx} alt="" />
                 <img width={120} src={binance} alt="" />
                 <img width={70} src={byb} alt="" />

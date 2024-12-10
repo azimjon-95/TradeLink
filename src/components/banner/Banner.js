@@ -224,7 +224,7 @@ const Banner = () => {
             {/* Slide 3 (Next slide) */}
             <SwiperSlide className="swiper-slide_cert_slide_3">
               <div className="swiper-slide-main_slide_3">
-                <div className="swiper-slide-main_slide_3_info"></div>
+                <div className="swiper-slide-main_slide_3_info_img"></div>
                 <div className="swiper-slide-main_slide_3_info">
                   <h1>{t.analyzing_trader}</h1>
                   <span>

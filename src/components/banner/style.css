@@ -1,6 +1,5 @@
 .homePage {
   width: 100%;
-  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1021,4 +1020,40 @@
   background-color: transparent !important;
   border: none !important;
   border-radius: 0px !important;
+}
+
+
+.weSupport_box {
+  width: 200px !important;
+  height: 100px !important;
+  background: red !important;
+}
+
+.weSupport_box>img {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 900px) {
+  .weSupport_container {
+    width: 100%;
+    height: 100% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 50px;
+    margin-top: 50px;
+  }
+
+  .weSupport_container>div {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap !important;
+    padding: 0 10px;
+    gap: 10px;
+  }
+
 }

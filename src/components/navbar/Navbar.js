@@ -442,6 +442,7 @@ function Navbar() {
             onClick={() => {
               setModalType("signIn");
               setIsModalSinUp(true);
+
             }}
           >
             {login}
@@ -505,9 +506,19 @@ function Navbar() {
           </div>
           {openSections.tradeLink && (
             <div className="media-nav-links">
-              <p>{about}</p>
-              <p>{products}</p>
-              <p>{faq}</p>
+              {links.map((link, index) => (
+                <Link
+                  key={index}
+                  to={link.path}
+                  onClick={() => {
+                    handleClick(link.path);
+                    handleScroll(link.scrollTo);
+                    setIsMediaModalOpen(false)
+                  }}
+                >
+                  <p>{link.label}</p>
+                </Link>
+              ))}
             </div>
           )}
         </div>
@@ -529,8 +540,12 @@ function Navbar() {
           </div>
           {openSections.passport && (
             <div className="media-nav-links">
-              <p>{traderCabinet}</p>
-              <p>{rating}</p>
+              <Link to="/" onClick={() => setIsMediaModalOpen(false)} >
+                <p>{traderCabinet}</p>
+              </Link>
+              <Link to="/rating" onClick={() => setIsMediaModalOpen(false)} >
+                <p>{rating}</p>
+              </Link>
             </div>
           )}
         </div>
