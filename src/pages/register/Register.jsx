@@ -269,17 +269,7 @@ const SignUpModal = ({
           </form>
         )}
       </Modal>
-      <div onClick={handleClose} style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'rgba(0, 0, 0, 0.3)',
-        zIndex: 111,
-        cursor: "pointer",
-      }}>ss</div>
-      {/* {isOpen && */}
+
     </div >
   );
 };
