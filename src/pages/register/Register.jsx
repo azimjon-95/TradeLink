@@ -155,23 +155,17 @@ const SignUpModal = ({
   };
 
   return (
-    <>
+    <div className="modal-content_img">
       <Modal
         isOpen={isOpen}
         onRequestClose={handleClose}
         overlayClassName="modal-overlay"
         className="modal-content"
+        shouldCloseOnOverlayClick={true}  // Close on background click
       >
         {/* Render Log In Modal */}
         {modalType === "signIn" && (
           <form onSubmit={singIn}>
-            {/* <button
-              className="close_modalReg"
-              onClick={handleClose}
-              style={{ border: "none", background: "none", cursor: "pointer" }}
-            >
-              ✖
-            </button> */}
             <button
               className="close_modalReg"
               onClick={handleClose}
@@ -275,9 +269,23 @@ const SignUpModal = ({
           </form>
         )}
       </Modal>
-      <div onClick={handleClose} className="close-reg-up"></div>
-    </>
+      <div onClick={handleClose} style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(0, 0, 0, 0.3)',
+        zIndex: 111,
+        cursor: "pointer",
+      }}>ss</div>
+      {/* {isOpen && */}
+    </div >
   );
 };
 
 export default SignUpModal;
+
+
+
+

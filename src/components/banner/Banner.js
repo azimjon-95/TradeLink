@@ -106,6 +106,7 @@ const Banner = () => {
 
   const createData = (data, frames) =>
     data?.map((item, index) => ({
+      id: item?.portfolio_id,
       rank: index + 1,
       name: item?.user_name || "N/A",
       icons: frames[index],
@@ -121,7 +122,7 @@ const Banner = () => {
     quarterly: createData(leaderboardData?.quarterly, frames),
   };
 
-
+  console.log(data.quarterly);
   const customIcons = ({ isActive }) =>
     isActive ? <MinusOutlined style={{ fontSize: "22px" }} /> : <PlusOutlined style={{ fontSize: "22px" }} />;
   return (
@@ -272,33 +273,35 @@ const Banner = () => {
                 <Skeleton
                   title={false}
                   active
-                  paragraph={{ rows: 5, width: "100%", height: "45px" }}
+                  paragraph={{ rows: 5, width: "100%", height: "75px" }}
                 />
               ) : (
                 <>
                   {data.monthly.map((item) => (
-                    <div className="card_ret-bann" key={item.rank}>
-                      <span>
-                        <p
-                          className={`${item.rank === 1 ? "item-rank" : "item-rank-circle"
-                            }`}
-                        >
-                          {item.rank}
-                        </p>
-                        <img width={28} src={item.icons} alt="" />
-                        <div className="name_reting_user">
-                          {item.name} <br />{" "}
-                          <p>
-                            {t.by} {item.org}
+                    <Link key={item.rank} to={`/portfolio/${item?.id}`}>
+                      <div className="card_ret-bann">
+                        <span>
+                          <p
+                            className={`${item.rank === 1 ? "item-rank" : "item-rank-circle"
+                              }`}
+                          >
+                            {item.rank}
                           </p>
-                        </div>
-                      </span>
+                          <img width={28} src={item.icons} alt="" />
+                          <div className="name_reting_user">
+                            {item.name} <br />{" "}
+                            <p>
+                              {t.by} {item.org}
+                            </p>
+                          </div>
+                        </span>
 
-                      <span className="name_reting_res">
-                        <img width={28} src={item.reting} alt="" />
-                        <p> {item.score}</p>
-                      </span>
-                    </div>
+                        <span className="name_reting_res">
+                          <img width={28} src={item.reting} alt="" />
+                          <p> {item.score}</p>
+                        </span>
+                      </div>
+                    </Link>
                   ))}
                 </>
               )}
@@ -322,28 +325,30 @@ const Banner = () => {
               ) : (
                 <>
                   {data.quarterly.map((item) => (
-                    <div className="card_ret-bann" key={item.rank}>
-                      <span>
-                        <p
-                          className={`${item.rank === 1 ? "item-rank" : "item-rank-circle"
-                            }`}
-                        >
-                          {item.rank}
-                        </p>
-                        <img width={28} src={item.icons} alt="" />
-                        <div className="name_reting_user">
-                          {item.name} <br />{" "}
-                          <p>
-                            {t.by} {item.org}
+                    <Link key={item.rank} to={`/portfolio/${item?.id}`}>
+                      <div className="card_ret-bann">
+                        <span>
+                          <p
+                            className={`${item.rank === 1 ? "item-rank" : "item-rank-circle"
+                              }`}
+                          >
+                            {item.rank}
                           </p>
-                        </div>
-                      </span>
+                          <img width={28} src={item.icons} alt="" />
+                          <div className="name_reting_user">
+                            {item.name} <br />{" "}
+                            <p>
+                              {t.by} {item.org}
+                            </p>
+                          </div>
+                        </span>
 
-                      <span className="name_reting_res">
-                        <img width={28} src={item.reting} alt="" />
-                        <p> {item.score}</p>
-                      </span>
-                    </div>
+                        <span className="name_reting_res">
+                          <img width={28} src={item.reting} alt="" />
+                          <p> {item.score}</p>
+                        </span>
+                      </div>
+                    </Link>
                   ))}
                 </>
               )}

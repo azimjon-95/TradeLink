@@ -282,6 +282,8 @@ const Leaderboard = () => {
     setPage(page);
   };
 
+  console.log(leaderboardData?.quarterly);
+
   const month = transMonth[currentLanguage];
 
   const options = [

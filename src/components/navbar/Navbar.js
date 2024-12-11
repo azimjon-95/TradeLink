@@ -165,7 +165,7 @@ function Navbar() {
     ],
     "/": [
       { path: "/#about", label: about, scrollTo: 0 },
-      { path: "/#products", label: passportTitle, scrollTo: 570 },
+      { path: "/rating", label: rating, scrollTo: 0 },
       { path: "/faq", label: faq },
     ],
     default: [{ path: "/", label: "", scrollTo: 0 }],

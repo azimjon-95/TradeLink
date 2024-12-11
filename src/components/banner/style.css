@@ -15,6 +15,10 @@
   overflow: hidden;
 }
 
+.reting_banner_cards a {
+  text-decoration: none;
+  color: #000;
+}
 
 .homePage__header {
   width: 100%;
@@ -575,7 +579,7 @@
   width: 100%;
   border: .3px solid #80808038;
   border-radius: 30px;
-  padding: 10px 16px 0 16px;
+  padding: 10px 8px 0 8px;
 }
 
 .name_reting_user {
@@ -606,7 +610,12 @@
   justify-content: space-between;
   margin-bottom: 10px;
   border-bottom: .3px solid #80808038;
-  padding: 5px 0;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.card_ret-bann:hover {
+  background: #b8b8b82c;
 }
 
 .card_ret-bann:last-child {
