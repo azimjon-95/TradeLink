@@ -20,15 +20,16 @@ import {
   labels,
   labelsBar,
   drawDown,
-  translationsInfo
-} from './Lang'
+  translationsInfo,
+} from "./Lang";
 
 const { RangePicker } = DatePicker;
 
 const UtopiaOldMultiLine = () => {
-  const currentLanguage = useSelector((state) => state.language.currentLanguage);
+  const currentLanguage = useSelector(
+    (state) => state.language.currentLanguage
+  );
   const t = translations[currentLanguage] || translations.en;
-
 
   const dispatch = useDispatch();
   const [isLite] = useState(true);
@@ -43,7 +44,6 @@ const UtopiaOldMultiLine = () => {
   const [isSticky, setIsSticky] = useState(true);
   const location = useLocation();
 
-
   const handleClick = () => {
     if (token) {
       // Toggle stars between 1 and 0, and switch icon
@@ -55,19 +55,33 @@ const UtopiaOldMultiLine = () => {
   };
 
   // getData;
+  // useEffect(() => {
+  //   setTopLoader(true);
+  //   let API = `https://api.kyt.systems/portfolio/main-indicators?portfolio_id=${baseId}&time_step=${selectValue}`;
+  //   myAxios
+  //     .get(API)
+  //     .then((res) => {
+  //       setData(res?.data?.data);
+  //     })
+  //     .catch((err) => console.log(err))
+  //     .finally(() => setTopLoader(false));
+  // }, [selectValue, baseId]);
+
   useEffect(() => {
     setTopLoader(true);
-    let API = `https://api.kyt.systems/portfolio/main-indicators?portfolio_id=${baseId}&time_step=${selectValue}`;
-    myAxios
-      .get(API)
-      .then((res) => {
+    const API = `https://api.kyt.systems/portfolio/main-indicators?portfolio_id=${baseId}&time_step=${selectValue}`;
+    const fetchData = async () => {
+      try {
+        const res = await myAxios.get(API);
         setData(res?.data?.data);
-      })
-      .catch((err) => console.log(err))
-      .finally(() => setTopLoader(false));
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setTopLoader(false);
+      }
+    };
+    fetchData();
   }, [selectValue, baseId]);
-
-
 
   // const handleSwitchChange = (checked) => {
   //   setIsLite(checked);
@@ -95,7 +109,6 @@ const UtopiaOldMultiLine = () => {
       document.body.style.overflow = "";
     };
   }, [isOverlayVisible]);
-
 
   const allowedKeys = new Set([
     "benchmarkBTC",
@@ -128,14 +141,14 @@ const UtopiaOldMultiLine = () => {
     en: ["Start Day", "End Day"],
     ru: ["Начало", "Конец"], // Russian
     de: ["Startdatum", "Enddatum"], // German
-    es: ["Día de inicio", "Día final"] // Spanish
+    es: ["Día de inicio", "Día final"], // Spanish
   };
 
   const translationsCh = {
     en: "Chart",
     ru: "График", // Russian
     de: "Diagramm", // German
-    es: "Gráfico" // Spanish
+    es: "Gráfico", // Spanish
   };
 
   useEffect(() => {
@@ -156,7 +169,9 @@ const UtopiaOldMultiLine = () => {
           <img src={data?.user_avatar || bin} alt="" />
           <p>{data?.user_name || ""}</p>
           <p>•</p>
-          <p>{data?.views || 0} {t.views}</p>
+          <p>
+            {data?.views || 0} {t.views}
+          </p>
           <p>•</p>
           <p>
             {(data?.stars ?? 0) + stars}{" "}
@@ -170,8 +185,7 @@ const UtopiaOldMultiLine = () => {
         {/* <p>My copy trading: <a href={currentUrl} target="_blank" rel="noopener noreferrer">{currentUrl}</a> https://example.com</p> */}
       </div>
       <div className="oldMultiLine-main">
-        {
-          !isOverlayVisible &&
+        {!isOverlayVisible && (
           <div
             style={{
               position: isSticky ? "static" : "sticky",
@@ -215,10 +229,15 @@ const UtopiaOldMultiLine = () => {
               </div>
             </div>
           </div>
-        }
+        )}
         {/* -----------------------7A------------------------- */}
         <h2 className="ket-inxTitle">{t.kIndicators}</h2>
-        <KeyIndicators currentLanguage={currentLanguage} topLoader={topLoader} data={data} customKey={isLite} />
+        <KeyIndicators
+          currentLanguage={currentLanguage}
+          topLoader={topLoader}
+          data={data}
+          customKey={isLite}
+        />
         <div
           className="overlayVisible"
           style={{
@@ -313,7 +332,9 @@ const UtopiaOldMultiLine = () => {
                 </div>
               ))}
           </div>
-          <Charts currentLanguage={currentLanguage} labels={labels}
+          <Charts
+            currentLanguage={currentLanguage}
+            labels={labels}
             selectValue={selectValue}
             id={baseId}
             // chartData={chartData}
@@ -322,7 +343,7 @@ const UtopiaOldMultiLine = () => {
             isOverlayVisible={isOverlayVisible}
             labelsBar={labelsBar}
             drawDown={drawDown}
-          // setLoading={setLoading}
+            // setLoading={setLoading}
           />
           {/* {loading && (
             <div className="single-cards-container">
@@ -344,7 +365,3 @@ const UtopiaOldMultiLine = () => {
 };
 
 export default UtopiaOldMultiLine;
-
-
-
-

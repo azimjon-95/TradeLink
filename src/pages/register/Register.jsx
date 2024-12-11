@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import "./style.css";
-import { Button } from "antd";
+import { Button, message } from "antd";
 import { useSelector } from "react-redux";
 import { FcGoogle } from "react-icons/fc";
 import { FiX } from "react-icons/fi";
@@ -26,6 +26,7 @@ const translations = {
     login: "Log in",
     signupTitle: "Sign up",
     loginWith: "Log in with",
+    incorrect: "Incorrect email or password",
   },
   ru: {
     aboutPaymentWarning:
@@ -42,6 +43,7 @@ const translations = {
     login: "Войти",
     signupTitle: "Регистрация",
     loginWith: "Войти через",
+    incorrect: "Неправильный email или пароль",
   },
   de: {
     aboutPaymentWarning:
@@ -58,6 +60,7 @@ const translations = {
     login: "Anmelden",
     signupTitle: "Registrieren",
     loginWith: "Anmelden mit",
+    incorrect: "Falscher E-Mail-Adresse oder Passwort",
   },
   es: {
     aboutPaymentWarning:
@@ -74,6 +77,7 @@ const translations = {
     login: "Iniciar sesión",
     signupTitle: "Regístrate",
     loginWith: "Iniciar sesión con",
+    incorrect: "Correo electrónica o contraseña incorrectos",
   },
 };
 
@@ -130,6 +134,7 @@ const SignUpModal = ({
         handleClose();
       }
     } catch (error) {
+      message.error(subTitle.incorrect);
       console.log(error);
     } finally {
       setIsLoading(false);

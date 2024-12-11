@@ -485,9 +485,10 @@
     white-space: nowrap;
     font-size: 14px;
     line-height: 22.001px;
-    font-weight: 600;
+    font-weight: 600 !important;
     cursor: pointer;
-    color: rgb(26, 34, 51);
+    font-family: sans-serif;
+    color: #fff;
   }
 
   img {
