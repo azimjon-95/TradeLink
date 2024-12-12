@@ -230,10 +230,10 @@ function Navbar() {
     const linksToSet = mainPageRoutes.includes(path)
       ? linkOptions["/"]
       : isUserRoute || isPortfolioRoute
-        ? passportLinks
-        : passportOpenRoutes.includes(path)
-          ? passportLinks
-          : linkOptions[path] || linkOptions.default;
+      ? passportLinks
+      : passportOpenRoutes.includes(path)
+      ? passportLinks
+      : linkOptions[path] || linkOptions.default;
 
     setLinks(linksToSet);
   }, [
@@ -338,136 +338,106 @@ function Navbar() {
         background: isScrolled ? "#1B1531" : "",
         backdropFilter: isScrolled ? "blur(50px)" : "",
       }}
-      className={`navbar_container ${isProductDashboard ? "navbar_static" : "navbar_sticky"
-        }`}
+      className={`navbar_container ${
+        isProductDashboard ? "navbar_static" : "navbar_sticky"
+      }`}
     >
-      <div className="nav_links-box">
-        <Link to="/" onClick={() => handleClick("/")}>
-          <div className="nav_logo">
-            <img src={logo} alt="Logo" />
-          </div>
-        </Link>
-        <button
-          className="menu_button"
-          onMouseEnter={openModal}
-          onMouseLeave={(e) => handleMouseLeave(e, closeModalWithDelay)}
-        >
-          <CgMenuGridO />
-          {isModalOpen && (
-            <div
-              className="navbar_modal"
-              onMouseEnter={openModal}
-              onMouseLeave={closeModalWithDelay}
-              tabIndex={0}
-              onBlur={handleModalBlur}
-            >
-              <Link to="/">
-                <div className="trade-link-header">
-                  <div className="trade-link-header-text">
-                    <h3>KYT - Know Your Trader</h3>
-                    <p>{kytDescription}</p>
-                  </div>
-                </div>
-              </Link>
-              <Link to="/passport">
-                <div className="trade-link-header">
-                  <div className="trade-link-header-text">
-                    <h3>{passportTitle}</h3>
-                    <p>{passportDescription}</p>
-                  </div>
-                </div>
-              </Link>
+      <div className="header_main_container">
+        <div className="nav_links-box">
+          <Link to="/" onClick={() => handleClick("/")}>
+            <div className="nav_logo">
+              <img src={logo} alt="Logo" />
             </div>
-          )}
-        </button>
-
-        <span>
-          <div className="menu_button-lang">
-            <LanguageSwitcher />
-          </div>
-          <button className="menu_button-media" onClick={toggleMediaModal}>
-            <IoMenu />
-          </button>
-        </span>
-      </div>
-
-      <div className="nav_links-main">
-        {links.map((link, index) => (
-          <Link
-            key={index}
-            to={link.path}
-            onClick={() => {
-              handleClick(link.path);
-              handleScroll(link.scrollTo);
-            }}
-          >
-            <button
-              style={{
-                width: "100%",
-                position: "relative",
-              }}
-              className={activeLink === link.path ? "active-button" : ""}
-            >
-              {link.label}
-            </button>
           </Link>
-        ))}
-      </div>
-
-      {token ? (
-        <div className="right-btns">
-          <LanguageSwitcher />
-          <Popover
-            content={popoverContent}
-            trigger="click"
-            open={visible}
-            onOpenChange={handleVisibleChange}
-            overlayClassName="popoverAnimation"
+          <button
+            className="menu_button"
+            onMouseEnter={openModal}
+            onMouseLeave={(e) => handleMouseLeave(e, closeModalWithDelay)}
           >
-            <div className="userProfileName">
-              <b>{payload?.user}</b>
-              <img
-                src="https://gravatar.com/avatar/07f9820661965f5c65726c026a58a8b3?size=80&d=retro"
-                alt="Profile"
-                style={{ cursor: "pointer" }}
-              />
+            <CgMenuGridO />
+            {isModalOpen && (
+              <div
+                className="navbar_modal"
+                onMouseEnter={openModal}
+                onMouseLeave={closeModalWithDelay}
+                tabIndex={0}
+                onBlur={handleModalBlur}
+              >
+                <Link to="/">
+                  <div className="trade-link-header">
+                    <div className="trade-link-header-text">
+                      <h3>KYT - Know Your Trader</h3>
+                      <p>{kytDescription}</p>
+                    </div>
+                  </div>
+                </Link>
+                <Link to="/passport">
+                  <div className="trade-link-header">
+                    <div className="trade-link-header-text">
+                      <h3>{passportTitle}</h3>
+                      <p>{passportDescription}</p>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            )}
+          </button>
+
+          <span>
+            <div className="menu_button-lang">
+              <LanguageSwitcher />
             </div>
-          </Popover>
+            <button className="menu_button-media" onClick={toggleMediaModal}>
+              <IoMenu />
+            </button>
+          </span>
         </div>
-      ) : (
-        <div className="right-btns">
-          <LanguageSwitcher />
-
-          <button
-            onClick={() => {
-              setModalType("signIn");
-              setIsModalSinUp(true);
-
-            }}
-          >
-            {login}
-          </button>
-          <button
-            onClick={() => {
-              setModalType("signUp");
-              setIsModalSinUp(true);
-            }}
-          >
-            {signup}
-          </button>
+        <div className="nav_links-main">
+          {links.map((link, index) => (
+            <Link
+              key={index}
+              to={link.path}
+              onClick={() => {
+                handleClick(link.path);
+                handleScroll(link.scrollTo);
+              }}
+            >
+              <button
+                style={{
+                  width: "100%",
+                  position: "relative",
+                }}
+                className={activeLink === link.path ? "active-button" : ""}
+              >
+                {link.label}
+              </button>
+            </Link>
+          ))}
         </div>
-      )}
+        {token ? (
+          <div className="right-btns">
+            <LanguageSwitcher />
+            <Popover
+              content={popoverContent}
+              trigger="click"
+              open={visible}
+              onOpenChange={handleVisibleChange}
+              overlayClassName="popoverAnimation"
+            >
+              <div className="userProfileName">
+                <b>{payload?.user}</b>
+                <img
+                  src="https://gravatar.com/avatar/07f9820661965f5c65726c026a58a8b3?size=80&d=retro"
+                  alt="Profile"
+                  style={{ cursor: "pointer" }}
+                />
+              </div>
+            </Popover>
+          </div>
+        ) : (
+          <div className="right-btns">
+            <LanguageSwitcher />
 
-      {/* Media modal */}
-      <div
-        className={`media_modal-container ${isMediaModalOpen ? "open" : ""}`}
-      >
-        <div style={{ marginBottom: "10px" }} className="media_modal-lang">
-          <FiX onClick={() => setIsMediaModalOpen(false)} />
-        </div>
-
-        {!token && (
-          <div className="media_modal-btns">
             <button
               onClick={() => {
                 setModalType("signIn");
@@ -478,110 +448,139 @@ function Navbar() {
             </button>
             <button
               onClick={() => {
-                setIsModalSinUp(true);
-                toggleMediaModal();
                 setModalType("signUp");
+                setIsModalSinUp(true);
               }}
             >
               {signup}
             </button>
           </div>
         )}
-
-        {/* KYT - Know Your Trader Section */}
-        <div>
-          <div
-            className="nav_head-lins"
-            onClick={() => toggleSection("tradeLink")}
-          >
-            <span>
-              <AiFillHome />
-              KYT
-            </span>
-            {openSections.tradeLink ? (
-              <IoChevronDown className="nav-chevron" />
-            ) : (
-              <IoChevronUpOutline className="nav-chevron" />
-            )}
+        {/* Media modal */}
+        <div
+          className={`media_modal-container ${isMediaModalOpen ? "open" : ""}`}
+        >
+          <div style={{ marginBottom: "10px" }} className="media_modal-lang">
+            <FiX onClick={() => setIsMediaModalOpen(false)} />
           </div>
-          {openSections.tradeLink && (
-            <div className="media-nav-links">
-              {links.map((link, index) => (
-                <Link
-                  key={index}
-                  to={link.path}
-                  onClick={() => {
-                    handleClick(link.path);
-                    handleScroll(link.scrollTo);
-                    setIsMediaModalOpen(false)
-                  }}
-                >
-                  <p>{link.label}</p>
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
-        {/* Passport Section */}
-        <div>
-          <div
-            className="nav_head-lins"
-            onClick={() => toggleSection("passport")}
-          >
-            <span>
-              <AiOutlineFileText />
-              {passportTitle}
-            </span>
-            {openSections.passport ? (
-              <IoChevronDown className="nav-chevron" />
-            ) : (
-              <IoChevronUpOutline className="nav-chevron" />
-            )}
-          </div>
-          {openSections.passport && (
-            <div className="media-nav-links">
-              <Link to="/" onClick={() => setIsMediaModalOpen(false)} >
-                <p>{traderCabinet}</p>
-              </Link>
-              <Link to="/rating" onClick={() => setIsMediaModalOpen(false)} >
-                <p>{rating}</p>
-              </Link>
-            </div>
-          )}
-        </div>
 
-        <div className="userProfileName media_modal_userInfo">
-          <div className="userProfileName_left">
-            {token && (
-              <Popover
-                content={popoverContentMobile}
-                trigger="click"
-                open={visibleMob}
-                onOpenChange={handleVisibleChangeMob}
-                overlayClassName="popoverAnimation"
+          {!token && (
+            <div className="media_modal-btns">
+              <button
+                onClick={() => {
+                  setModalType("signIn");
+                  setIsModalSinUp(true);
+                }}
               >
-                <img
-                  src="https://gravatar.com/avatar/07f9820661965f5c65726c026a58a8b3?size=80&d=retro"
-                  alt=""
-                />
-                <b>{payload?.user}</b>
-              </Popover>
+                {login}
+              </button>
+              <button
+                onClick={() => {
+                  setIsModalSinUp(true);
+                  toggleMediaModal();
+                  setModalType("signUp");
+                }}
+              >
+                {signup}
+              </button>
+            </div>
+          )}
+
+          {/* KYT - Know Your Trader Section */}
+          <div>
+            <div
+              className="nav_head-lins"
+              onClick={() => toggleSection("tradeLink")}
+            >
+              <span>
+                <AiFillHome />
+                KYT
+              </span>
+              {openSections.tradeLink ? (
+                <IoChevronDown className="nav-chevron" />
+              ) : (
+                <IoChevronUpOutline className="nav-chevron" />
+              )}
+            </div>
+            {openSections.tradeLink && (
+              <div className="media-nav-links">
+                {links.map((link, index) => (
+                  <Link
+                    key={index}
+                    to={link.path}
+                    onClick={() => {
+                      handleClick(link.path);
+                      handleScroll(link.scrollTo);
+                      setIsMediaModalOpen(false);
+                    }}
+                  >
+                    <p>{link.label}</p>
+                  </Link>
+                ))}
+              </div>
             )}
           </div>
-        </div>
-      </div>
+          {/* Passport Section */}
+          <div>
+            <div
+              className="nav_head-lins"
+              onClick={() => toggleSection("passport")}
+            >
+              <span>
+                <AiOutlineFileText />
+                {passportTitle}
+              </span>
+              {openSections.passport ? (
+                <IoChevronDown className="nav-chevron" />
+              ) : (
+                <IoChevronUpOutline className="nav-chevron" />
+              )}
+            </div>
+            {openSections.passport && (
+              <div className="media-nav-links">
+                <Link to="/" onClick={() => setIsMediaModalOpen(false)}>
+                  <p>{traderCabinet}</p>
+                </Link>
+                <Link to="/rating" onClick={() => setIsMediaModalOpen(false)}>
+                  <p>{rating}</p>
+                </Link>
+              </div>
+            )}
+          </div>
 
-      <div
-        className={`close-modal-signup ${isModalSinUp && "close-modal-signup-open"
+          <div className="userProfileName media_modal_userInfo">
+            <div className="userProfileName_left">
+              {token && (
+                <Popover
+                  content={popoverContentMobile}
+                  trigger="click"
+                  open={visibleMob}
+                  onOpenChange={handleVisibleChangeMob}
+                  overlayClassName="popoverAnimation"
+                >
+                  <img
+                    src="https://gravatar.com/avatar/07f9820661965f5c65726c026a58a8b3?size=80&d=retro"
+                    alt=""
+                  />
+                  <b>{payload?.user}</b>
+                </Popover>
+              )}
+            </div>
+          </div>
+        </div>
+        <div
+          className={`close-modal-signup ${
+            isModalSinUp && "close-modal-signup-open"
           }`}
-      >
-        <SignUpModal
-          setModalType={setModalType}
-          modalType={modalType}
-          setIsMediaModalOpen={setIsMediaModalOpen}
-          isOpen={isModalSinUp}
-          onRequestClose={() => setIsModalSinUp(false)}
-        />
+        >
+          <SignUpModal
+            setModalType={setModalType}
+            modalType={modalType}
+            setIsMediaModalOpen={setIsMediaModalOpen}
+            isOpen={isModalSinUp}
+            onRequestClose={() => setIsModalSinUp(false)}
+          />
+        </div>
       </div>
     </div>
   );

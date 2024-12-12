@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import "./style.css";
 import { useSelector } from "react-redux";
 import { BsArrowUpShort } from "react-icons/bs";
@@ -65,14 +65,11 @@ const translations = {
   },
 };
 
-
 const Footer = () => {
   const currentLanguage = useSelector(
     (state) => state.language.currentLanguage
   );
   const subTitle = translations[currentLanguage];
-
-
 
   const handleScrollToTop = () => {
     setTimeout(() => {
@@ -80,58 +77,69 @@ const Footer = () => {
     }, 0); // Ensure it runs after route change
   };
 
-
   return (
     <footer className="footer">
-      <div className="footer-top">
-        <div className="footer-section">
-          <div className="footer-head-logo">
-            <img src={logo} alt="LOGO" />
+      <div className="footer_main_container">
+        <div className="footer-top">
+          <div className="footer-section">
+            <div className="footer-head-logo">
+              <img src={logo} alt="LOGO" />
+            </div>
           </div>
-        </div>
 
-        <div className="footer-section">
-          <h3 className="footer-title">{subTitle?.products}</h3>
-          <ul className="footer-list">
-            <li>
-              <Link to={"/rating"}>{subTitle?.rating}</Link>
-            </li>
-            <li>
-              <Link to={"/passport"}>{subTitle?.passport}</Link>
-            </li>
-          </ul>
-        </div>
+          <div className="footer-section">
+            <h3 className="footer-title">{subTitle?.products}</h3>
+            <ul className="footer-list">
+              <li>
+                <Link to={"/rating"}>{subTitle?.rating}</Link>
+              </li>
+              <li>
+                <Link to={"/passport"}>{subTitle?.passport}</Link>
+              </li>
+            </ul>
+          </div>
 
-        <div className="footer-section">
-          <h3 className="footer-title">{subTitle?.company}</h3>
-          <ul className="footer-list">
-            <li>
-              <Link onClick={handleScrollToTop} to={"/about"}>{subTitle?.aboutUs}</Link>
-            </li>
-            <li>
-              <Link onClick={handleScrollToTop} to={"/reviews"}>{subTitle?.reviews}</Link>
-            </li>
-            <li>
-              <Link onClick={handleScrollToTop} to={"/faq"}>{subTitle?.faq}</Link>
-            </li>
-            <li>
-              <Link onClick={handleScrollToTop} to={"/contact"}>{subTitle?.contact}</Link>
-            </li>
-            {/* <li>
+          <div className="footer-section">
+            <h3 className="footer-title">{subTitle?.company}</h3>
+            <ul className="footer-list">
+              <li>
+                <Link onClick={handleScrollToTop} to={"/about"}>
+                  {subTitle?.aboutUs}
+                </Link>
+              </li>
+              <li>
+                <Link onClick={handleScrollToTop} to={"/reviews"}>
+                  {subTitle?.reviews}
+                </Link>
+              </li>
+              <li>
+                <Link onClick={handleScrollToTop} to={"/faq"}>
+                  {subTitle?.faq}
+                </Link>
+              </li>
+              <li>
+                <Link onClick={handleScrollToTop} to={"/contact"}>
+                  {subTitle?.contact}
+                </Link>
+              </li>
+              {/* <li>
               <Link to={"/"}>{subTitle?.support}</Link>
             </li> */}
-          </ul>
+            </ul>
+          </div>
+
+          <button onClick={handleScrollToTop}>
+            <BsArrowUpShort />
+          </button>
         </div>
 
-        <button onClick={handleScrollToTop}><BsArrowUpShort /></button>
-      </div>
+        <div className="footer-bottom">
+          <p className="footer-copyright">{subTitle?.copyright}</p>
+          <p className="footer-disclaimer">{subTitle?.disclaimer}</p>
+        </div>
 
-      <div className="footer-bottom">
-        <p className="footer-copyright">{subTitle?.copyright}</p>
-        <p className="footer-disclaimer">{subTitle?.disclaimer}</p>
+        <img src={footer_shadow} alt="" />
       </div>
-
-      <img src={footer_shadow} alt="" />
     </footer>
   );
 };

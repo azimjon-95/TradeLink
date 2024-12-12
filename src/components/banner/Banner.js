@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import "./style.css";
 import "./media.css";
 import AOS from "aos";
-import { Collapse, Skeleton } from 'antd';
+import { Collapse, Skeleton } from "antd";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
@@ -31,12 +31,11 @@ import Ellipse from "../../assets/newBanners/image2.png";
 import ForTrader from "../../components/forTrader/ForTrader";
 import "aos/dist/aos.css";
 import { transMonth } from "../passport/rating/Lang";
-import { translate } from './Lang';
-import 'swiper/css';
-import 'swiper/css/pagination';
+import { translate } from "./Lang";
+import "swiper/css";
+import "swiper/css/pagination";
 import Support from "./Support";
 // import { IoRadioButtonOn } from "react-icons/io5";
-
 
 const Banner = () => {
   const location = useLocation();
@@ -48,11 +47,8 @@ const Banner = () => {
   const [loadingTop, setLoadingTop] = useState(true);
   const [leaderboardData, setLeaderboardData] = useState(null);
   const [selectedOption] = useState("score");
-  const current = useSelector(
-    (state) => state.language.currentLanguage
-  );
+  const current = useSelector((state) => state.language.currentLanguage);
   const month = transMonth[current];
-
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -82,9 +78,6 @@ const Banner = () => {
     });
   }, []);
 
-
-
-
   useEffect(() => {
     setLoadingTop(true);
     let API = `leaderboard/three-top-units?sort_type=${selectedOption}`;
@@ -102,7 +95,6 @@ const Banner = () => {
       .catch((err) => console.log(err))
       .finally(() => setLoadingTop(false));
   }, [selectedOption]);
-
 
   const createData = (data, frames) =>
     data?.map((item, index) => ({
@@ -124,133 +116,144 @@ const Banner = () => {
 
   console.log(data.quarterly);
   const customIcons = ({ isActive }) =>
-    isActive ? <MinusOutlined style={{ fontSize: "22px" }} /> : <PlusOutlined style={{ fontSize: "22px" }} />;
+    isActive ? (
+      <MinusOutlined style={{ fontSize: "22px" }} />
+    ) : (
+      <PlusOutlined style={{ fontSize: "22px" }} />
+    );
   return (
     <>
       <div className="homePage">
-        <header className="homePage__header">
-          <div className="homePage__texts">
-            <h1 className="homePage__title">{t.theMost}</h1>
-            <h1
-              style={{ color: "#7241d3" }}
-              className="homePage__title homePage__title_x"
-            >
-              {t.monitoring}
-            </h1>
-            <p className="homePage__subtitle">{t.global}</p>
-          </div>
-
-          <div className="homePage__images">
-            <img src={Ellipse} alt="" />
-          </div>
-        </header>
-
-        <div className="slider-container">
-
-          <Swiper
-            slidesPerView={1.1}  // Displays parts of both previous and next slides
-            spaceBetween={30}    // Space between slides
-            centeredSlides={true} // Center the active slide
-            pagination={{
-              clickable: true,
-            }}
-            navigation={{
-              prevEl: prevRef.current,
-              nextEl: nextRef.current,
-            }}
-            initialSlide={1}
-            onSwiper={(swiper) => {
-              swiper.params.navigation.prevEl = prevRef.current;
-              swiper.params.navigation.nextEl = nextRef.current;
-              swiper.navigation.init();
-              swiper.navigation.update();
-            }}
-            onSlideChange={(swiper) => setSlider(swiper.activeIndex + 1)}
-            modules={[Pagination, Navigation]}
-            className="mySwiper"
-          >
-            <div className="simple-btn">
-              <p>0{slider}</p>
-              <button ref={prevRef} className="prev-btn">
-                <BsArrowLeftShort />
-              </button>
-              <button ref={nextRef} className="next-btn">
-                <BsArrowRightShort />
-              </button>
+        <div className="banner_main_container">
+          <header className="homePage__header">
+            <div className="homePage__texts">
+              <h1 className="homePage__title">{t.theMost}</h1>
+              <h1
+                style={{ color: "#7241d3" }}
+                className="homePage__title homePage__title_x"
+              >
+                {t.monitoring}
+              </h1>
+              <p className="homePage__subtitle">{t.global}</p>
             </div>
 
-            {/* Slide 1 (Previous slide) */}
-            <SwiperSlide className="swiper-slide_cert">
-              <div className="swiper-slide-main_img"></div>
-            </SwiperSlide>
-
-            {/* Slide 2 (Main slide - Central slide) */}
-            <SwiperSlide className="swiper-slide">
-              <div className="swiper-slide-main">
-                <div className="homeslide__left">
-                  <div>
-                    <p>{t.passportSubtitle}</p>
-                    <h1>{t.passportTitle}</h1>
-                  </div>
-                  <Link to="/passport">
-                    <button>{t.learnMore}</button>
-                  </Link>
-                </div>
-                <div className="homeslide__right">
-                  <img src={my_img1} alt="" />
-                  <div className="homeslide__right_box">
-                    <div>
-                      <div>
-                        <BsCheck2 />
-                      </div>
-                      <p>{t.passportBenefits[0]}</p>
-                    </div>
-                    <div>
-                      <div>
-                        <BsCheck2 />
-                      </div>
-                      <p>{t.passportBenefits[1]}</p>
-                    </div>
-                    <div>
-                      <div>
-                        <BsCheck2 />
-                      </div>
-                      <p>{t.passportBenefits[2]}</p>
-                    </div>
-                  </div>
-                </div>
+            <div className="homePage__images">
+              <img src={Ellipse} alt="" />
+            </div>
+          </header>
+        </div>
+        <div className="slider-container">
+          <div className="banner_main_container">
+            <Swiper
+              slidesPerView={1.1} // Displays parts of both previous and next slides
+              spaceBetween={30} // Space between slides
+              centeredSlides={true} // Center the active slide
+              pagination={{
+                clickable: true,
+              }}
+              navigation={{
+                prevEl: prevRef.current,
+                nextEl: nextRef.current,
+              }}
+              initialSlide={1}
+              onSwiper={(swiper) => {
+                swiper.params.navigation.prevEl = prevRef.current;
+                swiper.params.navigation.nextEl = nextRef.current;
+                swiper.navigation.init();
+                swiper.navigation.update();
+              }}
+              onSlideChange={(swiper) => setSlider(swiper.activeIndex + 1)}
+              modules={[Pagination, Navigation]}
+              className="mySwiper"
+            >
+              <div className="simple-btn">
+                <p>0{slider}</p>
+                <button ref={prevRef} className="prev-btn">
+                  <BsArrowLeftShort />
+                </button>
+                <button ref={nextRef} className="next-btn">
+                  <BsArrowRightShort />
+                </button>
               </div>
-            </SwiperSlide>
 
-            {/* Slide 3 (Next slide) */}
-            <SwiperSlide className="swiper-slide_cert_slide_3">
-              <div className="swiper-slide-main_slide_3">
-                <div className="swiper-slide-main_slide_3_info_img"></div>
-                <div className="swiper-slide-main_slide_3_info">
-                  <h1>{t.analyzing_trader}</h1>
-                  <span>
-                    <p>{t.track_trader}</p>
-                    <Link to="/rating">
-                      <button className="homeslide__left_btn">{t.learnMore}</button>
+              {/* Slide 1 (Previous slide) */}
+              <SwiperSlide className="swiper-slide_cert">
+                <div className="swiper-slide-main_img"></div>
+              </SwiperSlide>
+
+              {/* Slide 2 (Main slide - Central slide) */}
+              <SwiperSlide className="swiper-slide">
+                <div className="swiper-slide-main">
+                  <div className="homeslide__left">
+                    <div>
+                      <p>{t.passportSubtitle}</p>
+                      <h1>{t.passportTitle}</h1>
+                    </div>
+                    <Link to="/passport">
+                      <button>{t.learnMore}</button>
                     </Link>
-                  </span>
+                  </div>
+                  <div className="homeslide__right">
+                    <img src={my_img1} alt="" />
+                    <div className="homeslide__right_box">
+                      <div>
+                        <div>
+                          <BsCheck2 />
+                        </div>
+                        <p>{t.passportBenefits[0]}</p>
+                      </div>
+                      <div>
+                        <div>
+                          <BsCheck2 />
+                        </div>
+                        <p>{t.passportBenefits[1]}</p>
+                      </div>
+                      <div>
+                        <div>
+                          <BsCheck2 />
+                        </div>
+                        <p>{t.passportBenefits[2]}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </SwiperSlide>
-          </Swiper>
+              </SwiperSlide>
 
-        </div >
-      </div >
+              {/* Slide 3 (Next slide) */}
+              <SwiperSlide className="swiper-slide_cert_slide_3">
+                <div className="swiper-slide-main_slide_3">
+                  <div className="swiper-slide-main_slide_3_info_img"></div>
+                  <div className="swiper-slide-main_slide_3_info">
+                    <h1>{t.analyzing_trader}</h1>
+                    <span>
+                      <p>{t.track_trader}</p>
+                      <Link to="/rating">
+                        <button className="homeslide__left_btn">
+                          {t.learnMore}
+                        </button>
+                      </Link>
+                    </span>
+                  </div>
+                </div>
+              </SwiperSlide>
+            </Swiper>
+          </div>
+        </div>
+      </div>
 
       {/* passport */}
-      <div className="marketplace" >
+      <div className="marketplace">
         <h1 className="marketplace-subtitle_pass">
           {t.kytreat} <p>KYT</p>
         </h1>
 
         <div className="reting_btns-banner">
-          <button onClick={() => openModal("portfolio")}>< BsQuestionCircle /> {t.addMod1}</button>
-          <button onClick={() => openModal("score")}><BsQuestionCircle /> {t.addMod2}</button>
+          <button onClick={() => openModal("portfolio")}>
+            <BsQuestionCircle /> {t.addMod1}
+          </button>
+          <button onClick={() => openModal("score")}>
+            <BsQuestionCircle /> {t.addMod2}
+          </button>
         </div>
 
         <InfoModal
@@ -282,8 +285,9 @@ const Banner = () => {
                       <div className="card_ret-bann">
                         <span>
                           <p
-                            className={`${item.rank === 1 ? "item-rank" : "item-rank-circle"
-                              }`}
+                            className={`${
+                              item.rank === 1 ? "item-rank" : "item-rank-circle"
+                            }`}
                           >
                             {item.rank}
                           </p>
@@ -329,8 +333,9 @@ const Banner = () => {
                       <div className="card_ret-bann">
                         <span>
                           <p
-                            className={`${item.rank === 1 ? "item-rank" : "item-rank-circle"
-                              }`}
+                            className={`${
+                              item.rank === 1 ? "item-rank" : "item-rank-circle"
+                            }`}
                           >
                             {item.rank}
                           </p>
@@ -355,16 +360,16 @@ const Banner = () => {
             </div>
           </div>
         </div>
-      </div >
+      </div>
 
       {/* Как начать */}
-      < ForTrader />
+      <ForTrader />
 
       {/* Мы поддерживаем */}
       <Support />
 
       {/* Наши тарифы */}
-      <div className="ourTariffs" >
+      <div className="ourTariffs">
         <div className="ourTariffs_img_box">
           <h1>{t.ourTariffs}</h1>
 
@@ -373,39 +378,100 @@ const Banner = () => {
               <div className="ourTariffs-main">
                 <h2>{t.start}</h2>
                 <p>300 USDT / {t.yer}</p>
-                <button><BsArrowUpRight /></button>
+                <button>
+                  <BsArrowUpRight />
+                </button>
               </div>
               <div className="ourTariffs__right_box">
-                <div><div><BsCheck2 /></div> <p>{t.forStart[0]}</p></div>
-                <div><div><BsCheck2 /></div> <p>{t.forStart[1]}</p></div>
-                <div><div><BsCheck2 /></div> <p>{t.forStart[2]}</p></div>
+                <div>
+                  <div>
+                    <BsCheck2 />
+                  </div>{" "}
+                  <p>{t.forStart[0]}</p>
+                </div>
+                <div>
+                  <div>
+                    <BsCheck2 />
+                  </div>{" "}
+                  <p>{t.forStart[1]}</p>
+                </div>
+                <div>
+                  <div>
+                    <BsCheck2 />
+                  </div>{" "}
+                  <p>{t.forStart[2]}</p>
+                </div>
               </div>
             </div>
             <div className="ourTariffs-card">
               <div className="ourTariffs-main">
                 <h2>{t.profi}</h2>
                 <p>1 500 USDT / {t.yer}</p>
-                <button><BsArrowUpRight /></button>
+                <button>
+                  <BsArrowUpRight />
+                </button>
               </div>
 
               <div className="ourTariffs__right_box">
-                <div><div><BsCheck2 /></div> <p>{t.forProfi[0]}</p></div>
-                <div><div><BsCheck2 /></div> <p>{t.forProfi[1]}</p></div>
-                <div><div><BsCheck2 /></div> <p>{t.forProfi[2]}</p></div>
-                <div><div><BsCheck2 /></div> <p>{t.forProfi[3]}</p></div>
+                <div>
+                  <div>
+                    <BsCheck2 />
+                  </div>{" "}
+                  <p>{t.forProfi[0]}</p>
+                </div>
+                <div>
+                  <div>
+                    <BsCheck2 />
+                  </div>{" "}
+                  <p>{t.forProfi[1]}</p>
+                </div>
+                <div>
+                  <div>
+                    <BsCheck2 />
+                  </div>{" "}
+                  <p>{t.forProfi[2]}</p>
+                </div>
+                <div>
+                  <div>
+                    <BsCheck2 />
+                  </div>{" "}
+                  <p>{t.forProfi[3]}</p>
+                </div>
               </div>
             </div>
             <div className="ourTariffs-card">
               <div className="ourTariffs-main">
                 <h2>{t.profi}</h2>
                 <p>5 000 USDT / {t.yer}</p>
-                <button><BsArrowUpRight /></button>
+                <button>
+                  <BsArrowUpRight />
+                </button>
               </div>
               <div className="ourTariffs__right_box">
-                <div><div><BsCheck2 /></div> <p>{t.forTarif[0]}</p></div>
-                <div><div><BsCheck2 /></div> <p>{t.forTarif[1]}</p></div>
-                <div><div><BsCheck2 /></div> <p>{t.forTarif[2]}</p></div>
-                <div><div><BsCheck2 /></div> <p>{t.forTarif[3]}</p></div>
+                <div>
+                  <div>
+                    <BsCheck2 />
+                  </div>{" "}
+                  <p>{t.forTarif[0]}</p>
+                </div>
+                <div>
+                  <div>
+                    <BsCheck2 />
+                  </div>{" "}
+                  <p>{t.forTarif[1]}</p>
+                </div>
+                <div>
+                  <div>
+                    <BsCheck2 />
+                  </div>{" "}
+                  <p>{t.forTarif[2]}</p>
+                </div>
+                <div>
+                  <div>
+                    <BsCheck2 />
+                  </div>{" "}
+                  <p>{t.forTarif[3]}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -419,17 +485,20 @@ const Banner = () => {
           <img className="shadow_1" src={shadow_1} alt="" />
           <img className="shadow_2" src={shadow_2} alt="" />
         </div>
-      </div >
+      </div>
 
       {/* Отзывы */}
-      <div className="reviews_container" >
+      <div className="reviews_container">
         <h1>{t.reviews}</h1>
         <p>{t.leaving}</p>
         <div className="reviews_box">
           <div className="reviews_card">
             <div className="review_userImage">
               <div className="review_userImage_img">
-                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User 1" />
+                <img
+                  src="https://randomuser.me/api/portraits/women/68.jpg"
+                  alt="User 1"
+                />
               </div>
               <div className="review_userImage_info">
                 <div>
@@ -445,7 +514,10 @@ const Banner = () => {
           <div className="reviews_card">
             <div className="review_userImage">
               <div className="review_userImage_img">
-                <img src="https://randomuser.me/api/portraits/men/72.jpg" alt="User 2" />
+                <img
+                  src="https://randomuser.me/api/portraits/men/72.jpg"
+                  alt="User 2"
+                />
               </div>
               <div className="review_userImage_info">
                 <div>
@@ -461,7 +533,10 @@ const Banner = () => {
           <div className="reviews_card">
             <div className="review_userImage">
               <div className="review_userImage_img">
-                <img src="https://randomuser.me/api/portraits/women/52.jpg" alt="User 3" />
+                <img
+                  src="https://randomuser.me/api/portraits/women/52.jpg"
+                  alt="User 3"
+                />
               </div>
               <div className="review_userImage_info">
                 <div>
@@ -474,34 +549,34 @@ const Banner = () => {
             <p>{t.review_texts[2]}</p>
           </div>
         </div>
-
-      </div >
-
+      </div>
 
       {/* FAQ */}
-      <div className="FAQ_container" >
+      <div className="FAQ_container">
         <h1>{t.faq_title}</h1>
-        <Collapse
-          size="middle"
-          expandIcon={customIcons}
-          expandIconPosition="end"
-          items={t.open_info.map((info, index) => ({
-            key: `${index + 1}`,
-            label: [
-              t.WhatIsKYT,
-              t.KYT_passport,
-              t.what_benefits,
-              t.how_connect,
-              t.what_information,
-            ][index],
-            children: (
-              <div className="open_info">
-                <p style={{ fontSize: "14px" }}>{info}</p>
-              </div>
-            ),
-          }))}
-        />
-      </div >
+        <div className="FAQ_main_container">
+          <Collapse
+            size="middle"
+            expandIcon={customIcons}
+            expandIconPosition="end"
+            items={t.open_info.map((info, index) => ({
+              key: `${index + 1}`,
+              label: [
+                t.WhatIsKYT,
+                t.KYT_passport,
+                t.what_benefits,
+                t.how_connect,
+                t.what_information,
+              ][index],
+              children: (
+                <div className="open_info">
+                  <p style={{ fontSize: "14px" }}>{info}</p>
+                </div>
+              ),
+            }))}
+          />
+        </div>
+      </div>
     </>
   );
 };
