@@ -32,7 +32,6 @@
 }
 
 .footer-top {
-  width: 85%;
   width: 100%;
   display: flex;
   justify-content: start;
@@ -166,6 +165,12 @@
   .footer-bottom,
   .footer-top {
     width: 85%;
+  }
+}
+
+@media screen and (max-width: 1230px) {
+  .footer_main_container {
+    width: 100%;
   }
 }
 

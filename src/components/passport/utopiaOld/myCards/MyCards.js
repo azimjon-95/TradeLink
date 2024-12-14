@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 import "./style.css";
-import OutlineCircle from "./OutlineCircle";
 import Investment from "./Investment";
-import Trades from "./Trades";
 
 const MyCards = ({ t, id, selectValue, currentLanguage, translationsInfo, }) => {
   const [activeTab, setActiveTab] = useState("main");
   const renderContent = () => {
     if (activeTab === "main") {
-      return <OutlineCircle translationsInfo={translationsInfo} currentLanguage={currentLanguage} id={id} selectValue={selectValue} />;
-    } else if (activeTab === "investment") {
-      return <Investment currentLanguage={currentLanguage} id={id} selectValue={selectValue} />;
-    } else if (activeTab === "trades") {
-      return <Trades currentLanguage={currentLanguage} id={id} selectValue={selectValue} />;
+      return <Investment t={t} currentLanguage={currentLanguage} id={id} selectValue={selectValue} />;
     }
+    //  else if (activeTab === "investment") {
+    //   return <OutlineCircle translationsInfo={translationsInfo} currentLanguage={currentLanguage} id={id} selectValue={selectValue} />;
+    // } else if (activeTab === "trades") {
+    //   return <Trades currentLanguage={currentLanguage} id={id} selectValue={selectValue} />;
+    // }
     return null;
   };
 
@@ -26,7 +25,7 @@ const MyCards = ({ t, id, selectValue, currentLanguage, translationsInfo, }) => 
         >
           {t.main}
         </button>
-        <button
+        {/* <button
           onClick={() => setActiveTab("investment")}
           className={activeTab === "investment" ? "active" : ""}
         >
@@ -37,7 +36,7 @@ const MyCards = ({ t, id, selectValue, currentLanguage, translationsInfo, }) => 
           className={activeTab === "trades" ? "active" : ""}
         >
           {t.trades}
-        </button>
+        </button> */}
       </nav>
 
       <br />

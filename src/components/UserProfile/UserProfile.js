@@ -77,67 +77,70 @@ const UserProfile = () => {
 
   return (
     <div className="ed_khan">
-      <h1>{profileLang[lang].title}</h1>
+      <div className="user-share-container-media">
+        <h1>{profileLang[lang].title}</h1>
 
-      <div className="user-share-container">
-        <div className="user-share">
-          <div className="ed-khan-image">
-            <img src={user_profile_header_data?.avatar || ed_khan} alt="" />
+        <div className="user-share-container">
+          <div className="user-share">
+            <div className="ed-khan-image">
+              <img src={user_profile_header_data?.avatar || ed_khan} alt="" />
+            </div>
+            <div className="ed-khan-text">
+              <div className="ed-khan-main">
+                <h1>
+                  {" "}
+                  <img
+                    className="user-image-mob"
+                    src={user_profile_header_data?.avatar || ed_khan}
+                    alt=""
+                  />{" "}
+                  {user_profile_header_data?.name || ""}
+                </h1>
+                <p>{profileInfo?.days_in_market || 0}</p>
+                <Tooltip title={profileLang[lang].market}>
+                  <span>{profileLang[lang].market}</span>
+                </Tooltip>
+              </div>
+              <div className="ed-khan-main">
+                <p>{profileInfo?.days_investing || 0}</p>
+                <Tooltip title={profileLang[lang].investing}>
+                  <span>{profileLang[lang].investing}</span>
+                </Tooltip>
+              </div>
+              <div className="ed-khan-main">
+                <p>{profileInfo?.active_portfolios || 0}</p>
+                <Tooltip title={profileLang[lang].portfolio}>
+                  <span>{profileLang[lang].portfolio}</span>
+                </Tooltip>
+              </div>
+              <div className="ed-khan-main">
+                <p>{profileInfo?.active_jets || 0}</p>
+                <Tooltip title={profileLang[lang].jet}>
+                  <span>{profileLang[lang].jet}</span>
+                </Tooltip>
+              </div>
+              <div className="ed-khan-main">
+                <p>{(profileInfo?.total_views / 1000 || 0)?.toFixed(2)}K</p>
+                <Tooltip title={profileLang[lang].views}>
+                  <span>{profileLang[lang].views}</span>
+                </Tooltip>
+              </div>
+            </div>
           </div>
-          <div className="ed-khan-text">
-            <div className="ed-khan-main">
-              <h1>
-                {" "}
-                <img
-                  className="user-image-mob"
-                  src={user_profile_header_data?.avatar || ed_khan}
-                  alt=""
-                />{" "}
-                {user_profile_header_data?.name || ""}
-              </h1>
-              <p>{profileInfo?.days_in_market || 0}</p>
-              <Tooltip title={profileLang[lang].market}>
-                <span>{profileLang[lang].market}</span>
-              </Tooltip>
-            </div>
-            <div className="ed-khan-main">
-              <p>{profileInfo?.days_investing || 0}</p>
-              <Tooltip title={profileLang[lang].investing}>
-                <span>{profileLang[lang].investing}</span>
-              </Tooltip>
-            </div>
-            <div className="ed-khan-main">
-              <p>{profileInfo?.active_portfolios || 0}</p>
-              <Tooltip title={profileLang[lang].portfolio}>
-                <span>{profileLang[lang].portfolio}</span>
-              </Tooltip>
-            </div>
-            <div className="ed-khan-main">
-              <p>{profileInfo?.active_jets || 0}</p>
-              <Tooltip title={profileLang[lang].jet}>
-                <span>{profileLang[lang].jet}</span>
-              </Tooltip>
-            </div>
-            <div className="ed-khan-main">
-              <p>{(profileInfo?.total_views / 1000 || 0)?.toFixed(2)}K</p>
-              <Tooltip title={profileLang[lang].views}>
-                <span>{profileLang[lang].views}</span>
-              </Tooltip>
-            </div>
-          </div>
+
+          <button onClick={toggleModal}>
+            <FaShare style={{ fontSize: "16px" }} />
+            {profileLang[lang].share}
+          </button>
         </div>
-
-        <button onClick={toggleModal}>
-          <FaShare style={{ fontSize: "16px" }} />
-          {profileLang[lang].share}
-        </button>
       </div>
 
       <div className="user-menus-khan">
-        <div className="strategies-layout">
-          {true ? (
-            <nav className="nav-bar">
-              {/* <Link
+        <div className="user-menus-khan-media">
+          <div className="strategies-layout">
+            {true ? (
+              <nav className="nav-bar">
+                {/* <Link
                 to={`/user/${id}`}
                 className={currentPath === `/user/${id}` ? "active" : ""}
                 style={{
@@ -147,17 +150,17 @@ const UserProfile = () => {
               >
                 Strategies
               </Link> */}
-              <Link
-                to={`/user/${id}/portfolios`}
-                className={currentPath === `/user/${id}` ? "active" : ""}
-                style={{
-                  color: currentPath === `/user/${id}` ? "#4A27A9" : "gray",
-                  fontWeight: currentPath === `/user/${id}` ? "bold" : "normal",
-                }}
-              >
-                {profileLang[lang].tabs_1}
-              </Link>
-              {/* <Link
+                <Link
+                  to={`/user/${id}/portfolios`}
+                  className={currentPath === `/user/${id}` ? "active" : ""}
+                  style={{
+                    color: currentPath === `/user/${id}` ? "#4A27A9" : "gray",
+                    fontWeight: currentPath === `/user/${id}` ? "bold" : "normal",
+                  }}
+                >
+                  {profileLang[lang].tabs_1}
+                </Link>
+                {/* <Link
                 to={`/user/${id}/jet`}
                 className={currentPath === `/user/${id}/jet` ? "active" : ""}
                 style={{
@@ -168,50 +171,51 @@ const UserProfile = () => {
               >
                 Jet
               </Link> */}
-            </nav>
-          ) : (
-            <nav className="nav-bar">
-              <Link className="active">Overview</Link>
-            </nav>
-          )}
+              </nav>
+            ) : (
+              <nav className="nav-bar">
+                <Link className="active">Overview</Link>
+              </nav>
+            )}
 
-          {true ? (
-            <div className="user-menus">
-              <div className="khan-pages">
-                <Outlet />{" "}
+            {true ? (
+              <div className="user-menus">
+                <div className="khan-pages">
+                  <Outlet />{" "}
+                </div>
+
+                <div className="menus-khan-page">
+                  <Routes>
+                    {/* <Route path="/" element={<Overview />} /> */}
+                    <Route
+                      path="/"
+                      element={
+                        <Portfolios
+                          portFolioData={portFolioData}
+                          public_portfolios={public_portfolios}
+                        />
+                      }
+                    />
+                    {/* <Route path="jet" element={<Jet />} /> */}
+
+                    {/* Redirect any unknown paths under /user/:id to the Overview page */}
+                    <Route path="*" element={<Navigate to={`/user/${id}`} />} />
+                  </Routes>
+                </div>
               </div>
-
-              <div className="menus-khan-page">
-                <Routes>
-                  {/* <Route path="/" element={<Overview />} /> */}
-                  <Route
-                    path="/"
-                    element={
-                      <Portfolios
-                        portFolioData={portFolioData}
-                        public_portfolios={public_portfolios}
-                      />
-                    }
-                  />
-                  {/* <Route path="jet" element={<Jet />} /> */}
-
-                  {/* Redirect any unknown paths under /user/:id to the Overview page */}
-                  <Route path="*" element={<Navigate to={`/user/${id}`} />} />
-                </Routes>
-              </div>
-            </div>
-          ) : (
-            <p className="user-menus">
-              You don't have a public portfolio yet. You can either create one
-              or choose to make an existing portfolio public in the{" "}
-              <Link
-                style={{ textDecoration: "underline", color: "#000" }}
-                to="/passport/dashboard"
-              >
-                dashboard.
-              </Link>{" "}
-            </p>
-          )}
+            ) : (
+              <p className="user-menus">
+                You don't have a public portfolio yet. You can either create one
+                or choose to make an existing portfolio public in the{" "}
+                <Link
+                  style={{ textDecoration: "underline", color: "#000" }}
+                  to="/passport/dashboard"
+                >
+                  dashboard.
+                </Link>{" "}
+              </p>
+            )}
+          </div>
         </div>
       </div>
       {isModalOpen && <ShareModal closeModal={toggleModal} />}

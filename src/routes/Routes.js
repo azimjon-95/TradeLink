@@ -24,15 +24,11 @@ const UtopiaOldMultiLine = lazy(() =>
 );
 const Rating = lazy(() => import("../components/passport/rating/Rating"));
 const PassportDashboard = lazy(() => import("../pages/passport/Dashboard"));
-const TradersCabinet = lazy(() =>
-  import("../pages/tradersCabinet/TradersCabinet")
-);
+
 
 // Define routes
 const routes = [
   // ====Home=====
-  { path: "/trader-cabinet", element: <TradersCabinet />, protected: false },
-  { path: "/traders-cabinet", element: <TradersCabinet />, protected: false },
   { path: "/user/:id/*", element: <UserProfile />, protected: true },
   { path: "/portfolio/:id", element: <UtopiaOldMultiLine />, protected: false },
   { path: "/faq", element: <Faq />, protected: false },

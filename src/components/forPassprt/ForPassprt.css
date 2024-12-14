@@ -1,6 +1,6 @@
 .forPaspport {
   width: 100%;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background: linear-gradient(to bottom, #2c1d52, #0b0b0e 20% 100%);
   /* url("./background.png") !important; */
   background-size: cover;
@@ -10,6 +10,11 @@
   overflow: hidden !important;
   margin-top: 7vw;
   position: relative;
+}
+
+.forPaspport_media {
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 .forPaspport::after {
@@ -28,7 +33,7 @@
 
 .forPaspport::before {
   width: 100%;
-  height: 553px;
+  height: 253px;
   content: "";
   position: absolute;
   /* top: 0; */

@@ -64,11 +64,9 @@ const Leaderboard = () => {
   // get LeaderBoard table Data
   useEffect(() => {
     setLoading(true);
-    let API = `/leaderboard/top-traders?page=${
-      page === 0 ? 0 : page - 1
-    }&show_non_active=${showInactive}&sort_type=${
-      filterOption.value || selectedOption
-    }`;
+    let API = `/leaderboard/top-traders?page=${page === 0 ? 0 : page - 1
+      }&show_non_active=${showInactive}&sort_type=${filterOption.value || selectedOption
+      }`;
     axios
       .get(API)
       .then((res) => {
@@ -334,151 +332,155 @@ const Leaderboard = () => {
 
   return (
     <div className="leaderboard-container-box">
-      <div className="leaderboard-container">
-        <div className="leaderboard-btnd-text">
-          <div className="leaderboard-Link">
-            <h1>{subTitle.leaderboardBy}</h1>
-            <h1
-              style={{ cursor: "pointer", color: "#FFB700" }}
-              onClick={() => setIsModal(!isModal)}
-            >
-              {selectedOption === "score" ? "KYT" : "Profit"} <GrBottomCorner />
-              {isModal && (
-                <div className="leaderboard-modal-smoll" ref={modalRef}>
-                  <button onClick={() => handleOptionClick("score")}>
-                    KYT-Know your trader{" "}
-                    {selectedOption === "score" && <FaCheck />}
-                  </button>
-                  <button onClick={() => handleOptionClick("profit")}>
-                    {subTitle.profit}{" "}
-                    {selectedOption === "profit" && <FaCheck />}
-                  </button>
-                </div>
-              )}
-            </h1>
-          </div>
-          <div className="leaderboard-btnd">
-            <button onClick={() => openModal("portfolio")}>
-              {subTitle.howToAdd}
-            </button>
-            {selectedOption === "score" && (
-              <button onClick={() => openModal("score")}>
-                <img src={ret} alt="Info" /> {subTitle.measure}
+      <div className="leaderboard-container-box-media">
+        <div className="leaderboard-container">
+          <div className="leaderboard-btnd-text">
+            <div className="leaderboard-Link">
+              <h1>{subTitle.leaderboardBy}</h1>
+              <h1
+                style={{ cursor: "pointer", color: "#FFB700" }}
+                onClick={() => setIsModal(!isModal)}
+              >
+                {selectedOption === "score" ? "KYT" : "Profit"} <GrBottomCorner />
+                {isModal && (
+                  <div className="leaderboard-modal-smoll" ref={modalRef}>
+                    <button onClick={() => handleOptionClick("score")}>
+                      KYT-Rating{" "}
+                      {selectedOption === "score" && <FaCheck />}
+                    </button>
+                    <button onClick={() => handleOptionClick("profit")}>
+                      {subTitle.profit}{" "}
+                      {selectedOption === "profit" && <FaCheck />}
+                    </button>
+                  </div>
+                )}
+              </h1>
+            </div>
+            <div className="leaderboard-btnd">
+              <button onClick={() => openModal("portfolio")}>
+                {subTitle.howToAdd}
               </button>
-            )}
-            <InfoModal
-              isOpen={isModalOpen}
-              onClose={closeModal}
-              contentType={modalContentType}
-              currentLanguage={currentLanguage}
-            />
+              {selectedOption === "score" && (
+                <button onClick={() => openModal("score")}>
+                  <img src={ret} alt="Info" /> {subTitle.measure}
+                </button>
+              )}
+              <InfoModal
+                isOpen={isModalOpen}
+                onClose={closeModal}
+                contentType={modalContentType}
+                currentLanguage={currentLanguage}
+              />
+            </div>
           </div>
-        </div>
-        {selectedOption !== "score" ? (
-          <div className="leaderboard-cards">
-            <LeaderboardCard
-              by={subTitle.by}
-              title={subTitle.dailyTop}
-              data={leaderboardData?.daily}
-              date={month.today}
-            />
-            <LeaderboardCard
-              by={subTitle.by}
-              title={subTitle.weeklyTop}
-              data={leaderboardData?.weekly}
-              date={`${month.weeklAgo} - ${month.today}`}
-            />
-            <LeaderboardCard
-              by={subTitle.by}
-              title={subTitle.novemberTop}
-              data={leaderboardData?.monthly}
-              date={`${month.startMonth} - ${month.endMonth}`}
-            />
-          </div>
-        ) : (
-          <div className="leaderboard-cards">
-            <LeaderboardCard
-              by={subTitle.by}
-              loadingTop={loadingTop}
-              title={subTitle.monthlyTop}
-              data={leaderboardData?.monthly}
-              date={`${month.oneMonthAgo} - ${month.today}`}
-            />
-            <LeaderboardCard
-              by={subTitle.by}
-              loadingTop={loadingTop}
-              title={subTitle.quarterlyTop}
-              data={leaderboardData?.quarterly}
-              date={`${month.fourMonthAgo} - ${month.today}`}
-            />
-            {/* <LeaderboardCard
+          {selectedOption !== "score" ? (
+            <div className="leaderboard-cards">
+              <LeaderboardCard
+                by={subTitle.by}
+                title={subTitle.dailyTop}
+                data={leaderboardData?.daily}
+                date={month.today}
+              />
+              <LeaderboardCard
+                by={subTitle.by}
+                title={subTitle.weeklyTop}
+                data={leaderboardData?.weekly}
+                date={`${month.weeklAgo} - ${month.today}`}
+              />
+              <LeaderboardCard
+                by={subTitle.by}
+                title={subTitle.novemberTop}
+                data={leaderboardData?.monthly}
+                date={`${month.startMonth} - ${month.endMonth}`}
+              />
+            </div>
+          ) : (
+            <div className="leaderboard-cards">
+              <LeaderboardCard
+                by={subTitle.by}
+                loadingTop={loadingTop}
+                title={subTitle.monthlyTop}
+                data={leaderboardData?.monthly}
+                date={`${month.oneMonthAgo} - ${month.today}`}
+              />
+              <LeaderboardCard
+                by={subTitle.by}
+                loadingTop={loadingTop}
+                title={subTitle.quarterlyTop}
+                data={leaderboardData?.quarterly}
+                date={`${month.fourMonthAgo} - ${month.today}`}
+              />
+              {/* <LeaderboardCard
               by={subTitle.by}
               loadingTop={loadingTop}
               title={subTitle.yearlyTop}
               data={leaderboardData?.yearly}
               date={`${month.oneYearAgo} - ${month.today}`}
             /> */}
-          </div>
-        )}
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="container-rating">
-        <h1>{subTitle.topTradersRating}</h1>
-        <div className="head-rating">
-          <label>
-            <Switch
-              checked={showInactive}
-              onChange={() => setShowInactive(!showInactive)}
-              className={
-                showInactive ? "switch-checked-ret" : "switch-unchecked-ret"
-              }
-            />
-            {subTitle.showNonActive}
-          </label>
-
-          <Select
-            value={filterOption}
-            labelInValue
-            onChange={(value) => setFilterOption(value)}
-            style={{ width: 150 }}
-            defaultValue={options[0]} // Birinchi opsiya avtomatik tanlanadi
-            popupMatchSelectWidth={false}
-            options={options} // Statik o'rniga dinamik opsiyalar ishlatiladi
-          />
-        </div>
-        <div className="portfolio-list">
-          <div>
-            <Table
-              loading={loading}
-              columns={columns}
-              dataSource={portfolios}
-              rowKey={(record) => record.portfolio_id} //
-              pagination={false}
-              scroll={{ x: "100%" }} // Responsive scrolling
-              size="small"
-              onRow={(record) => ({
-                onClick: () => {
-                  const timestamp = getTimestamp();
-                  navigate(`/portfolio/${record.portfolio_id}?t=${timestamp}`);
-                },
-              })}
-            />
-
-            <div
-              style={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "center",
-                textAlign: "center",
-              }}
-            >
-              <Pagination
-                current={currentPage} // Hozirgi sahifa
-                total={portfolios?.length} // Umumiy ma'lumotlar soni
-                pageSize={1} // Har bir sahifadagi elementlar soni
-                onChange={handlePageChange} // Sahifa o'zgarganda chaqiriladigan funksiya
-                showSizeChanger={false} // Foydalanuvchiga sahifa o'lchamini o'zgartirish imkoniyatini berishni o'chirish
+        <div className="container-rating-media">
+          <h1>{subTitle.topTradersRating}</h1>
+          <div className="head-rating">
+            <label>
+              <Switch
+                checked={showInactive}
+                onChange={() => setShowInactive(!showInactive)}
+                className={
+                  showInactive ? "switch-checked-ret" : "switch-unchecked-ret"
+                }
               />
+              {subTitle.showNonActive}
+            </label>
+
+            <Select
+              value={filterOption}
+              labelInValue
+              onChange={(value) => setFilterOption(value)}
+              style={{ width: 150 }}
+              defaultValue={options[0]} // Birinchi opsiya avtomatik tanlanadi
+              popupMatchSelectWidth={false}
+              options={options} // Statik o'rniga dinamik opsiyalar ishlatiladi
+            />
+          </div>
+          <div className="portfolio-list">
+            <div>
+              <Table
+                loading={loading}
+                columns={columns}
+                dataSource={portfolios}
+                rowKey={(record) => record.portfolio_id} //
+                pagination={false}
+                scroll={{ x: "100%" }} // Responsive scrolling
+                size="small"
+                onRow={(record) => ({
+                  onClick: () => {
+                    const timestamp = getTimestamp();
+                    navigate(`/portfolio/${record.portfolio_id}?t=${timestamp}`);
+                  },
+                })}
+              />
+
+              <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+              >
+                <Pagination
+                  current={currentPage} // Hozirgi sahifa
+                  total={portfolios?.length} // Umumiy ma'lumotlar soni
+                  pageSize={1} // Har bir sahifadagi elementlar soni
+                  onChange={handlePageChange} // Sahifa o'zgarganda chaqiriladigan funksiya
+                  showSizeChanger={false} // Foydalanuvchiga sahifa o'lchamini o'zgartirish imkoniyatini berishni o'chirish
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -495,14 +497,14 @@ const LeaderboardCard = ({ title, data, date, loadingTop, by }) => {
     rank === 1
       ? "#FBAF3D" // 1-bosqich
       : rank === 2
-      ? "#C0C8E0" // 2-bosqich
-      : rank === 3
-      ? "#D5B678" // 3-bosqich
-      : rank === 4
-      ? "#8BC34A" // 4-bosqich
-      : rank === 5
-      ? "#FF5722" // 5-bosqich
-      : "#fff"; // Default rang
+        ? "#C0C8E0" // 2-bosqich
+        : rank === 3
+          ? "#D5B678" // 3-bosqich
+          : rank === 4
+            ? "#8BC34A" // 4-bosqich
+            : rank === 5
+              ? "#FF5722" // 5-bosqich
+              : "#fff"; // Default rang
   return (
     <div className="leaderboard-card">
       <div className="leaderboard-card-box">

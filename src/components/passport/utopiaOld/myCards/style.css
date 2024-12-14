@@ -62,7 +62,8 @@
 .investment-card {
   background-color: #fff;
   border-radius: 8px;
-  width: 394px;
+  width: 32.5%;
+  min-width: 375px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: rgb(255, 255, 255);
   padding: 12px 14px;

@@ -63,7 +63,6 @@
     justify-content: center;
     flex-direction: column;
     background-blend-mode: darken;
-    border: 2px solid red;
   }
   .homePage__header {
     justify-content: space-between;
