@@ -1,4 +1,8 @@
 export const translations = {
+    //     Nemischa (German): Statistik
+    // Inglizcha (English): Statistics
+    // Ispancha (Spanish): Estadística
+    // Ruscha (Russian): Статистика
     en: {
         lite: "Lite",
         little: "A little",
@@ -6,7 +10,7 @@ export const translations = {
         day: "Day",
         week: "Week",
         kIndicators: "Key indicators",
-        main: "Main",
+        main: "Statistics",
         investment: "Investment",
         trades: "Trades",
         views: "views",
@@ -18,7 +22,7 @@ export const translations = {
         day: "День",
         week: "Неделя",
         kIndicators: "Ключевые показатели",
-        main: "Главная",
+        main: "Статистика",
         investment: "Инвестиции",
         trades: "Сделки",
         views: "просмотры",
@@ -30,7 +34,7 @@ export const translations = {
         day: "Día",
         week: "Semana",
         kIndicators: "Indicadores clave",
-        main: "Principal",
+        main: "Estadística",
         investment: "Inversión",
         trades: "Comercios",
         views: "vistas",
@@ -42,7 +46,7 @@ export const translations = {
         day: "Tag",
         week: "Woche",
         kIndicators: "Schlüsselindikatoren",
-        main: "Haupt",
+        main: "Statistik",
         investment: "Investition",
         trades: "Handel",
         views: "Ansichten"

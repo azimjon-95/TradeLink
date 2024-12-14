@@ -343,19 +343,7 @@ const Charts = ({
     es: "Ingresos por mes (%)",
   };
 
-  // const monthTranslations = {
-  //   en: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-  //   uz: ["Yan", "Fev", "Mar", "Apr", "May", "Iyun", "Iyul", "Avg", "Sen", "Okt", "Noy", "Dek"],
-  //   ru: ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"],
-  //   es: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-  // };
-  // const monthsInLanguage = monthTranslations[currentLanguage];
-  // Funksiya
-  // const formatMonthYear = (dateString, language) => {
-  //   moment.locale(language); // Tilni o'rnatish
-  //   const date = moment(dateString, "MMM YYYY"); // "Sep 2023" formatini momentga aylantirish
-  //   return date.format("MMMM YYYY"); // To'liq oy nomi va yil
-  // };
+
 
   return (
     <>
@@ -394,90 +382,82 @@ const Charts = ({
             <Tooltip content={<CustomTooltipMain />} />
             <Legend />
 
-            {checkedItems.benchmarkBTC && (
-              <Line
-                yAxisId="left"
-                name={t.benchmarkBTC}
-                type="monotone"
-                dataKey="negative0"
-                stroke="#8A2BE2"
-                strokeWidth={1.5}
-                dot={false}
-              />
-            )}
-            {checkedItems.return && (
-              <Area
-                strokeWidth={1.5}
-                name={t.return}
-                yAxisId="left"
-                type="linear"
-                dataKey="negative1"
-                fill="#fceddc"
-                stroke="#EB932D"
-              />
-            )}
-            {checkedItems.realizedReturn && (
-              <Line
-                yAxisId="left"
-                name={t.realizedReturn}
-                type="monotone"
-                dataKey="negative2"
-                label="ssss"
-                stroke="#1E90FF"
-                strokeWidth={1.5}
-                dot={false}
-              />
-            )}
-            {checkedItems.plByday && (
-              <Bar
-                yAxisId="left"
-                z={2}
-                name={t.plByDay}
-                dataKey="revenue"
-                barSize={2}
-              >
-                {" "}
-                {dataMain?.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={entry.revenue >= 0 ? "#14C886" : "#EA3941"}
-                  />
-                ))}
-              </Bar>
-            )}
-            {checkedItems.marginBalance && (
-              <Line
-                yAxisId="left"
-                name={t.marginBalance}
-                type="monotone"
-                dataKey="negative3"
-                stroke="#55516D"
-                strokeWidth={1.5}
-                dot={false}
-              />
-            )}
-            {checkedItems.balance && (
-              <Line
-                yAxisId="left"
-                name={t.balance}
-                type="monotone"
-                dataKey="negative4"
-                stroke="#FF4500"
-                strokeWidth={1.5}
-                dot={false}
-              />
-            )}
-            {checkedItems.profit && (
-              <Line
-                yAxisId="left"
-                name={t.profit}
-                type="monotone"
-                dataKey="negative5"
-                stroke="#32CD32"
-                strokeWidth={1.5}
-                dot={false}
-              />
-            )}
+            <Line
+              yAxisId="left"
+              name={t.benchmarkBTC}
+              type="monotone"
+              dataKey={checkedItems?.benchmarkBTC && "negative0"}
+              stroke="#8A2BE2"
+              strokeWidth={checkedItems?.benchmarkBTC ? 1.9 : 0}
+              dot={false}
+            />
+
+            <Area
+              strokeWidth={checkedItems?.realizedReturn ? 1.9 : 0}
+              name={t.return}
+              yAxisId="left"
+              type="linear"
+              dataKey={checkedItems?.realizedReturn && "negative1"}
+              fill="#fceddc"
+              stroke="#EB932D"
+            />
+
+            <Line
+              yAxisId="left"
+              name={t.realizedReturn}
+              type="monotone"
+              dataKey={checkedItems?.realizedReturn && "negative2"}
+              label="ssss"
+              stroke="#1E90FF"
+              strokeWidth={checkedItems?.realizedReturn ? 1.9 : 0}
+              dot={false}
+            />
+
+            <Bar
+              yAxisId="left"
+              z={2}
+              name={t.plByDay}
+              dataKey={checkedItems?.plByday && "revenue"}
+              barSize={checkedItems?.plByday ? 2 : 0}
+            >
+              {" "}
+              {dataMain?.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={entry.revenue >= 0 ? "#14C886" : "#EA3941"}
+                />
+              ))}
+            </Bar>
+
+            <Line
+              yAxisId="left"
+              name={t.marginBalance}
+              type="monotone"
+              dataKey={checkedItems?.marginBalance && "negative3"}
+              stroke="#55516D"
+              strokeWidth={1.8}
+              dot={false}
+            />
+
+            <Line
+              yAxisId="left"
+              name={t.balance}
+              type="monotone"
+              dataKey={checkedItems?.balance && "negative4"}
+              stroke="#FF4500"
+              strokeWidth={checkedItems?.balance ? 1.8 : 0}
+              dot={false}
+            />
+
+            <Line
+              yAxisId="left"
+              name={t.profit}
+              type="monotone"
+              dataKey={checkedItems?.profit && "negative5"}
+              stroke="#32CD32"
+              strokeWidth={checkedItems?.profit ? 1.8 : 0}
+              dot={false}
+            />
           </ComposedChart>
         ) : (
           <div className="chartLoader">
@@ -625,28 +605,24 @@ const Charts = ({
             <Tooltip content={<CustomTooltipBottom />} />
 
             {/* Conditional Line before Area for rendering order */}
-            {checkedItems.drawDown && (
-              <Line
-                yAxisId="left"
-                type="linear"
-                dataKey="drawdown"
-                stroke="#4180D2"
-                strokeWidth={1.5}
-                dot={false}
-              />
-            )}
+            <Line
+              yAxisId="left"
+              type="linear"
+              dataKey={checkedItems.drawDown && "drawdown"}
+              stroke="#4180D2"
+              strokeWidth={checkedItems.drawDown ? 1.9 : 0}
+              dot={false}
+            />
 
             {/* Conditional Area rendered on top */}
-            {checkedItems.drawDownDuration && (
-              <Area
-                yAxisId="left"
-                type="linear"
-                dataKey="drawdown_duration"
-                fill="#d1e3f9"
-                stroke="#4595fd0"
-                strokeWidth={1.5}
-              />
-            )}
+            <Area
+              yAxisId="left"
+              type="linear"
+              dataKey={checkedItems.drawDownDuration && "drawdown_duration"}
+              fill="#d1e3f9"
+              stroke="#4595fd0"
+              strokeWidth={checkedItems.drawDownDuration ? 1.9 : 0}
+            />
           </ComposedChart>
         ) : (
           <div className="chartLoader2">
@@ -680,7 +656,7 @@ const Charts = ({
             tick={{ fontSize: 10 }} /* Smaller font size for month labels */
             axisLine={false}
             tickLine={false}
-            // tickFormatter={(monthIndex) => formatMonthYear(monthIndex, currentLanguage)}
+          // tickFormatter={(monthIndex) => formatMonthYear(monthIndex, currentLanguage)}
           />
 
           <Bar
@@ -689,8 +665,8 @@ const Charts = ({
               formattedData?.length <= 5
                 ? 40
                 : formattedData?.length <= 10
-                ? 30
-                : 20
+                  ? 30
+                  : 20
             }
           >
             {formattedData?.map((entry, index) => (

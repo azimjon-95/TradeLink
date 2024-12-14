@@ -161,7 +161,9 @@ function Navbar() {
   const linkOptions = {
     "/passport": [
       { path: "/rating", label: rating },
-      // { path: '/passport#hub', label: 'Hub' },
+      { path: "/#about", label: about, scrollTo: 0 },
+      { path: "/faq", label: faq },
+
     ],
     "/": [
       { path: "/#about", label: about, scrollTo: 0 },
@@ -212,16 +214,16 @@ function Navbar() {
       });
     } else {
       passportLinks.unshift({
-        path: "/traders-cabinet",
+        path: "/passport",
         label: traderCabinet,
       });
     }
-    if (token) {
-      passportLinks.unshift({
-        path: "/passport/dashboard",
-        label: dashboard,
-      });
-    }
+    // if (token) {
+    //   passportLinks.unshift({
+    //     path: "/passport",
+    //     label: dashboard,
+    //   });
+    // }
 
     // Check if the path is a "/user/:id" route, making it universal
     const isUserRoute = /^\/user\/\w+/.test(path); // Match '/user/anything'
@@ -230,10 +232,10 @@ function Navbar() {
     const linksToSet = mainPageRoutes.includes(path)
       ? linkOptions["/"]
       : isUserRoute || isPortfolioRoute
-      ? passportLinks
-      : passportOpenRoutes.includes(path)
-      ? passportLinks
-      : linkOptions[path] || linkOptions.default;
+        ? passportLinks
+        : passportOpenRoutes.includes(path)
+          ? passportLinks
+          : linkOptions[path] || linkOptions.default;
 
     setLinks(linksToSet);
   }, [
@@ -338,9 +340,8 @@ function Navbar() {
         background: isScrolled ? "#1B1531" : "",
         backdropFilter: isScrolled ? "blur(50px)" : "",
       }}
-      className={`navbar_container ${
-        isProductDashboard ? "navbar_static" : "navbar_sticky"
-      }`}
+      className={`navbar_container ${isProductDashboard ? "navbar_static" : "navbar_sticky"
+        }`}
     >
       <div className="header_main_container">
         <div className="nav_links-box">
@@ -366,7 +367,7 @@ function Navbar() {
                 <Link to="/">
                   <div className="trade-link-header">
                     <div className="trade-link-header-text">
-                      <h3>KYT - Know Your Trader</h3>
+                      <h3>KYT</h3>
                       <p>{kytDescription}</p>
                     </div>
                   </div>
@@ -569,9 +570,8 @@ function Navbar() {
           </div>
         </div>
         <div
-          className={`close-modal-signup ${
-            isModalSinUp && "close-modal-signup-open"
-          }`}
+          className={`close-modal-signup ${isModalSinUp && "close-modal-signup-open"
+            }`}
         >
           <SignUpModal
             setModalType={setModalType}

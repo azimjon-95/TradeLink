@@ -9,28 +9,36 @@
     margin-top: 60px !important;
 }
 
-.ed_khan>h1 {
+.user-share-container-media>h1 {
     font-size: 34px;
     font-weight: 600;
     word-break: break-all;
     letter-spacing: -0.36px;
     line-height: 39.6px;
     color: rgb(255, 255, 255);
-    width: 90%;
+    max-width: 1440px;
     height: 80px;
     display: flex;
+    padding: 35px;
+    margin: 0 auto;
     align-items: center;
 }
 
+.user-share-container-media {
+    width: 100%;
+}
+
 .user-share-container {
-    width: 90%;
+    max-width: 1440px;
+    margin: 0 auto;
     border-radius: 24px;
     background-color: rgb(255, 255, 255);
-    padding: 24px;
+    padding: 35px;
     box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
     line-height: 24px;
     position: relative;
 }
+
 
 .user-share-container>button {
     color: rgb(255, 255, 255);
@@ -189,11 +197,17 @@
 }
 
 .user-menus-khan {
-    padding: 13px;
     width: 100% !important;
-    border-radius: 40px 40px 0 0;
     background-color: rgb(255, 255, 255);
+    border-radius: 40px 40px 0 0;
     margin-top: 35px;
+
+}
+
+.user-menus-khan-media {
+    padding: 13px;
+    max-width: 1440px;
+    margin: 0 auto;
 }
 
 .user-menus {

@@ -90,73 +90,78 @@ function Declaration() {
   return (
     <div className="Declaration">
       <div className="declaration-title">
-        <h1>
-          <Link to={"/dashboard"}>
-            <svg
-              aria-hidden="true"
-              role="img"
-              className="h-9 w-auto iconify iconify--ic"
-              width="1em"
-              height="1em"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="currentColor"
-                d="M19 11H7.83l4.88-4.88c.39-.39.39-1.03 0-1.42a.996.996 0 0 0-1.41 0l-6.59 6.59a.996.996 0 0 0 0 1.41l6.59 6.59a.996.996 0 1 0 1.41-1.41L7.83 13H19c.55 0 1-.45 1-1s-.45-1-1-1"
-              ></path>
-            </svg>
-          </Link>
-          {t.newDeclaration}
-        </h1>
+        <div className="declaration-title-media">
+          <h1>
+            <Link to={"/dashboard"}>
+              <svg
+                aria-hidden="true"
+                role="img"
+                className="h-9 w-auto iconify iconify--ic"
+                width="1em"
+                height="1em"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M19 11H7.83l4.88-4.88c.39-.39.39-1.03 0-1.42a.996.996 0 0 0-1.41 0l-6.59 6.59a.996.996 0 0 0 0 1.41l6.59 6.59a.996.996 0 1 0 1.41-1.41L7.83 13H19c.55 0 1-.45 1-1s-.45-1-1-1"
+                ></path>
+              </svg>
+            </Link>
+            {t.newDeclaration}
+          </h1>
+        </div>
       </div>
       <div className="progres-padding">
         <div className="publish-progress-bar">
-          <div className="progress-index">
-            <div className="progress-index-left">
-              <h4>
-                <svg
-                  aria-hidden="true"
-                  role="img"
-                  className="h-6 w-6 iconify iconify--ion"
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 512 512"
-                >
-                  <path
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinejoin="round"
-                    strokeWidth="32"
-                    d="M416 221.25V416a48 48 0 0 1-48 48H144a48 48 0 0 1-48-48V96a48 48 0 0 1 48-48h98.75a32 32 0 0 1 22.62 9.37l141.26 141.26a32 32 0 0 1 9.37 22.62Z"
-                  ></path>
-                  <path
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="32"
-                    d="M256 56v120a32 32 0 0 0 32 32h120m-232 80h160m-160 80h160"
-                  ></path>
-                </svg>
-                {t.iDeclaration}
-              </h4>
-              <span>{`(${Math.floor(progressPercent)}% completed)`}</span>
+          <div className="publish-progress-bar-media">
+            <div className="progress-index">
+              <div className="progress-index-left">
+                <h4>
+                  <svg
+                    aria-hidden="true"
+                    role="img"
+                    className="h-6 w-6 iconify iconify--ion"
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinejoin="round"
+                      strokeWidth="32"
+                      d="M416 221.25V416a48 48 0 0 1-48 48H144a48 48 0 0 1-48-48V96a48 48 0 0 1 48-48h98.75a32 32 0 0 1 22.62 9.37l141.26 141.26a32 32 0 0 1 9.37 22.62Z"
+                    ></path>
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="32"
+                      d="M256 56v120a32 32 0 0 0 32 32h120m-232 80h160m-160 80h160"
+                    ></path>
+                  </svg>
+                  {t.iDeclaration}
+                </h4>
+                <span>{`(${Math.floor(progressPercent)}% completed)`}</span>
+              </div>
+              <button
+                className={`publish-btn ${isComplete ? "active" : "disabled"}`}
+                onClick={handleSubmit}
+                disabled={!isComplete}
+              >
+                {t.publishs}
+              </button>
             </div>
-            <button
-              className={`publish-btn ${isComplete ? "active" : "disabled"}`}
-              onClick={handleSubmit}
-              disabled={!isComplete}
-            >
-              {t.publishs}
-            </button>
+            <Progress
+              percent={Math.floor(progressPercent)}
+              strokeColor={progressPercent === 100 ? "#52c41a" : "#591D87"}
+              status={progressPercent === 100 ? "success" : "active"}
+            />
           </div>
-          <Progress
-            percent={Math.floor(progressPercent)}
-            strokeColor={progressPercent === 100 ? "#52c41a" : "#591D87"}
-            status={progressPercent === 100 ? "success" : "active"}
-          />
         </div>
       </div>
+
       <div className="new-declaration-form">
         <div className="form-item">
           <h2>{t.statistics}</h2>

@@ -1,57 +1,117 @@
-section {
+.passport__main {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-direction: column;
-  background: #fff;
+  /* height: 100; */
+  background: linear-gradient(to bottom, #2c1d52, #0b0b0e 20% 100%);
+  /* url("./background.png") !important; */
+  background-size: cover;
+  background-position: center;
+  padding: 0 3%;
+  padding-bottom: 6%;
+  overflow: hidden !important;
+  /* margin-top: 7vw; */
+  position: relative;
 }
 
-.section_container {
-  max-width: 1280px;
-  width: 100%;
-  padding: 96px 11.5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.passport__media {
+  max-width: 1440px;
   margin: 0 auto;
 }
 
+.passport__main::after {
+  width: 100%;
+  height: 600px;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  opacity: .2;
+  background-image: url("../../../assets/newBanners/bgBanner.svg") !important;
+}
+
+.passport__main::before {
+  width: 100%;
+  height: 300px;
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  opacity: .1;
+  bottom: 0;
+  background-image: url("../../../assets/newBanners/bgBanner.svg") !important;
+}
+
+
+.Paspport__title_x {
+  text-wrap: nowrap;
+}
+
+.Paspport__title {
+  font-size: calc(30px + (80 - 40) * ((100vw - 300px) / (1920 - 300)));
+  text-align: start;
+  font-weight: 600 !important;
+  line-height: calc(40px + (110 - 45) * ((100vw - 300px) / (1920 - 300)));
+  color: rgba(255, 255, 255, 1);
+}
+
+.Paspport__subtitle {
+  font-size: calc(1.6rem + (1.8 - 4) * ((100vw - 300px) / (1920 - 300)));
+  color: rgba(255, 255, 255, 1);
+  max-width: 70%;
+  margin-bottom: 30px;
+  font-weight: 300 !important;
+  z-index: 1;
+  margin-top: 30px !important;
+  text-align: start;
+}
+
+
 .PassportPage__header {
   width: 100%;
+  height: 100%;
   margin-top: 70px !important;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 50px 30px;
+  padding: 80px 30px 0 30px;
   gap: 5px;
+  overflow: hidden;
 }
 
 .PassportPage__images {
-  width: 450px;
-  height: 350px;
+  width: calc(40% + (50 - 40) * ((100vw - 900px) / (1920 - 900)));
+  height: calc(70% + (90 - 70) * ((100vw - 900px) / (1920 - 900)));
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 .PassportPage__images>img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: scale(1.3);
+  transform: scale(calc(1.1 + (1.2 - 1.1) * ((100vw - 900px) / (1920 - 900))));
+  margin-left: calc(20px + (50 - 20) * ((100vw - 900px) / (1920 - 900)));
+  margin-top: calc(20px + (50 - 20) * ((100vw - 900px) / (1920 - 900)));
 }
 
 
 
-
-
+.FAQ_containerPs_media {
+  background: #fff;
+  width: 100%;
+}
 
 .FAQ_containerPs {
-  width: 94%;
   display: flex;
   flex-direction: column;
   gap: 20px;
   margin: 40px 0;
   padding: 20px 0;
-  background: #fff;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 .FAQ_containerPs>h1 {
@@ -68,8 +128,58 @@ section {
 }
 
 
-/* media */
 @media screen and (max-width:900px) {
+  .PassportPage__header {
+    width: 100%;
+    margin-top: 70px !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column-reverse;
+    padding: 50px 30px;
+    gap: 5px;
+  }
+
+  .PassportPage__images {
+    width: calc(95% + (50 - 40) * ((100vw - 900px) / (1920 - 900)));
+    height: calc(95% + (90 - 70) * ((100vw - 900px) / (1920 - 900)));
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .Paspport__subtitle {
+    max-width: 90%;
+  }
+
+
+  .FAQ_containerPs>h1 {
+    text-align: center;
+    font-size: 30px;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  .FAQ_containerPs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 40px 0;
+    padding: 20px;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width:410px) {
+  .Paspport__subtitle {
+    max-width: 90%;
+    font-size: 15px !important;
+  }
+}
+
+/* media */
+/* @media screen and (max-width:900px) {
   .PassportPage__header {
     width: 100%;
     margin-top: 70px !important;
@@ -128,4 +238,4 @@ section {
     transform: scale(1);
     margin-right: -40px;
   }
-}
+} */

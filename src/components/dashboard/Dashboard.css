@@ -1,3 +1,12 @@
 .dashbord-components-container {
-  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+/* media */
+@media screen and (max-width: 450px) {
+  .dashbord-components-container {
+    padding: 0px;
+  }
 }
