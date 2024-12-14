@@ -114,7 +114,6 @@ const Banner = () => {
     quarterly: createData(leaderboardData?.quarterly, frames),
   };
 
-  console.log(data.quarterly);
   const customIcons = ({ isActive }) =>
     isActive ? (
       <MinusOutlined style={{ fontSize: "22px" }} />
@@ -142,6 +141,7 @@ const Banner = () => {
             </div>
           </header>
         </div>
+
         <div className="slider-container">
           <div className="banner_main_container">
             <Swiper
@@ -176,12 +176,10 @@ const Banner = () => {
                 </button>
               </div>
 
-              {/* Slide 1 (Previous slide) */}
               <SwiperSlide className="swiper-slide_cert">
                 <div className="swiper-slide-main_img"></div>
               </SwiperSlide>
 
-              {/* Slide 2 (Main slide - Central slide) */}
               <SwiperSlide className="swiper-slide">
                 <div className="swiper-slide-main">
                   <div className="homeslide__left">
@@ -219,7 +217,6 @@ const Banner = () => {
                 </div>
               </SwiperSlide>
 
-              {/* Slide 3 (Next slide) */}
               <SwiperSlide className="swiper-slide_cert_slide_3">
                 <div className="swiper-slide-main_slide_3">
                   <div className="swiper-slide-main_slide_3_info_img"></div>
@@ -496,7 +493,7 @@ const Banner = () => {
             <div className="review_userImage">
               <div className="review_userImage_img">
                 <img
-                  src="https://randomuser.me/api/portraits/women/68.jpg"
+                  src="https://randomuser.me/api/portraits/women/90.jpg"
                   alt="User 1"
                 />
               </div>
@@ -509,6 +506,7 @@ const Banner = () => {
               </div>
             </div>
             <p>{t.review_texts[0]}</p>
+            <p>{t.review_texts[1]}</p>
           </div>
 
           <div className="reviews_card">
@@ -527,6 +525,7 @@ const Banner = () => {
                 <p>@james_analyst</p>
               </div>
             </div>
+            <p>{t.review_texts[0]}</p>
             <p>{t.review_texts[1]}</p>
           </div>
 
@@ -546,6 +545,7 @@ const Banner = () => {
                 <p>@sophia_trader</p>
               </div>
             </div>
+            <p>{t.review_texts[1]}</p>
             <p>{t.review_texts[2]}</p>
           </div>
         </div>

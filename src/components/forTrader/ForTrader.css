@@ -1,6 +1,6 @@
 .forTrader {
   width: 100%;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background: linear-gradient(to bottom, #2c1d52, #0b0b0e 50% 100%),
     url("../../assets/newBanners/bgBanner.svg") !important;
   background-size: cover;
