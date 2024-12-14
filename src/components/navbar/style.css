@@ -530,6 +530,11 @@
     align-items: center;
     gap: 10px;
 
+    b {
+      color: #000;
+      margin-left: 10px;
+    }
+
     img {
       width: 32px;
       height: 32px;
