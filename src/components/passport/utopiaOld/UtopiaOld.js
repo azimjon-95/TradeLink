@@ -7,7 +7,6 @@ import { useLocation, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import myAxios from "axios";
 import { setModalType } from "../../../context/modalType";
-// import axios from "../../../api";
 import bin from "../../../assets/ed_khan/binance_rounded.svg";
 import "./style.css";
 import KeyIndicators from "./myCards/KeyIndicators";
@@ -52,18 +51,7 @@ const UtopiaOldMultiLine = () => {
     }
   };
 
-  // getData;
-  // useEffect(() => {
-  //   setTopLoader(true);
-  //   let API = `https://api.kyt.systems/portfolio/main-indicators?portfolio_id=${baseId}&time_step=${selectValue}`;
-  //   myAxios
-  //     .get(API)
-  //     .then((res) => {
-  //       setData(res?.data?.data);
-  //     })
-  //     .catch((err) => console.log(err))
-  //     .finally(() => setTopLoader(false));
-  // }, [selectValue, baseId]);
+
 
   useEffect(() => {
     setTopLoader(true);
@@ -181,7 +169,7 @@ const UtopiaOldMultiLine = () => {
               )}
             </p>
           </div>
-          {/* <p>My copy trading: <a href={currentUrl} target="_blank" rel="noopener noreferrer">{currentUrl}</a> https://example.com</p> */}
+
         </div>
       </div>
       <div className="oldMultiLine-main">
@@ -252,6 +240,7 @@ const UtopiaOldMultiLine = () => {
               backgroundColor: "#ffffff",
               zIndex: isOverlayVisible ? 999 : 0,
               overflow: isOverlayVisible ? "auto" : "hidden",
+              padding: isOverlayVisible ? "0px 40px" : "0px",
             }}
           >
             {isOverlayVisible && (
