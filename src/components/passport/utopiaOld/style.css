@@ -138,6 +138,7 @@
     width: 100%;
     border-radius: 40px;
     background: #ffffff;
+    position: relative !important;
 }
 
 .oldMultiLine-main-media {
@@ -145,6 +146,24 @@
     padding: 15px 35px;
     max-width: 1440px;
     margin: 0 auto;
+    position: relative;
+}
+
+.oldMultiLine-main-head {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0;
+    z-index: 101;
+    position: sticky;
+    height: 40px;
+    top: 0;
+    left: 0;
+}
+
+.oldMultiLine-main-head-stikiy {
+    box-shadow: 0px 4px 6px rgba(137, 137, 137, 0.1);
 
 }
 
@@ -154,24 +173,7 @@
 
 
 
-.oldMultiLine-main-head {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    background-color: #fff;
-    z-index: 10;
-    position: sticky;
-    top: 0;
-    left: 0;
-    right: 0;
-}
 
-.oldMultiLine-main-head-stikiy {
-    box-shadow: 0px 4px 6px rgba(137, 137, 137, 0.1);
-
-}
 
 .oldMultiLine-calendar {
     width: 100%;

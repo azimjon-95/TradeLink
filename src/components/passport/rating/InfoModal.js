@@ -278,11 +278,9 @@ function InfoModal({ isOpen, onClose, contentType, currentLanguage }) {
                 options={options}
                 series={options.series}
                 type="radialBar"
-                width={400}
-                height={400}
+                className="apexCharts_box"
               />
               <p style={{ width: "40%", textIndent: "35px" }}>KYT - Rating</p>
-              {/* <div className="ApexCharts"></div> */}
             </div>
           )}
         </div>

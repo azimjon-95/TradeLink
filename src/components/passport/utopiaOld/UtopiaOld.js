@@ -12,12 +12,14 @@ import "./style.css";
 import KeyIndicators from "./myCards/KeyIndicators";
 import Charts from "./myCards/Charts";
 import Investment from "./myCards/Investment";
+import MyCards from './myCards/MyCards'
 import {
   translations,
   checkboxData,
   labels,
   labelsBar,
   drawDown,
+  translationsInfo
 } from "./Lang";
 
 const { RangePicker } = DatePicker;
@@ -172,53 +174,47 @@ const UtopiaOldMultiLine = () => {
 
         </div>
       </div>
+
       <div className="oldMultiLine-main">
         <div className="oldMultiLine-main-media">
-          {!isOverlayVisible && (
-            <div
-              style={{
-                position: isSticky ? "static" : "sticky",
-                top: 0,
-                left: 0,
-              }}
-              className="oldMultiLine-main-head"
-            >
-              <Space className="RangePicker" direction="vertical" size={12}>
-                <RangePicker placeholder={placeholders[currentLanguage]} />
-              </Space>
-              <div className="oldMultiLine-calendar">
-                <Select
-                  defaultValue="day"
-                  style={{
-                    width: 100,
-                  }}
-                  onChange={(value) => setSelectValue(value)}
-                  options={[
-                    { value: "hour", label: t.hour },
-                    { value: "day", label: t.day },
-                    { value: "week", label: t.week },
-                  ]}
-                />
 
-                <div
-                  style={{
-                    color: "#591d87",
-                    display: "flex",
-                    alignItems: "center",
-                    fontSize: "12px",
-                  }}
-                >
-                  {isLite ? t.lite : t.lite}
-                  &nbsp;&nbsp;
-                  <Switch
-                    checked={isLite}
-                    onChange={handleSwitchChange}
-                    className={isLite ? "switch-checked" : "switch-unchecked"}
-                  />
-                </div>
+          <div className="oldMultiLine-main-head">
+            <Space className="RangePicker" direction="vertical" size={12}>
+              <RangePicker placeholder={placeholders[currentLanguage]} />
+            </Space>
+            <div className="oldMultiLine-calendar">
+              <Select
+                defaultValue="day"
+                style={{
+                  width: 100,
+                }}
+                onChange={(value) => setSelectValue(value)}
+                options={[
+                  { value: "hour", label: t.hour },
+                  { value: "day", label: t.day },
+                  { value: "week", label: t.week },
+                ]}
+              />
+
+              <div
+                style={{
+                  color: "#591d87",
+                  display: "flex",
+                  alignItems: "center",
+                  fontSize: "12px",
+                }}
+              >
+                {isLite ? t.lite : t.lite}
+                &nbsp;&nbsp;
+                <Switch
+                  checked={isLite}
+                  onChange={handleSwitchChange}
+                  className={isLite ? "switch-checked" : "switch-unchecked"}
+                />
               </div>
             </div>
-          )}
+          </div>
+
           {/* -----------------------7A------------------------- */}
           <h2 className="ket-inxTitle">{t.kIndicators}</h2>
           <KeyIndicators
@@ -339,7 +335,7 @@ const UtopiaOldMultiLine = () => {
             />
 
             {
-              isOverlayVisible && <div style={{ padding: "30px" }} className="single-cards-box">
+              isLite && isOverlayVisible && <div style={{ padding: "30px" }} className="single-cards-box">
                 <h1>{t.main}</h1>
                 <div className="single-cards-container">
                   <Investment currentLanguage={currentLanguage} t={t} selectValue={selectValue} key={loading} id={baseId} />
@@ -348,7 +344,7 @@ const UtopiaOldMultiLine = () => {
             }
           </div>
           {
-            !isOverlayVisible && <div className="single-cards-box">
+            isLite && <div className="single-cards-box">
               <h1>{t.main}</h1>
               <div className="single-cards-container">
                 <Investment currentLanguage={currentLanguage} t={t} selectValue={selectValue} key={loading} id={baseId} />
@@ -356,13 +352,16 @@ const UtopiaOldMultiLine = () => {
             </div>
           }
 
-          {/* <MyCards
-            translationsInfo={translationsInfo}
-            currentLanguage={currentLanguage}
-            id={baseId}
-            selectValue={selectValue}
-            t={t}
-          /> */}
+          {
+            !isLite &&
+            <MyCards
+              translationsInfo={translationsInfo}
+              currentLanguage={currentLanguage}
+              id={baseId}
+              selectValue={selectValue}
+              t={t}
+            />
+          }
           {/* )} */}
 
         </div>

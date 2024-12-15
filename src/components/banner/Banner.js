@@ -143,6 +143,8 @@ const Banner = () => {
         </div>
 
         <div className="slider-container">
+
+
           <div className="banner_main_container">
             <Swiper
               slidesPerView={1.1} // Displays parts of both previous and next slides
@@ -164,7 +166,9 @@ const Banner = () => {
               }}
               onSlideChange={(swiper) => setSlider(swiper.activeIndex + 1)}
               modules={[Pagination, Navigation]}
-              className="mySwiper"
+              // className="mySwiper"
+              className={`mySwiper ${slider === 1 ? "slider-1" : slider === 2 ? "slider-2" : "slider-3"
+                }`}
             >
               <div className="simple-btn">
                 <p>0{slider}</p>
@@ -282,9 +286,8 @@ const Banner = () => {
                       <div className="card_ret-bann">
                         <span>
                           <p
-                            className={`${
-                              item.rank === 1 ? "item-rank" : "item-rank-circle"
-                            }`}
+                            className={`${item.rank === 1 ? "item-rank" : "item-rank-circle"
+                              }`}
                           >
                             {item.rank}
                           </p>
@@ -330,9 +333,8 @@ const Banner = () => {
                       <div className="card_ret-bann">
                         <span>
                           <p
-                            className={`${
-                              item.rank === 1 ? "item-rank" : "item-rank-circle"
-                            }`}
+                            className={`${item.rank === 1 ? "item-rank" : "item-rank-circle"
+                              }`}
                           >
                             {item.rank}
                           </p>
