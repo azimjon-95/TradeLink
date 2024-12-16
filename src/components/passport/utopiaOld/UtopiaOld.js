@@ -215,7 +215,7 @@ const UtopiaOldMultiLine = () => {
               width: "100%",
               height: isOverlayVisible ? "100vh" : "auto",
               backgroundColor: "#ffffff",
-              zIndex: isOverlayVisible ? 90 : 0,
+              zIndex: isOverlayVisible ? 999 : 0,
               overflow: isOverlayVisible ? "auto" : "hidden",
               padding: isOverlayVisible ? "0px 40px" : "0px",
             }}
