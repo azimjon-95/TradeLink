@@ -61,7 +61,8 @@ const Leaderboard = () => {
       .finally(() => setLoadingTop(false));
   }, [selectedOption]);
 
-  // get LeaderBoard table Data
+  const [pageCount, setPageCount] = useState(0);
+
   useEffect(() => {
     setLoading(true);
     let API = `/leaderboard/top-traders?page=${page === 0 ? 0 : page - 1
@@ -70,12 +71,13 @@ const Leaderboard = () => {
     axios
       .get(API)
       .then((res) => {
-        // setPortfolios((p) => [...p, ...res?.data?.data]);
+        setPageCount(res?.data?.page_count)
         setPortfolios(res?.data?.data);
       })
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
   }, [showInactive, filterOption, page, selectedOption]);
+
 
   // ----------------------------------------------------------------------------
 
@@ -118,18 +120,18 @@ const Leaderboard = () => {
       align: "center",
       render: (text, record, index) => {
         const currentPage = page || 1; // Joriy sahifa
-        const pageSize = portfolios?.length || 25; // Har bir sahifadagi yozuvlar soni
-        const calculatedIndex = (currentPage - 1) * pageSize + index + 1; // Indexni qayta hisoblash
+        const pageSize = 25; // Har bir sahifadagi yozuvlar soni standart 25 deb olinadi
 
-        let rankStyle = {};
-        if (calculatedIndex === 1) {
-          rankStyle = { backgroundColor: "#FBAF3D" };
-        } else if (calculatedIndex === 2) {
-          rankStyle = { backgroundColor: "#C0C8E0" };
-        } else if (calculatedIndex === 3) {
-          rankStyle = { backgroundColor: "#D5B678" };
-        }
+        const calculatedIndex = (currentPage - 1) * pageSize + index + 1;
 
+        const rankStyle = (() => {
+          if (calculatedIndex === 1) return { backgroundColor: "#FBAF3D" };
+          if (calculatedIndex === 2) return { backgroundColor: "#C0C8E0" };
+          if (calculatedIndex === 3) return { backgroundColor: "#D5B678" };
+          return {}; // Boshqa holatlar uchun standart uslub
+        })();
+
+        // Indexni qaytarish bilan birga uslub qo'llash
         return (
           <div style={rankStyle} className="rank-gold">
             {calculatedIndex}
@@ -283,7 +285,6 @@ const Leaderboard = () => {
     setPage(page);
   };
 
-  console.log(leaderboardData?.quarterly);
 
   const month = transMonth[currentLanguage];
 
@@ -410,13 +411,7 @@ const Leaderboard = () => {
                 data={leaderboardData?.quarterly}
                 date={`${month.fourMonthAgo} - ${month.today}`}
               />
-              {/* <LeaderboardCard
-              by={subTitle.by}
-              loadingTop={loadingTop}
-              title={subTitle.yearlyTop}
-              data={leaderboardData?.yearly}
-              date={`${month.oneYearAgo} - ${month.today}`}
-            /> */}
+
             </div>
           )}
         </div>
@@ -475,7 +470,7 @@ const Leaderboard = () => {
               >
                 <Pagination
                   current={currentPage} // Hozirgi sahifa
-                  total={portfolios?.length} // Umumiy ma'lumotlar soni
+                  total={pageCount} // Umumiy ma'lumotlar soni
                   pageSize={1} // Har bir sahifadagi elementlar soni
                   onChange={handlePageChange} // Sahifa o'zgarganda chaqiriladigan funksiya
                   showSizeChanger={false} // Foydalanuvchiga sahifa o'lchamini o'zgartirish imkoniyatini berishni o'chirish
