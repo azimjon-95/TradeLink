@@ -242,7 +242,7 @@
 
 .indicator-card .ket-label {
   /* text-decoration: underline; */
-  border-bottom: 1px solid #1a2233b3;
+  border-bottom: 2px dotted #1a2233b3;
   cursor: help;
   color: #1a2233b3;
   text-decoration-style: solid;

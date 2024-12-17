@@ -5,6 +5,13 @@ import HandleTooltip from "../HandleTooltip";
 import "./style.css";
 
 const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
+  function formatNumber(number) {
+    if (number >= 1000) {
+      return (number / 1000)?.toFixed(1)?.replace(/\.0$/, "") + "K";
+    }
+    return number?.toFixed(1);
+  }
+
   const indicators = [
     {
       value: data?.open_story_coefficient?.toFixed(0) || 0,
@@ -17,7 +24,7 @@ const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
       isProgress: true,
     },
     {
-      value: (data?.cagr?.toFixed(2) || 0) + "%",
+      value: (formatNumber(data?.cagr) || 0) + "%",
       label: {
         en: "CAGR",
         ru: "Среднегодовой темп роста",
@@ -26,7 +33,7 @@ const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
       },
     },
     {
-      value: (data?.average_monthly_profit?.toFixed(2) || 0) + "%",
+      value: (formatNumber(data?.average_monthly_profit) || 0) + "%",
       label: {
         en: "Avg. Monthly Profit",
         ru: "Средняя ежемесячная прибыль",
@@ -35,7 +42,7 @@ const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
       },
     },
     {
-      value: (data?.average_daily_profit?.toFixed(2) || 0) + "%",
+      value: (formatNumber(data?.average_daily_profit) || 0) + "%",
       label: {
         en: "Avg. Day Profit",
         ru: "Средняя ежедневная прибыль",
@@ -44,7 +51,7 @@ const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
       },
     },
     {
-      value: (data?.profit_rate?.toFixed(2) || 0) + "%",
+      value: (formatNumber(data?.profit_rate) || 0) + "%",
       label: {
         en: "Profit",
         ru: "Прибыль",
@@ -53,7 +60,7 @@ const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
       },
     },
     {
-      value: (data?.winrate?.toFixed(2) || 0) + "%",
+      value: (formatNumber(data?.winrate) || 0) + "%",
       label: {
         en: "Success Rate",
         ru: "Коэффициент успеха",
@@ -63,7 +70,8 @@ const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
       highlight: true,
     },
     {
-      value: "$" + (data?.margin_balance / 1000).toFixed(1) || 0 + "K",
+      // value: "$" + (data?.margin_balance / 1000).toFixed(1) || 0 + "K",
+      value: "$" + formatNumber(data?.margin_balance),
       label: {
         en: "Margin Balance",
         ru: "Баланс маржи",
@@ -72,7 +80,7 @@ const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
       },
     },
     {
-      value: (data?.max_drawdown?.toFixed(2) || 0) + "%",
+      value: (formatNumber(data?.max_drawdown) || 0) + "%",
       label: {
         en: "Max Drawdown",
         ru: "Максимальное падение",
@@ -81,7 +89,7 @@ const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
       },
     },
     {
-      value: (data?.max_drawdown_duration?.toFixed(0) || 0) + "D",
+      value: (formatNumber(data?.max_drawdown_duration) || 0) + "D",
       label: {
         en: "Max Drawdown Duration",
         ru: "Длительность максимального падения",
@@ -90,7 +98,7 @@ const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
       },
     },
     {
-      value: data?.max_leverage?.toFixed(2) || 0,
+      value: formatNumber(data?.max_leverage) || 0,
       label: {
         en: "Max Leverage",
         ru: "Максимальное кредитное плечо",
@@ -99,7 +107,7 @@ const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
       },
     },
     {
-      value: data?.avg_leverage?.toFixed(2) || 0,
+      value: formatNumber(data?.avg_leverage) || 0,
       label: {
         en: "Avg. Leverage",
         ru: "Среднее кредитное плечо",
@@ -108,7 +116,7 @@ const KeyIndicators = ({ data, topLoader, currentLanguage }) => {
       },
     },
     {
-      value: "$" + (data?.net_profit?.toFixed(2) || 0),
+      value: "$" + formatNumber(data?.net_profit),
       label: {
         en: "Income",
         ru: "Доход",
