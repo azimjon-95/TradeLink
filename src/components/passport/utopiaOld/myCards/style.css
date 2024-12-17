@@ -62,8 +62,7 @@
 .investment-card {
   background-color: #fff;
   border-radius: 8px;
-  width: 32.5%;
-  min-width: 375px;
+  width: 394px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: rgb(255, 255, 255);
   padding: 12px 14px;
@@ -244,19 +243,5 @@
 
   66% {
     background-size: calc(100% / 3) 100%, calc(100% / 3) 100%, calc(100% / 3) 0%;
-  }
-}
-
-@media screen and (max-width: 450px) {
-  .investment-card {
-    background-color: #fff;
-    border-radius: 8px;
-    width: 32.5%;
-    min-width: 100%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: rgb(255, 255, 255);
-    padding: 12px 14px;
-    line-height: 24px;
-    border: 0.888889px solid rgb(231, 235, 243);
   }
 }
