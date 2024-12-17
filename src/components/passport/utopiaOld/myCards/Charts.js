@@ -1,5 +1,3 @@
-
-// eslint - disable - next - line
 import React, { useState, useEffect, useMemo } from "react";
 import {
   BarChart,
@@ -28,6 +26,7 @@ import "./style.css";
 const Charts = ({
   checkedItems,
   isOverlayVisible,
+  customKey,
   id,
   selectValue,
   labels,
@@ -72,10 +71,10 @@ const Charts = ({
         negative0: chartData?.benchmark_btc[index].value,
         negative1: chartData?.drawdown_percentage[index].value,
         negative2: chartData?.drawdown_duration[index].value,
-        negative3: chartData?.long_positions_x[index].value,
-        // revenue: chartData?.long_positions[index].value,
-        // negative3: chartData?.margin_balances[index].value,
-        // negative4: chartData?.pnl[index].value,
+        revenue: chartData?.long_positions[index].value,
+        negative3: chartData?.margin_balances[index].value,
+        negative4: chartData?.pnl[index].value,
+        negative5: chartData?.long_positions_x[index].value,
       })),
     [chartData]
   );
@@ -84,16 +83,9 @@ const Charts = ({
     if (!active || !payload || payload.length === 0) return null;
     return (
       <div className="PLByMonth" style={{ color: "#fff", fontSize: "12px" }}>
-        {/* <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
           <b>{moment(payload[0]?.payload?.name).format("MMM D YYYY")}</b>
-        </div> */}
-        <b>
-          {moment(payload[0]?.payload?.name, "MM/DD/YYYY").isValid()
-            ? moment(payload[0]?.payload?.name, "MM/DD/YYYY").format(
-              "MMM D YYYY"
-            )
-            : "Noma'lum sana"}
-        </b>
+        </div>
         {payload.map(
           (item, index) =>
             item.value !== undefined && (
@@ -117,6 +109,17 @@ const Charts = ({
     );
   };
 
+  const dataLine = useMemo(
+    () =>
+      chartData?.used_lerage?.map((item, index) => ({
+        day: new Date(item?.timestamp)?.toLocaleDateString(),
+        leverage: item.value,
+        long_positions: chartData?.long_positions[index].value,
+        short_positions: chartData?.short_positions[index].value,
+      })),
+    [chartData]
+  );
+
   const usedLeverage = {
     en: "Used Leverage:",
     ru: "Используемое кредитное плечо:",
@@ -139,17 +142,9 @@ const Charts = ({
     if (active && payload && payload.length) {
       return (
         <div className="PLByMonth">
-          {/* <b style={{ color: "#fff", fontSize: "14px" }}>
-            {moment(payload[0]?.payload?.day).format("MMM D YYYY")}
-          </b> */}
           <b style={{ color: "#fff", fontSize: "14px" }}>
-            {moment(payload[0]?.payload?.day, "MM/DD/YYYY").isValid()
-              ? moment(payload[0]?.payload?.day, "MM/DD/YYYY").format(
-                "MMM D YYYY"
-              )
-              : "Noma'lum sana"}
+            {moment(payload[0]?.payload?.day).format("MMM D YYYY")}
           </b>
-
           <p>
             <strong
               style={{ display: "flex", alignItems: "center", gap: "4px" }}
@@ -221,20 +216,19 @@ const Charts = ({
     de: "Maximaler Rückgang:",
     es: "Pérdida máxima:",
   };
-
+  const drawdownDuration = {
+    en: "DrawDown Duration:",
+    ru: "Длительность просадки:",
+    de: "Dauer des Rückgangs:",
+    es: "Duración de la pérdida:",
+  };
   const CustomTooltipBottom = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
         <div className="PLByMonth">
-          {/* <b style={{ color: "#fff", fontSize: "14px" }}>
-            {moment(payload[0]?.payload?.day).format("MMM D YYYY")}
-          </b> */}
           <b style={{ color: "#fff", fontSize: "14px" }}>
-            {moment(payload[0]?.payload?.day, "YYYY-MM-DD", true).isValid()
-              ? moment(payload[0]?.payload?.day).format("MMM D YYYY")
-              : "Noma'lum sana"}
+            {moment(payload[0]?.payload?.day).format("MMM D YYYY")}
           </b>
-
           <p>
             <strong
               style={{ display: "flex", alignItems: "center", gap: "4px" }}
@@ -250,6 +244,23 @@ const Charts = ({
               ></div>
               {drawdown[currentLanguage]}{" "}
               {payload[0]?.payload?.drawdown?.toFixed(2)}%
+            </strong>
+          </p>
+          <p>
+            <strong
+              style={{ display: "flex", alignItems: "center", gap: "4px" }}
+            >
+              <div
+                style={{
+                  display: "inline-block",
+                  width: "8px",
+                  height: "8px",
+                  borderRadius: "50%",
+                  border: `2px solid #4180D2`, // Color based on value
+                }}
+              ></div>
+              {drawdownDuration[currentLanguage]}{" "}
+              {payload[1]?.payload?.drawdown_duration?.toFixed(2)}%
             </strong>
           </p>
         </div>
@@ -332,83 +343,19 @@ const Charts = ({
     es: "Ingresos por mes (%)",
   };
 
-  const monthNames = {
-    ru: [
-      "Янв",
-      "Фев",
-      "Мар",
-      "Апр",
-      "Май",
-      "Июн",
-      "Июл",
-      "Авг",
-      "Сен",
-      "Окт",
-      "Ноя",
-      "Дек",
-    ],
-    de: [
-      "Jan",
-      "Feb",
-      "Mär",
-      "Apr",
-      "Mai",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Okt",
-      "Nov",
-      "Dez",
-    ],
-    en: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
-    es: [
-      "Ene",
-      "Feb",
-      "Mar",
-      "Abr",
-      "May",
-      "Jun",
-      "Jul",
-      "Ago",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dic",
-    ],
-  };
-
-  // Funksiya sanani formatlash uchun
-  function formatDay(day, currentLanguage) {
-    const [month, date, year] = day.split("/"); // MM/DD/YYYY formatida bo'lishini kutadi
-    const monthIndex = parseInt(month, 10) - 1; // Oy indexi uchun
-    const translatedMonth =
-      monthNames[currentLanguage]?.[monthIndex] || monthNames.eng[monthIndex]; // Default: English
-    return `${translatedMonth}: ${date}`; // Oy nomi va kun
-  }
-
-  // dataBottom massivini formatlash
-  function formatData(data, currentLanguage) {
-    return data?.map((item) => ({
-      ...item,
-      formattedDay: formatDay(item?.day, currentLanguage),
-    }));
-  }
-  // Formatlangan natija
-  const data_formated = formatData(dataBottom, currentLanguage);
+  // const monthTranslations = {
+  //   en: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  //   uz: ["Yan", "Fev", "Mar", "Apr", "May", "Iyun", "Iyul", "Avg", "Sen", "Okt", "Noy", "Dek"],
+  //   ru: ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"],
+  //   es: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+  // };
+  // const monthsInLanguage = monthTranslations[currentLanguage];
+  // Funksiya
+  // const formatMonthYear = (dateString, language) => {
+  //   moment.locale(language); // Tilni o'rnatish
+  //   const date = moment(dateString, "MMM YYYY"); // "Sep 2023" formatini momentga aylantirish
+  //   return date.format("MMMM YYYY"); // To'liq oy nomi va yil
+  // };
 
   return (
     <>
@@ -540,7 +487,94 @@ const Charts = ({
       </ResponsiveContainer>
 
       {/* ---------------------------10A----------------------------------- */}
+      <div style={{ display: `${customKey && "none"}` }}>
+        {checkedItems.usedLeverage && (
+          <ResponsiveContainer width="100%" height={130}>
+            {dataLine?.length ? (
+              <ComposedChart
+                data={dataLine}
+                margin={{ top: 30, right: 0, left: 0, bottom: 30 }}
+              >
+                <CartesianGrid
+                  vertical={false}
+                  strokeDasharray="0"
+                  stroke="#ccccccd5"
+                />
 
+                {/* Left Y-Axis - Percentage format */}
+                <YAxis
+                  yAxisId="left"
+                  orientation="left"
+                  domain={["auto"]}
+                  tickFormatter={(value) => `${value}%`}
+                  tick={{ fontSize: 10 }}
+                  axisLine={{ stroke: "#a9a9a978" }}
+                  tickLine={{ stroke: "#a9a9a978" }}
+                />
+
+                {/* Right Y-Axis - Dollar format with 'K' suffix */}
+                <YAxis
+                  yAxisId="right"
+                  orientation="right"
+                  domain={["auto"]}
+                  tickFormatter={(value) => `$${(value / 1000).toFixed(1)}K`}
+                  tick={{ fontSize: 10 }}
+                  axisLine={{ stroke: "#a9a9a978" }}
+                  tickLine={{ stroke: "#a9a9a978" }}
+                />
+
+                <Tooltip content={<CustomTooltipTwo />} />
+                <Legend />
+
+                {/* Bar for Long Positions */}
+                <Bar
+                  yAxisId="left"
+                  name="Long Positions"
+                  dataKey="long_positions"
+                  barSize={4}
+                >
+                  {dataLine?.map((entry, index) => (
+                    <Cell
+                      key={`long-cell-${index}`}
+                      fill={entry.long_positions >= 0 ? "#14C886" : "#EA3941"}
+                    />
+                  ))}
+                </Bar>
+
+                {/* Bar for Short Positions */}
+                <Bar
+                  yAxisId="left"
+                  name="Short Positions"
+                  dataKey="short_positions"
+                  barSize={4}
+                >
+                  {dataLine?.map((entry, index) => (
+                    <Cell
+                      key={`short-cell-${index}`}
+                      fill={entry.short_positions >= 0 ? "#14C886" : "#EA3941"}
+                    />
+                  ))}
+                </Bar>
+
+                {/* Line Component for Leverage */}
+                <Line
+                  yAxisId="left"
+                  name="Margin Balance"
+                  type="monotone"
+                  dataKey="leverage"
+                  stroke="#954FC4"
+                  strokeWidth={1.5}
+                  dot={false}
+                />
+              </ComposedChart>
+            ) : (
+              <div className="chartLoader2">
+                <div className="loader"></div>
+              </div>
+            )}
+          </ResponsiveContainer>
+        )}
+      </div>
 
       {/* ---------------------------11A----------------------------------- */}
       {/* {checkedItems.drawDownDuration || checkedItems.drawDown && */}
@@ -705,7 +739,7 @@ export default Charts;
 
 
 
-// eslint-disable-next-line
+// // eslint-disable-next-line
 // import React, { useState, useEffect, useMemo } from "react";
 // import {
 //   BarChart,
