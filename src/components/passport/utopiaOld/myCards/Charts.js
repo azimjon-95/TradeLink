@@ -83,9 +83,16 @@ const Charts = ({
     if (!active || !payload || payload.length === 0) return null;
     return (
       <div className="PLByMonth" style={{ color: "#fff", fontSize: "12px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+        {/* <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
           <b>{moment(payload[0]?.payload?.name).format("MMM D YYYY")}</b>
-        </div>
+        </div> */}
+        <b>
+          {moment(payload[0]?.payload?.name, "MM/DD/YYYY").isValid()
+            ? moment(payload[0]?.payload?.name, "MM/DD/YYYY").format(
+                "MMM D YYYY"
+              )
+            : "Noma'lum sana"}
+        </b>
         {payload.map(
           (item, index) =>
             item.value !== undefined && (
@@ -142,9 +149,17 @@ const Charts = ({
     if (active && payload && payload.length) {
       return (
         <div className="PLByMonth">
-          <b style={{ color: "#fff", fontSize: "14px" }}>
+          {/* <b style={{ color: "#fff", fontSize: "14px" }}>
             {moment(payload[0]?.payload?.day).format("MMM D YYYY")}
+          </b> */}
+          <b style={{ color: "#fff", fontSize: "14px" }}>
+            {moment(payload[0]?.payload?.day, "MM/DD/YYYY").isValid()
+              ? moment(payload[0]?.payload?.day, "MM/DD/YYYY").format(
+                  "MMM D YYYY"
+                )
+              : "Noma'lum sana"}
           </b>
+
           <p>
             <strong
               style={{ display: "flex", alignItems: "center", gap: "4px" }}
@@ -226,9 +241,15 @@ const Charts = ({
     if (active && payload && payload.length) {
       return (
         <div className="PLByMonth">
-          <b style={{ color: "#fff", fontSize: "14px" }}>
+          {/* <b style={{ color: "#fff", fontSize: "14px" }}>
             {moment(payload[0]?.payload?.day).format("MMM D YYYY")}
+          </b> */}
+          <b style={{ color: "#fff", fontSize: "14px" }}>
+            {moment(payload[0]?.payload?.day, "YYYY-MM-DD", true).isValid()
+              ? moment(payload[0]?.payload?.day).format("MMM D YYYY")
+              : "Noma'lum sana"}
           </b>
+
           <p>
             <strong
               style={{ display: "flex", alignItems: "center", gap: "4px" }}
@@ -342,8 +363,6 @@ const Charts = ({
     de: "Umsatz pro Monat (%)",
     es: "Ingresos por mes (%)",
   };
-
-
 
   return (
     <>
@@ -656,7 +675,7 @@ const Charts = ({
             tick={{ fontSize: 10 }} /* Smaller font size for month labels */
             axisLine={false}
             tickLine={false}
-          // tickFormatter={(monthIndex) => formatMonthYear(monthIndex, currentLanguage)}
+            // tickFormatter={(monthIndex) => formatMonthYear(monthIndex, currentLanguage)}
           />
 
           <Bar
@@ -665,8 +684,8 @@ const Charts = ({
               formattedData?.length <= 5
                 ? 40
                 : formattedData?.length <= 10
-                  ? 30
-                  : 20
+                ? 30
+                : 20
             }
           >
             {formattedData?.map((entry, index) => (
