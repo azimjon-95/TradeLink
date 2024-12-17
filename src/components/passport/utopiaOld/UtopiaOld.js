@@ -1,9 +1,10 @@
+// eslint-disable-next-line
 import React, { useState, useEffect } from "react";
 import { ImStarEmpty, ImStarFull } from "react-icons/im";
-import { Checkbox, Select, DatePicker, Space, Switch } from "antd";
+import { Checkbox, Select, DatePicker, Space } from "antd";
 import { CheckSquareTwoTone } from "@ant-design/icons";
 import { RiExpandDiagonalLine } from "react-icons/ri";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import myAxios from "axios";
 import { setModalType } from "../../../context/modalType";
@@ -12,14 +13,12 @@ import "./style.css";
 import KeyIndicators from "./myCards/KeyIndicators";
 import Charts from "./myCards/Charts";
 import Investment from "./myCards/Investment";
-import MyCards from './myCards/MyCards'
 import {
   translations,
   checkboxData,
   labels,
   labelsBar,
   drawDown,
-  translationsInfo
 } from "./Lang";
 
 const { RangePicker } = DatePicker;
@@ -34,14 +33,12 @@ const UtopiaOldMultiLine = () => {
   const [selectValue, setSelectValue] = useState("day");
   const [data, setData] = useState([]);
   const [topLoader, setTopLoader] = useState(false);
-  const [isLite, setIsLite] = useState(false);
+  const [isLite] = useState(true);
   const { id: baseId } = useParams();
   const [stars, setStars] = useState(0);
   const [isClicked, setIsClicked] = useState(false); // Track icon click state
   const token = localStorage.getItem("access_token");
   const [loading] = useState(false);
-  const [isSticky, setIsSticky] = useState(true);
-  const location = useLocation();
 
   const handleClick = () => {
     if (token) {
@@ -71,10 +68,6 @@ const UtopiaOldMultiLine = () => {
     fetchData();
   }, [selectValue, baseId]);
 
-  const handleSwitchChange = (checked) => {
-    setIsLite(checked);
-  };
-
   const handleCheckboxChange = (key) => {
     setCheckedItems((prev) => ({
       ...prev,
@@ -101,7 +94,7 @@ const UtopiaOldMultiLine = () => {
   const allowedKeys = new Set([
     "benchmarkBTC",
     "return",
-    "realizedReturn",
+    "marginBalance",
     "drawDown",
     "profit",
   ]);
@@ -111,14 +104,10 @@ const UtopiaOldMultiLine = () => {
   const [checkedItems, setCheckedItems] = useState({
     benchmarkBTC: true,
     return: true,
-    realizedReturn: true,
     marginBalance: true,
-    balance: true,
-    plByday: true,
     profit: true,
-    usedLeverage: true,
     drawDown: true,
-    drawDownDuration: true,
+
   });
 
   useEffect(() => {
@@ -139,13 +128,7 @@ const UtopiaOldMultiLine = () => {
     es: "Gráfico", // Spanish
   };
 
-  useEffect(() => {
-    if (location.pathname.startsWith("/portfolio/")) {
-      setIsSticky(false); // Static qilish
-    } else {
-      setIsSticky(true); // Sticky qilish
-    }
-  }, [location.pathname]);
+
   return (
     <div className="oldMultiLine">
       <div className="oldMultiLine-header">
@@ -177,12 +160,11 @@ const UtopiaOldMultiLine = () => {
 
       <div className="oldMultiLine-main">
         <div className="oldMultiLine-main-media">
-
-          <div className="oldMultiLine-main-head">
-            <Space className="RangePicker" direction="vertical" size={12}>
-              <RangePicker placeholder={placeholders[currentLanguage]} />
-            </Space>
-            <div className="oldMultiLine-calendar">
+          {!isOverlayVisible && (
+            <div className="oldMultiLine-main-head">
+              <Space className="RangePicker" direction="vertical" size={12}>
+                <RangePicker placeholder={placeholders[currentLanguage]} />
+              </Space>
               <Select
                 defaultValue="day"
                 style={{
@@ -195,26 +177,8 @@ const UtopiaOldMultiLine = () => {
                   { value: "week", label: t.week },
                 ]}
               />
-
-              <div
-                style={{
-                  color: "#591d87",
-                  display: "flex",
-                  alignItems: "center",
-                  fontSize: "12px",
-                }}
-              >
-                {isLite ? t.lite : t.lite}
-                &nbsp;&nbsp;
-                <Switch
-                  checked={isLite}
-                  onChange={handleSwitchChange}
-                  className={isLite ? "switch-checked" : "switch-unchecked"}
-                />
-              </div>
             </div>
-          </div>
-
+          )}
           {/* -----------------------7A------------------------- */}
           <h2 className="ket-inxTitle">{t.kIndicators}</h2>
           <KeyIndicators
@@ -240,9 +204,7 @@ const UtopiaOldMultiLine = () => {
             }}
           >
             {isOverlayVisible && (
-              <div
-                style={{ padding: "10px 20px" }}
-                className="oldMultiLine-main-head oldMultiLine-main-head-stikiy"
+              <div className="oldMultiLine-main-head"
               >
                 <Space className="RangePicker" direction="vertical" size={12}>
                   <RangePicker placeholder={placeholders[currentLanguage]} />
@@ -268,14 +230,7 @@ const UtopiaOldMultiLine = () => {
                       fontSize: "12px",
                     }}
                   >
-                    {isLite ? t.lite : t.lite}
-                    &nbsp;&nbsp;
-                    <Switch
-                      checked={isLite}
-                      onChange={handleSwitchChange}
-                      className={isLite ? "switch-checked" : "switch-unchecked"}
-                    />
-                    &nbsp;&nbsp; &nbsp;&nbsp;
+
                     <button
                       className="isOverlayVisible-btn"
                       onClick={() => setOverlayVisible(!isOverlayVisible)}
@@ -288,7 +243,7 @@ const UtopiaOldMultiLine = () => {
             )}
 
             <div
-              style={{ padding: `${isOverlayVisible && "10px 20px"}` }}
+              style={{ zIndex: 999, padding: `${isOverlayVisible && "10px 20px"}` }}
               className="ket-inxBox"
             >
               <h2>{translationsCh[currentLanguage]}</h2>
@@ -301,13 +256,26 @@ const UtopiaOldMultiLine = () => {
                 </button>
               )}
             </div>
-
+            {
+              isOverlayVisible &&
+              <div style={{
+                position: "fixed",
+                top: "0",
+                left: "0",
+                right: "0",
+                backgroundColor: "#ffffff",
+                zIndex: 30,
+                height: "40px",
+                width: '100%',
+                boxShadow: '0px 4px 6px rgba(137, 137, 137, 0.1)',
+              }}></div>
+            }
             <div
               style={{ padding: `${isOverlayVisible && "10px 20px"} ` }}
               className="checkbox-old"
             >
               {checkboxData
-                .filter((item) => !isLite || allowedKeys.has(item.key))
+                .filter((item) => allowedKeys.has(item.key))
                 .map(({ key, label, color }) => (
                   <div key={key} className="checkbox-oldMain">
                     <Checkbox
@@ -326,7 +294,6 @@ const UtopiaOldMultiLine = () => {
               labels={labels}
               selectValue={selectValue}
               id={baseId}
-              // chartData={chartData}
               customKey={isLite}
               checkedItems={checkedItems}
               isOverlayVisible={isOverlayVisible}
@@ -352,17 +319,6 @@ const UtopiaOldMultiLine = () => {
             </div>
           }
 
-          {
-            !isLite &&
-            <MyCards
-              translationsInfo={translationsInfo}
-              currentLanguage={currentLanguage}
-              id={baseId}
-              selectValue={selectValue}
-              t={t}
-            />
-          }
-          {/* )} */}
 
         </div>
       </div>
@@ -371,3 +327,5 @@ const UtopiaOldMultiLine = () => {
 };
 
 export default UtopiaOldMultiLine;
+
+

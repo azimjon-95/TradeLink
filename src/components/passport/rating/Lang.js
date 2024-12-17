@@ -151,5 +151,3 @@ export const transMonth = {
     },
 };
 
-console.log(transMonth);
-

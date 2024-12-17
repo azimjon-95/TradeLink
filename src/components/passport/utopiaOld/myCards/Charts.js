@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React, { useState, useEffect, useMemo } from "react";
 import {
   BarChart,
@@ -26,7 +27,6 @@ import "./style.css";
 const Charts = ({
   checkedItems,
   isOverlayVisible,
-  customKey,
   id,
   selectValue,
   labels,
@@ -71,10 +71,10 @@ const Charts = ({
         negative0: chartData?.benchmark_btc[index].value,
         negative1: chartData?.drawdown_percentage[index].value,
         negative2: chartData?.drawdown_duration[index].value,
-        revenue: chartData?.long_positions[index].value,
-        negative3: chartData?.margin_balances[index].value,
-        negative4: chartData?.pnl[index].value,
-        negative5: chartData?.long_positions_x[index].value,
+        negative3: chartData?.long_positions_x[index].value,
+        // revenue: chartData?.long_positions[index].value,
+        // negative3: chartData?.margin_balances[index].value,
+        // negative4: chartData?.pnl[index].value,
       })),
     [chartData]
   );
@@ -115,17 +115,6 @@ const Charts = ({
       </div>
     );
   };
-
-  const dataLine = useMemo(
-    () =>
-      chartData?.used_lerage?.map((item, index) => ({
-        day: new Date(item?.timestamp)?.toLocaleDateString(),
-        leverage: item.value,
-        long_positions: chartData?.long_positions[index].value,
-        short_positions: chartData?.short_positions[index].value,
-      })),
-    [chartData]
-  );
 
   const usedLeverage = {
     en: "Used Leverage:",
@@ -231,12 +220,7 @@ const Charts = ({
     de: "Maximaler Rückgang:",
     es: "Pérdida máxima:",
   };
-  const drawdownDuration = {
-    en: "DrawDown Duration:",
-    ru: "Длительность просадки:",
-    de: "Dauer des Rückgangs:",
-    es: "Duración de la pérdida:",
-  };
+
   const CustomTooltipBottom = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
@@ -265,23 +249,6 @@ const Charts = ({
               ></div>
               {drawdown[currentLanguage]}{" "}
               {payload[0]?.payload?.drawdown?.toFixed(2)}%
-            </strong>
-          </p>
-          <p>
-            <strong
-              style={{ display: "flex", alignItems: "center", gap: "4px" }}
-            >
-              <div
-                style={{
-                  display: "inline-block",
-                  width: "8px",
-                  height: "8px",
-                  borderRadius: "50%",
-                  border: `2px solid #4180D2`, // Color based on value
-                }}
-              ></div>
-              {drawdownDuration[currentLanguage]}{" "}
-              {payload[1]?.payload?.drawdown_duration?.toFixed(2)}%
             </strong>
           </p>
         </div>
@@ -364,6 +331,84 @@ const Charts = ({
     es: "Ingresos por mes (%)",
   };
 
+  const monthNames = {
+    ru: [
+      "Янв",
+      "Фев",
+      "Мар",
+      "Апр",
+      "Май",
+      "Июн",
+      "Июл",
+      "Авг",
+      "Сен",
+      "Окт",
+      "Ноя",
+      "Дек",
+    ],
+    de: [
+      "Jan",
+      "Feb",
+      "Mär",
+      "Apr",
+      "Mai",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Okt",
+      "Nov",
+      "Dez",
+    ],
+    en: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    es: [
+      "Ene",
+      "Feb",
+      "Mar",
+      "Abr",
+      "May",
+      "Jun",
+      "Jul",
+      "Ago",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dic",
+    ],
+  };
+
+  // Funksiya sanani formatlash uchun
+  function formatDay(day, currentLanguage) {
+    const [month, date, year] = day.split("/"); // MM/DD/YYYY formatida bo'lishini kutadi
+    const monthIndex = parseInt(month, 10) - 1; // Oy indexi uchun
+    const translatedMonth =
+      monthNames[currentLanguage]?.[monthIndex] || monthNames.eng[monthIndex]; // Default: English
+    return `${translatedMonth}: ${date}`; // Oy nomi va kun
+  }
+
+  // dataBottom massivini formatlash
+  function formatData(data, currentLanguage) {
+    return data?.map((item) => ({
+      ...item,
+      formattedDay: formatDay(item?.day, currentLanguage),
+    }));
+  }
+  // Formatlangan natija
+  const data_formated = formatData(dataBottom, currentLanguage);
+
   return (
     <>
       <ResponsiveContainer width="100%" height={isOverlayVisible ? 300 : 400}>
@@ -378,21 +423,21 @@ const Charts = ({
               stroke="#ccccccd5"
             />
 
+            {/* Define the Y-axes */}
             <YAxis
               yAxisId="left"
               orientation="left"
               domain={["auto"]}
-              tickFormatter={(value) => `${value}%`} // Keep as percentage format (unchanged)
-              tick={{ fontSize: 10 }}
-              axisLine={{ stroke: "#a9a9a978" }}
+              tickFormatter={(value) => `${(value / 1000).toFixed(1)}K%`}
+              axisLine={{ stroke: "#ccc", strokeWidth: 1 }}
               tickLine={{ stroke: "#a9a9a978" }}
+              tick={{ fontSize: 10 }}
             />
-
             <YAxis
               yAxisId="right"
               orientation="right"
               domain={["auto"]}
-              tickFormatter={(value) => `$${(value / 1000).toFixed(1)}K`} // Format with "$" and "K"
+              tickFormatter={(value) => `$${(value / 1000).toFixed(1)}K`}
               axisLine={{ stroke: "#a9a9a978" }}
               tickLine={{ stroke: "#a9a9a978" }}
               tick={{ fontSize: 10 }}
@@ -401,79 +446,40 @@ const Charts = ({
             <Tooltip content={<CustomTooltipMain />} />
             <Legend />
 
+            {/* Graphical components */}
             <Line
-              yAxisId="left"
+              yAxisId="left" // Matches "left" YAxis
               name={t.benchmarkBTC}
               type="monotone"
               dataKey={checkedItems?.benchmarkBTC && "negative0"}
-              stroke="#8A2BE2"
+              stroke="#FFD800"
               strokeWidth={checkedItems?.benchmarkBTC ? 1.9 : 0}
               dot={false}
             />
-
             <Area
-              strokeWidth={checkedItems?.realizedReturn ? 1.9 : 0}
+              yAxisId="left" // Matches "left" YAxis
+              stroke="#EB932D" // Stroke comes first
+              strokeWidth={checkedItems?.return ? 1.9 : 0}
+              fill="#fceddc" // Fill comes after stroke
               name={t.return}
-              yAxisId="left"
-              type="linear"
-              dataKey={checkedItems?.realizedReturn && "negative1"}
-              fill="#fceddc"
-              stroke="#EB932D"
-            />
-
-            <Line
-              yAxisId="left"
-              name={t.realizedReturn}
               type="monotone"
-              dataKey={checkedItems?.realizedReturn && "negative2"}
-              label="ssss"
-              stroke="#1E90FF"
-              strokeWidth={checkedItems?.realizedReturn ? 1.9 : 0}
-              dot={false}
+              dataKey={checkedItems?.return && "negative1"}
             />
-
-            <Bar
-              yAxisId="left"
-              z={2}
-              name={t.plByDay}
-              dataKey={checkedItems?.plByday && "revenue"}
-              barSize={checkedItems?.plByday ? 2 : 0}
-            >
-              {" "}
-              {dataMain?.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={entry.revenue >= 0 ? "#14C886" : "#EA3941"}
-                />
-              ))}
-            </Bar>
-
             <Line
-              yAxisId="left"
+              yAxisId="right" // Matches "right" YAxis
               name={t.marginBalance}
               type="monotone"
-              dataKey={checkedItems?.marginBalance && "negative3"}
-              stroke="#55516D"
+              dataKey={checkedItems?.marginBalance && "negative2"}
+              stroke="#51AF94"
               strokeWidth={1.8}
               dot={false}
             />
-
             <Line
-              yAxisId="left"
-              name={t.balance}
-              type="monotone"
-              dataKey={checkedItems?.balance && "negative4"}
-              stroke="#FF4500"
-              strokeWidth={checkedItems?.balance ? 1.8 : 0}
-              dot={false}
-            />
-
-            <Line
-              yAxisId="left"
+              yAxisId="right" // Matches "right" YAxis
               name={t.profit}
               type="monotone"
-              dataKey={checkedItems?.profit && "negative5"}
-              stroke="#32CD32"
+              dataKey={checkedItems?.profit && "negative3"}
+              stroke="#444974"
               strokeWidth={checkedItems?.profit ? 1.8 : 0}
               dot={false}
             />
@@ -484,172 +490,73 @@ const Charts = ({
           </div>
         )}
       </ResponsiveContainer>
-
       {/* ---------------------------10A----------------------------------- */}
-      <div style={{ display: `${customKey && "none"}` }}>
-        {checkedItems.usedLeverage && (
-          <ResponsiveContainer width="100%" height={130}>
-            {dataLine?.length ? (
-              <ComposedChart
-                data={dataLine}
-                margin={{ top: 30, right: 0, left: 0, bottom: 30 }}
-              >
-                <CartesianGrid
-                  vertical={false}
-                  strokeDasharray="0"
-                  stroke="#ccccccd5"
-                />
 
-                {/* Left Y-Axis - Percentage format */}
-                <YAxis
-                  yAxisId="left"
-                  orientation="left"
-                  domain={["auto"]}
-                  tickFormatter={(value) => `${value}%`}
-                  tick={{ fontSize: 10 }}
-                  axisLine={{ stroke: "#a9a9a978" }}
-                  tickLine={{ stroke: "#a9a9a978" }}
-                />
+      {checkedItems.drawDown && (
+        <ResponsiveContainer width="100%" height={130}>
+          {dataBottom?.length ? (
+            <ComposedChart
+              data={data_formated}
+              margin={{ top: 20, right: 10, left: 10, bottom: 20 }}
+            >
+              <CartesianGrid
+                vertical={false}
+                strokeDasharray="0"
+                stroke="#e0e0e0"
+              />
 
-                {/* Right Y-Axis - Dollar format with 'K' suffix */}
-                <YAxis
-                  yAxisId="right"
-                  orientation="right"
-                  domain={["auto"]}
-                  tickFormatter={(value) => `$${(value / 1000).toFixed(1)}K`}
-                  tick={{ fontSize: 10 }}
-                  axisLine={{ stroke: "#a9a9a978" }}
-                  tickLine={{ stroke: "#a9a9a978" }}
-                />
+              <XAxis
+                dataKey="day"
+                tickFormatter={(value) => {
+                  const matchedDay = data_formated.find(
+                    (item) => item.day === value
+                  );
+                  return matchedDay?.formattedDay || value; // formattedDay ni ko'rsatadi
+                }}
+                tick={{ fontSize: 10, fill: "#606060" }}
+                axisLine={{ stroke: "#a9a9a978" }}
+                tickLine={false}
+                tickMargin={10}
+              />
 
-                <Tooltip content={<CustomTooltipTwo />} />
-                <Legend />
+              <YAxis
+                yAxisId="left"
+                orientation="left"
+                domain={[0, "auto"]}
+                tickFormatter={(value) => `${value}%`}
+                tick={{ fontSize: 10, fill: "#606060" }}
+                axisLine={false}
+                tickLine={false}
+              />
 
-                {/* Bar for Long Positions */}
-                <Bar
-                  yAxisId="left"
-                  name="Long Positions"
-                  dataKey="long_positions"
-                  barSize={4}
-                >
-                  {dataLine?.map((entry, index) => (
-                    <Cell
-                      key={`long-cell-${index}`}
-                      fill={entry.long_positions >= 0 ? "#14C886" : "#EA3941"}
-                    />
-                  ))}
-                </Bar>
+              <YAxis
+                yAxisId="right"
+                orientation="right"
+                domain={["auto", 0]}
+                tickFormatter={(value) => `$${(value / 1000).toFixed(1)}K`}
+                tick={{ fontSize: 10, fill: "#606060" }}
+                axisLine={false}
+                tickLine={false}
+              />
 
-                {/* Bar for Short Positions */}
-                <Bar
-                  yAxisId="left"
-                  name="Short Positions"
-                  dataKey="short_positions"
-                  barSize={4}
-                >
-                  {dataLine?.map((entry, index) => (
-                    <Cell
-                      key={`short-cell-${index}`}
-                      fill={entry.short_positions >= 0 ? "#14C886" : "#EA3941"}
-                    />
-                  ))}
-                </Bar>
+              <Tooltip content={<CustomTooltipBottom />} />
 
-                {/* Line Component for Leverage */}
-                <Line
-                  yAxisId="left"
-                  name="Margin Balance"
-                  type="monotone"
-                  dataKey="leverage"
-                  stroke="#954FC4"
-                  strokeWidth={1.5}
-                  dot={false}
-                />
-              </ComposedChart>
-            ) : (
-              <div className="chartLoader2">
-                <div className="loader"></div>
-              </div>
-            )}
-          </ResponsiveContainer>
-        )}
-      </div>
-
-      {/* ---------------------------11A----------------------------------- */}
-      {/* {checkedItems.drawDownDuration || checkedItems.drawDown && */}
-
-      <ResponsiveContainer width="100%" height={130}>
-        {dataBottom?.length ? (
-          <ComposedChart
-            data={dataBottom}
-            margin={{ top: 20, right: 10, left: 10, bottom: 20 }}
-          >
-            <CartesianGrid
-              vertical={false}
-              strokeDasharray="0"
-              stroke="#e0e0e0"
-            />
-
-            {/* X-Axis with Month Labels */}
-            <XAxis
-              dataKey="date"
-              tick={{ fontSize: 10, fill: "#606060" }}
-              axisLine={{ stroke: "#a9a9a978" }}
-              tickLine={false}
-              tickMargin={10}
-            />
-
-            {/* Left Y-Axis for Percentage */}
-            <YAxis
-              yAxisId="left"
-              orientation="left"
-              domain={[0, "auto"]}
-              tickFormatter={(value) => `${value}%`}
-              tick={{ fontSize: 10, fill: "#606060" }}
-              axisLine={false}
-              tickLine={false}
-            />
-
-            {/* Right Y-Axis with "$" and "K" suffix */}
-            <YAxis
-              yAxisId="right"
-              orientation="right"
-              domain={["auto", 0]}
-              tickFormatter={(value) => `$${(value / 1000).toFixed(1)}K`}
-              tick={{ fontSize: 10, fill: "#606060" }}
-              axisLine={false}
-              tickLine={false}
-            />
-
-            <Tooltip content={<CustomTooltipBottom />} />
-
-            {/* Conditional Line before Area for rendering order */}
-            <Line
-              yAxisId="left"
-              type="linear"
-              dataKey={checkedItems.drawDown && "drawdown"}
-              stroke="#4180D2"
-              strokeWidth={checkedItems.drawDown ? 1.9 : 0}
-              dot={false}
-            />
-
-            {/* Conditional Area rendered on top */}
-            <Area
-              yAxisId="left"
-              type="linear"
-              dataKey={checkedItems.drawDownDuration && "drawdown_duration"}
-              fill="#d1e3f9"
-              stroke="#4595fd0"
-              strokeWidth={checkedItems.drawDownDuration ? 1.9 : 0}
-            />
-          </ComposedChart>
-        ) : (
-          <div className="chartLoader2">
-            <div className="loader"></div>
-          </div>
-        )}
-      </ResponsiveContainer>
-
+              <Area
+                yAxisId="left"
+                type="linear"
+                dataKey={checkedItems.drawDown && "drawdown"}
+                fill="#d1e3f9"
+                stroke="#4595fd0"
+                strokeWidth={checkedItems.drawDown ? 1.9 : 0}
+              />
+            </ComposedChart>
+          ) : (
+            <div className="chartLoader2">
+              <div className="loader"></div>
+            </div>
+          )}
+        </ResponsiveContainer>
+      )}
       {/* ---------------------------12A----------------------------------- */}
       <div className="revenue-by-month">
         <div></div>
