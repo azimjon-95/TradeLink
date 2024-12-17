@@ -84,10 +84,11 @@ const Leaderboard = () => {
       }`;
 
     axios
-      .get(API, { timeout: 20000 }) // Timeout: 20 sekund
+      .get(API) // Timeout: 20 sekund
       .then((res) => {
-        setPageCount(res?.data?.page_count);
-        setPortfolios(res?.data?.data);
+        setPageCount(res?.data?.page_count || []);
+        setPortfolios(res?.data?.data || []);
+
       })
       .catch((err) => {
         console.error("API so'rovida xato yuz berdi:", err.message);
