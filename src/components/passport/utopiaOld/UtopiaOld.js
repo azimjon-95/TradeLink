@@ -4,7 +4,7 @@ import { ImStarEmpty, ImStarFull } from "react-icons/im";
 import { Checkbox, Select, DatePicker, Space } from "antd";
 import { CheckSquareTwoTone } from "@ant-design/icons";
 import { RiExpandDiagonalLine } from "react-icons/ri";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import myAxios from "axios";
 import { setModalType } from "../../../context/modalType";
@@ -139,7 +139,7 @@ const UtopiaOldMultiLine = () => {
           </div>
           <div className="SubtitleInfo">
             <img src={data?.user_avatar || bin} alt="" />
-            <p>{data?.user_name || ""}</p>
+            <Link to={`/user/${data.user_id}`}>{data?.user_name || ""}</Link>
             <p>•</p>
             <p>
               {data?.views || 0} {t.views}

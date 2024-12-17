@@ -33,17 +33,47 @@ const Investment = ({ id, selectValue, currentLanguage }) => {
       clearTimeout(debounceFetch);
       controller.abort();
     };
-  }, [id, selectValue, isDataFetched]); // Add isDataFetched to the dependency array to control re-fetching
+  }, [id, selectValue, isDataFetched]);
+
+  // Add isDataFetched to the dependency array to control re-fetching
+  const formatValue = (value) => {
+    // If the value is undefined or null, return it as-is (empty or fallback value)
+    if (value === undefined || value === null) {
+      return ''; // or some fallback value, like 'N/A'
+    }
+
+    // Convert the value to string and check the number of digits
+    const valueString = value.toString();
+    const decimalIndex = valueString.indexOf('.');
+
+    // Check if the absolute value has less than 1000 and has less than 4 digits before the decimal
+    if (Math.abs(value) < 1000) {
+      if (decimalIndex === -1) {
+        // Integer value, check the length
+        if (valueString.length < 4) {
+          return valueString; // Return the number as it is if it has fewer than 4 digits
+        }
+      } else {
+        // Decimal value, check the length before and after the decimal point
+        const beforeDecimal = valueString.substring(0, decimalIndex);
+        const afterDecimal = valueString.substring(decimalIndex + 1);
+
+        if (beforeDecimal.length < 4 && afterDecimal.length === 0) {
+          return valueString; // Return the number as it is if it has fewer than 4 digits and no decimals
+        }
+      }
+    }
+
+    // Format the value if it's 1000 or more or has more than 3 digits
+    return value.toFixed(3); // Return formatted value with 3 decimals
+  };
+
 
   const datas = [
     {
-      title:
-        transInvestment[currentLanguage]?.lifetimeExperience ||
-        "Lifetime Experience",
-      value: `${data?.lifetime_experience?.toFixed(2)}`,
-      description:
-        transInvestment[currentLanguage]?.lifetimeExperienceDescription ||
-        "Very good",
+      title: transInvestment[currentLanguage]?.lifetimeExperience || "Lifetime Experience",
+      value: formatValue(data?.lifetime_experience),
+      description: transInvestment[currentLanguage]?.lifetimeExperienceDescription || "Very good",
       a: 25,
       y: 25,
       x: 25,
@@ -53,7 +83,7 @@ const Investment = ({ id, selectValue, currentLanguage }) => {
     },
     {
       title: transInvestment[currentLanguage]?.sharpeRatio,
-      value: `${data?.sharpe_ratio?.toFixed(2)}`,
+      value: formatValue(data?.sharpe_ratio),
       description: transInvestment[currentLanguage]?.sharpeRatioDescription,
       a: 25,
       y: 25,
@@ -64,7 +94,7 @@ const Investment = ({ id, selectValue, currentLanguage }) => {
     },
     {
       title: transInvestment[currentLanguage]?.calmarRatio,
-      value: `${data?.calmar_ratio?.toFixed(2)}`,
+      value: formatValue(data?.calmar_ratio),
       description: transInvestment[currentLanguage]?.calmarRatioDescription,
       a: 25,
       y: 25,
@@ -75,7 +105,7 @@ const Investment = ({ id, selectValue, currentLanguage }) => {
     },
     {
       title: transInvestment[currentLanguage]?.sortinoRatio,
-      value: `${data?.sortino_ratio?.toFixed(2)}`,
+      value: formatValue(data?.sortino_ratio),
       description: transInvestment[currentLanguage]?.sortinoRatioDescription,
       a: 25,
       y: 25,
@@ -84,42 +114,20 @@ const Investment = ({ id, selectValue, currentLanguage }) => {
       p: 25,
       sliderValue: +data?.sortino_ratio,
     },
-    // {
-    //   title: transInvestment[currentLanguage]?.ir,
-    //   value: `${data?.ir?.toFixed(2)}`,
-    //   description: transInvestment[currentLanguage]?.irDescription,
-    //   a: 25,
-    //   y: 25,
-    //   x: 25,
-    //   m: 25,
-    //   p: 25,
-    //   sliderValue: +data?.ir,
-    // },
-    // {
-    //   title: transInvestment[currentLanguage]?.volatility,
-    //   value: `${data?.volatility?.toFixed(2)}`,
-    //   description: transInvestment[currentLanguage]?.volatilityDescription,
-    //   a: 25,
-    //   y: 25,
-    //   x: 25,
-    //   m: 25,
-    //   p: 25,
-    //   sliderValue: +data?.volatility,
-    // },
     {
       title: transInvestment[currentLanguage]?.alphaRatio,
-      value: `${data?.treynor_ratio?.toFixed(2)}`,
+      value: formatValue(data?.treynor_ratio),
       description: transInvestment[currentLanguage]?.alphaRatioDescription,
       a: 25,
       y: 25,
       x: 25,
       m: 25,
       p: 25,
-      sliderValue: +data?.alpha,
+      sliderValue: +data?.treynor_ratio,
     },
     {
       title: transInvestment[currentLanguage]?.betaRatio,
-      value: `${data?.beta_ratio?.toFixed(2)}`,
+      value: formatValue(data?.beta_ratio),
       description: transInvestment[currentLanguage]?.betaRatioDescription,
       a: 25,
       y: 25,
@@ -128,51 +136,11 @@ const Investment = ({ id, selectValue, currentLanguage }) => {
       p: 25,
       sliderValue: +data?.beta_ratio,
     },
-    // {
-    //   title: transInvestment[currentLanguage]?.treynorRatio,
-    //   value: `${data?.treynor_ratio?.toFixed(2)}`,
-    //   description: transInvestment[currentLanguage]?.treynorRatioDescription,
-    //   a: 25,
-    //   y: 25,
-    //   x: 25,
-    //   m: 25,
-    //   p: 25,
-    //   sliderValue: +data?.treynor_ratio,
-    // },
-    // {
-    //   title: transInvestment[currentLanguage]?.schwagerRatio,
-    //   value: `${data?.schwager_ratio?.toFixed(2)}`,
-    //   description: transInvestment[currentLanguage]?.schwagerRatioDescriptions,
-    //   a: 25,
-    //   y: 25,
-    //   x: 25,
-    //   m: 25,
-    //   p: 25,
-    //   sliderValue: +data?.schwager_ratio,
-    // },
-    // {
-    //   title: transInvestment[currentLanguage]?.rSquared,
-    //   value: `${data?.r_sqr?.toFixed(2)}`,
-    //   description: transInvestment[currentLanguage]?.rSquaredDescription,
-    //   a: 25,
-    //   y: 25,
-    //   x: 25,
-    //   m: 25,
-    //   p: 25,
-    //   sliderValue: +data?.r_sqr,
-    // },
-    // {
-    //   title: transInvestment[currentLanguage]?.mSquared,
-    //   value: `${data?.m_sqr?.toFixed(2)}`,
-    //   description: transInvestment[currentLanguage]?.mSquaredDescription,
-    //   a: 25,
-    //   y: 25,
-    //   x: 25,
-    //   m: 25,
-    //   p: 25,
-    //   sliderValue: +data?.m_sqr,
-    // },
   ];
+
+
+
+
 
   const Card = ({ title, value, description, a, y, x, m, p, sliderValue }) => {
     // Segmentlar uchun qiymatlar
@@ -195,8 +163,8 @@ const Investment = ({ id, selectValue, currentLanguage }) => {
           index === 0
             ? 0
             : segments
-                .slice(0, index)
-                .reduce((acc, s) => acc + (s.value / total) * 100, 0);
+              .slice(0, index)
+              .reduce((acc, s) => acc + (s.value / total) * 100, 0);
         return `${segment.color} ${position}% ${position + percentage}%`;
       })
       .join(", ");
@@ -229,10 +197,10 @@ const Investment = ({ id, selectValue, currentLanguage }) => {
                     sliderValue > 100
                       ? "100%"
                       : sliderValue < 3 && sliderValue >= 0
-                      ? `${sliderValue}%`
-                      : sliderValue < 0
-                      ? "0%"
-                      : `${sliderValue}%`,
+                        ? `${sliderValue}%`
+                        : sliderValue < 0
+                          ? "0%"
+                          : `${sliderValue}%`,
                   transform: "translateX(-50%)", // Markazdan ko'rsatish
                   width: "12px", // Sliderning kengligi
                   height: "12px", // Sliderning balandligi
@@ -254,29 +222,29 @@ const Investment = ({ id, selectValue, currentLanguage }) => {
     <>
       {data && Object.keys(data).length > 0
         ? datas?.map((item, index) => (
-            <Card
-              key={index}
-              title={item.title}
-              value={item.value}
-              description={item.description}
-              a={item.a}
-              y={item.y}
-              x={item.x}
-              m={item.m}
-              p={item.p}
-              sliderValue={item.sliderValue}
-            />
-          ))
+          <Card
+            key={index}
+            title={item.title}
+            value={item.value}
+            description={item.description}
+            a={item.a}
+            y={item.y}
+            x={item.x}
+            m={item.m}
+            p={item.p}
+            sliderValue={item.sliderValue}
+          />
+        ))
         : datas?.map((card, index) => (
-            <div key={index} className="investment-card">
-              <h3>
-                <Skeleton.Input style={{ width: 180 }} active loading={true} />
-              </h3>
-              <ul>
-                <Skeleton active paragraph={{ rows: 1 }} />
-              </ul>
-            </div>
-          ))}
+          <div key={index} className="investment-card">
+            <h3>
+              <Skeleton.Input style={{ width: 180 }} active loading={true} />
+            </h3>
+            <ul>
+              <Skeleton active paragraph={{ rows: 1 }} />
+            </ul>
+          </div>
+        ))}
     </>
   );
 };

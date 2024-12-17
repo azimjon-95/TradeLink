@@ -14,7 +14,7 @@
   overflow: hidden;
 }
 
-.single-cards-box > h1 {
+.single-cards-box>h1 {
   font-size: 20px;
   font-weight: 500;
   margin: 0px;
@@ -31,7 +31,7 @@
   margin: 0 auto;
 }
 
-.oldMultiLine-header > p {
+.oldMultiLine-header>p {
   font-size: 13px;
   line-height: 18px;
   color: #3b3b3bef;
@@ -47,7 +47,7 @@
   gap: 10px;
 }
 
-.imgSubtitle > h2 {
+.imgSubtitle>h2 {
   vertical-align: baseline;
   font-size: 25px;
   font-weight: 550;
@@ -60,10 +60,25 @@
   gap: 5px;
 }
 
-.SubtitleInfo > img {
+.SubtitleInfo>img {
   width: 25px;
   height: 25px;
   border-radius: 50%;
+}
+
+.SubtitleInfo>a {
+  text-decoration: none;
+  vertical-align: baseline;
+  font-size: 12px;
+  line-height: 18px;
+  color: #737373ef;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.SubtitleInfo>a:hover {
+  text-decoration: underline solid gray;
 }
 
 .SubtitleInfo p {
@@ -76,7 +91,7 @@
   gap: 5px;
 }
 
-.SubtitleInfo p > svg {
+.SubtitleInfo p>svg {
   font-size: 20px;
   color: #383838;
   margin-top: -3px;
@@ -85,7 +100,7 @@
   border-radius: 50%;
 }
 
-.SubtitleInfo p > svg:hover {
+.SubtitleInfo p>svg:hover {
   background-color: rgba(26, 34, 51, 0.2);
 }
 
@@ -301,7 +316,7 @@
   position: relative;
 }
 
-.custom-tooltip > p {
+.custom-tooltip>p {
   text-align: end;
   font-size: 11px;
   font-weight: 600;
@@ -363,7 +378,7 @@
   align-items: center;
 }
 
-.checkbox-oldMain > span {
+.checkbox-oldMain>span {
   margin-left: 2px;
   cursor: pointer;
   font-size: 12px;
@@ -405,12 +420,12 @@
   display: none !important;
 }
 
-.PLByMonth > p {
+.PLByMonth>p {
   color: #f5f7fa;
   font-size: 12px;
 }
 
-.PLByMonth > p > strong {
+.PLByMonth>p>strong {
   margin-left: 4px;
 }
 
@@ -427,7 +442,7 @@
   background-color: rgb(255, 255, 255);
 }
 
-.revenue-by-month > div {
+.revenue-by-month>div {
   background: #14c886;
   border-radius: 50%;
   height: 12px;
@@ -493,7 +508,7 @@
   height: 50px;
 }
 
-.ket-inxBox > h2 {
+.ket-inxBox>h2 {
   /* vertical-align: baseline; */
   display: block;
   width: 100%;
@@ -614,6 +629,7 @@
   }
   */
 }
+
 @media screen and (max-width: 360px) {
   .key-indicators {
     display: grid;

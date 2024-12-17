@@ -63,20 +63,7 @@ const Leaderboard = () => {
 
   const [pageCount, setPageCount] = useState(0);
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   let API = `/leaderboard/top-traders?page=${page === 0 ? 0 : page - 1
-  //     }&show_non_active=${showInactive}&sort_type=${filterOption.value || selectedOption
-  //     }`;
-  //   axios
-  //     .get(API)
-  //     .then((res) => {
-  //       setPageCount(res?.data?.page_count)
-  //       setPortfolios(res?.data?.data);
-  //     })
-  //     .catch((err) => console.log(err))
-  //     .finally(() => setLoading(false));
-  // }, [showInactive, filterOption, page, selectedOption]);
+
   useEffect(() => {
     setLoading(true);
     let API = `/leaderboard/top-traders?page=${page === 0 ? 0 : page - 1
@@ -174,7 +161,9 @@ const Leaderboard = () => {
           </div>
           <div className="row-rating-text">
             <p className="ret-texOne">{record.portfolio_name}</p>
-            <p className="ret-texTwo">by {record.user_name}</p>
+            <div className="ret-texTwo">by  <Link to={`/user/${record.user_id}`} onClick={(e) => e.stopPropagation()}>
+              {record.user_name}
+            </Link></div>
           </div>
         </div>
       ),
@@ -465,12 +454,13 @@ const Leaderboard = () => {
                 loading={loading}
                 columns={columns}
                 dataSource={portfolios}
-                rowKey={(record) => record.portfolio_id} //
+                rowKey={(record) => record.portfolio_id}
                 pagination={false}
-                scroll={{ x: "100%" }} // Responsive scrolling
+                scroll={{ x: "100%" }}
                 size="small"
                 onRow={(record) => ({
                   onClick: () => {
+                    // Navigate to portfolio page on row click
                     const timestamp = getTimestamp();
                     navigate(`/portfolio/${record.portfolio_id}?t=${timestamp}`);
                   },
@@ -504,7 +494,7 @@ const Leaderboard = () => {
 // ====================Boshqa file bu=======================
 const LeaderboardCard = ({ title, data, date, loadingTop, by }) => {
   const getTimestamp = () => Math.floor(Date.now() / 1000); // Get current timestamp in seconds
-
+  console.log(data);
   const getRankColor = (rank) =>
     rank === 1
       ? "#FBAF3D" // 1-bosqich
@@ -534,47 +524,46 @@ const LeaderboardCard = ({ title, data, date, loadingTop, by }) => {
           <>
             {/* `/portfolio/${record.portfolio_id}?t=${timestamp}` */}
             {data?.map((item, index) => (
-              <Link
-                to={`/portfolio/${item?.portfolio_id}?t=${getTimestamp()}`}
-                key={index}
-              >
-                <li>
-                  <div className="leaderboard-rank-box">
-                    <span
-                      className="leaderboard-rank-icon"
-                      style={{ backgroundColor: getRankColor(index + 1) }}
-                    >
-                      {index + 1}
-                    </span>
-                    {/* <img width={30} src={binance} alt="logo" /> */}
-                    <img
-                      className="leaderboard-user-avatar"
-                      width={30}
-                      src={item?.user_avatar || avatar}
-                      alt="User avatar"
-                    />
-                  </div>
-                  <div className="leaderboard-details">
+
+              <li key={index}>
+                <div className="leaderboard-rank-box">
+                  <span
+                    className="leaderboard-rank-icon"
+                    style={{ backgroundColor: getRankColor(index + 1) }}
+                  >
+                    {index + 1}
+                  </span>
+                  {/* <img width={30} src={binance} alt="logo" /> */}
+                  <img
+                    className="leaderboard-user-avatar"
+                    width={30}
+                    src={item?.user_avatar || avatar}
+                    alt="User avatar"
+                  />
+                </div>
+                <div className="leaderboard-details">
+                  <Link
+                    to={`/portfolio/${item?.portfolio_id}?t=${getTimestamp()}`}
+
+                  >
                     <p className="leaderboard-name">
                       {item?.portfolio_name.length > 19
                         ? `${item?.portfolio_name.substring(0, 19)}...`
                         : item?.portfolio_name}
                     </p>
-                    <p className="leaderboard-creator">
-                      {by} {item?.user_name}{" "}
-                    </p>
+                  </Link>
+                  <div className="leaderboard-creator">
+                    {by} <Link to={`/user/${item?.user_id}`}>{item?.user_name}</Link> {" "}
                   </div>
-                  {/* {
-                    chartData &&
-                    <LineChart strokeColor={"gold"} data={chartData} height={30} />
-                  } */}
-                  <img src={ret} alt="Ret" />
-                  <p className="leaderboard-score">
-                    {item?.score?.toFixed(2) ||
-                      item?.profit_percentage?.toFixed(2)}
-                  </p>
-                </li>
-              </Link>
+                </div>
+
+                <img src={ret} alt="Ret" />
+                <p className="leaderboard-score">
+                  {item?.score?.toFixed(2) ||
+                    item?.profit_percentage?.toFixed(2)}
+                </p>
+              </li>
+
             ))}
           </>
         )}
