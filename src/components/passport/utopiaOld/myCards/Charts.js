@@ -362,82 +362,34 @@ const Charts = ({
 
 
   const monthNames = {
-    ru: [
-      "Янв",
-      "Фев",
-      "Мар",
-      "Апр",
-      "Май",
-      "Июн",
-      "Июл",
-      "Авг",
-      "Сен",
-      "Окт",
-      "Ноя",
-      "Дек",
-    ],
-    de: [
-      "Jan",
-      "Feb",
-      "Mär",
-      "Apr",
-      "Mai",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Okt",
-      "Nov",
-      "Dez",
-    ],
-    en: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
-    es: [
-      "Ene",
-      "Feb",
-      "Mar",
-      "Abr",
-      "May",
-      "Jun",
-      "Jul",
-      "Ago",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dic",
-    ],
+    ru: ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"],
+    de: ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"],
+    en: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    es: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
   };
 
-  // Funksiya sanani formatlash uchun
-  function formatDay(day, currentLanguage) {
-    const [month, date, year] = day?.split("/"); // MM/DD/YYYY formatida bo'lishini kutadi
-    const monthIndex = parseInt(month, 10) - 1; // Oy indexi uchun
-    const translatedMonth =
-      monthNames[currentLanguage]?.[monthIndex] || monthNames.eng[monthIndex]; // Default: English
-    return `${translatedMonth}' ${date}`; // Oy nomi va kun
+  // Sanani formatlash funksiyasi
+  function formatDay(day, currentLanguage = "en") {
+    if (!day || typeof day !== "string") return ""; // Xatolikni tekshirish
+    const [month, date] = day.split("/"); // "MM/DD/YYYY" formatini ajratish
+    const monthIndex = parseInt(month, 10) - 1; // Oy indeksini olish
+    const translatedMonth = monthNames[currentLanguage]?.[monthIndex] || monthNames.en[monthIndex];
+    return `${translatedMonth} ${date}`; // Formatlangan sana
   }
 
-  // dataBottom massivini formatlash
-  function formatData(data, currentLanguage) {
-    return data?.map((item) => ({
-      ...item,
-      formattedDay: formatDay(item?.day, currentLanguage),
-    }));
+  // Data massivini formatlash
+  function createFormattedDaysMap(data, currentLanguage) {
+    const map = new Map(); // Map uchun
+    data?.forEach((item) => {
+      if (item?.day) {
+        map.set(item.day, formatDay(item.day, currentLanguage));
+      }
+    });
+    return map;
   }
-  // Formatlangan natija
-  const data_formated = formatData(dataBottom, currentLanguage);
+
+  // Ma'lumotlarni formatlash
+  const formattedDaysMap = createFormattedDaysMap(dataBottom, currentLanguage);
 
   return (
     <>
@@ -534,27 +486,15 @@ const Charts = ({
                 stroke="#e0e0e0"
               />
 
-              {/* X-Axis with Month Labels */}
-              {/* <XAxis
-                dataKey="date"
-                tick={{ fontSize: 10, fill: "#606060" }}
-                axisLine={{ stroke: "#a9a9a978" }}
-                tickLine={false}
-                tickMargin={10}
-              /> */}
+
               <XAxis
                 dataKey="day"
-                tickFormatter={(value) => {
-                  const matchedDay = data_formated?.find(
-                    (item) => item.day === value
-                  );
-                  return matchedDay?.formattedDay || value; // formattedDay ni ko'rsatadi
-                }}
+                tickFormatter={(value) => formattedDaysMap.get(value) || value} // Map'dan olish
                 tick={{ fontSize: 10, fill: "#606060" }}
                 axisLine={{ stroke: "#a9a9a978" }}
                 tickLine={false}
                 tickMargin={10}
-              />
+              />;
 
               {/* Left Y-Axis for Percentage */}
               <YAxis
