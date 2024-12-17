@@ -235,13 +235,19 @@ const Charts = ({
     es: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
   };
 
-  // Sanani formatlash funksiyasi
   function formatDay(day, currentLanguage = "en") {
-    if (!day || typeof day !== "string") return ""; // Xatolikni tekshirish
-    const [month, date] = day.split("/"); // "MM/DD/YYYY" formatini ajratish
-    const monthIndex = parseInt(month, 10) - 1; // Oy indeksini olish
-    const translatedMonth = monthNames[currentLanguage]?.[monthIndex] || monthNames.en[monthIndex];
-    return `${translatedMonth} ${date}`; // Formatlangan sana
+    if (!day) return ""; // Bo'sh yoki noto'g'ri qiymatni tekshirish
+
+    const [month, date] = (day || "").split("/"); // Default bo'sh string
+    const monthIndex = Number(month) - 1; // Oy indeksini olish
+    const validMonth = monthIndex >= 0 && monthIndex < 12; // Oy indeksini tekshirish
+
+    // Tilga qarab oy nomini tanlash (default 'en' o'z ichiga oladi)
+    const translatedMonth = validMonth
+      ? monthNames[currentLanguage]?.[monthIndex] || monthNames.en[monthIndex]
+      : "";
+
+    return `${translatedMonth} ${date || ""}`.trim(); // Bo'sh qiymatlarni oldini olish
   }
 
   // Data massivini formatlash
