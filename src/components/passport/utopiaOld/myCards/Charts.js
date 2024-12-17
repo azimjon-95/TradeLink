@@ -72,9 +72,6 @@ const Charts = ({
         negative1: chartData?.drawdown_percentage[index].value,
         negative2: chartData?.drawdown_duration[index].value,
         negative3: chartData?.long_positions_x[index].value,
-        // revenue: chartData?.long_positions[index].value,
-        // negative3: chartData?.margin_balances[index].value,
-        // negative4: chartData?.pnl[index].value,
       })),
     [chartData]
   );
@@ -436,96 +433,6 @@ const Charts = ({
         )}
       </ResponsiveContainer>
 
-      {/* ---------------------------10A----------------------------------- */}
-      <div style={{ display: `${customKey && "none"}` }}>
-        {checkedItems.usedLeverage && (
-          <ResponsiveContainer width="100%" height={130}>
-            {dataLine?.length ? (
-              <ComposedChart
-                data={dataLine}
-                margin={{ top: 30, right: 0, left: 0, bottom: 30 }}
-              >
-                <CartesianGrid
-                  vertical={false}
-                  strokeDasharray="0"
-                  stroke="#ccccccd5"
-                />
-
-                {/* Left Y-Axis - Percentage format */}
-                <YAxis
-                  yAxisId="left"
-                  orientation="left"
-                  domain={["auto"]}
-                  tickFormatter={(value) => `${value}%`}
-                  tick={{ fontSize: 10 }}
-                  axisLine={{ stroke: "#a9a9a978" }}
-                  tickLine={{ stroke: "#a9a9a978" }}
-                />
-
-                {/* Right Y-Axis - Dollar format with 'K' suffix */}
-                <YAxis
-                  yAxisId="right"
-                  orientation="right"
-                  domain={["auto"]}
-                  tickFormatter={(value) => `$${(value / 1000).toFixed(1)}K`}
-                  tick={{ fontSize: 10 }}
-                  axisLine={{ stroke: "#a9a9a978" }}
-                  tickLine={{ stroke: "#a9a9a978" }}
-                />
-
-                <Tooltip content={<CustomTooltipTwo />} />
-                <Legend />
-
-                {/* Bar for Long Positions */}
-                <Bar
-                  yAxisId="left"
-                  name="Long Positions"
-                  dataKey="long_positions"
-                  barSize={4}
-                >
-                  {dataLine?.map((entry, index) => (
-                    <Cell
-                      key={`long-cell-${index}`}
-                      fill={entry.long_positions >= 0 ? "#14C886" : "#EA3941"}
-                    />
-                  ))}
-                </Bar>
-
-                {/* Bar for Short Positions */}
-                <Bar
-                  yAxisId="left"
-                  name="Short Positions"
-                  dataKey="short_positions"
-                  barSize={4}
-                >
-                  {dataLine?.map((entry, index) => (
-                    <Cell
-                      key={`short-cell-${index}`}
-                      fill={entry.short_positions >= 0 ? "#14C886" : "#EA3941"}
-                    />
-                  ))}
-                </Bar>
-
-                {/* Line Component for Leverage */}
-                <Line
-                  yAxisId="left"
-                  name="Margin Balance"
-                  type="monotone"
-                  dataKey="leverage"
-                  stroke="#954FC4"
-                  strokeWidth={1.5}
-                  dot={false}
-                />
-              </ComposedChart>
-            ) : (
-              <div className="chartLoader2">
-                <div className="loader"></div>
-              </div>
-            )}
-          </ResponsiveContainer>
-        )}
-      </div>
-
       {/* ---------------------------11A----------------------------------- */}
       {/* {checkedItems.drawDownDuration || checkedItems.drawDown && */}
 
@@ -574,24 +481,12 @@ const Charts = ({
 
             <Tooltip content={<CustomTooltipBottom />} />
 
-            {/* Conditional Line before Area for rendering order */}
-            {checkedItems.drawDown && (
-              <Line
-                yAxisId="left"
-                type="linear"
-                dataKey="drawdown"
-                stroke="#4180D2"
-                strokeWidth={1.5}
-                dot={false}
-              />
-            )}
-
             {/* Conditional Area rendered on top */}
-            {checkedItems.drawDownDuration && (
+            {checkedItems.drawDown && (
               <Area
                 yAxisId="left"
                 type="linear"
-                dataKey="drawdown_duration"
+                dataKey={checkedItems.drawDown && "drawdown"}
                 fill="#d1e3f9"
                 stroke="#4595fd0"
                 strokeWidth={1.5}
