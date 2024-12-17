@@ -354,6 +354,91 @@ const Charts = ({
   //   return date.format("MMMM YYYY"); // To'liq oy nomi va yil
   // };
 
+
+
+
+
+
+
+
+  const monthNames = {
+    ru: [
+      "Янв",
+      "Фев",
+      "Мар",
+      "Апр",
+      "Май",
+      "Июн",
+      "Июл",
+      "Авг",
+      "Сен",
+      "Окт",
+      "Ноя",
+      "Дек",
+    ],
+    de: [
+      "Jan",
+      "Feb",
+      "Mär",
+      "Apr",
+      "Mai",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Okt",
+      "Nov",
+      "Dez",
+    ],
+    en: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    es: [
+      "Ene",
+      "Feb",
+      "Mar",
+      "Abr",
+      "May",
+      "Jun",
+      "Jul",
+      "Ago",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dic",
+    ],
+  };
+
+  // Funksiya sanani formatlash uchun
+  function formatDay(day, currentLanguage) {
+    const [month, date, year] = day?.split("/"); // MM/DD/YYYY formatida bo'lishini kutadi
+    const monthIndex = parseInt(month, 10) - 1; // Oy indexi uchun
+    const translatedMonth =
+      monthNames[currentLanguage]?.[monthIndex] || monthNames.eng[monthIndex]; // Default: English
+    return `${translatedMonth}' ${date}`; // Oy nomi va kun
+  }
+
+  // dataBottom massivini formatlash
+  function formatData(data, currentLanguage) {
+    return data?.map((item) => ({
+      ...item,
+      formattedDay: formatDay(item?.day, currentLanguage),
+    }));
+  }
+  // Formatlangan natija
+  const data_formated = formatData(dataBottom, currentLanguage);
+
   return (
     <>
       <ResponsiveContainer width="100%" height={isOverlayVisible ? 300 : 400}>
@@ -436,69 +521,84 @@ const Charts = ({
       {/* ---------------------------11A----------------------------------- */}
       {/* {checkedItems.drawDownDuration || checkedItems.drawDown && */}
 
-      <ResponsiveContainer width="100%" height={130}>
-        {dataBottom?.length ? (
-          <ComposedChart
-            data={dataBottom}
-            margin={{ top: 20, right: 10, left: 10, bottom: 20 }}
-          >
-            <CartesianGrid
-              vertical={false}
-              strokeDasharray="0"
-              stroke="#e0e0e0"
-            />
-
-            {/* X-Axis with Month Labels */}
-            <XAxis
-              dataKey="date"
-              tick={{ fontSize: 10, fill: "#606060" }}
-              axisLine={{ stroke: "#a9a9a978" }}
-              tickLine={false}
-              tickMargin={10}
-            />
-
-            {/* Left Y-Axis for Percentage */}
-            <YAxis
-              yAxisId="left"
-              orientation="left"
-              domain={[0, "auto"]}
-              tickFormatter={(value) => `${value}%`}
-              tick={{ fontSize: 10, fill: "#606060" }}
-              axisLine={false}
-              tickLine={false}
-            />
-
-            {/* Right Y-Axis with "$" and "K" suffix */}
-            <YAxis
-              yAxisId="right"
-              orientation="right"
-              domain={["auto", 0]}
-              tickFormatter={(value) => `$${(value / 1000).toFixed(1)}K`}
-              tick={{ fontSize: 10, fill: "#606060" }}
-              axisLine={false}
-              tickLine={false}
-            />
-
-            <Tooltip content={<CustomTooltipBottom />} />
-
-            {/* Conditional Area rendered on top */}
-            {checkedItems.drawDown && (
-              <Area
-                yAxisId="left"
-                type="linear"
-                dataKey={checkedItems.drawDown && "drawdown"}
-                fill="#d1e3f9"
-                stroke="#4595fd0"
-                strokeWidth={1.5}
+      {checkedItems?.drawDown && (
+        <ResponsiveContainer width="100%" height={130}>
+          {dataBottom?.length ? (
+            <ComposedChart
+              data={dataBottom}
+              margin={{ top: 20, right: 10, left: 10, bottom: 20 }}
+            >
+              <CartesianGrid
+                vertical={false}
+                strokeDasharray="0"
+                stroke="#e0e0e0"
               />
-            )}
-          </ComposedChart>
-        ) : (
-          <div className="chartLoader2">
-            <div className="loader"></div>
-          </div>
-        )}
-      </ResponsiveContainer>
+
+              {/* X-Axis with Month Labels */}
+              {/* <XAxis
+                dataKey="date"
+                tick={{ fontSize: 10, fill: "#606060" }}
+                axisLine={{ stroke: "#a9a9a978" }}
+                tickLine={false}
+                tickMargin={10}
+              /> */}
+              <XAxis
+                dataKey="day"
+                tickFormatter={(value) => {
+                  const matchedDay = data_formated?.find(
+                    (item) => item.day === value
+                  );
+                  return matchedDay?.formattedDay || value; // formattedDay ni ko'rsatadi
+                }}
+                tick={{ fontSize: 10, fill: "#606060" }}
+                axisLine={{ stroke: "#a9a9a978" }}
+                tickLine={false}
+                tickMargin={10}
+              />
+
+              {/* Left Y-Axis for Percentage */}
+              <YAxis
+                yAxisId="left"
+                orientation="left"
+                domain={[0, "auto"]}
+                tickFormatter={(value) => `${value}%`}
+                tick={{ fontSize: 10, fill: "#606060" }}
+                axisLine={false}
+                tickLine={false}
+              />
+
+              {/* Right Y-Axis with "$" and "K" suffix */}
+              <YAxis
+                yAxisId="right"
+                orientation="right"
+                domain={["auto", 0]}
+                tickFormatter={(value) => `$${(value / 1000).toFixed(1)}K`}
+                tick={{ fontSize: 10, fill: "#606060" }}
+                axisLine={false}
+                tickLine={false}
+              />
+
+              <Tooltip content={<CustomTooltipBottom />} />
+
+              {/* Conditional Area rendered on top */}
+              {checkedItems.drawDown && (
+                <Area
+                  yAxisId="left"
+                  type="linear"
+                  dataKey={checkedItems.drawDown && "drawdown"}
+                  fill="#d1e3f9"
+                  stroke="#4595fd0"
+                  strokeWidth={1.5}
+                />
+              )}
+            </ComposedChart>
+          ) : (
+            <div className="chartLoader2">
+              <div className="loader"></div>
+            </div>
+          )}
+        </ResponsiveContainer>
+      )}
 
       {/* ---------------------------12A----------------------------------- */}
       <div className="revenue-by-month">
