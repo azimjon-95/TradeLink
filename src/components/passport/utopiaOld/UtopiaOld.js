@@ -1,9 +1,10 @@
+// eslint-disable-next-line
 import React, { useState, useEffect } from "react";
 import { ImStarEmpty, ImStarFull } from "react-icons/im";
-import { Checkbox, Select, DatePicker, Space, Switch } from "antd";
+import { Checkbox, Select, DatePicker, Space } from "antd";
 import { CheckSquareTwoTone } from "@ant-design/icons";
 import { RiExpandDiagonalLine } from "react-icons/ri";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import myAxios from "axios";
 import { setModalType } from "../../../context/modalType";
@@ -12,7 +13,6 @@ import "./style.css";
 import KeyIndicators from "./myCards/KeyIndicators";
 import Charts from "./myCards/Charts";
 import Investment from "./myCards/Investment";
-// import MyCards from './myCards/MyCards'
 import {
   translations,
   checkboxData,
@@ -33,14 +33,12 @@ const UtopiaOldMultiLine = () => {
   const [selectValue, setSelectValue] = useState("day");
   const [data, setData] = useState([]);
   const [topLoader, setTopLoader] = useState(false);
-  const [isLite, setIsLite] = useState(true);
+  const [isLite] = useState(true);
   const { id: baseId } = useParams();
   const [stars, setStars] = useState(0);
   const [isClicked, setIsClicked] = useState(false); // Track icon click state
   const token = localStorage.getItem("access_token");
   const [loading] = useState(false);
-  const [isSticky, setIsSticky] = useState(true);
-  const location = useLocation();
 
   const handleClick = () => {
     if (token) {
@@ -69,10 +67,6 @@ const UtopiaOldMultiLine = () => {
     };
     fetchData();
   }, [selectValue, baseId]);
-
-  const handleSwitchChange = (checked) => {
-    setIsLite(checked);
-  };
 
   const handleCheckboxChange = (key) => {
     setCheckedItems((prev) => ({
@@ -114,11 +108,6 @@ const UtopiaOldMultiLine = () => {
     profit: true,
     drawDown: true,
 
-    // realizedReturn: true,
-    // balance: true,
-    // plByday: true,
-    // usedLeverage: true,
-    // drawDownDuration: true,
   });
 
   useEffect(() => {
@@ -139,13 +128,7 @@ const UtopiaOldMultiLine = () => {
     es: "Gráfico", // Spanish
   };
 
-  useEffect(() => {
-    if (location.pathname.startsWith("/portfolio/")) {
-      setIsSticky(false); // Static qilish
-    } else {
-      setIsSticky(true); // Sticky qilish
-    }
-  }, [location.pathname]);
+
   return (
     <div className="oldMultiLine">
       <div className="oldMultiLine-header">
@@ -344,3 +327,5 @@ const UtopiaOldMultiLine = () => {
 };
 
 export default UtopiaOldMultiLine;
+
+

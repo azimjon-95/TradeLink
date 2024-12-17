@@ -29,8 +29,8 @@
 <rect x="-34" y="602" width="1938" height="318" fill="#ffffff"/>
 <defs>
 <linearGradient id="paint0_linear_22_686" x1="935" y1="602" x2="935"  fill="#ffffff" y2="920" gradientUnits="userSpaceOnUse">
-<stop stop-color="#fff" /> 
-<stop offset="1" stop-color="#fff" />
+<stop stop-color="white" /> 
+<stop offset="1" stop-color="white" />
 </linearGradient>
 </defs>
 </svg>

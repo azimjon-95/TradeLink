@@ -63,21 +63,37 @@ const Leaderboard = () => {
 
   const [pageCount, setPageCount] = useState(0);
 
+  // useEffect(() => {
+  //   setLoading(true);
+  //   let API = `/leaderboard/top-traders?page=${page === 0 ? 0 : page - 1
+  //     }&show_non_active=${showInactive}&sort_type=${filterOption.value || selectedOption
+  //     }`;
+  //   axios
+  //     .get(API)
+  //     .then((res) => {
+  //       setPageCount(res?.data?.page_count)
+  //       setPortfolios(res?.data?.data);
+  //     })
+  //     .catch((err) => console.log(err))
+  //     .finally(() => setLoading(false));
+  // }, [showInactive, filterOption, page, selectedOption]);
   useEffect(() => {
     setLoading(true);
     let API = `/leaderboard/top-traders?page=${page === 0 ? 0 : page - 1
       }&show_non_active=${showInactive}&sort_type=${filterOption.value || selectedOption
       }`;
+
     axios
-      .get(API)
+      .get(API, { timeout: 20000 }) // Timeout: 20 sekund
       .then((res) => {
-        setPageCount(res?.data?.page_count)
+        setPageCount(res?.data?.page_count);
         setPortfolios(res?.data?.data);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.error("API so'rovida xato yuz berdi:", err.message);
+      })
       .finally(() => setLoading(false));
   }, [showInactive, filterOption, page, selectedOption]);
-
 
   // ----------------------------------------------------------------------------
 

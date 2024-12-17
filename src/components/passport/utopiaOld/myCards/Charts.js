@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React, { useState, useEffect, useMemo } from "react";
 import {
   BarChart,
@@ -151,23 +152,7 @@ const Charts = ({
               {payload[0]?.payload?.drawdown?.toFixed(2)}%
             </strong>
           </p>
-          {/* <p>
-            <strong
-              style={{ display: "flex", alignItems: "center", gap: "4px" }}
-            >
-              <div
-                style={{
-                  display: "inline-block",
-                  width: "8px",
-                  height: "8px",
-                  borderRadius: "50%",
-                  border: `2px solid #4180D2`, // Color based on value
-                }}
-              ></div>
-              {drawdownDuration[currentLanguage]}{" "}
-              {payload[1]?.payload?.drawdown_duration?.toFixed(2)}%
-            </strong>
-          </p> */}
+
         </div>
       );
     }
@@ -249,11 +234,6 @@ const Charts = ({
   };
 
 
-
-
-
-
-
   const monthNames = {
     ru: ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"],
     de: ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"],
@@ -280,91 +260,10 @@ const Charts = ({
   // Formatlangan natija
   const data_formated = formatData(dataBottom, currentLanguage);
 
-  console.log(data_formated);
+
   return (
     <>
-      {/* <ResponsiveContainer width="100%" height={isOverlayVisible ? 300 : 400}>
-        {dataMain?.length ? (
-          <ComposedChart
-            data={dataMain}
-            margin={{ top: 30, right: 0, left: 0, bottom: 30 }}
-          >
-            <CartesianGrid
-              vertical={false}
-              strokeDasharray="0"
-              stroke="#ccccccd5"
-            />
 
-            <YAxis
-              yAxisId="right"
-              orientation="right"
-              domain={["auto"]}
-              tickFormatter={(value) => `$${(value / 1000).toFixed(1)}K`}
-              axisLine={{ stroke: "#ccc", strokeWidth: 1 }} // Add border
-              tickLine={{ stroke: "#a9a9a978" }}
-              tick={{ fontSize: 10 }}
-            />
-
-
-            <YAxis
-              yAxisId="right"
-              orientation="right"
-              domain={["auto"]}
-              tickFormatter={(value) => `$${(value / 1000).toFixed(1)}K`} // Format with "$" and "K"
-              axisLine={{ stroke: "#a9a9a978" }}
-              tickLine={{ stroke: "#a9a9a978" }}
-              tick={{ fontSize: 10 }}
-            />
-
-            <Tooltip content={<CustomTooltipMain />} />
-            <Legend />
-
-            <Line
-              yAxisId="left"
-              name={t.benchmarkBTC}
-              type="monotone"
-              dataKey={checkedItems?.benchmarkBTC && "negative0"}
-              stroke="#FFD800"
-              strokeWidth={checkedItems?.benchmarkBTC ? 1.9 : 0}
-              dot={false}
-            />
-
-            <Area
-              strokeWidth={checkedItems?.return ? 1.9 : 0}
-              name={t.return}
-              yAxisId="left"
-              type="linear"
-              dataKey={checkedItems?.return && "negative1"}
-              fill="#fceddc"
-              stroke="#EB932D"
-            />
-            <Line
-              yAxisId="right"
-              name={t.marginBalance}
-              type="monotone"
-              dataKey={checkedItems?.marginBalance && "negative2"}
-              stroke="#51AF94"
-              strokeWidth={1.8}
-              dot={false}
-            />
-            <Line
-              yAxisId="right"
-              name={t.profit}
-              type="monotone"
-              dataKey={checkedItems?.profit && "negative3"}
-              stroke="#444974"
-              strokeWidth={checkedItems?.profit ? 1.8 : 0}
-              dot={false}
-            />
-
-
-          </ComposedChart>
-        ) : (
-          <div className="chartLoader">
-            <div className="loader"></div>
-          </div>
-        )}
-      </ResponsiveContainer> */}
       <ResponsiveContainer width="100%" height={isOverlayVisible ? 300 : 400}>
         {dataMain?.length ? (
           <ComposedChart
