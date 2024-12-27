@@ -51,7 +51,6 @@ const Charts = ({
   useEffect(() => {
     fetchChartData(id, selectValue)
       .then((data) => {
-        console.log(data);
         setChartData(data); // Ma'lumotlarni saqlash
       })
       .catch((error) => {
@@ -59,20 +58,31 @@ const Charts = ({
       });
   }, [id, selectValue]);
 
+  const [aa, setAa] = useState("profit");
 
+  useEffect(() => {
+    const getTimeStep = (checkedItems) => {
+      if (checkedItems?.profit) return "profit";
+      if (checkedItems?.benchmarkBTC) return "benchmark_btc";
+      if (checkedItems?.marginBalance) return "margin_balances";
+      if (checkedItems?.return) return "profit_percentage";
+    };
+    setAa(getTimeStep(checkedItems));
+  }, [checkedItems]);
 
   const dataMain = useMemo(() => {
     if (!chartData) return []; // Return an empty array if chartData is not available.
 
-    const { balances, benchmark_btc, profit_percentage, margin_balances, profit } = chartData;
+    const { benchmark_btc, profit_percentage, margin_balances, profit } =
+      chartData;
 
-    return balances.map((balance, index) => ({
-      name: new Date(balance.timestamp).toLocaleDateString(),
+    return benchmark_btc.map((balance, index) => ({
+      // name: new Date(balance.timestamp).toLocaleDateString(),
+      name: new Date(chartData[aa][index]?.timestamp).toLocaleDateString(),
       negative0: benchmark_btc[index]?.value ?? 0,
       negative1: profit_percentage[index]?.value ?? 0,
       negative2: margin_balances[index]?.value ?? 0,
       negative3: profit[index]?.value ?? 0,
-
     }));
   }, [chartData]);
 
@@ -105,9 +115,6 @@ const Charts = ({
       </div>
     );
   };
-
-
-
 
   // ---------------------------12A-----------------------------------
 
@@ -183,7 +190,6 @@ const Charts = ({
     de: "Umsatz pro Monat (%)",
     es: "Ingresos por mes (%)",
   };
-
 
   return (
     <>
@@ -273,8 +279,6 @@ const Charts = ({
         )}
       </ResponsiveContainer>
 
-
-
       {/* ---------------------------12A----------------------------------- */}
       <div className="revenue-by-month">
         <div></div>
@@ -300,7 +304,7 @@ const Charts = ({
             tick={{ fontSize: 10 }} /* Smaller font size for month labels */
             axisLine={false}
             tickLine={false}
-          // tickFormatter={(monthIndex) => formatMonthYear(monthIndex, currentLanguage)}
+            // tickFormatter={(monthIndex) => formatMonthYear(monthIndex, currentLanguage)}
           />
 
           <Bar
@@ -309,8 +313,8 @@ const Charts = ({
               formattedData?.length <= 5
                 ? 40
                 : formattedData?.length <= 10
-                  ? 30
-                  : 20
+                ? 30
+                : 20
             }
           >
             {formattedData?.map((entry, index) => (
