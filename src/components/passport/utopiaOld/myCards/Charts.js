@@ -36,7 +36,6 @@ const Charts = ({
       try {
         const API = `/portfolio/chart/?portfolio_id=${id}&time_step=${selectValue}`;
         const response = await axios.get(API);
-
         // Ma'lumotlarni filtrlash va optimallashtirish
         const optimizedData = response?.data?.data?.balances?.slice(-100) || []; // Oxirgi 100 yozuvni olish
         resolve({
@@ -52,6 +51,7 @@ const Charts = ({
   useEffect(() => {
     fetchChartData(id, selectValue)
       .then((data) => {
+        console.log(data);
         setChartData(data); // Ma'lumotlarni saqlash
       })
       .catch((error) => {
@@ -60,19 +60,21 @@ const Charts = ({
   }, [id, selectValue]);
 
 
-  //  Data mapping optimized with useMemo
-  const dataMain = useMemo(
-    () =>
-      chartData?.balances?.map((balance, index) => ({
-        name: new Date(balance.timestamp).toLocaleDateString(),
-        negative0: chartData?.benchmark_btc[index].value,
-        negative1: chartData?.profit_percentage[index].value,
-        negative2: chartData?.margin_balances[index].value,
-        negative3: chartData?.profit[index].value,
-        negative4: chartData?.drawdown_percentage[index].value,
-      })),
-    [chartData]
-  );
+
+  const dataMain = useMemo(() => {
+    if (!chartData) return []; // Return an empty array if chartData is not available.
+
+    const { balances, benchmark_btc, profit_percentage, margin_balances, profit } = chartData;
+
+    return balances.map((balance, index) => ({
+      name: new Date(balance.timestamp).toLocaleDateString(),
+      negative0: benchmark_btc[index]?.value ?? 0,
+      negative1: profit_percentage[index]?.value ?? 0,
+      negative2: margin_balances[index]?.value ?? 0,
+      negative3: profit[index]?.value ?? 0,
+
+    }));
+  }, [chartData]);
 
   const CustomTooltipMain = ({ active, payload, label }) => {
     if (!active || !payload || payload.length === 0) return null;
@@ -104,52 +106,9 @@ const Charts = ({
     );
   };
 
-  const dataBottom = useMemo(
-    () =>
-      chartData?.drawdown_duration?.map((item, index) => ({
-        day: new Date(item?.timestamp)?.toLocaleDateString(),
-        drawdown_duration: item.value,
-        drawdown: chartData?.drawdown_percentage[index].value,
-      })),
-    [chartData]
-  );
 
-  const drawdown = {
-    en: "DrawDown:",
-    ru: "Максимальная просадка:",
-    de: "Maximaler Rückgang:",
-    es: "Pérdida máxima:",
-  };
 
-  const CustomTooltipBottom = ({ active, payload, label }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="PLByMonth">
-          <b style={{ color: "#fff", fontSize: "14px" }}>
-            {moment(payload[0]?.payload?.day).format("MMM D YYYY")}
-          </b>
-          <p>
-            <strong
-              style={{ display: "flex", alignItems: "center", gap: "4px" }}
-            >
-              <div
-                style={{
-                  display: "inline-block",
-                  width: "8px",
-                  height: "8px",
-                  borderRadius: "50%",
-                  border: `2px solid #85bafe`, // Color based on value
-                }}
-              ></div>
-              {drawdown[currentLanguage]}{" "}
-              {payload[0]?.payload?.drawdown?.toFixed(2)}%
-            </strong>
-          </p>
-        </div>
-      );
-    }
-    return null;
-  };
+
   // ---------------------------12A-----------------------------------
 
   const [data, setData] = useState([]); // State for fetched data
@@ -225,93 +184,6 @@ const Charts = ({
     es: "Ingresos por mes (%)",
   };
 
-  const monthNames = {
-    ru: [
-      "Янв",
-      "Фев",
-      "Мар",
-      "Апр",
-      "Май",
-      "Июн",
-      "Июл",
-      "Авг",
-      "Сен",
-      "Окт",
-      "Ноя",
-      "Дек",
-    ],
-    de: [
-      "Jan",
-      "Feb",
-      "Mär",
-      "Apr",
-      "Mai",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Okt",
-      "Nov",
-      "Dez",
-    ],
-    en: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
-    es: [
-      "Ene",
-      "Feb",
-      "Mar",
-      "Abr",
-      "May",
-      "Jun",
-      "Jul",
-      "Ago",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dic",
-    ],
-  };
-
-  function formatDay(day, currentLanguage = "en") {
-    if (!day) return ""; // Bo'sh yoki noto'g'ri qiymatni tekshirish
-
-    const [month, date] = (day || "").split("/"); // Default bo'sh string
-    const monthIndex = Number(month) - 1; // Oy indeksini olish
-    const validMonth = monthIndex >= 0 && monthIndex < 12; // Oy indeksini tekshirish
-
-    // Tilga qarab oy nomini tanlash (default 'en' o'z ichiga oladi)
-    const translatedMonth = validMonth
-      ? monthNames[currentLanguage]?.[monthIndex] || monthNames.en[monthIndex]
-      : "";
-
-    return `${translatedMonth} ${date || ""}`.trim(); // Bo'sh qiymatlarni oldini olish
-  }
-
-  // Data massivini formatlash
-  function createFormattedDaysMap(data, currentLanguage) {
-    const map = new Map(); // Map uchun
-    data?.forEach((item) => {
-      if (item?.day) {
-        map.set(item.day, formatDay(item.day, currentLanguage));
-      }
-    });
-    return map;
-  }
-
-  // Ma'lumotlarni formatlash
-  const formattedDaysMap = createFormattedDaysMap(dataBottom, currentLanguage);
 
   return (
     <>
@@ -384,7 +256,7 @@ const Charts = ({
               strokeWidth={checkedItems?.profit ? 1.8 : 0}
               dot={false}
             />
-            <Line
+            {/* <Line
               yAxisId="right" // Matches "right" YAxis
               name={t.drawDown}
               type="monotone"
@@ -392,7 +264,7 @@ const Charts = ({
               stroke="dodgerblue"
               strokeWidth={checkedItems?.drawdown_percentage ? 1.8 : 0}
               dot={false}
-            />
+            /> */}
           </ComposedChart>
         ) : (
           <div className="chartLoader">
@@ -401,72 +273,7 @@ const Charts = ({
         )}
       </ResponsiveContainer>
 
-      {/* ---------------------------11A----------------------------------- */}
-      {/* {checkedItems.drawDownDuration || checkedItems.drawDown && */}
 
-      {/* {checkedItems?.drawDown && (
-        <ResponsiveContainer width="100%" height={130}>
-          {dataBottom?.length ? (
-            <ComposedChart
-              data={dataBottom}
-              margin={{ top: 20, right: 10, left: 10, bottom: 20 }}
-            >
-              <CartesianGrid
-                vertical={false}
-                strokeDasharray="0"
-                stroke="#e0e0e0"
-              />
-
-
-              <XAxis
-                dataKey="day"
-                tickFormatter={(value) => formattedDaysMap.get(value) || value} // Map'dan olish
-                tick={{ fontSize: 10, fill: "#606060" }}
-                axisLine={{ stroke: "#a9a9a978" }}
-                tickLine={false}
-                tickMargin={10}
-              />;
-
-              <YAxis
-                yAxisId="left"
-                orientation="left"
-                domain={[0, "auto"]}
-                tickFormatter={(value) => `${value}%`}
-                tick={{ fontSize: 10, fill: "#606060" }}
-                axisLine={false}
-                tickLine={false}
-              />
-
-              <YAxis
-                yAxisId="right"
-                orientation="right"
-                domain={["auto", 0]}
-                tickFormatter={(value) => `$${(value / 1000).toFixed(1)}K`}
-                tick={{ fontSize: 10, fill: "#606060" }}
-                axisLine={false}
-                tickLine={false}
-              />
-
-              <Tooltip content={<CustomTooltipBottom />} />
-
-
-              <Area
-                yAxisId="left"
-                type="linear"
-                dataKey={checkedItems.drawDown && "drawdown"}
-                fill="#d1e3f9"
-                stroke="#4595fd0"
-                strokeWidth={1.5}
-              />
-
-            </ComposedChart>
-          ) : (
-            <div className="chartLoader2">
-              <div className="loader"></div>
-            </div>
-          )}
-        </ResponsiveContainer>
-      )} */}
 
       {/* ---------------------------12A----------------------------------- */}
       <div className="revenue-by-month">
@@ -493,7 +300,7 @@ const Charts = ({
             tick={{ fontSize: 10 }} /* Smaller font size for month labels */
             axisLine={false}
             tickLine={false}
-            // tickFormatter={(monthIndex) => formatMonthYear(monthIndex, currentLanguage)}
+          // tickFormatter={(monthIndex) => formatMonthYear(monthIndex, currentLanguage)}
           />
 
           <Bar
@@ -502,8 +309,8 @@ const Charts = ({
               formattedData?.length <= 5
                 ? 40
                 : formattedData?.length <= 10
-                ? 30
-                : 20
+                  ? 30
+                  : 20
             }
           >
             {formattedData?.map((entry, index) => (

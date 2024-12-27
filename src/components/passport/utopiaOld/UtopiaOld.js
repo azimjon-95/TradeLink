@@ -93,7 +93,6 @@ const UtopiaOldMultiLine = () => {
     "benchmarkBTC",
     "return",
     "marginBalance",
-    "drawDown",
     "profit",
   ]);
 
@@ -104,11 +103,10 @@ const UtopiaOldMultiLine = () => {
     return: true,
     marginBalance: true,
     profit: true,
-    drawDown: true,
   });
 
   useEffect(() => {
-    document.title = data?.user_name || "KYT-know your trader";
+    document.title = data?.user_name || "KYT";
   }, [data?.user_name]);
 
   const placeholders = {
