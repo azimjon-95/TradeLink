@@ -59,15 +59,17 @@ const Charts = ({
       });
   }, [id, selectValue]);
 
+
   //  Data mapping optimized with useMemo
   const dataMain = useMemo(
     () =>
       chartData?.balances?.map((balance, index) => ({
         name: new Date(balance.timestamp).toLocaleDateString(),
         negative0: chartData?.benchmark_btc[index].value,
-        negative1: chartData?.drawdown_percentage[index].value,
-        negative2: chartData?.drawdown_duration[index].value,
-        negative3: chartData?.long_positions_x[index].value,
+        negative1: chartData?.profit_percentage[index].value,
+        negative2: chartData?.margin_balances[index].value,
+        negative3: chartData?.profit[index].value,
+        negative4: chartData?.drawdown_percentage[index].value,
       })),
     [chartData]
   );
@@ -101,8 +103,6 @@ const Charts = ({
       </div>
     );
   };
-
-
 
   const dataBottom = useMemo(
     () =>
@@ -145,7 +145,6 @@ const Charts = ({
               {payload[0]?.payload?.drawdown?.toFixed(2)}%
             </strong>
           </p>
-
         </div>
       );
     }
@@ -226,13 +225,63 @@ const Charts = ({
     es: "Ingresos por mes (%)",
   };
 
-
-
   const monthNames = {
-    ru: ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"],
-    de: ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"],
-    en: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    es: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+    ru: [
+      "Янв",
+      "Фев",
+      "Мар",
+      "Апр",
+      "Май",
+      "Июн",
+      "Июл",
+      "Авг",
+      "Сен",
+      "Окт",
+      "Ноя",
+      "Дек",
+    ],
+    de: [
+      "Jan",
+      "Feb",
+      "Mär",
+      "Apr",
+      "Mai",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Okt",
+      "Nov",
+      "Dez",
+    ],
+    en: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    es: [
+      "Ene",
+      "Feb",
+      "Mar",
+      "Abr",
+      "May",
+      "Jun",
+      "Jul",
+      "Ago",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dic",
+    ],
   };
 
   function formatDay(day, currentLanguage = "en") {
@@ -335,6 +384,15 @@ const Charts = ({
               strokeWidth={checkedItems?.profit ? 1.8 : 0}
               dot={false}
             />
+            <Line
+              yAxisId="right" // Matches "right" YAxis
+              name={t.drawDown}
+              type="monotone"
+              dataKey={checkedItems?.drawDown && "negative4"}
+              stroke="dodgerblue"
+              strokeWidth={checkedItems?.drawdown_percentage ? 1.8 : 0}
+              dot={false}
+            />
           </ComposedChart>
         ) : (
           <div className="chartLoader">
@@ -346,7 +404,7 @@ const Charts = ({
       {/* ---------------------------11A----------------------------------- */}
       {/* {checkedItems.drawDownDuration || checkedItems.drawDown && */}
 
-      {checkedItems?.drawDown && (
+      {/* {checkedItems?.drawDown && (
         <ResponsiveContainer width="100%" height={130}>
           {dataBottom?.length ? (
             <ComposedChart
@@ -369,7 +427,6 @@ const Charts = ({
                 tickMargin={10}
               />;
 
-              {/* Left Y-Axis for Percentage */}
               <YAxis
                 yAxisId="left"
                 orientation="left"
@@ -380,7 +437,6 @@ const Charts = ({
                 tickLine={false}
               />
 
-              {/* Right Y-Axis with "$" and "K" suffix */}
               <YAxis
                 yAxisId="right"
                 orientation="right"
@@ -410,7 +466,7 @@ const Charts = ({
             </div>
           )}
         </ResponsiveContainer>
-      )}
+      )} */}
 
       {/* ---------------------------12A----------------------------------- */}
       <div className="revenue-by-month">
@@ -437,7 +493,7 @@ const Charts = ({
             tick={{ fontSize: 10 }} /* Smaller font size for month labels */
             axisLine={false}
             tickLine={false}
-          // tickFormatter={(monthIndex) => formatMonthYear(monthIndex, currentLanguage)}
+            // tickFormatter={(monthIndex) => formatMonthYear(monthIndex, currentLanguage)}
           />
 
           <Bar
@@ -446,8 +502,8 @@ const Charts = ({
               formattedData?.length <= 5
                 ? 40
                 : formattedData?.length <= 10
-                  ? 30
-                  : 20
+                ? 30
+                : 20
             }
           >
             {formattedData?.map((entry, index) => (

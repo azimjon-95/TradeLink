@@ -50,8 +50,6 @@ const UtopiaOldMultiLine = () => {
     }
   };
 
-
-
   useEffect(() => {
     setTopLoader(true);
     const API = `https://api.kyt.systems/portfolio/main-indicators?portfolio_id=${baseId}&time_step=${selectValue}`;
@@ -107,7 +105,6 @@ const UtopiaOldMultiLine = () => {
     marginBalance: true,
     profit: true,
     drawDown: true,
-
   });
 
   useEffect(() => {
@@ -127,7 +124,6 @@ const UtopiaOldMultiLine = () => {
     de: "Diagramm", // German
     es: "Gráfico", // Spanish
   };
-
 
   return (
     <div className="oldMultiLine">
@@ -154,7 +150,6 @@ const UtopiaOldMultiLine = () => {
               )}
             </p>
           </div>
-
         </div>
       </div>
 
@@ -188,7 +183,6 @@ const UtopiaOldMultiLine = () => {
             customKey={isLite}
           />
 
-
           <div
             className="overlayVisible"
             style={{
@@ -204,8 +198,7 @@ const UtopiaOldMultiLine = () => {
             }}
           >
             {isOverlayVisible && (
-              <div className="oldMultiLine-main-head"
-              >
+              <div className="oldMultiLine-main-head">
                 <Space className="RangePicker" direction="vertical" size={12}>
                   <RangePicker placeholder={placeholders[currentLanguage]} />
                 </Space>
@@ -230,7 +223,6 @@ const UtopiaOldMultiLine = () => {
                       fontSize: "12px",
                     }}
                   >
-
                     <button
                       className="isOverlayVisible-btn"
                       onClick={() => setOverlayVisible(!isOverlayVisible)}
@@ -243,7 +235,10 @@ const UtopiaOldMultiLine = () => {
             )}
 
             <div
-              style={{ zIndex: 999, padding: `${isOverlayVisible && "10px 20px"}` }}
+              style={{
+                zIndex: 999,
+                padding: `${isOverlayVisible && "10px 20px"}`,
+              }}
               className="ket-inxBox"
             >
               <h2>{translationsCh[currentLanguage]}</h2>
@@ -256,20 +251,21 @@ const UtopiaOldMultiLine = () => {
                 </button>
               )}
             </div>
-            {
-              isOverlayVisible &&
-              <div style={{
-                position: "fixed",
-                top: "0",
-                left: "0",
-                right: "0",
-                backgroundColor: "#ffffff",
-                zIndex: 30,
-                height: "40px",
-                width: '100%',
-                boxShadow: '0px 4px 6px rgba(137, 137, 137, 0.1)',
-              }}></div>
-            }
+            {isOverlayVisible && (
+              <div
+                style={{
+                  position: "fixed",
+                  top: "0",
+                  left: "0",
+                  right: "0",
+                  backgroundColor: "#ffffff",
+                  zIndex: 30,
+                  height: "40px",
+                  width: "100%",
+                  boxShadow: "0px 4px 6px rgba(137, 137, 137, 0.1)",
+                }}
+              ></div>
+            )}
             <div
               style={{ padding: `${isOverlayVisible && "10px 20px"} ` }}
               className="checkbox-old"
@@ -301,25 +297,35 @@ const UtopiaOldMultiLine = () => {
               drawDown={drawDown}
             />
 
-            {
-              isLite && isOverlayVisible && <div style={{ padding: "30px" }} className="single-cards-box">
+            {isLite && isOverlayVisible && (
+              <div style={{ padding: "30px" }} className="single-cards-box">
                 <h1>{t.main}</h1>
                 <div className="single-cards-container">
-                  <Investment currentLanguage={currentLanguage} t={t} selectValue={selectValue} key={loading} id={baseId} />
+                  <Investment
+                    currentLanguage={currentLanguage}
+                    t={t}
+                    selectValue={selectValue}
+                    key={loading}
+                    id={baseId}
+                  />
                 </div>
               </div>
-            }
+            )}
           </div>
-          {
-            isLite && <div className="single-cards-box">
+          {isLite && (
+            <div className="single-cards-box">
               <h1>{t.main}</h1>
               <div className="single-cards-container">
-                <Investment currentLanguage={currentLanguage} t={t} selectValue={selectValue} key={loading} id={baseId} />
+                <Investment
+                  currentLanguage={currentLanguage}
+                  t={t}
+                  selectValue={selectValue}
+                  key={loading}
+                  id={baseId}
+                />
               </div>
             </div>
-          }
-
-
+          )}
         </div>
       </div>
     </div>
